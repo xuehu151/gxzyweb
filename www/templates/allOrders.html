@@ -1,0 +1,68 @@
+<ion-view view-title="全部订单">
+    <ion-nav-bar class="light bg1">
+        <ion-nav-buttons ng-click="" side="left">
+            <a class="button button-icon ion-ios-arrow-left light" href="#/tab/account" style="font-size: 1.5em;line-height: 31px;">
+            </a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content style="background: #eee;">
+      <ion-list class="allOrdersList">
+        <div class="eachOrder" ng-click="toOrderDetail()" >
+          <ion-item href="">
+              <span ng-cloak>{{order.type}}</span>
+              <span class="fr" ng-class="hasPrized?fontStyle1:fontStyle3" ng-cloak>{{order.status}}</span>
+          </ion-item>
+          <img ng-show="hasPrized?true:false" class="prizeImg" src="./img/getPrize.png" />
+          <ion-item href="">
+            <div class="fl">
+                <p ng-class="hasPrized?fontStyle1:fontStyle3" ng-cloak>{{开奖时间:2017-05-16 08:88:88}}</p>
+                <p class="fontStyle2" ng-cloak>{{订单编号:8798799966}}</p>
+              </div>
+              <div class="fr">
+                <p class="hasPrized?fontStyle1:fontStyle3" ng-cloak>{{扫码兑换}}</p>
+                <p class="fontStyle4">查看订单</p>
+              </div>
+          </ion-item>
+        </div>
+        <div class="eachOrder">
+          <ion-item href="">
+              <span>排列三</span>
+              <span class="fr" style="color: #d11d1d">已中奖</span>
+          </ion-item>
+          <img class="prizeImg" src="./img/getPrize.png" />
+          <ion-item href="">
+            <div class="fl">
+                <p class="fontStyle2">奖金: <span class="fontStyle5">¥1040:00</span></p>
+                <p class="fontStyle2">订单编号:8798799966</p>
+              </div>
+              <div class="fr">
+                <p class="fontStyle2" >奖金支付: <span class="fontStyle5">¥2</span></p>
+                <p class="fontStyle4">查看订单</p>
+              </div>
+          </ion-item>
+        </div>
+        <div class="eachOrder">
+          <ion-item href="">
+              <span>排列三</span>
+              <span class="fr" style="color: #d11d1d">未中奖</span>
+          </ion-item>
+          <img class="prizeImg" src="./img/getPrize.png" />
+          <ion-item href="">
+            <div class="fl">
+                <p class="fontStyle2">奖金: <span class="fontStyle5">¥1040:00</span></p>
+                <p class="fontStyle2">订单编号:8798799966</p>
+              </div>
+              <div class="fr">
+                <p class="fontStyle2" >奖金支付: <span class="fontStyle5">¥2</span></p>
+                <p class="fontStyle4">查看订单</p>
+              </div>
+          </ion-item>
+        </div>
+        <div class="prizeRecordsAll">
+          <img src="./img/completeInfoSucceed.png" />
+          <p>兑换多多才会中奖多多哦~~</p>
+        </div>
+
+      </ion-list>
+    </ion-content>
+</ion-view>

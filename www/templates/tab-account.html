@@ -1,0 +1,129 @@
+<ion-view view-title="账户">
+    <ion-nav-bar class="light bg1">
+        <ion-nav-buttons ng-click="" side="left">
+            <a class="button button-icon ion-ios-arrow-left light" href="#/tab/exchange" style="font-size: 1.5em;line-height: 31px;">
+            </a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="bg0">
+        <ion-list class="list-borderless accountList">
+            <ion-item class="bg2">
+                <div>
+                    奖金余额 (元)
+                </div>
+                <h2 class="light" ng-cloak="">
+                    {{totalMoney | number:2}}
+                </h2>
+            </ion-item>
+            <div class="bg3 row">
+                <div class="col">
+                    <div>
+                        可用余额 (元)
+                    </div>
+                    <div ng-cloak="">
+                        {{useableMoney | number:2}}
+                    </div>
+                </div>
+                <div class="col" ng-click="toggleShowAnswer()">
+                    <div>
+                        冻结余额 (元)
+                        <div class="accountForLoc">
+                            <img class="accountQuestion" src="./img/accountQuestion.png"/>
+                            <div class="accountAnswer" ng-show="showAnswer">
+                                <h5>
+                                    冻结金额：
+                                </h5>
+                                <span>
+                                    冻结金额为需要支付的金额，只是出票成功前该笔金额先暂时冻结在您的奖金余额内，等出票成功后，该笔冻结金额会自动支付给出票商家；
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-cloak="">
+                        {{frozedMoney | number:2}}
+                    </div>
+                </div>
+            </div>
+            <ion-item class="item-icon-right f18" ng-click="toPrizeRecords()">
+                奖金纪录
+                <i class="icon ion-ios-arrow-right">
+                </i>
+            </ion-item>
+            <ion-item class="item-icon-right f18 have-border" ng-click="toAllOrders()">
+                全部订单
+                <i class="icon ion-ios-arrow-right">
+                </i>
+            </ion-item>
+            <ion-item class="item-icon-left item-icon-right f18 " ng-click="toWidthdrawRecords()">
+                <i class="icon ion-card" style="color: #108ee9;">
+                </i>
+                提现明细
+                <i class="icon ion-ios-arrow-right">
+                </i>
+            </ion-item>
+            <p class="account-common account-bg-blue" ng-click="withdrawConfirm()">
+                提现
+            </p>
+            <p class="account-common account-bg-none" ng-click="openModal()">
+                投注
+            </p>
+        </ion-list>
+
+
+        <!-- modal弹窗 -->
+        <script id="accountModal.html" type="text/ng-template">
+            <ion-modal-view id="modalAccount" >
+        <div class="accountModal">
+            <ion-item class="item-icon-left " >
+                <i class="icon ion-ios-close-empty" ng-click="closeModal()">
+                </i>
+                选择提现方式
+            </ion-item>
+            <!-- <ion-item class="item-icon-right" ng-click="toWidthdraw()">
+                <img src="./img/img_010.png" />
+                支付宝账户 <span>(136****0136)</span>
+                <i class="icon ion-checkmark-round positive f18">
+                </i>
+            </ion-item>
+            <ion-item class="item-icon-right">
+                <img src="./img/img_011.png" />
+                微信账户 <span>(136****0136)</span>
+                <i class="icon ion-checkmark-round positive f18">
+                </i>
+            </ion-item> -->
+            <ion-item class="item-icon-right">
+                <img src="./img/img_012.png" />
+                银行卡账户 <span>(136****0136)</span>
+                <i class="icon ion-checkmark-round positive f18">
+                </i>
+            </ion-item>
+            <ion-radio ng-model="choice" ng-value="A">
+                <img src="./img/img_010.png" />
+                支付宝账户 <span>(136****0136)</span>
+            </ion-radio>
+            <ion-radio ng-model="choice" ng-value="B">
+                <img src="./img/img_011.png" />
+                微信账户 <span>(136****0136)</span>
+            </ion-radio>
+            <ion-radio ng-model="choice" ng-value="C">
+                <img src="./img/img_012.png" />
+                银行卡账户 <span>(136****0136)</span>
+            </ion-radio>
+        </div>
+    </ion-modal-view>
+        </script>
+    </ion-content>
+    <!-- <div class="chooseCompleteInfo" ng-show="confirmInfoComplete">
+        <div class="prompt">
+            <h4 class="item" >完善资料</h4>
+            <div class="item">
+                <img src="./img/completeInf.png" alt="" />
+                <p>当前个人资料尚未完善，无法提现；完善个人资料后即可立即提现！</p>
+            </div>
+            <div class="row item ">
+                <div class="col" ng-click="notCompleteInfo()">暂不完善</div>
+                <div class="col" ng-click="toCompleteInfo()">立即完善</div>
+            </div>
+        </div>
+    </div> -->
+</ion-view>

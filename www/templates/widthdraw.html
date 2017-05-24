@@ -1,0 +1,44 @@
+<ion-view view-title="提现">
+    <ion-nav-bar class="light bg1">
+        <ion-nav-buttons ng-click="" side="left">
+            <a class="button button-icon ion-ios-arrow-left light" href="#/tab/account" style="font-size: 1.5em;line-height: 31px;">
+            </a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content style="background: #eee;">
+        <ion-list class="widthdrawList list-borderless">
+            <ion-item>
+                <p>
+                    提现金额 (元)
+                </p>
+                <h2 class="f40">
+                    <i class="ion-social-yen loc1">
+                    </i>
+                    60
+                </h2>
+            </ion-item>
+            <ion-item class="padding0">
+                <p>
+                    可提现金额99元
+                    <a href="">
+                        全部提现
+                    </a>
+                </p>
+            </ion-item>
+            <p class="widthdraw-btn" ng-click="confirmWidthdraw()">
+                确认
+            </p>
+            <div class="widthdrawDescri">
+                提现说明
+                <p>
+                    1、10元及10元以下提现扣除1元手续费；
+                    <br/>
+                    2、11元～200元，必须一次性提完，无手续费；
+                    <br/>
+                    3、提现金额大于200元，需要审核，审核通过即可提现；
+                    <br/>
+                </p>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

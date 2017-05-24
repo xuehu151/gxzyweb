@@ -1,0 +1,44 @@
+<ion-view view-title="完善个人资料">
+    <ion-nav-bar class="light bg1">
+        <ion-nav-buttons ng-click="" side="left">
+            <a class="button button-icon ion-ios-arrow-left light" href="#/tab/account" style="font-size: 1.5em;line-height: 31px;">
+            </a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content style="background: #eee;">
+      <ion-list class="completeInfoList">
+        <form ng-submit="submitInfo()">
+          <label class="item item-input">
+            <!-- <img src="./img/completeInfo/img_001.png" alt="姓名" /> -->
+            <div class="img_001"></div>
+            <input type="text" placeholder="请输入姓名 (必填项)" ng-model="users.realName" required  />
+          </label>
+          <label class="item item-input">
+            <div class="img_002"></div>
+            <input type="text" placeholder="请输入手机号 (必填项)" ng-model="users.phone" />
+          </label>
+          <label class="item item-input">
+           <div class="img_003"></div>
+            <input type="text" placeholder="请输入身份证号 (必填项)" ng-model="users.idcard" />
+          </label>
+          <label class="item item-input">
+            <div class="img_005"></div>
+            <input type="text" placeholder="请输入微信账号 (必填项)" ng-model="users.weixin" />
+            <span class="fr" style="color: #d21e1e"></span>
+          </label>
+          <label class="item item-input">
+            <div class="img_004"></div>
+            <input type="text" placeholder="请输入支付宝账号" />
+            <span class="fr" style="color: #d21e1e">*</span>
+          </label>
+          <label class="item item-input">
+            <div class="img_006"></div>
+            <input type="text" placeholder="请输入银行卡号" />
+            <span class="fr" style="color: #d21e1e">*</span>
+          </label>
+          <ion-item class="completeInfoNote">注意：为了不影响您中奖资金的提现，请确保您的资料真实有效；带*为三项至少填写一项；</ion-item >
+         <input type="submit" class="comformEditInfo" value="点击提交" />
+       </form>
+      </ion-list>
+    </ion-content>
+</ion-view>

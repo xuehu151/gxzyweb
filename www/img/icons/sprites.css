@@ -1,0 +1,70 @@
+.img_001, .img_002, .img_003, .img_004, .img_005, .img_006, .img_008, .img_009, .img_010, .img_011, .img_012{
+	background: url(sprites.png) no-repeat;
+}
+
+.img_001{
+	background-position: 0 -6px ;
+	width: 25px;
+	height: 25px;
+}
+
+.img_002{
+	background-position: -50px 0;
+	width: 25px;
+	height: 38px;
+}
+
+.img_003{
+	background-position: -100px -11px ;
+	width: 25px;
+	height: 16px;
+}
+
+.img_004{
+	background-position: -150px -9px ;
+	width: 25px;
+	height: 20px;
+}
+
+.img_005{
+	background-position: -201px -9px ;
+	width: 25px;
+	height: 19px;
+}
+
+.img_006{
+	background-position: -250px -6px ;
+	width: 25px;
+	height: 25px;
+}
+
+.img_008{
+	background-position: -300px -6px ;
+	width: 25px;
+	height: 25px;
+}
+
+.img_009{
+	background-position: -350px -7px ;
+	width: 25px;
+	height: 23px;
+}
+
+.img_010{
+	background-position: -401px -10px ;
+	width: 25px;
+	height: 19px;
+}
+
+.img_011{
+	background-position: -450px -10px ;
+	width: 25px;
+	height: 19px;
+}
+
+.img_012{
+	background-position: -500px -10px ;
+	width: 25px;
+	height: 17px;
+}
+

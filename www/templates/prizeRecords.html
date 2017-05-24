@@ -1,0 +1,50 @@
+<ion-view view-title="奖金纪录">
+    <ion-nav-bar class="light bg1">
+        <ion-nav-buttons ng-click="" side="left">
+            <a class="button button-icon ion-ios-arrow-left light" href="#/tab/account" style="font-size: 1.5em;line-height: 31px;">
+            </a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content style="background: #eee;">
+      <ion-list class="prizeRecordsList">
+        <ion-item ng-repeat="prizeItem in infos">
+          <div class="fl">
+            <p ng-class="isIncome?'fontStyle5':'fontStyle1'" ng-bind="prizeItem.exchangeClass"></p>
+            <p class="fontStyle2" ng-bind="prizeItem.exchangeTime"></p>
+          </div>
+          <div class="fr">
+            <p 
+            ng-class="isIncome?'fontStyle6':'fontStyle3'" 
+            ng-bind="prizeItem.exchangeMoney | number:2"></p>
+            <p class="fontStyle4 fr" ng-bind="prizeItem.exchangeType"></p>
+          </div>
+        </ion-item>
+        <ion-item >
+          <div class="fl">
+            <p class="fontStyle5">彩票奖金</p>
+            <p class="fontStyle2">2017-05-16 08:88:88</p>
+          </div>
+          <div class="fr">
+            <p class="fontStyle3" style="color: #d11d1d">+5.00</p>
+            <p class="fontStyle4 fr">支出</p>
+          </div>
+        </ion-item>
+        <ion-item >
+          <div class="fl">
+            <p class="fontStyle1" style="color: #d11d1d">彩票奖金</p>
+            <p class="fontStyle2">2017-05-16 08:88:88</p>
+          </div>
+          <div class="fr">
+            <p class="fontStyle3" style="color: #d11d1d">+125.00</p>
+            <p class="fontStyle4 fr">支出</p>
+          </div>
+        </ion-item>
+        
+        <div class="prizeRecordsAll">
+          <img src="./img/prizeRecords.png" />
+          <p>就这么多咯~快快购彩中奖金吧~~</p>
+        </div>
+
+      </ion-list>
+    </ion-content>
+</ion-view>
