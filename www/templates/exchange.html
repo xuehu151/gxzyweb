@@ -1,14 +1,57 @@
 <ion-view view-title="兑换">
     <ion-nav-bar class="bar-dark">
         <ion-nav-buttons side="left" ng-click="">
-            <a href="#/tab/exchange" class="button button-icon ion-ios-arrow-left" style="font-size: 1.5em;line-height: 31px;">Back</a>
+            <a href="#/tab/exchange" class="button button-icon ion-ios-arrow-left"
+               style="font-size: 1.5em;line-height: 31px;">Back</a>
         </ion-nav-buttons>
     </ion-nav-bar>
 
-    <ion-content class="padding">
-        <div class="row homeIcon">
-            <div class="col col-50"><img src="./img/exchange3.png" alt=""></div>
-            <div class="col col-50"><img src="./img/exchange5.png" alt=""></div>
+    <ion-content class="warp-bg">
+
+        <div class="row home-icon">
+            <div class="col col-44">
+                <a href="" ng-click="goToExchange3D()">
+                    <img src="./img/exchange3.png" alt="">
+                    <h4>排列三</h4>
+                    <div class="title-intro">
+                        <h5>天天开奖 好玩易中</h5>
+                        <span>2元/注</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col col-44">
+                <a href="" ng-click="goToExchange5D()">
+                    <img src="./img/exchange5.png" alt="">
+                    <h4>排列五</h4>
+                    <div class="title-intro">
+                        <h5>天天开奖 好玩易中</h5>
+                        <span>2元/注</span>
+                    </div>
+                </a>
+            </div>
         </div>
+        <div class="row home-icon">
+            <div class="col col-44">
+                <a href="" ng-click="goToExchangeBigLotto2()">
+                    <img src="./img/BigLotto2.png" alt="" >
+                    <h4>大乐透</h4>
+                    <div class="title-intro">
+                        <h5>天天开奖 好玩易中</h5>
+                        <span>2元/注</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col col-44">
+                <a href="" ng-click="goToExchangeBigLotto3()">
+                    <img src="./img/BigLotto3.png" alt="">
+                    <h4>大乐透追加</h4>
+                    <div class="title-intro">
+                        <h5>天天开奖 好玩易中</h5>
+                        <span>3元/注</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
     </ion-content>
 </ion-view>
