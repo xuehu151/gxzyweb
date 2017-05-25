@@ -388,7 +388,12 @@ color: #387ef5;
 
 /**********widthdraw.html************/
 
-.widthdrawList .f40 {font-size: 40px}
+.widthdrawList .widthdraw-amount 
+{
+	font-size: 40px;
+	display: inline-block;
+	background: transparent;
+}
 
 .widthdrawList ion-item:first-child
 {
@@ -413,7 +418,7 @@ color: #387ef5;
 	color: #0098ff;
 }
 
-.widthdrawList .widthdraw-btn
+.widthdrawList .widthdraw-btn-blue
 {
   margin: 30px 8%;
   padding: 3% 0;
@@ -423,7 +428,22 @@ color: #387ef5;
   background: #2c4198;
 }
 
+.widthdrawList .widthdraw-btn-grey
+{
+  margin: 30px 8%;
+  padding: 3% 0;
+  border-radius: 4px;
+  text-align: center;
+  color: #fff;
+  background: #ccc;
+}
+
 .widthdrawList .item {background: #eee;}
+
+.widthdrawList .cantWidthdraw
+{
+color: #d11d1d;
+} 
 
 .widthdrawList .widthdrawDescri 
 {

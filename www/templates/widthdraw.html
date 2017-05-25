@@ -11,22 +11,21 @@
                 <p>
                     提现金额 (元)
                 </p>
-                <h2 class="f40">
                     <i class="ion-social-yen loc1">
                     </i>
-                    60
-                </h2>
+                    <input type="number" name="" class="widthdraw-amount" placeholder="|" ng-model="widthdrawMoney" ng-blur="whetherOK(widthdrawMoney)">
             </ion-item>
             <ion-item class="padding0">
-                <p>
-                    可提现金额99元
-                    <a href="">
+                <p ng-cloak ng-show="whetherShow">
+                    可提现金额{{widthdrawAble}}元
+                    <a href="" ng-click="widthdrawAll()">
                         全部提现
                     </a>
                 </p>
+                <p class="cantWidthdraw">{{cantWidthdraw}}</p>
             </ion-item>
-            <p class="widthdraw-btn" ng-click="confirmWidthdraw()">
-                确认
+            <p ng-class="{true:'widthdraw-btn-blue',false:'widthdraw-btn-grey'}[whetherShow]" ng-click="!whetherShow || confirmWidthdraw(widthdrawMoney)" ng-disable="!whetherShow">
+                确认 
             </p>
             <div class="widthdrawDescri">
                 提现说明

@@ -64,7 +64,7 @@
             <p class="account-common account-bg-blue" ng-click="withdrawConfirm()">
                 提现
             </p>
-            <p class="account-common account-bg-none" ng-click="openModal()">
+            <p class="account-common account-bg-none" ng-click="toBet()">
                 投注
             </p>
         </ion-list>
@@ -91,23 +91,23 @@
                 <i class="icon ion-checkmark-round positive f18">
                 </i>
             </ion-item> -->
-            <ion-item class="item-icon-right">
+            <!-- <ion-item class="item-icon-right">
                 <img src="./img/img_012.png" />
                 银行卡账户 <span>(136****0136)</span>
                 <i class="icon ion-checkmark-round positive f18">
-                </i>
+                </i> -->
             </ion-item>
-            <ion-radio ng-model="choice" ng-value="A">
+            <ion-radio ng-model="choice" ng-value="A" ng-click="toWidthdraw(1)">
                 <img src="./img/img_010.png" />
-                支付宝账户 <span>(136****0136)</span>
+                支付宝账户 <span ng-cloak>{{accountNum[0].num}}</span>
             </ion-radio>
-            <ion-radio ng-model="choice" ng-value="B">
+            <ion-radio ng-model="choice" ng-value="B" ng-click="toWidthdraw(2)">
                 <img src="./img/img_011.png" />
-                微信账户 <span>(136****0136)</span>
+                微信账户 <span ng-cloak>{{accountNum[1].num}}</span>
             </ion-radio>
-            <ion-radio ng-model="choice" ng-value="C">
+            <ion-radio ng-model="choice" ng-value="C" ng-click="toWidthdraw(3)">
                 <img src="./img/img_012.png" />
-                银行卡账户 <span>(136****0136)</span>
+                银行卡账户 <span ng-cloak>{{accountNum[2].num}}</span>
             </ion-radio>
         </div>
     </ion-modal-view>

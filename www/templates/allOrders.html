@@ -7,7 +7,7 @@
     </ion-nav-bar>
     <ion-content style="background: #eee;">
       <ion-list class="allOrdersList">
-        <div class="eachOrder" ng-click="toOrderDetail()" >
+        <!-- <div class="eachOrder" ng-click="toOrderDetail()" >
           <ion-item href="">
               <span ng-cloak>{{order.type}}</span>
               <span class="fr" ng-class="hasPrized?fontStyle1:fontStyle3" ng-cloak>{{order.status}}</span>
@@ -23,8 +23,8 @@
                 <p class="fontStyle4">查看订单</p>
               </div>
           </ion-item>
-        </div>
-        <div class="eachOrder">
+        </div> -->
+        <div class="eachOrder" ng-click="toOrderDetail()">
           <ion-item href="">
               <span>排列三</span>
               <span class="fr" style="color: #d11d1d">已中奖</span>
@@ -41,7 +41,7 @@
               </div>
           </ion-item>
         </div>
-        <div class="eachOrder">
+        <div class="eachOrder" ng-click="toOrderDetail()">
           <ion-item href="">
               <span>排列三</span>
               <span class="fr" style="color: #d11d1d">未中奖</span>
