@@ -5,15 +5,9 @@ FROM finfosoft/nodejs
 MAINTAINER zhangxuanchao "53536364@qq.com"
 
 #nodejs 文件上传到容器中
-ADD www /home/app/webapps/
-
-#npm
-RUN npm install -g cnpm
-RUN cnpm install -g phonegap
+ADD * /home/app/webapps/
 
 #暴露端口
 EXPOSE 3000
 
-CMD ["cd","/home/app/webapps"]
-CMD ["phonegap"," serve"]
 CMD ["vmstat","10"]
