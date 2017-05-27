@@ -12,5 +12,3 @@ EXPOSE 3000
 
 CMD ["npm install -g cnpm"]
 CMD ["cnpm install -g phonegap"]
-CMD ["cd /home/app/webapps"]
-CMD ["phonegap sever"]
