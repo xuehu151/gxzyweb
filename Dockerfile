@@ -7,7 +7,12 @@ MAINTAINER zhangxuanchao "53536364@qq.com"
 #nodejs 文件上传到容器中
 ADD * /home/app/webapps/
 
+#npm
+RUN npm install -g cnpm
+RUM cnpm install -g phonegap
+
 #暴露端口
 EXPOSE 3000
 
-CMD ["vmstat","10"]
+CMD ["cd","/home/app/webapps"]
+CMD ["phonegap"," sever"]
