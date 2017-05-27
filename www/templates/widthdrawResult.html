@@ -8,12 +8,14 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content style="background: #eee;">
-        <ion-list class="completeInfoSucceed list-borderless">
-          <ion-item class="InfoSucceedImg">
-           <img src="./img/completeInfoSucceed.png" alt="资料完善成功" style="width: 130px;" />
+        <ion-list class="complete-info-succeed list-borderless">
+          <ion-item class="info-succeed-img">
+           <img ng-src="{{whetherWidthdrawSuc?'./img/completeInfoSucceed.png':'./img/widthdrawFail.png'}}" alt="资料完善成功" style="width: 130px;" />
           </ion-item>
-          <ion-item style="color: #2c4198">申请审核未成功</ion-item>
-          <ion-item href="#/tab/account">别担心，说不定再试一次就成功了</ion-item>
+          <ion-item style="color: #2c4198">{{whetherWidthdrawSuc?widthdrawInfo.success:widthdrawInfo.fail}}</ion-item>
+          <ion-item href="#/tab/account">
+            {{whetherWidthdrawSuc?widthdrawInfo.successInfo:widthdrawInfo.failInfo}}
+          </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>

@@ -6,38 +6,74 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content style="background: #eee;">
-      <ion-list class="completeInfoList">
-        <form ng-submit="submitInfo()">
+      <ion-list class="complete-info-list">
+        <form role="form" name="inputInfoForm" ng-submit="submitInfo()">
           <label class="item item-input">
-            <!-- <img src="./img/completeInfo/img_001.png" alt="姓名" /> -->
             <div class="img_001"></div>
-            <input type="text" placeholder="请输入姓名 (必填项)" ng-model="users.realName" required  />
+            <input type="text" 
+                name="name" 
+                placeholder="请输入姓名 (必填项)" 
+                ng-model="users.realName" 
+                required
+                ng-pattern="/^[\u4E00-\u9FA5A-Za-z0-9_]+$/" />
+            <span class="icon ion-close-round"
+                ng-show="inputInfoForm.name.$dirty && inputInfoForm.name.$invalid"></span>
           </label>
           <label class="item item-input">
             <div class="img_002"></div>
-            <input type="text" placeholder="请输入手机号 (必填项)" ng-model="users.phone" />
+            <input type="text" 
+                  name="phone" 
+                  placeholder="请输入手机号 (必填项)" ng-model="users.phone" 
+                  required 
+                  ng-pattern="/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/" />
+            <span class="icon ion-close-round"
+                ng-show="inputInfoForm.phone.$dirty && inputInfoForm.phone.$invalid"></span>
           </label>
           <label class="item item-input">
            <div class="img_003"></div>
-            <input type="text" placeholder="请输入身份证号 (必填项)" ng-model="users.idcard" />
+            <input type="text" 
+                name="idcard" 
+                placeholder="请输入身份证号 (必填项)" ng-model="users.idcard"
+                required
+                ng-pattern="/^\d{15}|\d{18}$/" />
+            <span class="icon ion-close-round"
+                ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid"></span>
           </label>
           <label class="item item-input">
             <div class="img_005"></div>
-            <input type="text" placeholder="请输入微信账号 (必填项)" ng-model="users.wechat" />
+            <input type="text" 
+                name="wechat" 
+                placeholder="请输入微信账号 (必填项)" ng-model="users.wechat"
+                required
+                ng-pattern="/^[a-zA-Z][a-zA-Z0-9_]{4,20}$/" />
+            <span class="icon ion-close-round"
+                ng-show="inputInfoForm.wechat.$dirty && inputInfoForm.wechat.$invalid"></span>
             <span class="fr" style="color: #d21e1e"></span>
           </label>
           <label class="item item-input">
             <div class="img_004"></div>
-            <input type="text" placeholder="请输入支付宝账号" ng-model="users.alipay" />
+            <input type="text" 
+                name="alipay"
+                ng-pattern="/^[a-zA-Z][a-zA-Z0-9_]{4,20}$/"
+                placeholder="请输入支付宝账号" 
+                ng-model="users.alipay" />
+            <span class="icon ion-close-round"
+                ng-show="inputInfoForm.alipay.$dirty && inputInfoForm.alipay.$invalid"></span>
             <span class="fr" style="color: #d21e1e">*</span>
           </label>
           <label class="item item-input">
             <div class="img_006"></div>
-            <input type="text" placeholder="请输入银行卡号" ng-model="users.bankNo" />
+            <input type="text" 
+                name="bankNo"  
+                placeholder="请输入银行卡号" 
+                ng-model="users.bankNo" 
+                ng-pattern="/^[0-9]*$/" />
+            <span class="icon ion-close-round"
+                ng-show="inputInfoForm.bankNo.$dirty && inputInfoForm.bankNo.$invalid"></span>
             <span class="fr" style="color: #d21e1e">*</span>
           </label>
           <ion-item class="completeInfoNote">注意：为了不影响您中奖资金的提现，请确保您的资料真实有效；带*为三项至少填写一项；</ion-item >
-         <input type="submit" class="comformEditInfo" value="点击提交" />
+         <input type="submit" class="comform-edit-info" ng-class="inputInfoForm.$invalid?'comform-edit-info1':'comform-edit-info2'" ng-disabled="inputInfoForm.$invalid" value="点击提交" />
        </form>
       </ion-list>
     </ion-content>

@@ -1,11 +1,12 @@
-
-
-
 /*公共样式*/
 
-.fl {float: left;}
+.fl {
+    float: left;
+}
 
-.fr {float: right;}
+.fr {
+    float: right;
+}
 
 
 /**********tab-account.html************/
@@ -52,114 +53,106 @@
     margin: 0;
 }
 
-.accountList .item div,
-.accountList .bg3 .col
-{
+.account-list .item div, .account-list .bg3 .col {
     color: #fff;
     font-size: 16px;
 }
 
-.accountList .accountQuestion
-{
-	vertical-align: top;
-	width: 10px;
+.account-list .account-question {
+    vertical-align: top;
+    width: 10px;
 }
 
-.accountList .accountForLoc
-{
-	width: 10px;
-	display: inline-block;
-	position: relative;
+.account-list .accountForLoc {
+    width: 10px;
+    display: inline-block;
+    position: relative;
 }
 
-.accountList div.accountAnswer
-{
-	position: absolute;
-	right: -22px;
-	top: -4px;
-	width: 250px;
-	padding: 15px 15px 45px;
-	font-size: 10px;
-	line-height: 12px;
-	white-space: normal;
-	color: #ff3600;
-	background:url('../img/accountBg1.png') center no-repeat ;
-	background-size: contain;
-	z-index: 99;
-	text-align: left;
+.account-list div.account-answer {
+    position: absolute;
+    right: -22px;
+    top: -4px;
+    width: 250px;
+    padding: 15px 15px 45px;
+    font-size: 10px;
+    line-height: 12px;
+    white-space: normal;
+    color: #ff3600;
+    background: url('../img/accountBg1.png') center no-repeat;
+    background-size: contain;
+    z-index: 99;
+    text-align: left;
 }
 
-.accountList div.accountAnswer h5
-{
-	margin: 19px 0 5px;
+.account-list div.account-answer h5 {
+    margin: 19px 0 5px;
 }
 
 .bg2 h2 {
     font-size: 75px
 }
 
-.accountModal .f18, 
-.f18 {
+.account-modal .f18, .f18 {
     font-size: 18px;
 }
 
-.accountList .have-border {
+.account-list .have-border {
     border-top: 1px solid #e1e1e1;
     border-width: 1px;
     border-bottom: none;
     margin-bottom: 6px
 }
 
-.accountList .account-common {
+.account-list .account-common {
     margin: 30px 13%;
     padding: 3% 0;
     border-radius: 4px;
     text-align: center;
 }
 
-.accountList .account-bg-blue {
+.account-list .account-bg-blue {
     color: #fff;
     background: #2c4198;
 }
 
-.accountList .account-bg-none {
+.account-list .account-bg-none {
     color: #2c4198;
     border: 1px solid #a5a5a6;
+    display: block;
+}
+
+#modalAccount {
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+}
+
+.account-modal {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.account-modal ion-item:first-child {
+    font-size: 20px;
+    text-align: center;
+    padding-left: 16px;
+}
+
+.account-modal img {
+    width: 25px;
+    vertical-align: middle;
+}
+
+.account-modal .radio-icon {
+    color: #387ef5;
 }
 
 
-#modalAccount
-{
-	background: rgba(0,0,0,0.6);
-	position: absolute;
-}
+/*这是流程是首先进入完善资料页面的css,确定后再删除*/
 
-.accountModal
-{
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-}
 
-.accountModal ion-item:first-child
-{
-	font-size: 20px;
-	text-align: center;
-	padding-left: 16px;
-}
-
-.accountModal img
-{
-	width: 25px;
-	vertical-align: middle;
-}
-
-.accountModal .radio-icon
-{
-color: #387ef5;
-}
-
-.chooseCompleteInfo
+/*.chooseCompleteInfo
 {
 	width: 100%;
 	height: 100%;
@@ -178,7 +171,7 @@ color: #387ef5;
 	width: 280px;
 }
 
-.chooseCompleteInfo .prompt .item
+ .chooseCompleteInfo .prompt .item
 {
 	margin-left: 0;
 	margin-right: 0;
@@ -211,380 +204,358 @@ color: #387ef5;
 	padding: 10px;
 	color: #255fb3;
 }
+ */
 
 
 /**********completeInfo.html************/
-.completeInfoList .item 
-{
-	background: #eee;
-	margin:7px 30px -1px;
-	border-width: 0 0 1px 0;
-	padding-left: 16px;
+
+.complete-info-list .item {
+    background: #eee;
+    margin: 7px 30px -1px;
+    border-width: 0 0 1px 0;
+    padding-left: 16px;
 }
 
-.accountModal ion-item div,
-.completeInfoList .item-input div
-{
-	width: 27px;
-	margin-right: 6px;
-	display: inline-block;
+.account-modal ion-item div, .complete-info-list .item-input div {
+    width: 27px;
+    margin-right: 6px;
+    display: inline-block;
 }
 
-.img_001, .img_002, .img_003, .img_004, .img_005, .img_006, .img_008, .img_009, .img_010, .img_011, .img_012{
-	background: url(../img/iconsBg.png) no-repeat;
+.img_001, .img_002, .img_003, .img_004, .img_005, .img_006, .img_008, .img_009, .img_010, .img_011, .img_012 {
+    background: url(../img/iconsBg.png) no-repeat;
 }
 
-.img_001{
-	background-position: 0 -6px ;
-	height: 25px;
+.img_001 {
+    background-position: 0 -6px;
+    height: 25px;
 }
 
-.img_002{
-	background-position: -50px 0;
-	height: 38px;
+.img_002 {
+    background-position: -50px 0;
+    height: 38px;
 }
 
-.img_003{
-	background-position: -100px -11px ;
-	height: 16px;
+.img_003 {
+    background-position: -100px -11px;
+    height: 16px;
 }
 
-.img_004{
-	background-position: -150px -9px ;
-	height: 20px;
+.img_004 {
+    background-position: -150px -9px;
+    height: 20px;
 }
 
-.img_005{
-	background-position: -201px -9px ;
-	height: 19px;
+.img_005 {
+    background-position: -201px -9px;
+    height: 19px;
 }
 
-.img_006{
-	background-position: -250px -6px ;
-	height: 25px;
+.img_006 {
+    background-position: -250px -6px;
+    height: 25px;
 }
 
-.img_008{
-	background-position: -300px -6px ;
-	width: 25px;
-	height: 25px;
+.img_008 {
+    background-position: -300px -6px;
+    width: 25px;
+    height: 25px;
 }
 
-.img_009{
-	background-position: -350px -7px ;
-	width: 25px;
-	height: 23px;
+.img_009 {
+    background-position: -350px -7px;
+    width: 25px;
+    height: 23px;
 }
 
-.img_010{
-	background-position: -401px -10px ;
-	width: 25px;
-	height: 19px;
+.img_010 {
+    background-position: -401px -10px;
+    width: 25px;
+    height: 19px;
 }
 
-.img_011{
-	background-position: -450px -10px ;
-	width: 25px;
-	height: 19px;
+.img_011 {
+    background-position: -450px -10px;
+    width: 25px;
+    height: 19px;
 }
 
-.img_012{
-	background-position: -500px -10px ;
-	width: 25px;
-	height: 17px;
+.img_012 {
+    background-position: -500px -10px;
+    width: 25px;
+    height: 17px;
 }
 
-
-
-.completeInfoList .loc1
-{
-	background-position:-175px 0;
+.complete-info-list .loc1 {
+    background-position: -175px 0;
 }
 
-.completeInfoList .loc2
-{
-	background-position:-150px 0;
+.complete-info-list .loc2 {
+    background-position: -150px 0;
 }
 
-.completeInfoList .loc3
-{
-	background-position:-200px 0;
+.complete-info-list .loc3 {
+    background-position: -200px 0;
 }
 
-.completeInfoList .loc4
-{
-	background-position:-250px 0;
+.complete-info-list .loc4 {
+    background-position: -250px 0;
 }
 
-.completeInfoList .loc5
-{
-	background-position:-225px 0;
+.complete-info-list .loc5 {
+    background-position: -225px 0;
 }
 
-.completeInfoList .loc6
-{
-	background-position:-125px 0;
+.complete-info-list .loc6 {
+    background-position: -125px 0;
 }
 
-.completeInfoList img,
-.payList img
-{
-	display: inline-block;
-	width: 25px;
-	vertical-align: middle;
-	margin-right: 10px;
+.complete-info-list img, .payList img {
+    display: inline-block;
+    width: 25px;
+    vertical-align: middle;
+    margin-right: 10px;
 }
 
-.completeInfoList .completeInfoNote
-{
-	text-align: center;
-	font-size: 10px;
-	color: #d21e1e;
-	white-space: normal;
-	border-width: 0 ;
+.complete-info-list .completeInfoNote {
+    text-align: center;
+    font-size: 10px;
+    color: #d21e1e;
+    white-space: normal;
+    border-width: 0;
 }
 
-.completeInfoList .comformEditInfo
-{
-	margin: 0 auto 30px;
-	padding: 3% 0;
-	display: block;
-	width: 80%;
-	border-radius: 4px;
-	text-align: center;
-	color: #fff;
-	background: #2c4198;
+.complete-info-list .comform-edit-info {
+    margin: 0 auto 30px;
+    padding: 3% 0;
+    display: block;
+    width: 80%;
+    border-radius: 4px;
+    text-align: center;
+    color: #fff;
+    /*	background: #2c4198;*/
 }
 
+.complete-info-list .comform-edit-info1 {
+    background: #999;
+}
 
-
+.complete-info-list .comform-edit-info2 {
+    background: #2c4198;
+}
 
 
 /**********completeInfo.html************/
-.completeInfoSucceed
-{
-	text-align: center;
 
+.complete-info-succeed {
+    text-align: center;
 }
 
-
-.completeInfoSucceed .item,
-.completeInfoSucceed .item-content
-{
-	background: #eee;
-	padding:8px; 
+.complete-info-succeed .item, .complete-info-succeed .item-content {
+    background: #eee;
+    padding: 8px;
 }
 
-.completeInfoSucceed .InfoSucceedImg
-{
-	padding: 50px 0 25px;
+.complete-info-succeed .info-succeed-img {
+    padding: 50px 0 25px;
 }
 
-.completeInfoSucceed a.item-content
-{
-	color: #ff3600;
-	text-decoration: underline;
+.complete-info-succeed a.item-content {
+    color: #ff3600;
+    text-decoration: underline;
 }
+
 
 /**********widthdraw.html************/
 
-.widthdrawList .widthdraw-amount 
-{
-	font-size: 40px;
-	display: inline-block;
-	background: transparent;
+.widthdraw-list .widthdraw-amount {
+    font-size: 40px;
+    display: inline-block;
+    background: transparent;
+    height: 42px;
 }
 
-.widthdrawList ion-item:first-child
-{
-	border-bottom-width: 2px;
+.widthdraw-list ion-item:first-child {
+    border-bottom-width: 2px;
 }
 
-.widthdrawList .loc1
-{
-	  font-size: 20px;
+.widthdraw-list .loc1 {
+    font-size: 20px;
     vertical-align: top;
     display: inline-block;
 }
 
-.widthdrawList .padding0 
-{
-	padding: 5px 16px;
+.widthdraw-list .padding0 {
+    padding: 5px 16px;
 }
 
-.widthdrawList .padding0 span
-{
-	margin-left: 4px;
-	color: #0098ff;
+.widthdraw-list .padding0 span {
+    margin-left: 4px;
+    color: #0098ff;
 }
 
-.widthdrawList .widthdraw-btn-blue
-{
-  margin: 30px 8%;
-  padding: 3% 0;
-  border-radius: 4px;
-  text-align: center;
-  color: #fff;
-  background: #2c4198;
+.widthdraw-list .widthdraw-btn-blue {
+    margin: 30px 8%;
+    padding: 3% 0;
+    border-radius: 4px;
+    text-align: center;
+    color: #fff;
+    background: #2c4198;
 }
 
-.widthdrawList .widthdraw-btn-grey
-{
-  margin: 30px 8%;
-  padding: 3% 0;
-  border-radius: 4px;
-  text-align: center;
-  color: #fff;
-  background: #ccc;
+.widthdraw-list .widthdraw-btn-grey {
+    margin: 30px 8%;
+    padding: 3% 0;
+    border-radius: 4px;
+    text-align: center;
+    color: #fff;
+    background: #ccc;
 }
 
-.widthdrawList .item {background: #eee;}
-
-.widthdrawList .cantWidthdraw
-{
-color: #d11d1d;
-} 
-
-.widthdrawList .widthdrawDescri 
-{
-	width:90%;
-	margin: 50px auto;
-	
-	text-align: center;
-	color: #000;
+.widthdraw-list .item {
+    background: #eee;
 }
 
-.widthdrawList .widthdrawDescri  p
-{
-	margin-top: 5px;
-	text-align: left;
-	font-size: 14px;
-	line-height: 22px;
-	color: #d11d1d;
+.widthdraw-list .cant-widthdraw {
+    color: #d11d1d;
+}
+
+.widthdraw-list .widthdraw-descri {
+    width: 90%;
+    margin: 50px auto;
+    text-align: center;
+    color: #000;
+}
+
+.widthdraw-list .widthdraw-descri p {
+    margin-top: 5px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 22px;
+    color: #d11d1d;
 }
 
 
 /**********prizeRecords.html************/
 
-
-
-.prizeRecordsList .fontStyle2
-{
-	color: #666;
-	font-size: 12px;
+.prize-records-list .font-style2 {
+    color: #666;
+    font-size: 12px;
 }
 
-.prizeRecordsList .fontStyle3
-{
-	color: #1a1a1a;
-	font-size: 20px;
+.prize-records-list .font-style3 {
+    color: #1a1a1a;
+    font-size: 20px;
 }
 
-.prizeRecordsList .fontStyle4
-{
-	color: #1a1a1a;
-	font-size: 12px;
+.prize-records-list .font-style4 {
+    color: #1a1a1a;
+    font-size: 12px;
 }
 
-.prizeRecordsList .fontStyle6
-{
-	color: #d11d1d;
-	font-size: 20px;
+.prize-records-list .font-style6 {
+    color: #d11d1d;
+    font-size: 20px;
 }
 
-.prizeRecordsList .prizeRecordsAll,
-.allOrdersList .prizeRecordsAll
-{
-	width: 100%;
-	margin: 0 auto ;
-	text-align: center;
+.prize-records-list .prize-records-all, .all-orders-list .prize-records-all {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
 }
 
-.prizeRecordsList .prizeRecordsAll img,
-.allOrdersList .prizeRecordsAll img
-{
-	width: 30%;
-	margin:40px 0 10px 
+.prize-records-list .prize-records-all img, .all-orders-list .prize-records-all img {
+    width: 30%;
+    margin: 40px 0 10px
 }
 
-.allOrdersList .fontStyle1,
-.widthdrawRecordsList .fontStyle1,
-.orderDetailList .fontStyle1,
-.prizeRecordsList .fontStyle5
-{
-	color: #d11d1d;
+.all-orders-list .font-style1, .widthdraw-records-list .font-style1, .order-detail-list .font-style1, .prize-records-list .font-style5 {
+    color: #d11d1d;
 }
 
-.allOrdersList .fontStyle2,
-.allOrdersList .fontStyle4
-.widthdrawRecordsList .fontStyle2,
-.orderDetailList .fontStyle2,
-.orderDetailList .fontStyle4
-{
-	color: #666;
-	font-size: 13px;
+.all-orders-list .font-style2, .all-orders-list .font-style4 .widthdraw-records-list .font-style2, .order-detail-list .font-style2, .order-detail-list .font-style4 {
+    color: #666;
+    font-size: 13px;
 }
 
-.prizeRecordsList .fontStyle1,
-.allOrdersList .fontStyle3,
-.widthdrawRecordsList .fontStyle3,
-.orderDetailList .fontStyle3
-{
-	color: #1a1a1a;
+.prize-records-list .font-style1, .all-orders-list .font-style3, .widthdraw-records-list .font-style3, .order-detail-list .font-style3 {
+    color: #1a1a1a;
 }
 
-.allOrdersList .fontStyle5,
-.orderDetailList .fontStyle5
-{
-	color: #d11d1d;
-	font-weight: bold;
+.all-orders-list .font-style5, .order-detail-list .font-style5 {
+    color: #d11d1d;
+    font-weight: bold;
 }
 
-.allOrdersList .eachOrder
-{
-	position: relative;
-	margin-top: 5px;
+.all-orders-list .each-order {
+    position: relative;
+    margin-top: 5px;
 }
 
-.allOrdersList .eachOrder:first-child
-{
-	margin-top:0;
+.all-orders-list .each-order:first-child {
+    margin-top: 0;
 }
 
-.allOrdersList .prizeImg
-{
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%,-50%);
-	width: 80px;
-	z-index: 3;
+.all-orders-list .prize-img {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, 0);
+    width: 80px;
+    z-index: 3;
 }
 
-/**********prizeRecords.html************/
 
-.orderDetailList .detail
-{
-	padding: 30px;
+/**********orderDetail.html************/
+
+.order-detail-list .detail {
+    padding: 30px;
 }
 
-.orderDetailList .detail div
-{
-	line-height: 25px;
+.order-detail-list .detail>div {
+    line-height: 25px;
+    margin-top: 10px;
 }
 
-.orderDetailList .fontStyle6
-{
-	color: #d11d1d;
-	font-weight: bold;
-	font-size: 20px;
+.order-detail-list .line-height {
+    display: inline-block;
+    line-height: 40px;
+}
+
+.order-detail-list .dis-inlineblock {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.order-detail-list .font-style6 {
+    color: #d11d1d;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.order-detail-list .ball {
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    border-radius: 15px;
+    display: inline-block;
+    text-align: center;
+    background: #d11d1d;
+    color: #fff;
+}
+
+.order-detail-list .open-time {
+    font-size: 12px;
+    color: #d11d1d;
 }
 
 
 /**********widthdrawRecords.html************/
-.widthdrawRecordsList .fontStyle7
-{
-	color: #1a1a1a;
-	font-size: 20px;
-	padding-top: 10px;
+
+.widthdraw-records-list .font-style7 {
+    color: #1a1a1a;
+    font-size: 20px;
+    padding-top: 10px;
 }

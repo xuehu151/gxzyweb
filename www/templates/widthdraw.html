@@ -6,14 +6,14 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content style="background: #eee;">
-        <ion-list class="widthdrawList list-borderless">
+        <ion-list class="widthdraw-list list-borderless">
             <ion-item>
                 <p>
                     提现金额 (元)
                 </p>
                     <i class="ion-social-yen loc1">
                     </i>
-                    <input type="number" name="" class="widthdraw-amount" placeholder="|" ng-model="widthdrawMoney" ng-blur="whetherOK(widthdrawMoney)">
+                    <input type="number" name="" class="widthdraw-amount" placeholder="|" ng-model="widthdrawMoney" ng-change="whetherOK(widthdrawMoney)" />
             </ion-item>
             <ion-item class="padding0">
                 <p ng-cloak ng-show="whetherShow">
@@ -22,12 +22,12 @@
                         全部提现
                     </a>
                 </p>
-                <p class="cantWidthdraw">{{cantWidthdraw}}</p>
+                <p class="cant-widthdraw">{{cantWidthdraw}}</p>
             </ion-item>
             <p ng-class="{true:'widthdraw-btn-blue',false:'widthdraw-btn-grey'}[whetherShow]" ng-click="!whetherShow || confirmWidthdraw(widthdrawMoney)" ng-disable="!whetherShow">
                 确认 
             </p>
-            <div class="widthdrawDescri">
+            <div class="widthdraw-descri">
                 提现说明
                 <p>
                     1、10元及10元以下提现扣除1元手续费；
