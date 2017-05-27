@@ -9,7 +9,7 @@ ADD * /home/app/webapps/
 
 #npm
 RUN npm install -g cnpm
-RUM cnpm install -g phonegap
+RUN cnpm install -g phonegap
 
 #±©Â¶¶Ë¿Ú
 EXPOSE 3000
