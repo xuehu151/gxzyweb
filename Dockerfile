@@ -5,7 +5,7 @@ FROM finfosoft/nodejs
 MAINTAINER zhangxuanchao "53536364@qq.com"
 
 #nodejs 文件上传到容器中
-ADD ../ /home/app/webapps/
+ADD www /home/app/webapps/
 
 #npm
 RUN npm install -g cnpm
