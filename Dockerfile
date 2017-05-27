@@ -5,7 +5,6 @@ FROM finfosoft/nodejs
 MAINTAINER zhangxuanchao "53536364@qq.com"
 
 #nodejs 文件上传到容器中
-RUN mkdir webapps
 ADD * /home/app/webapps
 
 #暴露端口
