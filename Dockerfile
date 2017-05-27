@@ -6,6 +6,9 @@ MAINTAINER zhangxuanchao "53536364@qq.com"
 
 #nodejs 文件上传到容器中
 ADD * /home/app/webapps/
+ADD hooks /home/app/webapps/
+ADD scss /home/app/webapps/
+ADD www /home/app/webapps/
 
 #npm
 RUN npm install -g cnpm
