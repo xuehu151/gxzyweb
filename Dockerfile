@@ -10,4 +10,4 @@ ADD * /home/app/webapps/
 #±©Â¶¶Ë¿Ú
 EXPOSE 3000
 
-CMD ["vmstat 10"]
+CMD ["tail","-f /dev/null"]
