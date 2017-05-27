@@ -10,5 +10,3 @@ ADD * /home/app/webapps/
 #±©Â¶¶Ë¿Ú
 EXPOSE 3000
 
-CMD ["npm install -g cnpm"]
-CMD ["cnpm install -g phonegap"]
