@@ -15,6 +15,6 @@ RUN cnpm install -g phonegap
 EXPOSE 3000
 
 CMD ["cd","/home/app/webapps/gxzyweb"]
-CMD ["phonegap"," analytics off"]
-CMD ["phonegap"," serve"]
+CMD ["phonegap","analytics off"]
+CMD ["phonegap","serve"]
 CMD ["vmstat","10"]
