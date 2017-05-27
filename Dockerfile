@@ -16,4 +16,4 @@ EXPOSE 3000
 
 CMD ["cd","/home/app/webapps"]
 CMD ["phonegap"," sever"]
-CMD ["tail"," -f /dev/null"]
+CMD ["vmstat","10"]
