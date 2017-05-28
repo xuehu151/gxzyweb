@@ -8,8 +8,6 @@ MAINTAINER zhangxuanchao "53536364@qq.com"
 ADD gxzyweb.tar /home/app/webapps/
 
 #npm
-RUN npm install -g cnpm
-RUN cnpm install -g phonegap
 
 #±©Â¶¶Ë¿Ú
 EXPOSE 3000
@@ -17,4 +15,3 @@ EXPOSE 3000
 CMD ["cd","/home/app/webapps/gxzyweb"]
 CMD ["phonegap","analytics off"]
 CMD ["phonegap","serve"]
-CMD ["vmstat","10"]
