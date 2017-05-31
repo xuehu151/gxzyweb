@@ -1,0 +1,64 @@
+<ion-view view-title="大乐透">
+
+    <ion-nav-bar class="bar bar-header bar-lightBlue ">
+        <ion-nav-back-button class="button button-icon icon ion-ios-arrow-left"></ion-nav-back-button>
+    </ion-nav-bar>
+
+    <ion-content class="has-header scroll-bottom">
+        <div class="row advert-img">
+            <div class="col">
+                <img src="./img/title-img2.png" alt="">
+            </div>
+        </div>
+
+        <div class="num-sum-red">
+            <i
+                ng-repeat="redNumRed in numDataRed"
+                ng-class="{false: 'red-ball-bg-white', true: 'red-ball-bg-red'}[redNumRed.check]"
+                ng-click="addRedClick(redNumRed)">
+                {{redNumRed.num}}
+            </i>
+        </div>
+        <div class="num-sum-blue">
+            <i
+                ng-repeat="blueNumBlue in numDataBlue"
+                class="blue-ball-bg-white"
+                ng-class="{false: 'blue-ball-bg-white', true: 'blue-ball-bg-blue'}[blueNumBlue.check]"
+                ng-click="addBlueClick(blueNumBlue)">
+                {{blueNumBlue.num}}
+            </i>
+        </div>
+    </ion-content>
+
+
+    <div class=" order-btns">
+        <div class="row">
+            <div class="col col-67">
+                <h4>请选择你要获赠的大乐透号码</h4>
+                <p>(点击号码球可自选号码)</p>
+            </div>
+            <div class="col col-33">
+                <img src="./img/random.png" alt="" ng-click="randomBall()">
+            </div>
+        </div>
+
+        <div class="row" style="height: 50px">
+            <div class="col col-67 show-red-ball">
+                <i ng-repeat="filterRedNumBlue in filterDataRed" >{{filterRedNumBlue.num}}</i>
+            </div>
+            <div class="col col-33 show-blue-ball">
+                <i ng-repeat="filterBlueNumBlue in filterDataBlue" >{{filterBlueNumBlue.num}}</i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-50">
+                <a href="" class="button" ng-click="historyBiglotto()">网期开奖</a>
+            </div>
+            <div class="col col-50">
+                <a href="" class="button" ng-click="saveBallSelect()" >加入选单</a>
+            </div>
+        </div>
+    </div>
+
+</ion-view>
+

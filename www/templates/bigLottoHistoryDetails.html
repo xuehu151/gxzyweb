@@ -1,0 +1,35 @@
+<ion-view view-title="大乐透往期开奖">
+    <ion-nav-bar class="bar bar-header bar-linerBlue ">
+        <ion-nav-back-button class="icon ion-ios-arrow-left button-clear" style="color: white;"></ion-nav-back-button>
+    </ion-nav-bar>
+
+    <div class="bar bar-subheader">
+        <div class="row notice">
+            <i class="icon ion-volume-medium"></i>
+            <div class="noticeText">最近五场赛事推荐胜率比较高的的四位高手</div>
+        </div>
+    </div>
+
+    <ion-content class="h40">
+        <ion-list>
+            <ion-item class="history-time"  ng-repeat="past in bitLotto">
+                <p><span>{{past.wareIssue}}期</span><ins> {{past.createDate | date: 'MM-dd'}} 周三</ins></p>
+                <div class="row">
+                    <div class="col col-67 show-red-ball">
+                        <i>{{toArray(past.result,0)}}</i>
+                        <i>{{toArray(past.result,1)}}</i>
+                        <i>{{toArray(past.result,2)}}</i>
+                        <i>{{toArray(past.result,3)}}</i>
+                        <i>{{toArray(past.result,4)}}</i>
+                    </div>
+                    <div class="col col-33 show-blue-ball">
+                        <i>{{toArray(past.result,5)}}</i>
+                        <i>{{toArray(past.result,6)}}</i>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+
+</ion-view>

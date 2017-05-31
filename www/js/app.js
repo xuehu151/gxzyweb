@@ -17,7 +17,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
         });
     })
     
-    .config (function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    .config (function ($stateProvider, $urlRouterProvider, $ionicConfigProvider,$httpProvider) {
         //解决tabs在Android下局域顶部的方法
         $ionicConfigProvider.platform.ios.tabs.style('standard');
         $ionicConfigProvider.platform.ios.tabs.position('bottom');
@@ -34,6 +34,11 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
         //隐藏ion-nav-back-button的文字
         $ionicConfigProvider.backButton.text("");
         $ionicConfigProvider.backButton.previousTitleText(false);
+        
+         //添加http请求头文件
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+        $httpProvider.defaults.headers.post['Accept'] = 'application/json, text/javascript, */*; q=0.01';
+        $httpProvider.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
         
         $stateProvider
             // setup an abstract state for the tabs directive
@@ -52,6 +57,75 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
                         controller: 'ExchangeCtrl'
                     }
                 }
+            })
+            
+            //兑换 排列3
+            .state ('exchange-3', {
+                url: '/exchange-3',
+                cache:'false',
+                templateUrl: 'templates/exchange-3.html',
+                controller: 'Exchange-3Ctrl'
+            })
+    
+            //兑换 排列3  网期开奖详情
+            .state ('exchaangehistory3D', {
+                url: '/exchaangehistory3D',
+                templateUrl: 'templates/exchangehistory3D.html',
+                controller: 'Exchaangehistory3DCtrl'
+            })
+    
+            //兑换 排列3  详情
+            .state ('exchange-3Details', {
+                url: '/exchange-3Details',
+                templateUrl: 'templates/exchange-3Details.html',
+                controller: 'Exchange-3DetailsCtrl'
+            })
+    
+            //兑换 排列5
+            .state ('exchange-5', {
+                url: '/exchange-5',
+                cache:'false',
+                templateUrl: 'templates/exchange-5.html',
+                controller: 'Exchange-5Ctrl'
+        
+            })
+    
+            //兑换 排列5  网期开奖详情
+            .state ('exchangehistory5D', {
+                url: '/exchangehistory5D',
+                templateUrl: 'templates/exchangehistory5D.html',
+                controller: 'Exchangehistory5DCtrl'
+            })
+    
+            //兑换 排列5 详情
+            .state ('exchange-5Details', {
+                url: '/exchange-5Details',
+                templateUrl: 'templates/exchange-5Details.html',
+                controller: 'Exchange-5DetailsCtrl'
+        
+            })
+    
+            //兑换 大乐透 不追加
+            .state ('BigLotto-2', {
+                url: '/BigLotto-2',
+                cache:'false',
+                templateUrl: 'templates/BigLotto-2.html',
+                controller: 'BigLotto-2Ctrl'
+            })
+    
+            //兑换 大乐透 不追加详情
+            .state ('bettingDetail', {
+                url: '/bettingDetail',
+                cache:'false',
+                templateUrl: 'templates/bettingDetail.html',
+                controller: 'bettingDetailCtrl'
+            })
+    
+            //兑换 大乐透往期开奖详情
+            .state ('bigLottoHistoryDetails', {
+                url: '/bigLottoHistoryDetails',
+                templateUrl: 'templates/bigLottoHistoryDetails.html',
+                controller: 'bigLottoHistoryDetailsCtrl'
             })
             
             //账户
