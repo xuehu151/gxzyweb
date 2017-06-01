@@ -2,96 +2,109 @@ var url = "http://121.42.253.149:18820";
 var jsonWrap = [];//存放所有的注数
 var jsonWrapBit3D = [];//点击向右的修改后返回来时数据的存放
 var jsonWrapBit5D = [];//点击向右的修改后返回来时数据的存放
-var initToken='28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf3c7ed1104b0e43019e4ae600575d40d5f4ddbc74be3dac61013a8f1518dac006025ebe832a13856b86f2928a0f28806b063dcc0f184dfee91bb776f13bde6186715efb684a69f4e965d0c135449efac7841c7185c443118de0511e1be4e550dd09555449ed0';
+var initToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf2c0e81104b0e43019e4ae600575d40d5f4edcd145c5f0c61013aabe538ca71c3b3df3f822af1e7cb86f292af6ef8c0ea664c9ccecd6c7f682be7a6316bde41f6618e4b28bbd9168bc5d0c135618f5a2710ddf004b45301bd90112e6ba4f540ed792416ce9';
 //var ipUrl = 'http://192.168.0.137:8080';
 var ipUrl = 'http://121.42.253.149:18820/service';
 var initUrl = ipUrl + '/common/index';
 
-/* 格式化日期 */
-function formatDate (date) {
-    var y = date.getFullYear ();
-    var m = date.getMonth () + 1;
-    m = m < 10 ? '0' + m : m;
-    var d = date.getDate ();
-    d = d < 10 ? ('0' + d) : d;
-    return y + '-' + m + '-' + d;
-}
-
-angular.module('starter.controllers', []).controller('ExchangeCtrl', function($scope) {})
-    //兑换
-        .controller ('ExchangeCtrl', function ($scope, $http, $state, $ionicLoading) {
-            var data = {
-                token: initToken
-            };
-            //初始化接口
-            $http ({
-                method: "POST",
-                url: initUrl,
-                data: data,
-                transformRequest: function (obj) {
-                    var str = [];
-                    for (var s in obj) {
-                        str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
-                    }
-                    return str.join ("&");
-                },
-                timeout: 3000
-            })
-                .then (function (response) {
-                    /* 获取初始化数据 */
-                    window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
-                    console.log (response.data);
-            
-                }, function (response) {
-                    console.log ("初始化数据失败");
-                });
-    
-    
-            //***************************************
-            function getWareIssue (LotteryId) {
+angular.module ('starter.controllers', []).controller ('ExchangeCtrl', function ($scope) {
+})
+//兑换
+    .controller ('ExchangeCtrl', function ($scope, $http, $state, $ionicLoading, $ionicPopup) {
+        var data = {
+            token: initToken
+        };
+        //初始化接口
+        $http ({
+            method: "POST",
+            url: initUrl,
+            data: data,
+            transformRequest: function (obj) {
+                var str = [];
+                for (var s in obj) {
+                    str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
+                }
+                return str.join ("&");
+            },
+            timeout: 3000
+        })
+            .then (function (response) {
+                /* 获取初始化数据 */
+                window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
                 var localUserInfo = window.localStorage.getItem ("userInitInfo");
                 try {
                     userInfo = JSON.parse (localUserInfo);
                 } catch (error) {
                     userInfo = null;
                 }
-                $http ({
-                    method: "POST",
-                    url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
-                    params: {
-                        LotteryID: LotteryId
-                    },
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                    .then (function (response) {
-                
-                        console.log (response.data);
-                
-                    }, function (response) {
-                        console.log ("获取列表失败");
-                    });
+                if (userInfo.data.user.realName === undefined) {
+                    var confirmPopup = $ionicPopup.confirm ({
+                        title: '完善资料',
+                        template: '<p style="text-align:center;"><img src="./img/completeInf.png"></p>' + '当前个人资料尚未完善；请完善！',
+                        cancelText: '暂不完善',
+                        cancelType: '',
+                        okText: '立即完善',
+                        okType: 'button-positive'
+                    })
+                        .then (function (res) {
+                            if (res) {
+                                $state.go ('completeInfo')
+                            }
+                        });
+                }
+                console.log (response.data);
+            }, function (response) {
+                console.log ("初始化数据失败");
+            });
+        
+        
+        //***************************************
+        function getWareIssue (LotteryId) {
+            var localUserInfo = window.localStorage.getItem ("userInitInfo");
+            try {
+                userInfo = JSON.parse (localUserInfo);
+            } catch (error) {
+                userInfo = null;
             }
-            $scope.goToExchange3D = function () {//获取期号接口
-                getWareIssue(54);
-                $state.go ('exchange-3');
-            };
-            $scope.goToExchange5D = function () {
-                getWareIssue(53);
-                $state.go ('exchange-5');
-            };
-            $scope.goToExchangeBigLotto2 = function () {
-                getWareIssue(51);
-                $state.go ('BigLotto-2', {'flag2': 1});
-            };
-            $scope.goToExchangeBigLotto3 = function () {
-                getWareIssue(51);
-                $state.go ('BigLotto-2');
-            };
-        })
-
-        //兑换 排列3
+            $http ({
+                method: "POST",
+                url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
+                params: {
+                    LotteryID: LotteryId
+                },
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then (function (response) {
+                    $scope.pl3add = response.data;
+                    
+                    console.log (response.data);
+                    
+                }, function (response) {
+                    console.log ("获取列表失败");
+                });
+        }
+        
+        $scope.goToExchange3D = function () {//获取期号接口
+            getWareIssue (54);
+            $state.go ('exchange-3');
+        };
+        $scope.goToExchange5D = function () {
+            getWareIssue (53);
+            $state.go ('exchange-5');
+        };
+        $scope.goToExchangeBigLotto2 = function () {
+            getWareIssue (51);
+            $state.go ('BigLotto-2', {'flag2': 1});
+        };
+        $scope.goToExchangeBigLotto3 = function () {
+            getWareIssue (51);
+            $state.go ('BigLotto-2');
+        };
+    })
+    
+    //兑换 排列3
     .controller ('Exchange-3Ctrl', function ($scope, $state) {
         //设置排列3球百位号码
         $scope.numDataBit100 = [];
@@ -378,7 +391,6 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
     
     //兑换 排列 3 网期开奖详情
     .controller ('Exchaangehistory3DCtrl', function ($scope, $http, $interval) {
-        //获取期号和时间............
         var localUserInfo = window.localStorage.getItem ("userInitInfo");
         try {
             userInfo = JSON.parse (localUserInfo);
@@ -522,15 +534,6 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
                     investCode: "",
                     multiple: 1
                 };
-                //console.log($scope.sessionJsonWarp3D);
-                //for (var j in $scope.sessionJsonWarp3D[i]) {
-                //for (var k in $scope.sessionJsonWarp3D[i][j]) {
-                //    if (typeof $scope.sessionJsonWarp3D[i][j][k] === 'object') {
-                //        investCode += $scope.sessionJsonWarp3D[i][j][k].num + ",";
-                //        investCode = (investCode.substring (investCode.length - 1) == ',') ? investCode.substring (0, investCode.length - 1) : investCode;
-                //    }
-                //}
-                //}
                 var investCode = null;
                 investCode = $scope.sessionJsonWarp3D[i].B_Bit[0].num + ",";
                 investCode += $scope.sessionJsonWarp3D[i].S_Bit[0].num + ",";
@@ -540,17 +543,13 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
                 dataArray.push (dataObj);
                 console.log (dataArray);
             }
-            var json = {
+            var data = {
                 "LotteryID": "54",
                 "WareIssue": "17145",
                 "PayType": "0",
                 "data": dataArray
             };
-    
             
-            var data = {
-                json: JSON.stringify (json)
-            };
             $http ({
                 method: "POST",
                 url: ipUrl + '/lottery/pl3add?token=' + userInfo.data.token,
@@ -560,43 +559,63 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
                 }
             })
                 .then (function (response) {
+                    var alertPopup = $ionicPopup.alert ({
+                        title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
+                        template: '<div class="alert-left">' +
+                        '<p style="text-align: center">' + response.data.info + '</p>' +
+                        '</div>',
+                        okText: '确 定',
+                        okType: 'button-light'
+                    })
+                        .then (function () {
+//                    $state.go ('orderStatus');
+                        });
                     console.log (response.data);
                 }, function (response) {
-                    console.log ("提交失败");
+                    var confirmPopup = $ionicPopup.confirm ({
+                        title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
+                        template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
+                        okText: '确认',
+                        cancelText: '返回',
+                        okType: 'button-darkBlue'
+                    })
+                        .then (function () {
+                            $state.go ('bigLottoHistoryDetails');//大乐透往期详情
+                        });
                 });
             
-            //订单提交成功
-            var res = true;
-            if (res) {
-                var alertPopup = $ionicPopup.alert ({
-                    title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>', // String. 弹窗的标题。
-                    template: '<div class="alert-left">' +
-                    '<p><span>电 话:</span></p>' +
-                    '<p><span>姓 名:</span></p>' +
-                    '<p><span>获赠时间:</span></p>' +
-                    '<p><span>开奖时间:</span></p>' +
-                    '<p><span>获赠号码:</span>订单提交成功</p>' +
-                    '</div>', // String (可选)。放在弹窗body内的html模板。
-                    okText: '确 定', // String (默认: 'OK')。OK按钮的文字。
-                    okType: 'button-light' // String (默认: 'button-positive')。OK按钮的类型。
-                })
-                    .then (function () {
-//                    $state.go ('orderStatus');
-                    });
-            }
-            else {
-                //扫码后，所获赠注数的限制提示。
-                var confirmPopup = $ionicPopup.confirm ({
-                    title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>', // String. 弹窗标题。
-                    template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>', // String (可选)。放在弹窗body内的html模板。
-                    okText: '确认',// String (默认: 'OK')。OK按钮的文字。
-                    cancelText: '返回', // String (默认: 'Cancel')。一个取消按钮的文字。
-                    okType: 'button-darkBlue'
-                })
-                    .then (function () {
-                        $state.go ('bigLottoHistoryDetails');//大乐透往期详情
-                    });
-            }
+            /*//订单提交成功
+             var res = true;
+             if (res) {
+             var alertPopup = $ionicPopup.alert ({
+             title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>', // String. 弹窗的标题。
+             template: '<div class="alert-left">' +
+             '<p><span>电 话:</span></p>' +
+             '<p><span>姓 名:</span></p>' +
+             '<p><span>获赠时间:</span></p>' +
+             '<p><span>开奖时间:</span></p>' +
+             '<p><span>获赠号码:</span>订单提交成功</p>' +
+             '</div>', // String (可选)。放在弹窗body内的html模板。
+             okText: '确 定', // String (默认: 'OK')。OK按钮的文字。
+             okType: 'button-light' // String (默认: 'button-positive')。OK按钮的类型。
+             })
+             .then (function () {
+             //                    $state.go ('orderStatus');
+             });
+             }
+             else {
+             //扫码后，所获赠注数的限制提示。
+             var confirmPopup = $ionicPopup.confirm ({
+             title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>', // String. 弹窗标题。
+             template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>', // String (可选)。放在弹窗body内的html模板。
+             okText: '确认',// String (默认: 'OK')。OK按钮的文字。
+             cancelText: '返回', // String (默认: 'Cancel')。一个取消按钮的文字。
+             okType: 'button-darkBlue'
+             })
+             .then (function () {
+             $state.go ('bigLottoHistoryDetails');//大乐透往期详情
+             });
+             }*/
         }
     })
     
@@ -1043,7 +1062,7 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
             userInfo = null;
         }
         var data = {
-            lotteryID: '51',
+            lotteryID: '53',
             pageSize: '8',
             pageNum: '1'
         };
@@ -1195,68 +1214,84 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
                 investCode += $scope.sessionJsonWarp5D[i].Q_Bit[0].num + ",";
                 investCode += $scope.sessionJsonWarp5D[i].B_Bit[0].num + ",";
                 investCode += $scope.sessionJsonWarp5D[i].S_Bit[0].num + ",";
-                investCode += $scope.sessionJsonWarp5D[i].G_Bit[0].num ;
+                investCode += $scope.sessionJsonWarp5D[i].G_Bit[0].num;
                 
                 dataObj.investCode = investCode;
                 dataArray.push (dataObj);
                 console.log (dataArray);
             }
-            var json = {
+            var data = {
                 "LotteryID": "53",
-                "WareIssue": "16055",
+                "WareIssue": "17145",
                 "PayType": "0",
                 "data": dataArray
-            };
-            
-            var data = {
-                json: JSON.stringify (json)
             };
             $http ({
                 method: "POST",
                 url: ipUrl + '/lottery/pl5add?token=' + userInfo.data.token,
-                params: data,
+                data: data,
                 headers: {
                     "Content-Type": "application/json"
                 }
             })
                 .then (function (response) {
-                    console.log (response.data);
+                    var alertPopup = $ionicPopup.alert ({
+                        title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
+                        template: '<div class="alert-left">' +
+                        '<p style="text-align: center">' + response.data.info + '</p>' +
+                        '</div>',
+                        okText: '确 定',
+                        okType: 'button-light'
+                    })
+                        .then (function () {
+                        
+                        });
+//                    console.log (response.data.info);
                 }, function (response) {
-                    console.log ("提交失败");
+                    var confirmPopup = $ionicPopup.confirm ({
+                        title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
+                        template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
+                        okText: '确认',
+                        cancelText: '返回',
+                        okType: 'button-darkBlue'
+                    })
+                        .then (function () {
+                            $state.go ('bigLottoHistoryDetails');//大乐透往期详情
+                        });
                 });
             
-            //订单提交成功
-            var res = true;
-            if (res) {
-                var alertPopup = $ionicPopup.alert ({
-                    title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>', // String. 弹窗的标题。
-                    template: '<div class="alert-left">' +
-                    '<p><span>电 话:</span></p>' +
-                    '<p><span>姓 名:</span></p>' +
-                    '<p><span>获赠时间:</span></p>' +
-                    '<p><span>开奖时间:</span></p>' +
-                    '<p><span>获赠号码:</span>订单提交成功</p>' +
-                    '</div>', // String (可选)。放在弹窗body内的html模板。
-                    okText: '确 定', // String (默认: 'OK')。OK按钮的文字。
-                    okType: 'button-light' // String (默认: 'button-positive')。OK按钮的类型。
-                })
-                    .then (function () {
-//                    $state.go ('orderStatus');
-                    });
-            }
-            else {
-                //扫码后，所获赠注数的限制提示。
-                var confirmPopup = $ionicPopup.confirm ({
-                    title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>', // String. 弹窗标题。
-                    template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>', // String (可选)。放在弹窗body内的html模板。
-                    okText: '确认',// String (默认: 'OK')。OK按钮的文字。
-                    cancelText: '返回', // String (默认: 'Cancel')。一个取消按钮的文字。
-                    okType: 'button-darkBlue'
-                })
-                    .then (function () {
-                        $state.go ('bigLottoHistoryDetails');//大乐透往期详情
-                    });
-            }
+            /*//订单提交成功
+             var res = true;
+             if (res) {
+             var alertPopup = $ionicPopup.alert ({
+             title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>', // String. 弹窗的标题。
+             template: '<div class="alert-left">' +
+             '<p><span>电 话:</span></p>' +
+             '<p><span>姓 名:</span></p>' +
+             '<p><span>获赠时间:</span></p>' +
+             '<p><span>开奖时间:</span></p>' +
+             '<p><span>获赠号码:</span>订单提交成功</p>' +
+             '</div>', // String (可选)。放在弹窗body内的html模板。
+             okText: '确 定', // String (默认: 'OK')。OK按钮的文字。
+             okType: 'button-light' // String (默认: 'button-positive')。OK按钮的类型。
+             })
+             .then (function () {
+             //                    $state.go ('orderStatus');
+             });
+             }
+             else {
+             //扫码后，所获赠注数的限制提示。
+             var confirmPopup = $ionicPopup.confirm ({
+             title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>', // String. 弹窗标题。
+             template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>', // String (可选)。放在弹窗body内的html模板。
+             okText: '确认',// String (默认: 'OK')。OK按钮的文字。
+             cancelText: '返回', // String (默认: 'Cancel')。一个取消按钮的文字。
+             okType: 'button-darkBlue'
+             })
+             .then (function () {
+             $state.go ('bigLottoHistoryDetails');//大乐透往期详情
+             });
+             }*/
         }
     })
     
@@ -1481,8 +1516,17 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
     })
     
     //兑换  大乐透不追加详情
-    .controller ('bettingDetailCtrl', function ($scope, $ionicPopup, $timeout, $state, $http, $stateParams, $rootScope) {
+    .controller ('bettingDetailCtrl', function ($scope, $ionicPopup, $timeout, $state, $http, $stateParams) {
         $scope.flag3 = $stateParams.flag3;
+        //设置表单初始值
+        $scope.multiple = '1';
+        $scope.countMoney = '2';
+        if ($scope.falg3 == 1) {
+            $scope.countMoney = '2';
+        }
+        else {
+            $scope.countMoney = '3';
+        }
         //alert(flag3);
         $scope.sessionJsonWarp = JSON.parse (sessionStorage.jsonWrap);//反解析
         // console.log ($scope.sessionJsonWarp);
@@ -1576,9 +1620,8 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
             $scope.deleteRow ($index);
         };
         
-        //设置表单初始值
-        $scope.multiple = '1';
-        $scope.totalMoney = $scope.sessionJsonWarp.length;
+        
+        $scope.totalMoney = $scope.sessionJsonWarp.length;      /////////////////////////////////////////////
         
         
         // 方案保存成功提示框
@@ -1604,12 +1647,19 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
                 for (var j in $scope.sessionJsonWarp[i]) {
                     for (var k in $scope.sessionJsonWarp[i][j]) {
                         if (typeof $scope.sessionJsonWarp[i][j][k] === 'object') {
-                            investCode += ',' + $scope.sessionJsonWarp[i][j][k].num;
+                            
+                            if ($scope.sessionJsonWarp[i][j][k].num * 1 < 10) {
+                                investCode += ',' + '0' + $scope.sessionJsonWarp[i][j][k].num
+                            }
+                            else {
+                                investCode += ',' + $scope.sessionJsonWarp[i][j][k].num
+                            }
+                            
                             if (investCode.substr (0, 1) == ',') investCode = investCode.substr (1);//截取第一位逗号
                             investCode = (investCode.substring (investCode.length - 1) == ',') ? investCode.substring (0, investCode.length - 1) : investCode;//截取最后一位逗号
                             
                             var get_array = investCode.split ('');
-                            get_array.splice (13, 1, '@');
+                            get_array.splice (-6, 1, '@');
                             var investCodeStr = get_array.join ('');
                         }
                     }
@@ -1619,52 +1669,42 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
                 dataArrayBig.push (dataObj);
                 console.log (dataArrayBig);
             }
-            var json = {
+            var data = {
                 "LotteryID": "51",
-                "WareIssue": "17056",
+                "WareIssue": "17063",
                 "PayType": "0",
                 "AddFlag": "0",
                 "data": dataArrayBig
             };
-            var data = {
-                json: JSON.stringify (json)
-            };
+            
             $http ({
                 method: "POST",
                 url: ipUrl + '/lottery/dltadd?token=' + userInfo.data.token,
-                params: data,
+                data: data,
                 headers: {
                     "Content-Type": "application/json;charset=UTF-8"
                 }
             })
                 .then (function (response) {
                     console.log (response.data);
-                    /* if($rootScope.alertData == ''){
-                     console.log (response.data.info);
-                     }*/
                     var alertPopup = $ionicPopup.alert ({
-                        title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>', // String. 弹窗的标题。
+                        title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
                         template: '<div class="alert-left">' +
-                        '<p><span>电 话:</span></p>' +
-                        '<p><span>姓 名:</span></p>' +
-                        '<p><span>获赠时间:</span></p>' +
-                        '<p><span>开奖时间:</span></p>' +
-                        '<p><span>获赠号码:</span>订单提交成功</p>' +
-                        '</div>', // String (可选)。放在弹窗body内的html模板。
-                        okText: '确 定', // String (默认: 'OK')。OK按钮的文字。
-                        okType: 'button-light' // String (默认: 'button-positive')。OK按钮的类型。
+                        '<p style="text-align: center;">' + response.data.info + '</p>' +
+                        '</div>',
+                        okText: '确 定',
+                        okType: 'button-light'
                     })
                         .then (function () {
-                            //$state.go ('orderStatus');
+                        
                         });
                     
                 }, function (response) {
                     //扫码后，所获赠注数的限制提示。
                     var confirmPopup = $ionicPopup.confirm ({
-                        title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>', // String. 弹窗标题。
-                        template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>', // String (可选)。放在弹窗body内的html模板。
-                        okText: '确认',// String (默认: 'OK')。OK按钮的文字。
-                        cancelText: '返回', // String (默认: 'Cancel')。一个取消按钮的文字。
+                        title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
+                        template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
+                        okText: '确认',
                         okType: 'button-darkBlue'
                     })
                         .then (function () {
@@ -1721,15 +1761,15 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
     
     
     //账户页面
-    .controller('AccountCtrl', ['$scope', '$rootScope', '$ionicPopup', '$state', '$ionicModal', '$http', 'locals', 'getUser', function($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser) {
+    .controller ('AccountCtrl', ['$scope', '$rootScope', '$ionicPopup', '$state', '$ionicModal', '$http', 'locals', 'getUser', function ($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser) {
         //验证是否资料完善
-        getUser.getInfo(url + "/service/common/index?token=" + initToken).then(function(response) {
+        getUser.getInfo (url + "/service/common/index?token=" + initToken).then (function (response) {
             var userInfo = response.data;
-            console.log(userInfo)
+            console.log (userInfo)
             // $rootScope.user={}  //保存token和用户信息
-            locals.setObject($rootScope.user, userInfo)
-            $scope.useableMoney = locals.getObject($rootScope.user).user.money;
-            $scope.frozedMoney = locals.getObject($rootScope.user).user.freeze;
+            locals.setObject ($rootScope.user, userInfo)
+            $scope.useableMoney = locals.getObject ($rootScope.user).user.money;
+            $scope.frozedMoney = locals.getObject ($rootScope.user).user.freeze;
             $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
             //提现时候的账户号码
             $rootScope.accountNum = [{
@@ -1742,74 +1782,77 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
                 chanel: 3,
                 num: '(' + userInfo.user.bankNo + ')'
             }];
-        }, function() {
-            alert('网络异常,未获取到用户信息')
-        })
-        $scope.withdrawConfirm = function() {
-            if (locals.getObject($scope.user).user.realName) {
-                $scope.modal.show();
-            } else {
-                var confirmPopup = $ionicPopup.confirm({
+        }, function () {
+            alert ('网络异常,未获取到用户信息')
+        });
+        $scope.withdrawConfirm = function () {
+            if (locals.getObject ($scope.user).user.realName) {
+                $scope.modal.show ();
+            }
+            else {
+                var confirmPopup = $ionicPopup.confirm ({
                     title: '完善资料',
                     template: '<p style="text-align:center;"><img src="./img/completeInf.png"></p>' + '当前个人资料尚未完善，无法提现；完善个人资料后即可立即提现！',
                     // templateUrl: '', // String (可选)。放在弹窗body内的一个html模板的URL。
                     cancelText: '暂不完善', // String (默认: 'Cancel')。一个取消按钮的文字。
                     cancelType: '', // String (默认: 'button-default')。取消按钮的类型。
                     okText: '立即完善', // String (默认: 'OK')。OK按钮的文字。
-                    okType: 'button-positive', // String (默认: 'button-positive')。OK按钮的类型。
-                });
-                confirmPopup.then(function(res) {
-                    if (res) {
-                        $state.go('completeInfo')
-                    } else {}
-                });
+                    okType: 'button-positive' // String (默认: 'button-positive')。OK按钮的类型。
+                })
+                    .then (function (res) {
+                        if (res) {
+                            $state.go ('completeInfo')
+                        }
+                        else {
+                        }
+                    });
             }
         };
         /*//点击暂不完善,隐藏提示界面
-        $scope.notCompleteInfo=function () {
-            $scope.confirmInfoComplete=false;
-        }*/
+         $scope.notCompleteInfo=function () {
+         $scope.confirmInfoComplete=false;
+         }*/
         //点击完善资料,转到完善资料页面
         /* $scope.toCompleteInfo=function () {
-             $state.go('completeInfo')
+         $state.go('completeInfo')
          };*/
         //冻结金额的解释
-        $scope.toggleShowAnswer = function() {
+        $scope.toggleShowAnswer = function () {
             $scope.showAnswer = !$scope.showAnswer;
         };
         $scope.showAnswer = false;
         //转到奖金纪录页面
-        $scope.toPrizeRecords = function() {
-            $state.go('prizeRecords')
+        $scope.toPrizeRecords = function () {
+            $state.go ('prizeRecords')
         };
         //转到全部订单页面
-        $scope.toAllOrders = function() {
-            $state.go('allOrders')
+        $scope.toAllOrders = function () {
+            $state.go ('allOrders')
         };
         //转到提现明细页面
-        $scope.toWidthdrawRecords = function() {
-            $state.go('widthdrawRecords')
+        $scope.toWidthdrawRecords = function () {
+            $state.go ('widthdrawRecords')
         };
         //提现框的mordal窗口配置
-        $ionicModal.fromTemplateUrl('accountModal.html', {
+        $ionicModal.fromTemplateUrl ('accountModal.html', {
             scope: $scope
-        }).then(function(modal) {
+        }).then (function (modal) {
             $scope.modal = modal;
         });
-        $scope.openModal = function() {
-            $scope.modal.show();
+        $scope.openModal = function () {
+            $scope.modal.show ();
         };
-        $scope.closeModal = function() {
-            $scope.modal.hide();
+        $scope.closeModal = function () {
+            $scope.modal.hide ();
         };
-        $scope.toWidthdraw = function(channel) {
+        $scope.toWidthdraw = function (channel) {
             $rootScope.channel = channel;
-            $scope.modal.hide();
-            $state.go('widthdraw')
+            $scope.modal.hide ();
+            $state.go ('widthdraw')
         }
     }])
     //完善个人资料
-    .controller('completeInfoCtrl', ['$scope', '$rootScope', '$state', 'locals', 'postData', function($scope, $rootScope, $state, locals, postData) {
+    .controller ('completeInfoCtrl', ['$scope', '$rootScope', '$state', 'locals', 'postData', function ($scope, $rootScope, $state, locals, postData) {
         $scope.users = {
             realName: '',
             phone: '',
@@ -1824,76 +1867,77 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
          *     2.再把ng-model值赋进来
          *     3.再把这个对象赋给localstorage
          */
-        $rootScope.addData = locals.getObject($rootScope.user)
-        $scope.submitInfo = function() {
+        $rootScope.addData = locals.getObject ($rootScope.user)
+        $scope.submitInfo = function () {
             $rootScope.addData.user.realName = $scope.users.realName;
             $rootScope.addData.user.phone = $scope.users.phone;
             $rootScope.addData.user.idcard = $scope.users.idcard;
             $rootScope.addData.user.wechat = $scope.users.wechat;
             $rootScope.addData.user.alipay = $scope.users.alipay;
             $rootScope.addData.user.bankNo = $scope.users.bankNo;
-            locals.setObject($rootScope.user, $rootScope.addData)
+            locals.setObject ($rootScope.user, $rootScope.addData)
             /**
              * 功能:把提交的值上传到后台
              */
-            postData.getInfo(url + "/service/customer/add", $rootScope.addData).then(function(data) {
-                $state.go('completeInfoSucceed');
-            }, function() {
-                alert('网络异常,未能更新您的资料')
+            postData.getInfo (url + "/service/customer/add", $rootScope.addData).then (function (data) {
+                $state.go ('completeInfoSucceed');
+            }, function () {
+                alert ('网络异常,未能更新您的资料')
             })
         }
     }])
     //完善个人资料成功
-    .controller('completeInfoSucceedCtrl', ['$scope', '$state', function($scope, $state) {
-        $scope.toAccount = function() {
-            $state.go('tab.account')
+    .controller ('completeInfoSucceedCtrl', ['$scope', '$state', function ($scope, $state) {
+        $scope.toAccount = function () {
+            $state.go ('tab.account')
         }
     }])
     //提现页面
-    .controller('widthdrawCtrl', ['$scope', '$state', '$rootScope', 'getUser', 'locals', 'postData', function($scope, $state, $rootScope, getUser, locals, postData) {
-        var widthdrawLocals = locals.getObject($rootScope.user);
+    .controller ('widthdrawCtrl', ['$scope', '$state', '$rootScope', 'getUser', 'locals', 'postData', function ($scope, $state, $rootScope, getUser, locals, postData) {
+        var widthdrawLocals = locals.getObject ($rootScope.user);
         var token = widthdrawLocals.token;
-        getUser.getInfo(url + "/service/customer/getUser?token=" + token).then(function(response) {
+        getUser.getInfo (url + "/service/customer/getUser?token=" + token).then (function (response) {
             $scope.widthdrawAble = response.data.money; //可用余额
-        }, function() {
-            alert('网络异常,未能获取到您的可用余额');
+        }, function () {
+            alert ('网络异常,未能获取到您的可用余额');
         });
         $scope.widthdrawMoney = ''; //提现金额
         $scope.whetherShow = true; //控制提现提交按钮disable
-        $scope.whetherOK = function(widthdrawMoney) {
+        $scope.whetherOK = function (widthdrawMoney) {
             if (widthdrawMoney > $scope.widthdrawAble) {
                 $scope.cantWidthdraw = '输入金额超出可提现余额';
                 $scope.whetherShow = false;
-            } else {
+            }
+            else {
                 $scope.cantWidthdraw = '';
                 $scope.whetherShow = true;
             }
             $scope.widthdrawMoney = widthdrawMoney;
         }
         //提现所有可用余额
-        $scope.widthdrawAll = function() {
+        $scope.widthdrawAll = function () {
             $scope.widthdrawMoney = $scope.widthdrawAble;
         };
-        $scope.confirmWidthdraw = function(widthdrawMoney) {
+        $scope.confirmWidthdraw = function (widthdrawMoney) {
             /*//小于10元扣除1元手续费
-            if ($scope.widthdrawMoney<=10 && $scope.widthdrawMoney>1)
-            {
-                widthdrawLocals.money--;
-                console.log(widthdrawLocals)
-            };*/
-            var token = locals.getObject($rootScope.user).token;
-            console.log(token);
-            console.log($scope.widthdrawMoney);
-            getUser.getInfo(url + '/service/cash/add' + '?channel=' + $rootScope.channel + '&money=' + $scope.widthdrawMoney + '&token=' + token).then(function(data) {
+             if ($scope.widthdrawMoney<=10 && $scope.widthdrawMoney>1)
+             {
+             widthdrawLocals.money--;
+             console.log(widthdrawLocals)
+             };*/
+            var token = locals.getObject ($rootScope.user).token;
+            console.log (token);
+            console.log ($scope.widthdrawMoney);
+            getUser.getInfo (url + '/service/cash/add' + '?channel=' + $rootScope.channel + '&money=' + $scope.widthdrawMoney + '&token=' + token).then (function (data) {
                 $rootScope.WidthdrawStatus = data.error //保存返回的状态,用于决定widthdrawResult的页面
-                $state.go('widthdrawResult')
-            }, function() {
-                alert('网络异常,未能提交提现')
+                $state.go ('widthdrawResult')
+            }, function () {
+                alert ('网络异常,未能提交提现')
             })
         };
     }])
     //提现结果页面
-    .controller('widthdrawResultCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+    .controller ('widthdrawResultCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
         $scope.whetherWidthdrawSuc = $rootScope.WidthdrawStatus == 0 ? true : false; //决定展示的图片
         $scope.widthdrawInfo = {
             success: '提现成功',
@@ -1903,61 +1947,71 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
         };
     }])
     //奖金纪录页面
-    .controller('prizeRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals', function($scope, $rootScope, getUser, locals) {
-        var token = locals.getObject($rootScope.user).token;
-        getUser.getInfo(url + '/service/bonus/getList?token=' + token).then(function(response) {
+    .controller ('prizeRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals', function ($scope, $rootScope, getUser, locals) {
+        var token = locals.getObject ($rootScope.user).token;
+        getUser.getInfo (url + '/service/bonus/getList?token=' + token).then (function (response) {
             $scope.prizeItems = response.data;
             for (var i = 0; i < $scope.prizeItems.length; i++) {
                 if ($scope.prizeItems[i].type == 1) {
                     $scope.prizeItems[i].exchangeType = '收入';
                     $scope.prizeItems[i].isIncome = true;
                     $scope.prizeItems[i].exchangeClass = '彩票奖金';
-                } else if ($scope.prizeItems[i].type == 2) {
+                }
+                else if ($scope.prizeItems[i].type == 2) {
                     $scope.prizeItems[i].exchangeType = '支出';
                     $scope.prizeItems[i].isIncome = false;
                     $scope.prizeItems[i].exchangeClass = '奖金兑换';
-                } else {
+                }
+                else {
                     $scope.prizeItems[i].exchangeType = '收入';
                     $scope.prizeItems[i].isIncome = true;
                     $scope.prizeItems[i].exchangeClass = '出票失败退款';
-                };
-            };
-        }, function() {
-            alert('网络异常,未能获取到奖金纪录');
+                }
+                ;
+            }
+            ;
+        }, function () {
+            alert ('网络异常,未能获取到奖金纪录');
         })
     }])
     //全部订单页面
-    .controller('allOrdersCtrl', ['$scope', '$rootScope', '$state', 'getUser', 'locals', function($scope, $rootScope, $state, getUser, locals) {
-        var token = locals.getObject($rootScope.user).token;
-        getUser.getInfo(url + '/service/lottery/getList?token=' + token).then(function(response) {
+    .controller ('allOrdersCtrl', ['$scope', '$rootScope', '$state', 'getUser', 'locals', function ($scope, $rootScope, $state, getUser, locals) {
+        var token = locals.getObject ($rootScope.user).token;
+        getUser.getInfo (url + '/service/lottery/getList?token=' + token).then (function (response) {
             $scope.allOrders = response.data;
             for (var i = 0; i < $scope.allOrders.length; i++) {
                 if ($scope.allOrders[i].lotteryID == 53) {
                     $scope.allOrders[i].lotteryID = '排列五'
-                } else if ($scope.allOrders[i].lotteryID == 54) {
+                }
+                else if ($scope.allOrders[i].lotteryID == 54) {
                     $scope.allOrders[i].lotteryID = '排列三'
-                } else {
+                }
+                else {
                     $scope.allOrders[i].lotteryID = '大乐透'
-                };
+                }
+                ;
                 if ($scope.allOrders[i].status == 0 || $scope.allOrders[i].status == 1 || $scope.allOrders[i].status == 2) {
                     $scope.allOrders[i].whetherRed = true;
                     $scope.allOrders[i].status = '待开奖';
                     $scope.allOrders[i].whetherDate = true;
                     $scope.allOrders[i].LT = $scope.allOrders[i].updateDate;
                     $scope.allOrders[i].RT = '扫码兑换';
-                } else if ($scope.allOrders[i].status == 4) {
+                }
+                else if ($scope.allOrders[i].status == 4) {
                     $scope.allOrders[i].whetherRed = true;
                     $scope.allOrders[i].status = '已中奖';
                     $scope.allOrders[i].whetherDate = false;
                     $scope.allOrders[i].LT = '奖金: ¥' + $scope.allOrders[i].winamt;
                     $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
-                } else if ($scope.allOrders[i].status == -1) {
+                }
+                else if ($scope.allOrders[i].status == -1) {
                     $scope.allOrders[i].whetherRed = false;
                     $scope.allOrders[i].status = '兑换超时';
                     $scope.allOrders[i].whetherDate = false;
                     $scope.allOrders[i].LT = '  ';
                     $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
-                } else if ($scope.allOrders[i].status == 2) {
+                }
+                else if ($scope.allOrders[i].status == 2) {
                     $scope.allOrders[i].whetherRed = false;
                     $scope.allOrders[i].status = '未中奖';
                     $scope.allOrders[i].whetherDate = false;
@@ -1965,19 +2019,20 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
                     $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
                 }
             }
-        }, function() {
-            alert('网络异常,未能获取到全部订单');
+        }, function () {
+            alert ('网络异常,未能获取到全部订单');
         })
-        $scope.toOrderDetail = function(ticketID) {
+        $scope.toOrderDetail = function (ticketID) {
             for (var i = 0; i < $scope.allOrders.length; i++) {
                 if (ticketID == $scope.allOrders[i].ticketID) {
-                    var investCode = $scope.allOrders[i].investCode.split('@');
+                    var investCode = $scope.allOrders[i].investCode.split ('@');
                     var investCodeFormat = [];
                     if (investCode.length == 2) {
-                        investCodeFormat[0] = investCode[0].split(',');
-                        investCodeFormat[1] = investCode[1].split(',');
-                    } else if (investCode.length == 1) {
-                        investCodeFormat[0] = investCode[0].split(',');
+                        investCodeFormat[0] = investCode[0].split (',');
+                        investCodeFormat[1] = investCode[1].split (',');
+                    }
+                    else if (investCode.length == 1) {
+                        investCodeFormat[0] = investCode[0].split (',');
                     }
                     $rootScope.orderDetail = {
                         lotteryID: $scope.allOrders[i].lotteryID,
@@ -1991,19 +2046,19 @@ angular.module('starter.controllers', []).controller('ExchangeCtrl', function($s
                     }
                 }
             }
-            $state.go('orderDetail');
+            $state.go ('orderDetail');
         }
     }])
     //订单详情
-    .controller('orderDetailCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+    .controller ('orderDetailCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
         $scope.orderDetail = $rootScope.orderDetail;
     }])
     //提现明细
-    .controller('widthdrawRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals', 'postData', function($scope, $rootScope, getUser, locals, postData) {
-        var token = locals.getObject($rootScope.user).token;
-        getUser.getInfo(url + '/service/cash/getList?token=' + token).then(function(response) {
+    .controller ('widthdrawRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals', 'postData', function ($scope, $rootScope, getUser, locals, postData) {
+        var token = locals.getObject ($rootScope.user).token;
+        getUser.getInfo (url + '/service/cash/getList?token=' + token).then (function (response) {
             $scope.widthdrawItems = response.data;
-        }, function() {
-            alert('网络异常,未能获取到提现明细')
+        }, function () {
+            alert ('网络异常,未能获取到提现明细')
         })
     }]);
