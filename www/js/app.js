@@ -47,8 +47,8 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 abstract: true,
                 templateUrl: 'templates/tabs.html'
             })
-            
-           //兑换
+
+            //兑换
             .state ('tab.exchange', {
                 url: '/exchange',
                 views: {
@@ -58,7 +58,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
                     }
                 }
             })
-            
+    
             //兑换 排列3
             .state ('exchange-3', {
                 url: '/exchange-3',
@@ -107,7 +107,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
     
             //兑换 大乐透 不追加
             .state ('BigLotto-2', {
-                url: '/BigLotto-2',
+                url: '/BigLotto-2/:flag2',
                 cache:'false',
                 templateUrl: 'templates/BigLotto-2.html',
                 controller: 'BigLotto-2Ctrl'
@@ -115,7 +115,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
     
             //兑换 大乐透 不追加详情
             .state ('bettingDetail', {
-                url: '/bettingDetail',
+                url: '/bettingDetail/:flag3',
                 cache:'false',
                 templateUrl: 'templates/bettingDetail.html',
                 controller: 'bettingDetailCtrl'
@@ -171,7 +171,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 cache:'false',
                 templateUrl:'templates/widthdrawResult.html',
                 controller:'widthdrawResultCtrl'
-            }) 
+            })
 
             //奖金纪录页面
             .state('prizeRecords',{

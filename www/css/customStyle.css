@@ -377,7 +377,12 @@ a {
 .betting-detail-footer .bigLotto-input2 {
     width: 18px;
     height: 18px;
-    top: 10px;
+    top: 17px;
+    left: -20px;
+}
+
+.checkbox input:disabled:checked:before, .checkbox input:disabled:checked + .checkbox-icon:before {
+     background: #e42112;
 }
 
 input.bigLotto-input2:checked:before {

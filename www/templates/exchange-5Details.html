@@ -39,13 +39,6 @@
                         <i class="icon ion-ios-arrow-right dark"></i>
                     </a>
                 </li>
-                <li class="item item-button-left item-button-right" ng-repeat="liAutoAdd in liAutoAdds">
-                    <a class="button button-clear ">
-                        <i class="icon ion-android-close dark"></i>
-                    </a>
-                    <div style="line-height: 28px"><span ng-bind="liAutoAdd"></span>注</div>
-                </li>
-
             </ul>
         </div>
     </ion-content>
@@ -55,12 +48,12 @@
             <p>
                 投注
                 <label class="padding-left">
-                    <input class="bigLotto-input1 " type="text" placeholder="1"/>
+                    <input class="bigLotto-input1 " type="text" placeholder="1" ng-model="multiple"/>
                 </label> 倍
             </p>
             <p>
                 金额：
-                <span class="font-red">2</span> 元 &nbsp
+                <span class="font-red">{{totalMoney*multiple*2}}</span> 元 &nbsp;
             </p>
             <button class="button button-block button-liner-gradiend" ng-click="submitCms5D()"
                     style="font-size: 16px;">
