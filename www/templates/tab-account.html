@@ -80,15 +80,15 @@
                 选择提现方式
             </ion-item>
             </ion-item>
-            <ion-radio ng-model="choice" ng-value="A" ng-click="toWidthdraw(1)">
+           <ion-radio ng-class="accountNum[0].disable?'disable-class':''" ng-click="toWidthdraw(1,accountNum[0].num)" ng-disabled="accountNum[0].disable">
                 <img src="./img/img_010.png" />
                 支付宝账户 <span ng-cloak>{{accountNum[0].num}}</span>
             </ion-radio>
-            <ion-radio ng-model="choice" ng-value="B" ng-click="toWidthdraw(2)">
+            <ion-radio ng-class="accountNum[1].disable?'disable-class':''"  ng-click="toWidthdraw(2,accountNum[1].num)" ng-disabled="accountNum[1].disable" >
                 <img src="./img/img_011.png" />
                 微信账户 <span ng-cloak>{{accountNum[1].num}}</span>
             </ion-radio>
-            <ion-radio ng-model="choice" ng-value="C" ng-click="toWidthdraw(3)">
+            <ion-radio ng-class="accountNum[2].disable?'disable-class':''" ng-click="toWidthdraw(3,accountNum[2].num)" ng-disabled="accountNum[2].disable">
                 <img src="./img/img_012.png" />
                 银行卡账户 <span ng-cloak>{{accountNum[2].num}}</span>
             </ion-radio>

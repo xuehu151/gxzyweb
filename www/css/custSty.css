@@ -186,6 +186,12 @@
     vertical-align: middle;
 }
 
+.account-modal .disable-class .item-content
+{
+    background-color: #ccc;
+    
+}
+
 .account-modal .radio-icon
 {
     color: #387ef5;

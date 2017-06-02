@@ -59,7 +59,7 @@
                 ng-model="users.alipay" />
             <span class="icon ion-close-round"
                 ng-show="inputInfoForm.alipay.$dirty && inputInfoForm.alipay.$invalid"></span>
-            <span class="fr" style="color: #d21e1e">*</span>
+            <!-- <span class="fr" style="color: #d21e1e">*</span> -->
           </label>
           <label class="item item-input">
             <div class="img_006"></div>
@@ -70,9 +70,9 @@
                 ng-pattern="/^[0-9]*$/" />
             <span class="icon ion-close-round"
                 ng-show="inputInfoForm.bankNo.$dirty && inputInfoForm.bankNo.$invalid"></span>
-            <span class="fr" style="color: #d21e1e">*</span>
+            <!-- <span class="fr" style="color: #d21e1e">*</span> -->
           </label>
-          <ion-item class="completeInfoNote">注意：为了不影响您中奖资金的提现，请确保您的资料真实有效；带*为三项至少填写一项；</ion-item >
+          <ion-item class="completeInfoNote">注意：为了不影响您中奖资金的提现，请确保您的资料真实有效</ion-item >
          <input type="submit" class="comform-edit-info" ng-class="inputInfoForm.$invalid?'comform-edit-info1':'comform-edit-info2'" ng-disabled="inputInfoForm.$invalid" value="点击提交" />
        </form>
       </ion-list>
