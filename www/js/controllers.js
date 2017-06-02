@@ -652,7 +652,7 @@ angular.module ('starter.controllers', [])
     })
     
     //兑换 排列5
-    .controller ('Exchange-5Ctrl', function ($scope, $state, $http) {
+    .controller ('Exchange-5Ctrl', function ($scope, $state) {
         //设置排列3球万位号码
         $scope.numDataBit10000 = [];
         var filterBit10000 = [];
@@ -1120,7 +1120,7 @@ angular.module ('starter.controllers', [])
     })
     
     //兑换 排列 5 详情
-    .controller ('Exchange-5DetailsCtrl', function ($scope, $state, $http, $ionicPopup) {
+    .controller ('Exchange-5DetailsCtrl', function ($scope, $state, $http, $ionicPopup, $ionicLoading) {
         $scope.sessionJsonWarp5D = JSON.parse (sessionStorage.jsonWrap5D);//反解析
         //console.log ($scope.sessionJsonWarp5D);
         
@@ -1237,6 +1237,7 @@ angular.module ('starter.controllers', [])
             
             //排列五确认提交
             $scope.submitCms5D = function () {
+                $ionicLoading.show ();
                 if ($scope.multiple == 0) {//投注倍数限制
                     alert ('投注倍数不能为0');
                     return
@@ -1261,6 +1262,7 @@ angular.module ('starter.controllers', [])
                     }
                 })
                     .then (function (response) {
+                        $ionicLoading.hide ();
                         reques = response.data;
                         //console.log (reques.data);
                         getPl5add ();
@@ -1270,6 +1272,7 @@ angular.module ('starter.controllers', [])
                 
                 // 排列五投注信息
                 function getPl5add () {
+                    $ionicLoading.show ();
                     var localUserInfo = window.localStorage.getItem ("userInitInfo");
                     try {
                         userInfo = JSON.parse (localUserInfo);
@@ -1308,6 +1311,7 @@ angular.module ('starter.controllers', [])
                         }
                     })
                         .then (function (response) {
+                            $ionicLoading.hide ();
                             var alertPopup = $ionicPopup.alert ({
                                 title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
                                 template: '<div class="alert-left">' +
@@ -1558,7 +1562,7 @@ angular.module ('starter.controllers', [])
     })
     
     //兑换  大乐透不追加详情
-    .controller ('bettingDetailCtrl', function ($scope, $ionicPopup, $timeout, $state, $http, $stateParams) {
+    .controller ('bettingDetailCtrl', function ($scope, $ionicPopup, $timeout, $state, $http, $stateParams, $ionicLoading) {
         $scope.flag3 = $stateParams.flag3;
         //设置表单初始值
         $scope.multiple = '1';
@@ -1676,6 +1680,7 @@ angular.module ('starter.controllers', [])
             
             // 方案保存成功提示框
             $scope.showOrderAlertCms = function () {
+                $ionicLoading.show ();
                 if ($scope.multiple == 0) {//投注倍数限制
                     alert ('请重新设置投注倍数');
                     return
@@ -1700,6 +1705,7 @@ angular.module ('starter.controllers', [])
                     }
                 })
                     .then (function (response) {
+                        $ionicLoading.hide ();
                         reques = response.data;
                         //console.log (reques.data);
                         getdltadd ();
@@ -1709,6 +1715,7 @@ angular.module ('starter.controllers', [])
                 
                 // 大乐透投注接口信息
                 function getdltadd () {
+                    $ionicLoading.show ();
                     var localUserInfo = window.localStorage.getItem ("userInitInfo");
                     try {
                         userInfo = JSON.parse (localUserInfo);
@@ -1764,6 +1771,7 @@ angular.module ('starter.controllers', [])
                         }
                     })
                         .then (function (response) {
+                            $ionicLoading.hide ();
                             console.log (response.data);
                             var alertPopup = $ionicPopup.alert ({
                                 title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
