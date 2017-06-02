@@ -2,31 +2,18 @@ var url = "http://121.42.253.149:18820";
 var jsonWrap = [];//存放所有的注数
 var jsonWrapBit3D = [];//点击向右的修改后返回来时数据的存放
 var jsonWrapBit5D = [];//点击向右的修改后返回来时数据的存放
-var initToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf2c7ea1104b0e43019e4ae600575d40d5f49ded145c5f0c61013aabe538ca71c3b3df3f822af1e7cb86f292af6ef8c0ea664c9ccecd6c7f682be7a6316bde41f6618e4b28bbd9168bc5d0c135618f5a2710ddf004b45301bd90112e6ba4f540ed792416ce9';
-//var oldToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf2c6e31104b0e43019e4ae600575d40d5f48d8d145c5f0c61013aabe538ca71c3b3df3f822af1e7cb86f292af6ef8c0ea664c9ccecd6c7f682be7a6316bde41f6618e4b28bbd9168bc5d0c135618f5a2710ddf004b45301bd90112e6ba4f540ed792416ce9';
-//var newToken = '28fa9fa2c554268e4c0721b05c2a94937f86f901425a7d229f96e5cc2defaf82f8090a8bf0290cf4bc275925cf054b45ccdf63eff0c61011fbba5b8ce05f3b32e5ff36b2216aa97a3d3db4b7d749df6d';
+var initToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf2cbeb001198e81a19e4ac354e649f535f46ccca50edfcec1013a8f31e8fad0b7c7ef3f022b13670926f2928a2a49502b875dbd5fd998df689a872621fb8e61a6014e2bd80a98440b0770c13544bbeb676488b0044533019dd0215e2b94a540cd3925250b6a7e0';
 //var ipUrl = 'http://192.168.0.137:8080';
 var ipUrl = 'http://121.42.253.149:18820/service';
-//var oldInitUrl = ipUrl + '/common/index';
 var initUrl = ipUrl + '/common/index';
-//var newInitUrl = ipUrl + '/common/index1';
 
 angular.module ('starter.controllers', [])
 //兑换
     .controller ('ExchangeCtrl', function ($scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals) {
-        /*var emptyObj = {
-            user: {}
-        };
-        locals.setObject ($rootScope.user, emptyObj);
-        console.log(locals.setObject($rootScope.user,emptyObj));
-        console.log(locals.getObject($rootScope.user).user.realName);*/
-//        initToken = locals.getObject ($rootScope.user).user.realName == undefined ? oldToken : newToken;
+        $ionicLoading.show ();
         var data = {
             token: initToken
         };
-//        initUrl = locals.getObject ($rootScope.user).user.realName == undefined ? oldInitUrl : newInitUrl;
-//        console.log(initToken);
-//        console.log(initUrl);
         //初始化接口
         $http ({
             method: "POST",
@@ -42,10 +29,9 @@ angular.module ('starter.controllers', [])
             timeout: 3000
         })
             .then (function (response) {
+                $ionicLoading.hide ();
                 var userInfoData = response.data.data;
-                console.log (response);
-                console.log (userInfoData);
-                console.log (response.data);
+//                console.log (response.data);
                 locals.setObject ($rootScope.user, userInfoData);
                 
                 /* 获取初始化数据 */
@@ -57,7 +43,7 @@ angular.module ('starter.controllers', [])
                     userInfo = null;
                 }
                 
-                if (userInfo.data.user.realName == undefined) {
+                if (userInfo.data.user.realName === undefined) {
                     var confirmPopup = $ionicPopup.confirm ({
                         title: '完善资料',
                         template: '<p style="text-align:center;"><img src="./img/completeInf.png"></p>' + '当前个人资料尚未完善；请完善！',
@@ -78,7 +64,7 @@ angular.module ('starter.controllers', [])
                                     }
                                 };
                                 $scope.goToExchange5D = function () {
-    
+                                    
                                     if (userInfo.data.user.realName === undefined) {
                                         alert("资料未完善")
                                     }else {
@@ -112,19 +98,18 @@ angular.module ('starter.controllers', [])
             }, function (response) {
                 console.log ("初始化数据失败");
             });
-
-            $scope.goToExchange3D = function () {
-                $state.go ('exchange-3');
-            };
-            $scope.goToExchange5D = function () {
-                $state.go ('exchange-5');
-            };
-            $scope.goToExchangeBigLotto2 = function () {
-                $state.go ('BigLotto-2', {'flag2': 1});
-            };
-            $scope.goToExchangeBigLotto3 = function () {
-                $state.go ('BigLotto-2');
-            };
+        $scope.goToExchange3D = function () {
+            $state.go ('exchange-3');
+        };
+        $scope.goToExchange5D = function () {
+            $state.go ('exchange-5');
+        };
+        $scope.goToExchangeBigLotto2 = function () {
+            $state.go ('BigLotto-2', {'flag2': 1});
+        };
+        $scope.goToExchangeBigLotto3 = function () {
+            $state.go ('BigLotto-2');
+        };
     })
     
     //兑换 排列3
@@ -275,7 +260,6 @@ angular.module ('starter.controllers', [])
                     }
                 }
             }
-            
             //判断filterBit100的长度确定generate100值
             filterBit1Data ();
         };
@@ -413,7 +397,8 @@ angular.module ('starter.controllers', [])
     })
     
     //兑换 排列 3 网期开奖详情
-    .controller ('Exchaangehistory3DCtrl', function ($scope, $http, $interval, $ionicPopup) {
+    .controller ('Exchaangehistory3DCtrl', function ($scope, $http, $interval, $ionicPopup, $ionicLoading) {
+        $ionicLoading.show ();
         var localUserInfo = window.localStorage.getItem ("userInitInfo");
         try {
             userInfo = JSON.parse (localUserInfo);
@@ -435,6 +420,7 @@ angular.module ('starter.controllers', [])
             }
         })
             .then (function (response) {
+                $ionicLoading.hide ();
                 $scope.historyPast3 = response.data.data;
                 
                 if (response.data.data.length === 0) {
@@ -465,185 +451,202 @@ angular.module ('starter.controllers', [])
     })
     
     //兑换 排列 3 详情
-    .controller ('Exchange-3DetailsCtrl', function ($scope, $state, $http, $ionicPopup, $rootScope) {
+    .controller ('Exchange-3DetailsCtrl', function ($scope, $state, $http, $ionicPopup, $rootScope, $ionicLoading) {
         $scope.sessionJsonWarp3D = JSON.parse (sessionStorage.jsonWrap3D);//反解析
         //console.log ($scope.sessionJsonWarp3D);
-        
-        //手动添加一组
-        $scope.manualAdd3D = function () {
-            $state.go ('exchange-3');
-            sessionStorage.editThisOrderData3D = '';  //清除点击修改后保存在session.editThisOrderData中的数据
-        };
-        
-        //店家机选，在本页面随机添加一注
-        $scope.autoAdd3D = function () {
-            var arrBit100 = [];
-            var arrBit10 = [];
-            var arrBit1 = [];
-            var addJson3D = {
-                B_Bit: arrBit100,
-                S_Bit: arrBit10,
-                G_Bit: arrBit1
-            };
-            //店主点击随机产生百位号码
-            var randomNum100 = parseInt (Math.random () * 10);
-            var itemsBit100 = {
-                num: randomNum100,
-                check: false
-            };
-            arrBit100.push (itemsBit100);
-            
-            //店主点击随机产生十位号码
-            var randomNum10 = parseInt (Math.random () * 10);
-            var itemsBit10 = {
-                num: randomNum10,
-                check: false
-            };
-            arrBit10.push (itemsBit10);
-            
-            //店主点击随机产生十位号码
-            var randomNum1 = parseInt (Math.random () * 10);
-            var itemsBit1 = {
-                num: randomNum1,
-                check: false
-            };
-            arrBit1.push (itemsBit1);
-            //由于路由的切换,需本地保存session
-            sessionStorage.saveStr3D = JSON.stringify (addJson3D);
-            var addObject3D = JSON.parse (sessionStorage.saveStr3D);
-            $scope.sessionJsonWarp3D.push (addObject3D);
-            
-            sessionStorage.jsonWrap3D = JSON.stringify ($scope.sessionJsonWarp3D);//再次解析保存机选后的值
-            $scope.sessionJsonWarp3D = JSON.parse (sessionStorage.jsonWrap3D);
-            
-            $scope.totalMoney = $scope.sessionJsonWarp3D.length;//设置背时和金额
-        };
-        
-        //点击删除一组
-        $scope.deleteRow3D = function ($index) {
-            $scope.sessionJsonWarp3D.splice ($index, 1);   //点击删除本行
-            
-            //删除本行后的数据保存到sessionStorage
-            var changeToStr = JSON.stringify ($scope.sessionJsonWarp3D);
-            sessionStorage.jsonWrap3D = changeToStr;
-//            console.log (sessionStorage.jsonWrap3D);
-            
-            $scope.totalMoney -= 1;
-        };
-        
-        //点击返回选择号码页面
-        $scope.editThisOrder3D = function ($index) {
-            var thisIndexOrder3D = $scope.sessionJsonWarp3D[$index];
-            
-            var changeToStr3D = JSON.stringify (thisIndexOrder3D);
-//            console.info (changeToStr3D);
-            sessionStorage.editThisOrderData3D = changeToStr3D;//在本地保存选中的那组数据
-            
-            $state.go ('exchange-3');
-            $scope.deleteRow3D ($index);
-        };
         
         //设置表单初始值
         $scope.multiple = '1';
         $scope.totalMoney = $scope.sessionJsonWarp3D.length;
         
-        //排列三确认提交
-        $scope.submitCms = function () {
-            if ($scope.multiple == 0) {//投注倍数限制
-                alert ('倍数不能为0');
-                return;
-            }
-            
-            //获取3D期号
-            var reques = {};
-            var localUserInfo = window.localStorage.getItem ("userInitInfo");
-            try {
-                userInfo = JSON.parse (localUserInfo);
-            } catch (error) {
-                userInfo = null;
-            }
-            $http ({
-                method: "POST",
-                url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
-                params: {
-                    LotteryID: 54
-                },
-                headers: {
-                    "Content-Type": "application/json"
-                }
+        if($scope.totalMoney >= userInfo.data.user.voucher){
+            var alertPopup = $ionicPopup.alert ({
+                title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
+                template: '<div class="alert-left">' +
+                '<p style="text-align: center">余额不足,页面无法操作,请充值</p>' +
+                '</div>',
+                okText: '确 定',
+                okType: 'button-light'
             })
-                .then (function (response) {
-                    reques = response.data;
-                    console.log (reques.data);
-                    getPl3add ();
-                }, function (response) {
-                    console.log ("获取列表失败");
+                .then (function () {
+                    /////
                 });
+        }else {
+            //手动添加一组
+            $scope.manualAdd3D = function () {
+                $state.go ('exchange-3');
+                sessionStorage.editThisOrderData3D = '';  //清除点击修改后保存在session.editThisOrderData中的数据
+            };
             
-            // 排列三投注信息接口
-            function getPl3add () {
+            //店家机选，在本页面随机添加一注
+            $scope.autoAdd3D = function () {
+                var arrBit100 = [];
+                var arrBit10 = [];
+                var arrBit1 = [];
+                var addJson3D = {
+                    B_Bit: arrBit100,
+                    S_Bit: arrBit10,
+                    G_Bit: arrBit1
+                };
+                //店主点击随机产生百位号码
+                var randomNum100 = parseInt (Math.random () * 10);
+                var itemsBit100 = {
+                    num: randomNum100,
+                    check: false
+                };
+                arrBit100.push (itemsBit100);
+                
+                //店主点击随机产生十位号码
+                var randomNum10 = parseInt (Math.random () * 10);
+                var itemsBit10 = {
+                    num: randomNum10,
+                    check: false
+                };
+                arrBit10.push (itemsBit10);
+                
+                //店主点击随机产生十位号码
+                var randomNum1 = parseInt (Math.random () * 10);
+                var itemsBit1 = {
+                    num: randomNum1,
+                    check: false
+                };
+                arrBit1.push (itemsBit1);
+                //由于路由的切换,需本地保存session
+                sessionStorage.saveStr3D = JSON.stringify (addJson3D);
+                var addObject3D = JSON.parse (sessionStorage.saveStr3D);
+                $scope.sessionJsonWarp3D.push (addObject3D);
+                
+                sessionStorage.jsonWrap3D = JSON.stringify ($scope.sessionJsonWarp3D);//再次解析保存机选后的值
+                $scope.sessionJsonWarp3D = JSON.parse (sessionStorage.jsonWrap3D);
+                
+                $scope.totalMoney = $scope.sessionJsonWarp3D.length;//设置背时和金额
+            };
+            
+            //点击删除一组
+            $scope.deleteRow3D = function ($index) {
+                $scope.sessionJsonWarp3D.splice ($index, 1);   //点击删除本行
+                
+                //删除本行后的数据保存到sessionStorage
+                var changeToStr = JSON.stringify ($scope.sessionJsonWarp3D);
+                sessionStorage.jsonWrap3D = changeToStr;
+//            console.log (sessionStorage.jsonWrap3D);
+                
+                $scope.totalMoney -= 1;
+            };
+            
+            //点击返回选择号码页面
+            $scope.editThisOrder3D = function ($index) {
+                var thisIndexOrder3D = $scope.sessionJsonWarp3D[$index];
+                
+                var changeToStr3D = JSON.stringify (thisIndexOrder3D);
+//            console.info (changeToStr3D);
+                sessionStorage.editThisOrderData3D = changeToStr3D;//在本地保存选中的那组数据
+                
+                $state.go ('exchange-3');
+                $scope.deleteRow3D ($index);
+            };
+            
+            
+            //排列三确认提交
+            $scope.submitCms = function () {
+                $ionicLoading.show ();
+                if ($scope.multiple == 0) {//投注倍数限制
+                    alert ('倍数不能为0');
+                    return;
+                }
+                
+                //获取3D期号
+                var reques = {};
                 var localUserInfo = window.localStorage.getItem ("userInitInfo");
                 try {
                     userInfo = JSON.parse (localUserInfo);
                 } catch (error) {
                     userInfo = null;
                 }
-                
-                var dataArray = [];
-                for (var i in $scope.sessionJsonWarp3D) {
-                    var dataObj = {
-                        investCode: "",
-                        multiple: 1
-                    };
-                    var investCode = null;
-                    investCode = $scope.sessionJsonWarp3D[i].B_Bit[0].num + ",";
-                    investCode += $scope.sessionJsonWarp3D[i].S_Bit[0].num + ",";
-                    investCode += $scope.sessionJsonWarp3D[i].G_Bit[0].num;
-                    
-                    dataObj.investCode = investCode;
-                    dataArray.push (dataObj);
-                    //console.log (dataArray);
-                }
-                var data = {
-                    "LotteryID": "54",
-                    "WareIssue": reques.data.wareIssue,
-                    "PayType": "0",
-                    "data": dataArray
-                };
-                
                 $http ({
                     method: "POST",
-                    url: ipUrl + '/lottery/pl3add?token=' + userInfo.data.token,
-                    data: data,
+                    url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
+                    params: {
+                        LotteryID: 54
+                    },
                     headers: {
                         "Content-Type": "application/json"
                     }
                 })
                     .then (function (response) {
-                        var alertPopup = $ionicPopup.alert ({
-                            title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
-                            template: '<div class="alert-left">' +
-                            '<p style="text-align: center">' + response.data.info + '</p>' +
-                            '</div>',
-                            okText: '确 定',
-                            okType: 'button-light'
-                        })
-                            .then (function (response) {
-                            
-                            });
-                        //console.log (response.data);
+                        reques = response.data;
+                        console.log (reques.data);
+                        getPl3add ();
                     }, function (response) {
-                        var confirmPopup = $ionicPopup.confirm ({
-                            title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
-                            template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
-                            okText: '确认',
-                            cancelText: '返回',
-                            okType: 'button-darkBlue'
-                        })
-                            .then (function () {
-                                $state.go ('bigLottoHistoryDetails');//大乐透往期详情
-                            });
+                        console.log ("获取列表失败");
                     });
+                
+                // 排列三投注信息接口
+                function getPl3add () {
+                    var localUserInfo = window.localStorage.getItem ("userInitInfo");
+                    try {
+                        userInfo = JSON.parse (localUserInfo);
+                    } catch (error) {
+                        userInfo = null;
+                    }
+                    
+                    var dataArray = [];
+                    for (var i in $scope.sessionJsonWarp3D) {
+                        var dataObj = {
+                            investCode: "",
+                            multiple: 1
+                        };
+                        var investCode = null;
+                        investCode = $scope.sessionJsonWarp3D[i].B_Bit[0].num + ",";
+                        investCode += $scope.sessionJsonWarp3D[i].S_Bit[0].num + ",";
+                        investCode += $scope.sessionJsonWarp3D[i].G_Bit[0].num;
+                        
+                        dataObj.investCode = investCode;
+                        dataArray.push (dataObj);
+                        //console.log (dataArray);
+                    }
+                    var data = {
+                        "LotteryID": "54",
+                        "WareIssue": reques.data.wareIssue,
+                        "PayType": "0",
+                        "data": dataArray
+                    };
+                    
+                    $http ({
+                        method: "POST",
+                        url: ipUrl + '/lottery/pl3add?token=' + userInfo.data.token,
+                        data: data,
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                        .then (function (response) {
+                            $ionicLoading.hide ();
+                            var alertPopup = $ionicPopup.alert ({
+                                title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
+                                template: '<div class="alert-left">' +
+                                '<p style="text-align: center">' + response.data.info + '</p>' +
+                                '</div>',
+                                okText: '确 定',
+                                okType: 'button-light'
+                            })
+                                .then (function (response) {
+                                
+                                });
+                            //console.log (response.data);
+                        }, function (response) {
+                            var confirmPopup = $ionicPopup.confirm ({
+                                title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
+                                template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
+                                okText: '确认',
+                                cancelText: '返回',
+                                okType: 'button-darkBlue'
+                            })
+                                .then (function () {
+                                    $state.go ('bigLottoHistoryDetails');//大乐透往期详情
+                                });
+                        });
+                }
             }
         }
     })
@@ -1081,7 +1084,8 @@ angular.module ('starter.controllers', [])
     })
     
     //兑换 排列 5 往期开奖详情
-    .controller ('Exchangehistory5DCtrl', function ($scope, $http, $filter) {
+    .controller ('Exchangehistory5DCtrl', function ($scope, $http, $filter, $ionicLoading) {
+        $ionicLoading.show ();
         var localUserInfo = window.localStorage.getItem ("userInitInfo");
         try {
             userInfo = JSON.parse (localUserInfo);
@@ -1103,6 +1107,7 @@ angular.module ('starter.controllers', [])
             }
         })
             .then (function (response) {
+                $ionicLoading.hide ();
                 $scope.historyPast5 = response.data.data;
                 console.log (response.data);
             }, function (response) {
@@ -1118,201 +1123,216 @@ angular.module ('starter.controllers', [])
     .controller ('Exchange-5DetailsCtrl', function ($scope, $state, $http, $ionicPopup) {
         $scope.sessionJsonWarp5D = JSON.parse (sessionStorage.jsonWrap5D);//反解析
         //console.log ($scope.sessionJsonWarp5D);
-        //手动添加一组
-        $scope.manualAdd5D = function () {
-            $state.go ('exchange-5');
-            sessionStorage.editThisOrderData5D = '';  //清除点击修改后保存在session.editThisOrderData中的数据
-        };
-        
-        //店家机选，在本页面随机添加一注
-        $scope.autoAdd5D = function () {
-            var arrBit10000 = [];
-            var arrBit1000 = [];
-            var arrBit100 = [];
-            var arrBit10 = [];
-            var arrBit1 = [];
-            var addJson5D = {
-                W_Bit: arrBit10000,
-                Q_Bit: arrBit1000,
-                B_Bit: arrBit100,
-                S_Bit: arrBit10,
-                G_Bit: arrBit1
-            };
-            //店主点击随机产生万位号码
-            var randomNum10000 = parseInt (Math.random () * 10);
-            var itemsBit10000 = {
-                num: randomNum10000,
-                check: false
-            };
-            arrBit10000.push (itemsBit10000);
-            
-            //店主点击随机产生千位号码
-            var randomNum1000 = parseInt (Math.random () * 10);
-            var itemsBit1000 = {
-                num: randomNum1000,
-                check: false
-            };
-            arrBit1000.push (itemsBit1000);
-            
-            //店主点击随机产生百位号码
-            var randomNum100 = parseInt (Math.random () * 10);
-            var itemsBit100 = {
-                num: randomNum100,
-                check: false
-            };
-            arrBit100.push (itemsBit100);
-            
-            //店主点击随机产生十位号码
-            var randomNum10 = parseInt (Math.random () * 10);
-            var itemsBit10 = {
-                num: randomNum10,
-                check: false
-            };
-            arrBit10.push (itemsBit10);
-            
-            //店主点击随机产生十位号码
-            var randomNum1 = parseInt (Math.random () * 10);
-            var itemsBit1 = {
-                num: randomNum1,
-                check: false
-            };
-            arrBit1.push (itemsBit1);
-            //由于路由的切换,需本地保存session
-            sessionStorage.saveStr5D = JSON.stringify (addJson5D);
-            var addObject5D = JSON.parse (sessionStorage.saveStr5D);
-            $scope.sessionJsonWarp5D.push (addObject5D);
-            
-            sessionStorage.jsonWrap5D = JSON.stringify ($scope.sessionJsonWarp5D);//再次解析保存机选后的值
-            $scope.sessionJsonWarp5D = JSON.parse (sessionStorage.jsonWrap5D);
-            
-            $scope.totalMoney = $scope.sessionJsonWarp5D.length;//设置倍数及金额
-        };
-        
-        //点击删除一组
-        $scope.deleteRow5D = function ($index) {
-            $scope.sessionJsonWarp5D.splice ($index, 1);   //点击删除本行
-            
-            //删除本行后的数据保存到sessionStorage
-            var changeToStr = JSON.stringify ($scope.sessionJsonWarp5D);
-            sessionStorage.jsonWrap5D = changeToStr;
-            //console.log (sessionStorage.jsonWrap3D);
-            
-            $scope.totalMoney -= 1;
-        };
-        
-        //点击返回选择号码页面
-        $scope.editThisOrder5D = function ($index) {
-            var thisIndexOrder5D = $scope.sessionJsonWarp5D[$index];
-            
-            var changeToStr5D = JSON.stringify (thisIndexOrder5D);
-//            console.info (changeToStr3D);
-            sessionStorage.editThisOrderData5D = changeToStr5D;//在本地保存选中的那组数据
-            
-            $state.go ('exchange-5');
-            $scope.deleteRow5D ($index);
-        };
         
         //设置表单初始值
         $scope.multiple = '1';
         $scope.totalMoney = $scope.sessionJsonWarp5D.length;
         
-        //排列五确认提交
-        $scope.submitCms5D = function () {
-            if ($scope.multiple == 0) {//投注倍数限制
-                alert ('投注倍数不能为0');
-                return
-            }
-            
-            //获取5D期号
-            var reques = {};
-            var localUserInfo = window.localStorage.getItem ("userInitInfo");
-            try {
-                userInfo = JSON.parse (localUserInfo);
-            } catch (error) {
-                userInfo = null;
-            }
-            $http ({
-                method: "POST",
-                url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
-                params: {
-                    LotteryID: 53
-                },
-                headers: {
-                    "Content-Type": "application/json"
-                }
+        if($scope.totalMoney >= userInfo.data.user.voucher){
+            var alertPopup = $ionicPopup.alert ({
+                title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
+                template: '<div class="alert-left">' +
+                '<p style="text-align: center">余额不足,无法操作,请充值</p>' +
+                '</div>',
+                okText: '确 定',
+                okType: 'button-light'
             })
-                .then (function (response) {
-                    reques = response.data;
-                    //console.log (reques.data);
-                    getPl5add ();
-                }, function (response) {
-                    console.log ("获取列表失败");
+                .then (function () {
+                
                 });
+        }else {
+            //手动添加一组
+            $scope.manualAdd5D = function () {
+                $state.go ('exchange-5');
+                sessionStorage.editThisOrderData5D = '';  //清除点击修改后保存在session.editThisOrderData中的数据
+            };
             
-            // 排列五投注信息
-            function getPl5add () {
+            //店家机选，在本页面随机添加一注
+            $scope.autoAdd5D = function () {
+                var arrBit10000 = [];
+                var arrBit1000 = [];
+                var arrBit100 = [];
+                var arrBit10 = [];
+                var arrBit1 = [];
+                var addJson5D = {
+                    W_Bit: arrBit10000,
+                    Q_Bit: arrBit1000,
+                    B_Bit: arrBit100,
+                    S_Bit: arrBit10,
+                    G_Bit: arrBit1
+                };
+                //店主点击随机产生万位号码
+                var randomNum10000 = parseInt (Math.random () * 10);
+                var itemsBit10000 = {
+                    num: randomNum10000,
+                    check: false
+                };
+                arrBit10000.push (itemsBit10000);
+                
+                //店主点击随机产生千位号码
+                var randomNum1000 = parseInt (Math.random () * 10);
+                var itemsBit1000 = {
+                    num: randomNum1000,
+                    check: false
+                };
+                arrBit1000.push (itemsBit1000);
+                
+                //店主点击随机产生百位号码
+                var randomNum100 = parseInt (Math.random () * 10);
+                var itemsBit100 = {
+                    num: randomNum100,
+                    check: false
+                };
+                arrBit100.push (itemsBit100);
+                
+                //店主点击随机产生十位号码
+                var randomNum10 = parseInt (Math.random () * 10);
+                var itemsBit10 = {
+                    num: randomNum10,
+                    check: false
+                };
+                arrBit10.push (itemsBit10);
+                
+                //店主点击随机产生十位号码
+                var randomNum1 = parseInt (Math.random () * 10);
+                var itemsBit1 = {
+                    num: randomNum1,
+                    check: false
+                };
+                arrBit1.push (itemsBit1);
+                //由于路由的切换,需本地保存session
+                sessionStorage.saveStr5D = JSON.stringify (addJson5D);
+                var addObject5D = JSON.parse (sessionStorage.saveStr5D);
+                $scope.sessionJsonWarp5D.push (addObject5D);
+                
+                sessionStorage.jsonWrap5D = JSON.stringify ($scope.sessionJsonWarp5D);//再次解析保存机选后的值
+                $scope.sessionJsonWarp5D = JSON.parse (sessionStorage.jsonWrap5D);
+                
+                $scope.totalMoney = $scope.sessionJsonWarp5D.length;//设置倍数及金额
+            };
+            
+            //点击删除一组
+            $scope.deleteRow5D = function ($index) {
+                $scope.sessionJsonWarp5D.splice ($index, 1);   //点击删除本行
+                
+                //删除本行后的数据保存到sessionStorage
+                var changeToStr = JSON.stringify ($scope.sessionJsonWarp5D);
+                sessionStorage.jsonWrap5D = changeToStr;
+                //console.log (sessionStorage.jsonWrap3D);
+                
+                $scope.totalMoney -= 1;
+            };
+            
+            //点击返回选择号码页面
+            $scope.editThisOrder5D = function ($index) {
+                var thisIndexOrder5D = $scope.sessionJsonWarp5D[$index];
+                
+                var changeToStr5D = JSON.stringify (thisIndexOrder5D);
+//            console.info (changeToStr3D);
+                sessionStorage.editThisOrderData5D = changeToStr5D;//在本地保存选中的那组数据
+                
+                $state.go ('exchange-5');
+                $scope.deleteRow5D ($index);
+            };
+            
+            //排列五确认提交
+            $scope.submitCms5D = function () {
+                if ($scope.multiple == 0) {//投注倍数限制
+                    alert ('投注倍数不能为0');
+                    return
+                }
+                
+                //获取5D期号
+                var reques = {};
                 var localUserInfo = window.localStorage.getItem ("userInitInfo");
                 try {
                     userInfo = JSON.parse (localUserInfo);
                 } catch (error) {
                     userInfo = null;
                 }
-                var dataArray = [];
-                for (var i in $scope.sessionJsonWarp5D) {
-                    var dataObj = {
-                        investCode: "",
-                        multiple: 1
-                    };
-                    var investCode = null;
-                    investCode = $scope.sessionJsonWarp5D[i].W_Bit[0].num + ",";
-                    investCode += $scope.sessionJsonWarp5D[i].Q_Bit[0].num + ",";
-                    investCode += $scope.sessionJsonWarp5D[i].B_Bit[0].num + ",";
-                    investCode += $scope.sessionJsonWarp5D[i].S_Bit[0].num + ",";
-                    investCode += $scope.sessionJsonWarp5D[i].G_Bit[0].num;
-                    
-                    dataObj.investCode = investCode;
-                    dataArray.push (dataObj);
-                    //console.log (dataArray);
-                }
-                var data = {
-                    "LotteryID": "53",
-                    "WareIssue": reques.data.wareIssue,
-                    "PayType": "0",
-                    "data": dataArray
-                };
                 $http ({
                     method: "POST",
-                    url: ipUrl + '/lottery/pl5add?token=' + userInfo.data.token,
-                    data: data,
+                    url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
+                    params: {
+                        LotteryID: 53
+                    },
                     headers: {
                         "Content-Type": "application/json"
                     }
                 })
                     .then (function (response) {
-                        var alertPopup = $ionicPopup.alert ({
-                            title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
-                            template: '<div class="alert-left">' +
-                            '<p style="text-align: center">' + response.data.info + '</p>' +
-                            '</div>',
-                            okText: '确 定',
-                            okType: 'button-light'
-                        })
-                            .then (function () {
-                            
-                            });
-//                    console.log (response.data.info);
+                        reques = response.data;
+                        //console.log (reques.data);
+                        getPl5add ();
                     }, function (response) {
-                        var confirmPopup = $ionicPopup.confirm ({
-                            title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
-                            template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
-                            okText: '确认',
-                            cancelText: '返回',
-                            okType: 'button-darkBlue'
-                        })
-                            .then (function () {
-                                $state.go ('bigLottoHistoryDetails');//大乐透往期详情
-                            });
+                        console.log ("获取列表失败");
                     });
+                
+                // 排列五投注信息
+                function getPl5add () {
+                    var localUserInfo = window.localStorage.getItem ("userInitInfo");
+                    try {
+                        userInfo = JSON.parse (localUserInfo);
+                    } catch (error) {
+                        userInfo = null;
+                    }
+                    var dataArray = [];
+                    for (var i in $scope.sessionJsonWarp5D) {
+                        var dataObj = {
+                            investCode: "",
+                            multiple: 1
+                        };
+                        var investCode = null;
+                        investCode = $scope.sessionJsonWarp5D[i].W_Bit[0].num + ",";
+                        investCode += $scope.sessionJsonWarp5D[i].Q_Bit[0].num + ",";
+                        investCode += $scope.sessionJsonWarp5D[i].B_Bit[0].num + ",";
+                        investCode += $scope.sessionJsonWarp5D[i].S_Bit[0].num + ",";
+                        investCode += $scope.sessionJsonWarp5D[i].G_Bit[0].num;
+                        
+                        dataObj.investCode = investCode;
+                        dataArray.push (dataObj);
+                        //console.log (dataArray);
+                    }
+                    var data = {
+                        "LotteryID": "53",
+                        "WareIssue": reques.data.wareIssue,
+                        "PayType": "0",
+                        "data": dataArray
+                    };
+                    $http ({
+                        method: "POST",
+                        url: ipUrl + '/lottery/pl5add?token=' + userInfo.data.token,
+                        data: data,
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                        .then (function (response) {
+                            var alertPopup = $ionicPopup.alert ({
+                                title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
+                                template: '<div class="alert-left">' +
+                                '<p style="text-align: center">' + response.data.info + '</p>' +
+                                '</div>',
+                                okText: '确 定',
+                                okType: 'button-light'
+                            })
+                                .then (function () {
+                                
+                                });
+//                    console.log (response.data.info);
+                        }, function (response) {
+                            var confirmPopup = $ionicPopup.confirm ({
+                                title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
+                                template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
+                                okText: '确认',
+                                cancelText: '返回',
+                                okType: 'button-darkBlue'
+                            })
+                                .then (function () {
+                                    $state.go ('bigLottoHistoryDetails');//大乐透往期详情
+                                });
+                        });
+                }
             }
         }
     })
@@ -1549,222 +1569,235 @@ angular.module ('starter.controllers', [])
         else {
             $scope.countMoney = '3';
         }
-        //alert(flag3);
         $scope.sessionJsonWarp = JSON.parse (sessionStorage.jsonWrap);//反解析
         // console.log ($scope.sessionJsonWarp);
+        $scope.totalMoney = $scope.sessionJsonWarp.length;//设置倍数及金额
         
-        //手动添加一组，返回大乐透选中页面
-        $scope.manualAdd = function () {
-            $state.go ('BigLotto-2');
-            sessionStorage.editThisOrderData = '';  //清除点击修改后保存在session.editThisOrderData中的数据
-        };
-        
-        //店家点击机选，添加机选一注
-        $scope.autoAdd = function () {
-            $scope.arrRed = [];
-            $scope.arrBlue = [];
-            addJson = {
-                red: $scope.arrRed,
-                blue: $scope.arrBlue
+        if($scope.totalMoney >= userInfo.data.user.voucher){
+            var alertPopup = $ionicPopup.alert ({
+                title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
+                template: '<div class="alert-left">' +
+                '<p style="text-align: center;">余额不足,无法操作,请充值</p>' +
+                '</div>',
+                okText: '确 定',
+                okType: 'button-light'
+            })
+                .then (function () {
+                
+                });
+        }else {
+            //手动添加一组，返回大乐透选中页面
+            $scope.manualAdd = function () {
+                $state.go ('BigLotto-2');
+                sessionStorage.editThisOrderData = '';  //清除点击修改后保存在session.editThisOrderData中的数据
             };
             
-            //店主点击随机产生5个红号
-            var randomRed = [];//原数组
-            for (var i = 1; i <= 35; i++) {
-                randomRed[i] = i;
-            }
-            randomRed.sort (function () {//排序
-                return 0.5 - Math.random ();
-            });
-            //随机打撒
-            for (var j = 0; j < 5; j++) {
-                var itemsRed = {
-                    num: randomRed[j],
-                    check: false
+            //店家点击机选，添加机选一注
+            $scope.autoAdd = function () {
+                $scope.arrRed = [];
+                $scope.arrBlue = [];
+                addJson = {
+                    red: $scope.arrRed,
+                    blue: $scope.arrBlue
                 };
-                $scope.arrRed.push (itemsRed);
-            }
-            
-            //店主点击随机产生2个蓝号
-            var randomBlue = [];//原数组
-            for (var i = 1; i <= 12; i++) {
-                randomBlue[i] = i;
-            }
-            randomBlue.sort (function () {//排序
-                return 0.5 - Math.random ();
-            });
-            //随机打撒
-            for (var j = 0; j < 2; j++) {
-                var itemsBlue = {
-                    num: randomBlue[j],
-                    check: false
-                };
-                $scope.arrBlue.push (itemsBlue);
-            }
-            //由于路由的切换,需本地保存session
-            sessionStorage.saveStr = JSON.stringify (addJson);
-            
-            var addObject = JSON.parse (sessionStorage.saveStr);
-            $scope.sessionJsonWarp.push (addObject);
-            
-            sessionStorage.jsonWrap = JSON.stringify ($scope.sessionJsonWarp);
-            $scope.sessionJsonWarp = JSON.parse (sessionStorage.jsonWrap);
-            
-            $scope.totalMoney = $scope.sessionJsonWarp.length;//设置倍数及金额
-        };
-        
-        //点击删除一组
-        $scope.deleteRow = function ($index) {
-            $scope.sessionJsonWarp.splice ($index, 1);   //点击删除本行
-            
-            //删除本行后的数据保存到sessionStorage
-            var changeToStr = JSON.stringify ($scope.sessionJsonWarp);
-            sessionStorage.jsonWrap = changeToStr;
-//             console.log(sessionStorage.jsonWrap);
-            
-            $scope.totalMoney -= 1;
-        };
-        
-        $scope.editThisOrder = function ($index) {
-            /**
-             * 1.先转成数组
-             * 2.数组中获取当前修改的一组
-             * 3.sessionStorage保存当前修改的一组
-             */
-            var changeToArr = JSON.parse (sessionStorage.jsonWrap);
-            var thisIndexOrder = changeToArr[$index];
-            
-            var changeToArr1 = JSON.stringify (thisIndexOrder);
-            sessionStorage.editThisOrderData = changeToArr1;
-            
-            // console.log(thisIndexOrder);
-            $state.go ('BigLotto-2');
-            $scope.deleteRow ($index);
-        };
-        $scope.totalMoney = $scope.sessionJsonWarp.length;    /////////////////////////////////////////////
-        
-        // 方案保存成功提示框
-        $scope.showOrderAlertCms = function () {
-            if ($scope.multiple == 0) {//投注倍数限制
-                alert ('请重新设置投注倍数');
-                return
-            }
-            
-            //获取大乐透期号
-            var reques = {};
-            var localUserInfo = window.localStorage.getItem ("userInitInfo");
-            try {
-                userInfo = JSON.parse (localUserInfo);
-            } catch (error) {
-                userInfo = null;
-            }
-            $http ({
-                method: "POST",
-                url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
-                params: {
-                    LotteryID: 51
-                },
-                headers: {
-                    "Content-Type": "application/json"
+                
+                //店主点击随机产生5个红号
+                var randomRed = [];//原数组
+                for (var i = 1; i <= 35; i++) {
+                    randomRed[i] = i;
                 }
-            })
-                .then (function (response) {
-                    reques = response.data;
-                    //console.log (reques.data);
-                    getdltadd ();
-                }, function (response) {
-                    console.log ("获取列表失败");
+                randomRed.sort (function () {//排序
+                    return 0.5 - Math.random ();
                 });
+                //随机打撒
+                for (var j = 0; j < 5; j++) {
+                    var itemsRed = {
+                        num: randomRed[j],
+                        check: false
+                    };
+                    $scope.arrRed.push (itemsRed);
+                }
+                
+                //店主点击随机产生2个蓝号
+                var randomBlue = [];//原数组
+                for (var i = 1; i <= 12; i++) {
+                    randomBlue[i] = i;
+                }
+                randomBlue.sort (function () {//排序
+                    return 0.5 - Math.random ();
+                });
+                //随机打撒
+                for (var j = 0; j < 2; j++) {
+                    var itemsBlue = {
+                        num: randomBlue[j],
+                        check: false
+                    };
+                    $scope.arrBlue.push (itemsBlue);
+                }
+                //由于路由的切换,需本地保存session
+                sessionStorage.saveStr = JSON.stringify (addJson);
+                
+                var addObject = JSON.parse (sessionStorage.saveStr);
+                $scope.sessionJsonWarp.push (addObject);
+                
+                sessionStorage.jsonWrap = JSON.stringify ($scope.sessionJsonWarp);
+                $scope.sessionJsonWarp = JSON.parse (sessionStorage.jsonWrap);
+                
+            };
             
-            // 大乐透投注接口信息
-            function getdltadd () {
+            //点击删除一组
+            $scope.deleteRow = function ($index) {
+                $scope.sessionJsonWarp.splice ($index, 1);   //点击删除本行
+                
+                //删除本行后的数据保存到sessionStorage
+                var changeToStr = JSON.stringify ($scope.sessionJsonWarp);
+                sessionStorage.jsonWrap = changeToStr;
+//             console.log(sessionStorage.jsonWrap);
+                
+                $scope.totalMoney -= 1;
+            };
+            
+            $scope.editThisOrder = function ($index) {
+                /**
+                 * 1.先转成数组
+                 * 2.数组中获取当前修改的一组
+                 * 3.sessionStorage保存当前修改的一组
+                 */
+                var changeToArr = JSON.parse (sessionStorage.jsonWrap);
+                var thisIndexOrder = changeToArr[$index];
+                
+                var changeToArr1 = JSON.stringify (thisIndexOrder);
+                sessionStorage.editThisOrderData = changeToArr1;
+                
+                // console.log(thisIndexOrder);
+                $state.go ('BigLotto-2');
+                $scope.deleteRow ($index);
+            };
+            
+            // 方案保存成功提示框
+            $scope.showOrderAlertCms = function () {
+                if ($scope.multiple == 0) {//投注倍数限制
+                    alert ('请重新设置投注倍数');
+                    return
+                }
+                
+                //获取大乐透期号
+                var reques = {};
                 var localUserInfo = window.localStorage.getItem ("userInitInfo");
                 try {
                     userInfo = JSON.parse (localUserInfo);
                 } catch (error) {
                     userInfo = null;
                 }
-                var dataArrayBig = [];
-                for (var i in $scope.sessionJsonWarp) {
-                    var dataObj = {
-                        investCode: "",//"investCode":"01,03,05,07,09@06,08"
-                        multiple: 1
-                    };
-                    var investCode = '';
-                    for (var j in $scope.sessionJsonWarp[i]) {
-                        for (var k in $scope.sessionJsonWarp[i][j]) {
-                            if (typeof $scope.sessionJsonWarp[i][j][k] === 'object') {
-                                
-                                if ($scope.sessionJsonWarp[i][j][k].num * 1 < 10) {
-                                    investCode += ',' + '0' + $scope.sessionJsonWarp[i][j][k].num
-                                }
-                                else {
-                                    investCode += ',' + $scope.sessionJsonWarp[i][j][k].num
-                                }
-                                
-                                if (investCode.substr (0, 1) == ',') investCode = investCode.substr (1);//截取第一位逗号
-                                investCode = (investCode.substring (investCode.length - 1) == ',') ? investCode.substring (0, investCode.length - 1) : investCode;//截取最后一位逗号
-                                
-                                var get_array = investCode.split ('');
-                                get_array.splice (-6, 1, '@');
-                                var investCodeStr = get_array.join ('');
-                            }
-                        }
-                    }
-//                console.log (investCodeStr);
-                    dataObj.investCode = investCodeStr;
-                    dataArrayBig.push (dataObj);
-                    console.log (dataArrayBig);
-                }
-                var data = {
-                    "LotteryID": "51",
-                    "WareIssue": reques.data.wareIssue,
-                    "PayType": "0",
-                    "AddFlag": "0",
-                    "data": dataArrayBig
-                };
-                
                 $http ({
                     method: "POST",
-                    url: ipUrl + '/lottery/dltadd?token=' + userInfo.data.token,
-                    data: data,
+                    url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
+                    params: {
+                        LotteryID: 51
+                    },
                     headers: {
-                        "Content-Type": "application/json;charset=UTF-8"
+                        "Content-Type": "application/json"
                     }
                 })
                     .then (function (response) {
-                        console.log (response.data);
-                        var alertPopup = $ionicPopup.alert ({
-                            title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
-                            template: '<div class="alert-left">' +
-                            '<p style="text-align: center;">' + response.data.info + '</p>' +
-                            '</div>',
-                            okText: '确 定',
-                            okType: 'button-light'
-                        })
-                            .then (function () {
-                            
-                            });
-                        
+                        reques = response.data;
+                        //console.log (reques.data);
+                        getdltadd ();
                     }, function (response) {
-                        //扫码后，所获赠注数的限制提示。
-                        var confirmPopup = $ionicPopup.confirm ({
-                            title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
-                            template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
-                            okText: '确认',
-                            okType: 'button-darkBlue'
-                        })
-                            .then (function () {
-                                $state.go ('bigLottoHistoryDetails');//大乐透往期详情
-                            });
-                        console.log ("提交失败");
+                        console.log ("获取列表失败");
                     });
+                
+                // 大乐透投注接口信息
+                function getdltadd () {
+                    var localUserInfo = window.localStorage.getItem ("userInitInfo");
+                    try {
+                        userInfo = JSON.parse (localUserInfo);
+                    } catch (error) {
+                        userInfo = null;
+                    }
+                    var dataArrayBig = [];
+                    for (var i in $scope.sessionJsonWarp) {
+                        var dataObj = {
+                            investCode: "",//"investCode":"01,03,05,07,09@06,08"
+                            multiple: 1
+                        };
+                        var investCode = '';
+                        for (var j in $scope.sessionJsonWarp[i]) {
+                            for (var k in $scope.sessionJsonWarp[i][j]) {
+                                if (typeof $scope.sessionJsonWarp[i][j][k] === 'object') {
+                                    
+                                    if ($scope.sessionJsonWarp[i][j][k].num * 1 < 10) {
+                                        investCode += ',' + '0' + $scope.sessionJsonWarp[i][j][k].num
+                                    }
+                                    else {
+                                        investCode += ',' + $scope.sessionJsonWarp[i][j][k].num
+                                    }
+                                    
+                                    if (investCode.substr (0, 1) == ',') investCode = investCode.substr (1);//截取第一位逗号
+                                    investCode = (investCode.substring (investCode.length - 1) == ',') ? investCode.substring (0, investCode.length - 1) : investCode;//截取最后一位逗号
+                                    
+                                    var get_array = investCode.split ('');
+                                    get_array.splice (-6, 1, '@');
+                                    var investCodeStr = get_array.join ('');
+                                }
+                            }
+                        }
+//                console.log (investCodeStr);
+                        dataObj.investCode = investCodeStr;
+                        dataArrayBig.push (dataObj);
+                        console.log (dataArrayBig);
+                    }
+                    var data = {
+                        "LotteryID": "51",
+                        "WareIssue": reques.data.wareIssue,
+                        "PayType": "0",
+                        "AddFlag": "0",
+                        "data": dataArrayBig
+                    };
+                    
+                    $http ({
+                        method: "POST",
+                        url: ipUrl + '/lottery/dltadd?token=' + userInfo.data.token,
+                        data: data,
+                        headers: {
+                            "Content-Type": "application/json;charset=UTF-8"
+                        }
+                    })
+                        .then (function (response) {
+                            console.log (response.data);
+                            var alertPopup = $ionicPopup.alert ({
+                                title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
+                                template: '<div class="alert-left">' +
+                                '<p style="text-align: center;">' + response.data.info + '</p>' +
+                                '</div>',
+                                okText: '确 定',
+                                okType: 'button-light'
+                            })
+                                .then (function () {
+                                
+                                });
+                            
+                        }, function (response) {
+                            //扫码后，所获赠注数的限制提示。
+                            var confirmPopup = $ionicPopup.confirm ({
+                                title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
+                                template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
+                                okText: '确认',
+                                okType: 'button-darkBlue'
+                            })
+                                .then (function () {
+                                    $state.go ('bigLottoHistoryDetails');//大乐透往期详情
+                                });
+                            console.log ("提交失败");
+                        });
+                }
             }
         }
     })
     
     //大乐透往期详情
-    .controller ('bigLottoHistoryDetailsCtrl', function ($scope, $http) {
+    .controller ('bigLottoHistoryDetailsCtrl', function ($scope, $http, $ionicLoading) {
+        $ionicLoading.show ();
         //获取历史投注记录............
         var localUserInfo = window.localStorage.getItem ("userInitInfo");
         try {
@@ -1787,6 +1820,7 @@ angular.module ('starter.controllers', [])
             }
         })
             .then (function (response) {
+                $ionicLoading.hide ();
                 $scope.bitLotto = response.data.data;
                 //for(var i=0;i<response.data.data.length;i++){
                 //    $scope.historyPast3[i].result=response.data.data[i].result.split(",");
@@ -1805,14 +1839,14 @@ angular.module ('starter.controllers', [])
             return array[num];
         };
     })
-    
-    
-    
+
+
+
     //账户页面
     .controller ('AccountCtrl', ['$scope', '$rootScope', '$ionicPopup', '$state', '$ionicModal', '$http', 'locals', 'getUser','$ionicLoading', function ($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser,$ionicLoading) {
         //验证是否资料完善
 //        $ionicLoading.show ();
-    
+        
         console.log(locals.getObject($rootScope.user));
         var userInfo=locals.getObject($rootScope.user);
         $scope.useableMoney = locals.getObject ($rootScope.user).user.money;
@@ -1820,40 +1854,40 @@ angular.module ('starter.controllers', [])
         $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
         //提现时候的账户号码
         $rootScope.accountNum = [{
-                chanel: 1,
-                num: '(' + userInfo.user.alipay + ')',
-                disable:false,
+            chanel: 1,
+            num: '(' + userInfo.user.alipay + ')',
+            disable:false,
+            
+        }, {
+            chanel: 2,
+            num: '(' + userInfo.user.wechat + ')',
+            disable:false,
+            
+        }, {
+            chanel: 3,
+            num: '(' + userInfo.user.bankNo + ')',
+            disable:false,
+            
+        }];
+        
+        for (var i = 0; i < $rootScope.accountNum.length; i++) {
+            if ($rootScope.accountNum[i].num=="()")
+            {
                 
-            }, {
-                chanel: 2,
-                num: '(' + userInfo.user.wechat + ')',
-                disable:false,
-               
-            }, {
-                chanel: 3,
-                num: '(' + userInfo.user.bankNo + ')',
-                disable:false,
-
-            }];
-            
-            for (var i = 0; i < $rootScope.accountNum.length; i++) {
-                if ($rootScope.accountNum[i].num=="()")
-                {
-                   
-                    $rootScope.accountNum[i].disable=true;
-                }
+                $rootScope.accountNum[i].disable=true;
             }
+        }
         /*getUser.getInfo (url + "/service/common/index?token=" + initToken).then (function (response) {
-//            alert(22)
-            $ionicLoading.hide ();
-            var userInfo = response.data;
-            console.log (userInfo)
-            // $rootScope.user={}  //保存token和用户信息
-            locals.setObject ($rootScope.user, userInfo)
-            
-        }, function () {
-            alert ('网络异常,未获取到用户信息')
-        });*/
+         //            alert(22)
+         $ionicLoading.hide ();
+         var userInfo = response.data;
+         console.log (userInfo)
+         // $rootScope.user={}  //保存token和用户信息
+         locals.setObject ($rootScope.user, userInfo)
+         
+         }, function () {
+         alert ('网络异常,未获取到用户信息')
+         });*/
         $scope.withdrawConfirm = function () {
             if (locals.getObject ($scope.user).user.realName) {
                 $scope.modal.show ();
@@ -1998,8 +2032,8 @@ angular.module ('starter.controllers', [])
              widthdrawLocals.money--;
              console.log(widthdrawLocals)
              };*/
-
-             $ionicLoading.show ();
+            
+            $ionicLoading.show ();
             var token = locals.getObject ($rootScope.user).token;
             console.log (token);
             console.log ($scope.widthdrawMoney);
@@ -2027,7 +2061,7 @@ angular.module ('starter.controllers', [])
         var token = locals.getObject ($rootScope.user).token;
         $ionicLoading.show ();
         getUser.getInfo (url + '/service/bonus/getList?token=' + token).then (function (response) {
-
+            
             $scope.prizeItems = response.data;
             for (var i = 0; i < $scope.prizeItems.length; i++) {
                 if ($scope.prizeItems[i].type == 1) {
