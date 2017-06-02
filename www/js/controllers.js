@@ -2,102 +2,120 @@ var url = "http://121.42.253.149:18820";
 var jsonWrap = [];//存放所有的注数
 var jsonWrapBit3D = [];//点击向右的修改后返回来时数据的存放
 var jsonWrapBit5D = [];//点击向右的修改后返回来时数据的存放
-var initToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf2cbeb001198e81a19e4ac354e649f535f46ccca50edfcec1013a8f31e8fad0b7c7ef3f022b13670926f2928a2a49502b875dbd5fd998df689a872621fb8e61a6014e2bd80a98440b0770c13544bbeb676488b0044533019dd0215e2b94a540cd3925250b6a7e0';
+var initToken = '';
 //var ipUrl = 'http://192.168.0.137:8080';
 var ipUrl = 'http://121.42.253.149:18820/service';
 var initUrl = ipUrl + '/common/index';
+var uid='';
+var vid='';
 
 angular.module ('starter.controllers', [])
 //兑换
-    .controller ('ExchangeCtrl', function ($scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals) {
+    .controller ('ExchangeCtrl', function ($location,$scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals,getUser) {
         $ionicLoading.show ();
-        var data = {
+
+       uid=$location.search().uid;
+          vid=$location.search().vid;
+        getUser.getInfo(url + '/service/common/testToken?vid='+vid+'&uid='+uid).then(function (response) {
+            
+            initToken=response.data
+            console.log(initToken)
+            var data = {
             token: initToken
         };
-        //初始化接口
-        $http ({
-            method: "POST",
-            url: initUrl,
-            data: data,
-            transformRequest: function (obj) {
-                var str = [];
-                for (var s in obj) {
-                    str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
-                }
-                return str.join ("&");
-            },
-            timeout: 3000
+         console.log(data)
+
+                 //初始化接口
+                 $http ({
+                     method: "POST",
+                     url: initUrl,
+                     data: data,
+                     transformRequest: function (obj) {
+                         var str = [];
+                         for (var s in obj) {
+                             str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
+                         }
+                         return str.join ("&");
+                     },
+                     timeout: 3000
+                 })
+                     .then (function (response) {
+                         console.log(response)
+                         $ionicLoading.hide ();
+                         var userInfoData = response.data.data;
+         //                console.log (response.data);
+                         locals.setObject ($rootScope.user, userInfoData);
+                         
+                         /* 获取初始化数据 */
+                         window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
+                         var localUserInfo = window.localStorage.getItem ("userInitInfo");
+                         try {
+                             userInfo = JSON.parse (localUserInfo);
+                         } catch (error) {
+                             userInfo = null;
+                         }
+                         
+                         if (userInfo.data.user.realName === undefined) {
+                             var confirmPopup = $ionicPopup.confirm ({
+                                 title: '完善资料',
+                                 template: '<p style="text-align:center;"><img src="./img/completeInf.png"></p>' + '当前个人资料尚未完善；请完善！',
+                                 cancelText: '暂不完善',
+                                 cancelType: '',
+                                 okText: '立即完善',
+                                 okType: 'button-positive'
+                             })
+                                 .then (function (res) {
+                                     if (res) {
+                                         $state.go ('completeInfo')
+                                     }else {
+                                         $scope.goToExchange3D = function () {
+                                             if (userInfo.data.user.realName === undefined) {
+                                                 alert("资料未完善")
+                                             }else {
+                                                 $state.go ('exchange-3');
+                                             }
+                                         };
+                                         $scope.goToExchange5D = function () {
+                                             
+                                             if (userInfo.data.user.realName === undefined) {
+                                                 alert("资料未完善")
+                                             }else {
+                                                 $state.go ('exchange-5');
+                                             }
+                                             
+                                         };
+                                         $scope.goToExchangeBigLotto2 = function () {
+                                             if (userInfo.data.user.realName === undefined) {
+                                                 alert("资料未完善")
+                                             }else {
+                                                 $state.go ('BigLotto-2', {'flag2': 1});
+                                             }
+                                             
+                                         };
+                                         $scope.goToExchangeBigLotto3 = function () {
+                                             if (userInfo.data.user.realName === undefined) {
+                                                 alert("资料未完善")
+                                             }else {
+                                                 $state.go ('BigLotto-2');
+                                             }
+                                             
+                                         };
+                                     }
+                                 });
+                         }
+                         else {
+                         
+                         }
+                         //console.log (response.data);
+                     }, function (response) {
+                         console.log ("初始化数据失败");
+                     });
+
+        },function (data) {
+            console.log(data)
         })
-            .then (function (response) {
-                $ionicLoading.hide ();
-                var userInfoData = response.data.data;
-//                console.log (response.data);
-                locals.setObject ($rootScope.user, userInfoData);
-                
-                /* 获取初始化数据 */
-                window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
-                var localUserInfo = window.localStorage.getItem ("userInitInfo");
-                try {
-                    userInfo = JSON.parse (localUserInfo);
-                } catch (error) {
-                    userInfo = null;
-                }
-                
-                if (userInfo.data.user.realName === undefined) {
-                    var confirmPopup = $ionicPopup.confirm ({
-                        title: '完善资料',
-                        template: '<p style="text-align:center;"><img src="./img/completeInf.png"></p>' + '当前个人资料尚未完善；请完善！',
-                        cancelText: '暂不完善',
-                        cancelType: '',
-                        okText: '立即完善',
-                        okType: 'button-positive'
-                    })
-                        .then (function (res) {
-                            if (res) {
-                                $state.go ('completeInfo')
-                            }else {
-                                $scope.goToExchange3D = function () {
-                                    if (userInfo.data.user.realName === undefined) {
-                                        alert("资料未完善")
-                                    }else {
-                                        $state.go ('exchange-3');
-                                    }
-                                };
-                                $scope.goToExchange5D = function () {
-                                    
-                                    if (userInfo.data.user.realName === undefined) {
-                                        alert("资料未完善")
-                                    }else {
-                                        $state.go ('exchange-5');
-                                    }
-                                    
-                                };
-                                $scope.goToExchangeBigLotto2 = function () {
-                                    if (userInfo.data.user.realName === undefined) {
-                                        alert("资料未完善")
-                                    }else {
-                                        $state.go ('BigLotto-2', {'flag2': 1});
-                                    }
-                                    
-                                };
-                                $scope.goToExchangeBigLotto3 = function () {
-                                    if (userInfo.data.user.realName === undefined) {
-                                        alert("资料未完善")
-                                    }else {
-                                        $state.go ('BigLotto-2');
-                                    }
-                                    
-                                };
-                            }
-                        });
-                }
-                else {
-                
-                }
-                //console.log (response.data);
-            }, function (response) {
-                console.log ("初始化数据失败");
-            });
+
+
         $scope.goToExchange3D = function () {
             $state.go ('exchange-3');
         };
