@@ -2,7 +2,7 @@ var url = "http://121.42.253.149:18820";
 var jsonWrap = [];//存放所有的注数
 var jsonWrapBit3D = [];//点击向右的修改后返回来时数据的存放
 var jsonWrapBit5D = [];//点击向右的修改后返回来时数据的存放
-var initToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbaf6c7e81104b0e43019e4ae600575d40d5f45dbd145c5f0c61013aabe538ca71c3b3df3f822af1e7cb86f292af6ef8c0ea664c9ccecd6c7f682be7a6316bde41f6618e4b28bbd9168bc5d0c135618f5a2710ddf004b45301bd90112e6ba4f540ed792416ce9';
+var initToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf2c7ea1104b0e43019e4ae600575d40d5f49ded145c5f0c61013aabe538ca71c3b3df3f822af1e7cb86f292af6ef8c0ea664c9ccecd6c7f682be7a6316bde41f6618e4b28bbd9168bc5d0c135618f5a2710ddf004b45301bd90112e6ba4f540ed792416ce9';
 //var oldToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf2c6e31104b0e43019e4ae600575d40d5f48d8d145c5f0c61013aabe538ca71c3b3df3f822af1e7cb86f292af6ef8c0ea664c9ccecd6c7f682be7a6316bde41f6618e4b28bbd9168bc5d0c135618f5a2710ddf004b45301bd90112e6ba4f540ed792416ce9';
 //var newToken = '28fa9fa2c554268e4c0721b05c2a94937f86f901425a7d229f96e5cc2defaf82f8090a8bf0290cf4bc275925cf054b45ccdf63eff0c61011fbba5b8ce05f3b32e5ff36b2216aa97a3d3db4b7d749df6d';
 //var ipUrl = 'http://192.168.0.137:8080';
@@ -106,7 +106,7 @@ angular.module ('starter.controllers', [])
                         });
                 }
                 else {
-                    
+                
                 }
                 //console.log (response.data);
             }, function (response) {
@@ -1837,8 +1837,8 @@ angular.module ('starter.controllers', [])
             }];
             
             for (var i = 0; i < $rootScope.accountNum.length; i++) {
-                if ($rootScope.accountNum[i].num=="()") 
-                {   
+                if ($rootScope.accountNum[i].num=="()")
+                {
                    
                     $rootScope.accountNum[i].disable=true;
                 }
