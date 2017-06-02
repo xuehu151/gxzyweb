@@ -2,7 +2,7 @@ var url = "http://121.42.253.149:18820";
 var jsonWrap = [];//存放所有的注数
 var jsonWrapBit3D = [];//点击向右的修改后返回来时数据的存放
 var jsonWrapBit5D = [];//点击向右的修改后返回来时数据的存放
-var initToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbaf6c7ea1104b0e43019e4ae600575d40d5f45ddd145c5f0c61013aabe538ca71c3b3df3f822af1e7cb86f292af6ef8c0ea664c9ccecd6c7f682be7a6316bde41f6618e4b28bbd9168bc5d0c135618f5a2710ddf004b45301bd90112e6ba4f540ed792416ce9';
+var initToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbaf6c7e81104b0e43019e4ae600575d40d5f45dbd145c5f0c61013aabe538ca71c3b3df3f822af1e7cb86f292af6ef8c0ea664c9ccecd6c7f682be7a6316bde41f6618e4b28bbd9168bc5d0c135618f5a2710ddf004b45301bd90112e6ba4f540ed792416ce9';
 //var oldToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf2c6e31104b0e43019e4ae600575d40d5f48d8d145c5f0c61013aabe538ca71c3b3df3f822af1e7cb86f292af6ef8c0ea664c9ccecd6c7f682be7a6316bde41f6618e4b28bbd9168bc5d0c135618f5a2710ddf004b45301bd90112e6ba4f540ed792416ce9';
 //var newToken = '28fa9fa2c554268e4c0721b05c2a94937f86f901425a7d229f96e5cc2defaf82f8090a8bf0290cf4bc275925cf054b45ccdf63eff0c61011fbba5b8ce05f3b32e5ff36b2216aa97a3d3db4b7d749df6d';
 //var ipUrl = 'http://192.168.0.137:8080';
@@ -1921,7 +1921,7 @@ angular.module ('starter.controllers', [])
         }
     }])
     //完善个人资料
-    .controller ('completeInfoCtrl', ['$scope', '$rootScope', '$state', 'locals', 'postData', function ($scope, $rootScope, $state, locals, postData) {
+    .controller ('completeInfoCtrl', ['$scope', '$rootScope', '$state', 'locals', 'postData','$ionicLoading', function ($scope, $rootScope, $state, locals, postData,$ionicLoading) {
         $scope.users = {
             realName: '',
             phone: '',
@@ -1938,6 +1938,7 @@ angular.module ('starter.controllers', [])
          */
         $rootScope.addData = locals.getObject ($rootScope.user)
         $scope.submitInfo = function () {
+            $ionicLoading.show ();
             $rootScope.addData.user.realName = $scope.users.realName;
             $rootScope.addData.user.phone = $scope.users.phone;
             $rootScope.addData.user.idcard = $scope.users.idcard;
@@ -1949,6 +1950,7 @@ angular.module ('starter.controllers', [])
              * 功能:把提交的值上传到后台
              */
             postData.getInfo (url + "/service/customer/add", $rootScope.addData).then (function (data) {
+                $ionicLoading.hide ();
                 $state.go ('completeInfoSucceed');
             }, function () {
                 alert ('网络异常,未能更新您的资料')
@@ -1962,11 +1964,13 @@ angular.module ('starter.controllers', [])
         }
     }])
     //提现页面
-    .controller ('widthdrawCtrl', ['$scope', '$state', '$rootScope', 'getUser', 'locals', 'postData', function ($scope, $state, $rootScope, getUser, locals, postData) {
+    .controller ('widthdrawCtrl', ['$scope', '$state', '$rootScope', 'getUser', 'locals', 'postData','$ionicLoading', function ($scope, $state, $rootScope, getUser, locals, postData,$ionicLoading) {
+        $ionicLoading.show ();
         var widthdrawLocals = locals.getObject ($rootScope.user);
         var token = widthdrawLocals.token;
         getUser.getInfo (url + "/service/customer/getUser?token=" + token).then (function (response) {
             $scope.widthdrawAble = response.data.money; //可用余额
+            $ionicLoading.hide ();
         }, function () {
             alert ('网络异常,未能获取到您的可用余额');
         });
@@ -1994,11 +1998,14 @@ angular.module ('starter.controllers', [])
              widthdrawLocals.money--;
              console.log(widthdrawLocals)
              };*/
+
+             $ionicLoading.show ();
             var token = locals.getObject ($rootScope.user).token;
             console.log (token);
             console.log ($scope.widthdrawMoney);
             getUser.getInfo (url + '/service/cash/add' + '?channel=' + $rootScope.channel + '&money=' + $scope.widthdrawMoney + '&token=' + token).then (function (data) {
                 $rootScope.WidthdrawStatus = data.error //保存返回的状态,用于决定widthdrawResult的页面
+                $ionicLoading.hide ();
                 $state.go ('widthdrawResult')
             }, function () {
                 alert ('网络异常,未能提交提现')
@@ -2016,9 +2023,11 @@ angular.module ('starter.controllers', [])
         };
     }])
     //奖金纪录页面
-    .controller ('prizeRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals', function ($scope, $rootScope, getUser, locals) {
+    .controller ('prizeRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals','$ionicLoading', function ($scope, $rootScope, getUser, locals,$ionicLoading) {
         var token = locals.getObject ($rootScope.user).token;
+        $ionicLoading.show ();
         getUser.getInfo (url + '/service/bonus/getList?token=' + token).then (function (response) {
+
             $scope.prizeItems = response.data;
             for (var i = 0; i < $scope.prizeItems.length; i++) {
                 if ($scope.prizeItems[i].type == 1) {
@@ -2037,14 +2046,15 @@ angular.module ('starter.controllers', [])
                     $scope.prizeItems[i].exchangeClass = '出票失败退款';
                 }
                 ;
-            }
-            ;
+            };
+            $ionicLoading.hide ();
         }, function () {
             alert ('网络异常,未能获取到奖金纪录');
         })
     }])
     //全部订单页面
-    .controller ('allOrdersCtrl', ['$scope', '$rootScope', '$state', 'getUser', 'locals', function ($scope, $rootScope, $state, getUser, locals) {
+    .controller ('allOrdersCtrl', ['$scope', '$rootScope', '$state', 'getUser', 'locals','$ionicLoading', function ($scope, $rootScope, $state, getUser, locals,$ionicLoading) {
+        $ionicLoading.show();
         var token = locals.getObject ($rootScope.user).token;
         getUser.getInfo (url + '/service/lottery/getList?token=' + token).then (function (response) {
             $scope.allOrders = response.data;
@@ -2088,6 +2098,7 @@ angular.module ('starter.controllers', [])
                     $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
                 }
             }
+            $ionicLoading.hide ();
         }, function () {
             alert ('网络异常,未能获取到全部订单');
         })
@@ -2123,10 +2134,12 @@ angular.module ('starter.controllers', [])
         $scope.orderDetail = $rootScope.orderDetail;
     }])
     //提现明细
-    .controller ('widthdrawRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals', 'postData', function ($scope, $rootScope, getUser, locals, postData) {
+    .controller ('widthdrawRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals', 'postData','$ionicLoading', function ($scope, $rootScope, getUser, locals, postData,$ionicLoading) {
+        $ionicLoading.show();
         var token = locals.getObject ($rootScope.user).token;
         getUser.getInfo (url + '/service/cash/getList?token=' + token).then (function (response) {
             $scope.widthdrawItems = response.data;
+            $ionicLoading.hide();
         }, function () {
             alert ('网络异常,未能获取到提现明细')
         })
