@@ -189,7 +189,7 @@
 .account-modal .disable-class .item-content
 {
     background-color: #ccc;
-    
+
 }
 
 .account-modal .radio-icon
@@ -606,7 +606,8 @@
 }
 
 .prize-records-list .prize-records-all,
-.all-orders-list .prize-records-all
+.all-orders-list .prize-records-all,
+.widthdraw-records-list .prize-records-all
 {
     width: 100%;
     margin: 0 auto;
@@ -615,6 +616,7 @@
 }
 
 .prize-records-list .prize-records-all img,
+.widthdraw-records-list .prize-records-all img,
 .all-orders-list .prize-records-all img
 {
     width: 30%;
