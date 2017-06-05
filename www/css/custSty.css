@@ -229,6 +229,7 @@
 .complete-info-list .error {
   min-width: 78px;
   color: red;
+  font-size: 12px;
 }
 
 .img_001, .img_002, .img_003, .img_004, .img_005, .img_006, .img_008, .img_009, .img_010, .img_011, .img_012 {
