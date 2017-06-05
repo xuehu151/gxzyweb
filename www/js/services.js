@@ -26,15 +26,15 @@ angular.module('starter.services', [])
                 url: url,
                 headers: {
                     // "Accept": "application/json",
-                    "Content-Type": "application/json",
-                },
+                    "Content-Type": "application/json"
+                }
             }).success(function(response) {
                 d.resolve(response);
             }).error(function() {
                 d.reject('error')
             });
             return d.promise
-        }
+        };
         return info;
     }])
     //上传数据的http请求
@@ -55,15 +55,15 @@ angular.module('starter.services', [])
                 },
                 headers: {
                     "Accept": "application/json",
-                    "Content-Type": "application/json",
-                },
+                    "Content-Type": "application/json"
+                }
             }).success(function(response) {
                 d.resolve(response);
             }).error(function() {
                 d.reject('error')
             });
             return d.promise
-        }
+        };
         return info;
     }]).factory('postWidthdraw', ['$http', '$q', function($http, $q) {
         var info = {};
@@ -82,14 +82,14 @@ angular.module('starter.services', [])
                 },
                 headers: {
                     "Accept": "application/json",
-                    "Content-Type": "application/json",
-                },
+                    "Content-Type": "application/json"
+                }
             }).success(function(response) {
                 d.resolve(response);
             }).error(function() {
                 d.reject('error')
             });
             return d.promise
-        }
+        };
         return info;
     }]);

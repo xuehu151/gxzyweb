@@ -45,6 +45,10 @@ a {
     max-width: 44%;
 }
 
+.col-44 h4{
+    padding-left: 10px;
+}
+
 .home-icon h3 {
     padding-left: 6px;
     margin: 0 0;
@@ -58,15 +62,15 @@ a {
     padding-left: 5px;
     color: #ed7600;
     font-family: inherit;
-    font-weight: 600;
     letter-spacing: 1px;
+    font-size: .9em;
 }
 
 .title-intro span {
     padding-left: 5px;
     font-weight: bold;
     letter-spacing: 1px;
-    color: #000000;
+    color: #322b64;
 }
 
 /*兑换   排列3*/
@@ -98,7 +102,7 @@ a {
     border-radius: 50%;
     text-align: center;
     line-height: 2.4em;
-    margin: 4px 4px;
+    margin: 4px 7px;
     display: inline-block;
 }
 
@@ -142,27 +146,27 @@ a {
 }
 
 .red-ball-bg-white {
-    width: 2.9em;
-    height: 2.9em;
-    border: solid 1px #d11d1d;
-    background-color: #fff4fb;
-    color: #d11d1d;
+    width: 2.6em;
+    height: 2.6em;
+    border: solid 1px #888888;
+    background-color: #ffffff;
+    color: #888888;
     border-radius: 50%;
     text-align: center;
-    line-height: 2.9em;
+    line-height: 2.6em;
     margin: 4px 1.0%;
     display: inline-block;
 }
 
 .red-ball-bg-red {
-    width: 2.9em;
-    height: 2.9em;
+    width: 2.6em;
+    height: 2.6em;
     border: solid 1px #d11d1d;
     background-color: #d11d1d;
     color: #fff4fb;
     border-radius: 50%;
     text-align: center;
-    line-height: 2.9em;
+    line-height: 2.6em;
     margin: 4px 1.0%;
     display: inline-block;
 }
@@ -172,27 +176,27 @@ a {
 }
 
 .blue-ball-bg-white {
-    width: 2.9em;
-    height: 2.9em;
-    border: solid 1px #3f97d5;
-    background-color: #fff4fb;
-    color: #3f97d5;
+    width: 2.6em;
+    height: 2.6em;
+    border: solid 1px #888888;
+    background-color: #ffffff;
+    color: #888888;
     border-radius: 50%;
     text-align: center;
-    line-height: 2.9em;
+    line-height: 2.6em;
     margin: 4px 1.0%;
     display: inline-block;
 }
 
 .blue-ball-bg-blue {
-    width: 2.9em;
-    height: 2.9em;
+    width: 2.6em;
+    height: 2.6em;
     border: solid 1px #3f97d5;
     background-color: #3f97d5;
     color: #fff4fb;
     border-radius: 50%;
     text-align: center;
-    line-height: 2.9em;
+    line-height: 2.6em;
     margin: 4px 1.0%;
     display: inline-block;
 }
@@ -492,8 +496,23 @@ input.bigLotto-input2:checked:before {
     text-decoration: none;
 }
 
-
-
+/*注册账号*/
+.loginBtn{
+    border-color: transparent;
+    background: #00548b;
+    background: -o-linear-gradient(top, #0070b2, #15236a);
+    background: -ms-linear-gradient(top, #0070b2, #15236a);
+    background: -moz-linear-gradient(top, #0070b2, #15236a);
+    background: -webkit-linear-gradient(top, #0070b2, #15236a);
+    color: white;
+    margin: 0;
+    padding: 2px 15px;
+    min-width: 52px;
+    min-height: 30px;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: bold;
+}
 
 
 
