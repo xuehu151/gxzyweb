@@ -15,7 +15,8 @@
                 placeholder="请输入姓名 (必填项)" 
                 ng-model="users.realName" 
                 required
-                ng-pattern="/^[\u4E00-\u9FA5A-Za-z0-9_]+$/" />
+                ng-pattern="/^[\u4E00-\u9FA5A-Za-z0-9_]+$/"
+                style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.name.$dirty && inputInfoForm.name.$invalid">格式错误</span>
           </label>
@@ -25,7 +26,8 @@
                   name="phone" 
                   placeholder="请输入手机号 (必填项)" ng-model="users.phone" 
                   required 
-                  ng-pattern="/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/" />
+                  ng-pattern="/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/"
+                  style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.phone.$dirty && inputInfoForm.phone.$invalid" >格式错误</span>
           </label>
@@ -35,7 +37,8 @@
                 name="idcard" 
                 placeholder="请输入身份证号 (必填项)" ng-model="users.idcard"
                 required
-                ng-pattern="/^\d{15}|\d{18}$/" />
+                ng-pattern="/^\d{15}|\d{18}$/"
+                style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid">格式错误</span>
           </label>
@@ -45,7 +48,8 @@
                 name="wechat" 
                 placeholder="请输入微信账号 (必填项)" ng-model="users.wechat"
                 required
-                ng-pattern="/^[a-zA-Z][a-zA-Z0-9_]{4,20}$/" />
+                ng-pattern="/^[a-zA-Z][a-zA-Z0-9_]{4,20}$/"
+                style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.wechat.$dirty && inputInfoForm.wechat.$invalid">格式错误</span>
            
@@ -56,7 +60,8 @@
                 name="alipay"
                 ng-pattern="/^[a-zA-Z][a-zA-Z0-9_]{4,20}$/"
                 placeholder="请输入支付宝账号" 
-                ng-model="users.alipay" />
+                ng-model="users.alipay"
+                style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.alipay.$dirty && inputInfoForm.alipay.$invalid">格式错误</span>
             <!-- <span class="fr" style="color: #d21e1e">*</span> -->
@@ -67,7 +72,8 @@
                 name="bankNo"  
                 placeholder="请输入银行卡号" 
                 ng-model="users.bankNo" 
-                ng-pattern="/^[0-9]*$/" />
+                ng-pattern="/^[0-9]*$/"
+                style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.bankNo.$dirty && inputInfoForm.bankNo.$invalid">格式错误</span>
             <!-- <span class="fr" style="color: #d21e1e">*</span> -->
