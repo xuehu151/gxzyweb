@@ -16,8 +16,8 @@
                 ng-model="users.realName" 
                 required
                 ng-pattern="/^[\u4E00-\u9FA5A-Za-z0-9_]+$/" />
-            <span class="icon ion-close-round"
-                ng-show="inputInfoForm.name.$dirty && inputInfoForm.name.$invalid"></span>
+            <span class="icon ion-close-round error"
+                ng-show="inputInfoForm.name.$dirty && inputInfoForm.name.$invalid">格式错误</span>
           </label>
           <label class="item item-input">
             <div class="img_002"></div>
@@ -26,8 +26,8 @@
                   placeholder="请输入手机号 (必填项)" ng-model="users.phone" 
                   required 
                   ng-pattern="/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/" />
-            <span class="icon ion-close-round"
-                ng-show="inputInfoForm.phone.$dirty && inputInfoForm.phone.$invalid"></span>
+            <span class="icon ion-close-round error"
+                ng-show="inputInfoForm.phone.$dirty && inputInfoForm.phone.$invalid" >格式错误</span>
           </label>
           <label class="item item-input">
            <div class="img_003"></div>
@@ -36,8 +36,8 @@
                 placeholder="请输入身份证号 (必填项)" ng-model="users.idcard"
                 required
                 ng-pattern="/^\d{15}|\d{18}$/" />
-            <span class="icon ion-close-round"
-                ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid"></span>
+            <span class="icon ion-close-round error"
+                ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid">格式错误</span>
           </label>
           <label class="item item-input">
             <div class="img_005"></div>
@@ -46,9 +46,9 @@
                 placeholder="请输入微信账号 (必填项)" ng-model="users.wechat"
                 required
                 ng-pattern="/^[a-zA-Z][a-zA-Z0-9_]{4,20}$/" />
-            <span class="icon ion-close-round"
-                ng-show="inputInfoForm.wechat.$dirty && inputInfoForm.wechat.$invalid"></span>
-            <span class="fr" style="color: #d21e1e"></span>
+            <span class="icon ion-close-round error"
+                ng-show="inputInfoForm.wechat.$dirty && inputInfoForm.wechat.$invalid">格式错误</span>
+           
           </label>
           <label class="item item-input">
             <div class="img_004"></div>
@@ -57,8 +57,8 @@
                 ng-pattern="/^[a-zA-Z][a-zA-Z0-9_]{4,20}$/"
                 placeholder="请输入支付宝账号" 
                 ng-model="users.alipay" />
-            <span class="icon ion-close-round"
-                ng-show="inputInfoForm.alipay.$dirty && inputInfoForm.alipay.$invalid"></span>
+            <span class="icon ion-close-round error"
+                ng-show="inputInfoForm.alipay.$dirty && inputInfoForm.alipay.$invalid">格式错误</span>
             <!-- <span class="fr" style="color: #d21e1e">*</span> -->
           </label>
           <label class="item item-input">
@@ -68,8 +68,8 @@
                 placeholder="请输入银行卡号" 
                 ng-model="users.bankNo" 
                 ng-pattern="/^[0-9]*$/" />
-            <span class="icon ion-close-round"
-                ng-show="inputInfoForm.bankNo.$dirty && inputInfoForm.bankNo.$invalid"></span>
+            <span class="icon ion-close-round error"
+                ng-show="inputInfoForm.bankNo.$dirty && inputInfoForm.bankNo.$invalid">格式错误</span>
             <!-- <span class="fr" style="color: #d21e1e">*</span> -->
           </label>
           <ion-item class="completeInfoNote">注意：为了不影响您中奖资金的提现，请确保您的资料真实有效</ion-item >

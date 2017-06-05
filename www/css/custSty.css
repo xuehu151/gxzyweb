@@ -272,8 +272,14 @@
 {
     display: inline-block;
 
-    width: 27px;
+    width: 29px;
     margin-right: 6px;
+}
+
+.complete-info-list .error
+{
+    color: red;
+    min-width: 78px;
 }
 
 .img_001,
