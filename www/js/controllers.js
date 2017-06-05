@@ -5,8 +5,9 @@ var jsonWrapBit5D = []; //点击向右的修改后返回来时数据的存放
 //var ipUrl = 'http://192.168.0.137:8080';
 // var ipUrl = 'http://121.42.253.149:18820/service';
 var ipUrl = 'http://114.215.70.179:8080/service';
-var initUrl = ipUrl + '/common/index';
-var receiveToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf7c3e21104b0e43019e4ae600575d40d5f4fdcd145c5f0c61013aabe538ca71c3b3df3f822af1e7cb86f292af6ef8c0ea664c9ccecd6c7f682be7a6316bde41f6618e4b28bbd9168bc5d0c135618f5a2710ddf004b45301bd90112e6ba4f540ed792416ce9';
+var initUrl = ipUrl + '/common/index1';
+var initUrlNew = ipUrl + '/common/index';
+var receiveToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf7c7ef1104b0e43019e4ae600575d40d5f4fdbc74be3dac61013a8f1518dac006025ebe832a13856b86f2928a0f28806b063dcc0f184dfee91bb776f13bde6186715efb684a69f4e965d0c135449efac7841c7185c443118de0511e1be4e550dd09555449ed0';
 
 angular.module ('starter.controllers', [])
 //兑换
@@ -36,7 +37,7 @@ angular.module ('starter.controllers', [])
                 var userInfoData = response.data.data;
                 console.log (response.data);
                 locals.setObject ($rootScope.user, userInfoData);
-                
+
                 /* 获取初始化数据 */
                 window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
                 var localUserInfo = window.localStorage.getItem ("userInitInfo");
@@ -45,62 +46,98 @@ angular.module ('starter.controllers', [])
                 } catch (error) {
                     userInfo = null;
                 }
-                if (userInfo.data.user.realName === undefined) {
-                    var confirmPopup = $ionicPopup.confirm ({
-                        title: '完善资料',
-                        template: '<p style="text-align:center;"><img src="./img/completeInf.png"></p>' + '当前个人资料尚未完善；请完善！',
-                        cancelText: '暂不完善',
-                        cancelType: '',
-                        okText: '立即完善',
-                        okType: 'button-positive'
+                // console.log(userInfo);
+                if (userInfo.error == '0') {
+                    // $state.go ('completeInfo');
+                }else if(userInfo.error == '1003'){
+
+                    $http ({
+                        method: "POST",
+                        url: initUrlNew,
+                        data: {
+                            token: receiveToken
+                        },
+                        transformRequest: function (obj) {
+                            var str = [];
+                            for (var s in obj) {
+                                str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
+                            }
+                            return str.join ("&");
+                        },
+                        timeout: 3000
                     })
-                        .then (function (res) {
-                            if (res) {
-                                $state.go ('completeInfo');
+                        .then (function (response) {
+                            $ionicLoading.hide ();
+                            var userInfoData = response.data.data;
+                            console.log (response.data);
+                            locals.setObject ($rootScope.user, userInfoData);
+
+                            /* 获取初始化数据 */
+                            window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
+                            var localUserInfo = window.localStorage.getItem ("userInitInfo");
+                            try {
+                                userInfo = JSON.parse (localUserInfo);
+                            } catch (error) {
+                                userInfo = null;
                             }
-                            else {
-                                $scope.goToExchange3D = function () {
-                                    if (userInfo.data.user.realName === undefined) {
-                                        alert ("资料未完善");
-                                    }
-                                    else {
-                                        $state.go ('exchange-3');
-                                    }
-                                };
-                                $scope.goToExchange5D = function () {
-                                    if (userInfo.data.user.realName === undefined) {
-                                        alert ("资料未完善");
-                                    }
-                                    else {
-                                        $state.go ('exchange-5');
-                                    }
-                                };
-                                $scope.goToExchangeBigLotto2 = function () {
-                                    if (userInfo.data.user.realName === undefined) {
-                                        alert ("资料未完善");
-                                    }
-                                    else {
-                                        $state.go ('BigLotto-2', {
-                                            'flag2': 1
-                                        });
-                                    }
-                                };
-                                $scope.goToExchangeBigLotto3 = function () {
-                                    if (userInfo.data.user.realName === undefined) {
-                                        alert ("资料未完善");
-                                    }
-                                    else {
-                                        $state.go ('BigLotto-2');
-                                    }
-                                };
-                            }
+
+                            var confirmPopup = $ionicPopup.confirm ({
+                                title: '完善资料',
+                                template: '<p style="text-align:center;"><img src="./img/completeInf.png"></p>' + '当前个人资料尚未完善；请完善！',
+                                cancelText: '暂不完善',
+                                cancelType: '',
+                                okText: '立即完善',
+                                okType: 'button-positive'
+                            })
+                                .then (function (res) {
+                                    $state.go ('completeInfo');
+                                    $scope.goToExchange3D = function () {
+                                        if (userInfo.data.user.realName === undefined) {
+                                            alert ("资料未完善");
+                                        }
+                                        else {
+                                            $state.go ('exchange-3');
+                                        }
+                                    };
+                                    $scope.goToExchange5D = function () {
+                                        if (userInfo.data.user.realName === undefined) {
+                                            alert ("资料未完善");
+                                        }
+                                        else {
+                                            $state.go ('exchange-5');
+                                        }
+                                    };
+                                    $scope.goToExchangeBigLotto2 = function () {
+                                        if (userInfo.data.user.realName === undefined) {
+                                            alert ("资料未完善");
+                                        }
+                                        else {
+                                            $state.go ('BigLotto-2', {
+                                                'flag2': 1
+                                            });
+                                        }
+                                    };
+                                    $scope.goToExchangeBigLotto3 = function () {
+                                        if (userInfo.data.user.realName === undefined) {
+                                            alert ("资料未完善");
+                                        }
+                                        else {
+                                            $state.go ('BigLotto-2');
+                                        }
+                                    };
+
+                                });
+                        }, function (response) {
+                            console.log ("初始化数据失败");
                         });
+                }else {
+                    alert('连接失败')
                 }
                 //console.log (response.data);
             }, function (response) {
                 console.log ("初始化数据失败");
             });
-        
+
         $scope.goToExchange3D = function () {
             $state.go ('exchange-3');
         };
@@ -227,7 +264,7 @@ angular.module ('starter.controllers', [])
             //判断filterBit100的长度确定generate100值
             filterBit1Data ();
         };
-        
+
         function filterBit100Data () {
             if (filterBit100.length == 0) {
                 $scope.generate100 = 0;
@@ -236,7 +273,7 @@ angular.module ('starter.controllers', [])
                 $scope.generate100 = filterBit100[0].num;
             }
         }
-        
+
         function filterBit10Data () {
             if (filterBit10.length == 0) {
                 $scope.generate10 = 0;
@@ -245,7 +282,7 @@ angular.module ('starter.controllers', [])
                 $scope.generate10 = filterBit10[0].num;
             }
         }
-        
+
         function filterBit1Data () {
             if (filterBit1.length == 0) {
                 $scope.generate1 = 0;
@@ -254,7 +291,7 @@ angular.module ('starter.controllers', [])
                 $scope.generate1 = filterBit1[0].num;
             }
         }
-        
+
         //随机选取号码
         var randomBall = []; //原数组
         $scope.randomBallExchage = function () {
@@ -395,7 +432,7 @@ angular.module ('starter.controllers', [])
         $scope.totalMoney = $scope.sessionJsonWarp3D.length;
         $scope.isDisabled = true;
         disabledBtn3D ();
-        
+
         function disabledBtn3D () {
             if ($scope.totalMoney >= userInfo.data.user.voucher) {
                 $scope.isDisabled = true;
@@ -412,7 +449,7 @@ angular.module ('starter.controllers', [])
                 $scope.isDisabled = false;
             }
         }
-        
+
         //手动添加一组
         $scope.manualAdd3D = function () {
             $state.go ('exchange-3');
@@ -750,7 +787,7 @@ angular.module ('starter.controllers', [])
             //判断filterBit1的长度确定generate1值
             filterBit1Data ();
         };
-        
+
         function filterBit10000Data () {
             if (filterBit10000.length == 0) {
                 $scope.generate10000 = 0;
@@ -759,7 +796,7 @@ angular.module ('starter.controllers', [])
                 $scope.generate10000 = filterBit10000[0].num;
             }
         }
-        
+
         function filterBit1000Data () {
             if (filterBit1000.length == 0) {
                 $scope.generate1000 = 0;
@@ -768,7 +805,7 @@ angular.module ('starter.controllers', [])
                 $scope.generate1000 = filterBit1000[0].num;
             }
         }
-        
+
         function filterBit100Data () {
             if (filterBit100.length == 0) {
                 $scope.generate100 = 0;
@@ -777,7 +814,7 @@ angular.module ('starter.controllers', [])
                 $scope.generate100 = filterBit100[0].num;
             }
         }
-        
+
         function filterBit10Data () {
             if (filterBit10.length == 0) {
                 $scope.generate10 = 0;
@@ -786,7 +823,7 @@ angular.module ('starter.controllers', [])
                 $scope.generate10 = filterBit10[0].num;
             }
         }
-        
+
         function filterBit1Data () {
             if (filterBit1.length == 0) {
                 $scope.generate1 = 0;
@@ -795,7 +832,7 @@ angular.module ('starter.controllers', [])
                 $scope.generate1 = filterBit1[0].num;
             }
         }
-        
+
         //随机选取号码
         var randomBall = []; //原数组
         $scope.randomBallExchage5D = function () {
@@ -967,7 +1004,7 @@ angular.module ('starter.controllers', [])
                 $scope.isDisabled = false;
             }
         }
-        
+
         //手动添加一组
         $scope.manualAdd5D = function () {
             $state.go ('exchange-5');
@@ -1379,7 +1416,7 @@ angular.module ('starter.controllers', [])
             $scope.countMoney = '3';
         }
         disabledBtnBigBitting ();
-        
+
         function disabledBtnBigBitting () {
             if ($scope.totalMoney >= userInfo.data.user.voucher) {
                 $scope.isDisabled = true;
@@ -1395,7 +1432,7 @@ angular.module ('starter.controllers', [])
                 $scope.isDisabled = false;
             }
         }
-        
+
         //手动添加一组，返回大乐透选中页面
         $scope.manualAdd = function () {
             $state.go ('BigLotto-2');
@@ -1677,7 +1714,7 @@ angular.module ('starter.controllers', [])
          console.log (userInfo)
          // $rootScope.user={}  //保存token和用户信息
          locals.setObject ($rootScope.user, userInfo)
-         
+
          }, function () {
          alert ('网络异常,未获取到用户信息')
          });*/
