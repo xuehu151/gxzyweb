@@ -13,18 +13,18 @@
     <ion-content class="h40">
         <ion-list>
             <ion-item class="history-time"  ng-repeat="past in bitLotto">
-                <p><span>{{past.wareIssue}}期</span><ins> {{past.createDate | date: 'MM-dd'}} 周三</ins></p>
+                <p><span ng-cloak>{{past.wareIssue}}期</span><ins ng-cloak> {{past.createDate | date: 'MM-dd'}} 周三</ins></p>
                 <div class="row">
                     <div class="col col-67 show-red-ball">
-                        <i>{{toArray(past.result,0)}}</i>
-                        <i>{{toArray(past.result,1)}}</i>
-                        <i>{{toArray(past.result,2)}}</i>
-                        <i>{{toArray(past.result,3)}}</i>
-                        <i>{{toArray(past.result,4)}}</i>
+                        <i ng-cloak>{{toArray(past.result,0)}}</i>
+                        <i ng-cloak>{{toArray(past.result,1)}}</i>
+                        <i ng-cloak>{{toArray(past.result,2)}}</i>
+                        <i ng-cloak>{{toArray(past.result,3)}}</i>
+                        <i ng-cloak>{{toArray(past.result,4)}}</i>
                     </div>
                     <div class="col col-33 show-blue-ball">
-                        <i>{{toArray(past.result,5)}}</i>
-                        <i>{{toArray(past.result,6)}}</i>
+                        <i ng-cloak>{{toArray(past.result,5)}}</i>
+                        <i ng-cloak>{{toArray(past.result,6)}}</i>
                     </div>
                 </div>
             </ion-item>

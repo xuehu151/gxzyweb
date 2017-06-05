@@ -18,7 +18,7 @@
                     <i
                         ng-repeat="bitNum100 in numDataBit100"
                         ng-class="{false: 'arrange-3-bg-white', true: 'arrange-3-bg-red'}[bitNum100.check]"
-                        ng-click="addBit100Click(bitNum100)">
+                        ng-click="addBit100Click(bitNum100)" ng-cloak>
                         {{bitNum100.num}}
                     </i>
                 </div>
@@ -29,7 +29,7 @@
                     <i
                         ng-repeat="bitNum10 in numDataBit10"
                         ng-class="{false: 'arrange-3-bg-white', true: 'arrange-3-bg-red'}[bitNum10.check]"
-                        ng-click="addBit10Click(bitNum10)">
+                        ng-click="addBit10Click(bitNum10)" ng-cloak>
                         {{bitNum10.num}}
                     </i>
                 </div>
@@ -40,7 +40,7 @@
                     <i
                         ng-repeat="bitNum1 in numDataBit1"
                         ng-class="{false: 'arrange-3-bg-white', true: 'arrange-3-bg-red'}[bitNum1.check]"
-                        ng-click="addBit1Click(bitNum1)">
+                        ng-click="addBit1Click(bitNum1)" ng-cloak>
                         {{bitNum1.num}}
                     </i>
                 </div>
@@ -61,9 +61,9 @@
 
         <div class="row">
             <div class="col show-red-ball">
-                <i>{{generate100}}</i>
-                <i>{{generate10}}</i>
-                <i>{{generate1}}</i>
+                <i ng-cloak>{{generate100}}</i>
+                <i ng-cloak>{{generate10}}</i>
+                <i ng-cloak>{{generate1}}</i>
             </div>
         </div>
         <div class="row">

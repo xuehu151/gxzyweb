@@ -17,7 +17,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
         });
     })
     
-    .config (function ($locationProvider,$stateProvider, $urlRouterProvider, $ionicConfigProvider,$httpProvider) {
+    .config (function ($stateProvider, $urlRouterProvider, $ionicConfigProvider,$httpProvider, $locationProvider) {
         //解决tabs在Android下局域顶部的方法
         $ionicConfigProvider.platform.ios.tabs.style('standard');
         $ionicConfigProvider.platform.ios.tabs.position('bottom');
@@ -39,9 +39,9 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.post['Accept'] = 'application/json, text/javascript, */*; q=0.01';
         $httpProvider.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
+    
+        $locationProvider.html5Mode(false);
         
-         $locationProvider.html5Mode(false);
-
         $stateProvider
             // setup an abstract state for the tabs directive
             .state ('tab', {

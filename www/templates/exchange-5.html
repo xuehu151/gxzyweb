@@ -18,7 +18,7 @@
                     <i
                         ng-repeat="bitNum10000 in numDataBit10000"
                         ng-class="{false: 'arrange-3-bg-white', true: 'arrange-3-bg-red'}[bitNum10000.check]"
-                        ng-click="addBit10000Click(bitNum10000)">
+                        ng-click="addBit10000Click(bitNum10000)" ng-cloak>
                         {{bitNum10000.num}}
                     </i>
                 </div>
@@ -29,7 +29,7 @@
                     <i
                         ng-repeat="bitNum1000 in numDataBit1000"
                         ng-class="{false: 'arrange-3-bg-white', true: 'arrange-3-bg-red'}[bitNum1000.check]"
-                        ng-click="addBit1000Click(bitNum1000)">
+                        ng-click="addBit1000Click(bitNum1000)" ng-cloak>
                         {{bitNum1000.num}}
                     </i>
                 </div>
@@ -40,7 +40,7 @@
                     <i
                         ng-repeat="bitNum100 in numDataBit100"
                         ng-class="{false: 'arrange-3-bg-white', true: 'arrange-3-bg-red'}[bitNum100.check]"
-                        ng-click="addBit100Click(bitNum100)">
+                        ng-click="addBit100Click(bitNum100)" ng-cloak>
                         {{bitNum100.num}}
                     </i>
                 </div>
@@ -84,11 +84,11 @@
 
         <div class="row">
             <div class="col show-red-ball">
-                <i>{{generate10000}}</i>
-                <i>{{generate1000}}</i>
-                <i>{{generate100}}</i>
-                <i>{{generate10}}</i>
-                <i>{{generate1}}</i>
+                <i ng-cloak>{{generate10000}}</i>
+                <i ng-cloak>{{generate1000}}</i>
+                <i ng-cloak>{{generate100}}</i>
+                <i ng-cloak>{{generate10}}</i>
+                <i ng-cloak>{{generate1}}</i>
             </div>
         </div>
         <div class="row">
