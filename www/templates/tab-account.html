@@ -1,4 +1,4 @@
-<ion-view view-title="账户">
+<ion-view view-title="账户 {{phone}}">
     <ion-nav-bar class="light bg1">
         <ion-nav-buttons ng-click="" side="left">
             <a class="button button-icon ion-ios-arrow-left light" href="#/tab/exchange" style="font-size: 1.5em;line-height: 31px;">
@@ -44,6 +44,10 @@
                     </div>
                 </div>
             </div>
+            <ion-item ng-show="haventExchange" class="f18" style="border-bottom-width: 2px" ng-click="">
+                待兑换
+                <span style="right: 20px;" class="badge badge-assertive">1</span>
+            </ion-item>
             <ion-item class="item-icon-right f18" ng-click="toPrizeRecords()">
                 奖金纪录
                 <i class="icon ion-ios-arrow-right">

@@ -10,7 +10,7 @@
         <div class="each-order" ng-click="toOrderDetail(order.ticketID)" ng-repeat="order in allOrders">
           <ion-item href="">
               <span ng-cloak>{{order.lotteryID}}</span>
-              <span class="fr" ng-class="order.whetherRed?'fontStyle1':'fontStyle3'" ng-cloak>{{order.status}}</span>
+              <span class="fr" ng-class="order.whetherRed?'font-style1':'font-style3'" ng-cloak>{{order.status}}</span>
           </ion-item>
           <img ng-show="order.status=='已中奖'?true:false" class="prize-img" src="./img/getPrize.png" />
           <ion-item href="">
