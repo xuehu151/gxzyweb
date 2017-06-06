@@ -175,6 +175,13 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 controller:'widthdrawResultCtrl'
             })
 
+            .state('needExchange',{
+                url:'/account/needExchange',
+                cache:'false',
+                templateUrl:'templates/needExchange.html',
+                controller:'needExchangeCtrl'
+            })
+
             //奖金纪录页面
             .state('prizeRecords',{
                 url:'/account/prizeRecords',

@@ -122,6 +122,13 @@
   border: 1px solid #a5a5a6;
 }
 
+.account-list .badge-style1
+{
+  right: 20px;
+  background-color: #c01919;
+  color: #fff;
+}
+
 #modalAccount {
   position: absolute;
   background: rgba(0, 0, 0, .6);
@@ -354,6 +361,33 @@
   background: #2c4198;
 }
 
+/**********completeInfo.html************/
+.widthdraw-records-list .font-style8
+{
+  width: 90px;
+  height: 30px;
+  line-height: 10px;
+  font-size: 14px;
+  margin-top: 8px;
+  color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #c01919;
+}
+
+.widthdraw-records-list .font-style9
+{
+  font-size: 18px;
+  color: #1a1a1a; 
+}
+
+.widthdraw-records-list .font-style10
+{
+  font-size: 16px;
+  color: #666; 
+  margin-top: 6px;
+}
+
 
 /**********completeInfo.html************/
 
@@ -497,6 +531,14 @@
   color: #d11d1d;
 }
 
+.order-detail-list .explain-info
+{
+  color: #d11d1d;
+  font-size: 12px;
+  line-height: 25px;
+  margin-left: 20px;
+}
+
 .all-orders-list .each-order {
   position: relative;
   margin-top: 5px;
@@ -554,6 +596,16 @@
   color: #fff;
   border-radius: 15px;
   background: #d11d1d;
+}
+
+.exchange-fail
+{
+  margin: 30px 13%;
+  padding: 3% 0;
+  text-align: center;
+  border-radius: 4px;
+  color: #fff;
+  background: #2c4198;
 }
 
 .order-detail-list .open-time {

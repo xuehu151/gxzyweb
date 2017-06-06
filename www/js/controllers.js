@@ -286,6 +286,7 @@ angular.module('starter.controllers', [])
      * 1.此if是用来判断是不是在投注详情页面点击修改后跳转过来的
      * 2.如果是点击修改后跳转过来的需要渲染红篮球
      */
+    console.log(sessionStorage.editThisOrderData3d)
     if (sessionStorage.editThisOrderData3D) {
       var changeToArray3D = JSON.parse(sessionStorage.editThisOrderData3D);
       filterBit100 = changeToArray3D.B_Bit;
@@ -822,21 +823,24 @@ angular.module('starter.controllers', [])
      */
     if (sessionStorage.editThisOrderData5D) {
       var changeToArray5D = JSON.parse(sessionStorage.editThisOrderData5D);
-      filterBit10000 = changeToArray5D.W_Bit;
-      filterBit1000 = changeToArray5D.Q_Bit;
-      filterBit100 = changeToArray5D.B_Bit;
-      filterBit10 = changeToArray5D.S_Bit;
-      filterBit1 = changeToArray5D.G_Bit;
-      $scope.numDataBit10000[changeToArray5D.W_Bit[0].num].check = true;
-      $scope.numDataBit1000[changeToArray5D.Q_Bit[0].num].check = true;
-      $scope.numDataBit100[changeToArray5D.B_Bit[0].num].check = true;
-      $scope.numDataBit10[changeToArray5D.S_Bit[0].num].check = true;
-      $scope.numDataBit1[changeToArray5D.G_Bit[0].num].check = true;
-      $scope.generate10000 = changeToArray5D.W_Bit[0].num;
-      $scope.generate1000 = changeToArray5D.Q_Bit[0].num;
-      $scope.generate100 = changeToArray5D.B_Bit[0].num;
-      $scope.generate10 = changeToArray5D.S_Bit[0].num;
-      $scope.generate1 = changeToArray5D.G_Bit[0].num;
+      console.log(changeToArray5D)
+     
+        filterBit10000 = changeToArray5D.W_Bit ;
+        filterBit1000 = changeToArray5D.Q_Bit ;
+        filterBit100 = changeToArray5D.B_Bit ;
+        filterBit10 = changeToArray5D.S_Bit ;
+        filterBit1 = changeToArray5D.G_Bit ;
+        $scope.numDataBit10000[changeToArray5D.W_Bit[0].num].check = true;
+        $scope.numDataBit1000[changeToArray5D.Q_Bit[0].num].check = true;
+        $scope.numDataBit100[changeToArray5D.B_Bit[0].num].check = true;
+        $scope.numDataBit10[changeToArray5D.S_Bit[0].num].check = true;
+        $scope.numDataBit1[changeToArray5D.G_Bit[0].num].check = true;
+
+        $scope.generate10000 = changeToArray5D.W_Bit[0].num ;
+        $scope.generate1000 = changeToArray5D.Q_Bit[0].num ;
+        $scope.generate100 = changeToArray5D.B_Bit[0].num ;
+        $scope.generate10 = changeToArray5D.S_Bit[0].num ;
+        $scope.generate1 = changeToArray5D.G_Bit[0].num ;
     }
     //加入选单
     $scope.saveBallSelect5D = function($index) {
@@ -1023,6 +1027,7 @@ angular.module('starter.controllers', [])
     //点击返回选择号码页面
     $scope.editThisOrder5D = function($index) {
       var thisIndexOrder5D = $scope.sessionJsonWarp5D[$index];
+      console.log(thisIndexOrder5D)
       var changeToStr5D = JSON.stringify(thisIndexOrder5D);
       //            console.info (changeToStr3D);
       sessionStorage.editThisOrderData5D = changeToStr5D; //在本地保存选中的那组数据
@@ -1270,6 +1275,7 @@ angular.module('starter.controllers', [])
      */
     if (sessionStorage.editThisOrderData) {
       var changeToArray1 = JSON.parse(sessionStorage.editThisOrderData);
+      console.log(changeToArray1)
       $scope.filterDataBlue = changeToArray1.blue;
       $scope.filterDataRed = changeToArray1.red;
       for (var i = 0; i < 5; i++) {
@@ -1674,6 +1680,9 @@ angular.module('starter.controllers', [])
 
     //未兑换
     $scope.haventExchange=true;
+    $scope.toNeedExchange=function () {
+      $state.go('needExchange')
+    }
     
     //转到奖金纪录页面
     $scope.toPrizeRecords = function() {
@@ -1811,6 +1820,13 @@ angular.module('starter.controllers', [])
       failInfo: '别担心，说不定再试一次就成功了',
     };
   }])
+  //待兑换
+  .controller('needExchangeCtrl',['$scope','$state',function ($scope,$state) {
+    $scope.toScanExchange=function () {
+      // $state.go()
+    }
+  }])
+  
   //奖金纪录页面
   .controller('prizeRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals', '$ionicLoading', function($scope, $rootScope, getUser, locals, $ionicLoading) {
     var token = locals.getObject($rootScope.user).token;
@@ -1925,13 +1941,25 @@ angular.module('starter.controllers', [])
             investCodeFormat[1] = investCode[1].split(',');
           } else if (investCode.length == 1) {
             investCodeFormat[0] = investCode[0].split(',');
+
           }
+          console.log(investCodeFormat)
+          if ($scope.allOrders[i].payType==0) 
+          {
+            payType = '扫码兑换';
+          }
+          else if ($scope.allOrders[i].payType==1) 
+          {
+            payType = '¥' + $scope.allOrders[i].money;
+          }
+
           $rootScope.orderDetail = {
             lotteryID: $scope.allOrders[i].lotteryID,
             openTime: $scope.allOrders[i].drawTime,
             status: $scope.allOrders[i].status,
             investCode: investCodeFormat,
-            pay: $scope.allOrders[i].money,
+            payType:payType,
+            // pay: $scope.allOrders[i].money,
             ticketID: ticketID,
             orderTime: $scope.allOrders[i].createDate,
             winMoney: $scope.allOrders[i].winamt
@@ -1942,8 +1970,79 @@ angular.module('starter.controllers', [])
     }
   }])
   //订单详情
-  .controller('orderDetailCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+  .controller('orderDetailCtrl', ['$scope', '$rootScope','$state', function($scope, $rootScope,$state) {
     $scope.orderDetail = $rootScope.orderDetail;
+    if ($scope.orderDetail.payType=='扫码兑换') 
+    {
+      $scope.explainInfo='*兑换资格已返还至待兑换处';
+    }
+    else
+    {
+      $scope.explainInfo='*资金已返还至奖金余额';
+    }
+
+
+    $scope.failThenExchange = function() {
+
+      //字符串转成数字
+      for (var i = 0; i < $scope.orderDetail.investCode.length; i++) {
+        for (var j = 0; j < $scope.orderDetail.investCode[i].length; j++) {
+          $scope.orderDetail.investCode[i][j]*=1
+        }
+      }
+      console.log($scope.orderDetail.investCode);
+
+      //返回排列5
+      if ($scope.orderDetail.investCode[0].length==5 && !$scope.orderDetail.investCode[1]) 
+      {
+        var wrap5d={
+          W_Bit:[{"check":true,"num":$scope.orderDetail.investCode[0][0]}],
+          Q_Bit:[{"check":true,"num":$scope.orderDetail.investCode[0][1]}],
+          B_Bit:[{"check":true,"num":$scope.orderDetail.investCode[0][2]}],
+          S_Bit:[{"check":true,"num":$scope.orderDetail.investCode[0][3]}],
+          G_Bit:[{"check":true,"num":$scope.orderDetail.investCode[0][4]}]
+        }
+        console.log(wrap5d)
+
+        sessionStorage.editThisOrderData5D = JSON.stringify(wrap5d); //在本地保存选中的那组数据
+        $state.go('exchange-5');
+      }
+      else if ($scope.orderDetail.investCode[0].length==3 && !$scope.orderDetail.investCode[1]) 
+      {
+        var wrap3d={
+          B_Bit:[{"check":true,"num":$scope.orderDetail.investCode[0][0]}],
+          S_Bit:[{"check":true,"num":$scope.orderDetail.investCode[0][1]}],
+          G_Bit:[{"check":true,"num":$scope.orderDetail.investCode[0][2]}]
+        }
+        console.log(wrap3d)
+
+        sessionStorage.editThisOrderData3d = JSON.stringify(wrap3d); //在本地保存选中的那组数据
+        $state.go('exchange-3');
+      }
+      else
+      {
+        var wrapBigLotto={
+          red:[
+          {"check":true,"num":$scope.orderDetail.investCode[0][0]},
+          {"check":true,"num":$scope.orderDetail.investCode[0][1]},
+          {"check":true,"num":$scope.orderDetail.investCode[0][2]},
+          {"check":true,"num":$scope.orderDetail.investCode[0][3]},
+          {"check":true,"num":$scope.orderDetail.investCode[0][4]},
+          ],
+          blue:[
+          {"check":true,"num":$scope.orderDetail.investCode[1][0]},
+          {"check":true,"num":$scope.orderDetail.investCode[1][1]},
+          ]
+        }
+        
+        console.log(wrapBigLotto)
+
+        sessionStorage.editThisOrderData = JSON.stringify(wrapBigLotto); //在本地保存选中的那组数据
+        $state.go('BigLotto-2');
+      }
+      
+    };
+    
   }])
   //提现明细
   .controller('widthdrawRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals', 'postData', '$ionicLoading', function($scope, $rootScope, getUser, locals, postData, $ionicLoading) {
@@ -1952,6 +2051,7 @@ angular.module('starter.controllers', [])
     });
     var token = locals.getObject($rootScope.user).token;
     getUser.getInfo(url + '/service/cash/getList?token=' + token).then(function(response) {
+      console.log(response)
       $scope.widthdrawItems = response.data;
       $ionicLoading.hide();
     }, function() {

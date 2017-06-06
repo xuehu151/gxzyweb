@@ -14,18 +14,25 @@
              <span class="line-height">购买方案：</span>
              <div class="dis-inlineblock">
               <p>
-                <span class="ball" ng-repeat="ball in orderDetail.investCode[0]">{{ball}}</span>
+                <span class="ball" ng-repeat="ball in orderDetail.investCode[0] track by $index">{{ball}}</span>
               </p>
               <p ng-if="orderDetail.investCode[1]">
-                <span class="ball" style="background-color: #00a0e9" ng-repeat="ball in orderDetail.investCode[1]">{{ball}}</span>
+                <span class="ball" style="background-color: #00a0e9" ng-repeat="ball in orderDetail.investCode[1] track by $index">{{ball}}</span>
               </p>
             </div>
            </div>
-           <div>订单支付：<span class="font-style6" ng-cloak>¥ {{orderDetail.pay}}</span></div>
+           <div>订单支付：
+            <span ng-class="orderDetail.status=='已中奖'||orderDetail.status=='待开奖'?'font-style6':'font-style3'" ng-cloak>{{orderDetail.payType}}</span>
+            <span class="explain-info" ng-show="{{orderDetail.status=='兑换超时'}}" ng-cloak>{{explainInfo}}</span>
+            </div>
            <div>订单编号：<span class="font-style2" ng-cloak>{{orderDetail.ticketID}}</span></div>
            <div>订单时间：<span class="font-style2" ng-cloak>{{orderDetail.orderTime}}</span></div>
-           <div ng-show="orderDetail.winMoney?true:false">中奖奖金：<span class="fontStyle6" ng-cloak>¥ {{orderDetail.winMoney}}</span></div>
+           <div ng-show="orderDetail.winMoney">中奖奖金：<span class="font-style6" ng-cloak>¥ {{orderDetail.winMoney}}</span></div>
          </div>
        </ion-list>
+
+       <p ng-show="{{orderDetail.status=='兑换超时'}}" class="exchange-fail" ng-click="failThenExchange()">
+           兑换
+       </p>
     </ion-content>
 </ion-view>
