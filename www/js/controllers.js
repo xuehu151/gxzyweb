@@ -1846,6 +1846,7 @@ angular.module('starter.controllers', [])
     });
     var token = locals.getObject($rootScope.user).token;
     getUser.getInfo(url + '/service/lottery/getList?token=' + token).then(function(response) {
+      console.log(response)
       $scope.allOrders = response.data;
       for (var i = 0; i < $scope.allOrders.length; i++) {
         if ($scope.allOrders[i].lotteryID == 53) {
@@ -1859,26 +1860,55 @@ angular.module('starter.controllers', [])
           $scope.allOrders[i].whetherRed = true;
           $scope.allOrders[i].status = '待开奖';
           $scope.allOrders[i].whetherDate = true;
-          $scope.allOrders[i].LT = $scope.allOrders[i].updateDate;
-          $scope.allOrders[i].RT = '扫码兑换';
+          $scope.allOrders[i].LT ='开奖时间: ' + $scope.allOrders[i].drawTime;
+          if ($scope.allOrders[i].payType==0) 
+          {
+            $scope.allOrders[i].RT = '扫码兑换';
+          }
+          else if ($scope.allOrders[i].payType==1) 
+          {
+            $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
+          }
+          
         } else if ($scope.allOrders[i].status == 4) {
           $scope.allOrders[i].whetherRed = true;
           $scope.allOrders[i].status = '已中奖';
           $scope.allOrders[i].whetherDate = false;
           $scope.allOrders[i].LT = '奖金: ¥' + $scope.allOrders[i].winamt;
-          $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
+          if ($scope.allOrders[i].payType==0) 
+          {
+            $scope.allOrders[i].RT = '扫码兑换';
+          }
+          else if ($scope.allOrders[i].payType==1) 
+          {
+            $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
+          }
         } else if ($scope.allOrders[i].status == -1) {
           $scope.allOrders[i].whetherRed = false;
           $scope.allOrders[i].status = '兑换超时';
           $scope.allOrders[i].whetherDate = false;
           $scope.allOrders[i].LT = '  ';
-          $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
-        } else if ($scope.allOrders[i].status == 2) {
+          if ($scope.allOrders[i].payType==0) 
+          {
+            $scope.allOrders[i].RT = '扫码兑换';
+          }
+          else if ($scope.allOrders[i].payType==1) 
+          {
+            $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
+          }
+        } else if ($scope.allOrders[i].status == 3) {
           $scope.allOrders[i].whetherRed = false;
           $scope.allOrders[i].status = '未中奖';
           $scope.allOrders[i].whetherDate = false;
           $scope.allOrders[i].LT = '再接再厉哦~~~';
-          $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
+          if ($scope.allOrders[i].payType==0) 
+          {
+            $scope.allOrders[i].RT = '扫码兑换';
+          }
+          else if ($scope.allOrders[i].payType==1) 
+          {
+            $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
+          }
         }
       }
       $ionicLoading.hide();
@@ -1898,12 +1928,12 @@ angular.module('starter.controllers', [])
           }
           $rootScope.orderDetail = {
             lotteryID: $scope.allOrders[i].lotteryID,
-            openTime: $scope.allOrders[i].updateDate,
+            openTime: $scope.allOrders[i].drawTime,
             status: $scope.allOrders[i].status,
             investCode: investCodeFormat,
             pay: $scope.allOrders[i].money,
             ticketID: ticketID,
-            orderTime: $scope.allOrders[i].updateDate,
+            orderTime: $scope.allOrders[i].createDate,
             winMoney: $scope.allOrders[i].winamt
           }
         }

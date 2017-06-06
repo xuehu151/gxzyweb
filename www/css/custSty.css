@@ -483,7 +483,7 @@
   color: #d11d1d;
 }
 
-.all-orders-list .font-style2, .all-orders-list .font-style4 .widthdraw-records-list .font-style2, .order-detail-list .font-style2, .order-detail-list .font-style4 {
+.all-orders-list .font-style2, .all-orders-list .font-style4 , .widthdraw-records-list .font-style2, .order-detail-list .font-style2, .order-detail-list .font-style4 {
   font-size: 13px;
   color: #666;
 }
