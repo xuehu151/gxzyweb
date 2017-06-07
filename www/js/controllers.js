@@ -17,14 +17,9 @@ angular.module ('starter.controllers', [])
         $ionicLoading.show ();
         sign = $location.search ().sign;
         type = $location.search ().type;
-//        vid = $location.search ().vid;
+        
         if(sign != undefined ){
-//            initToken = response.data;
-//                console.log (initToken);
-//        receiveToken = $location.search ().receiveToken;
-            /*var data = {
-             token: receiveToken
-             };*/
+            
             if(type == 0){
                 //初始化用户接口
                 $http ({
@@ -97,35 +92,6 @@ angular.module ('starter.controllers', [])
                         else {
                             modal ();
                         }
-                        
-                        //初始化用户接口方法
-                        /* function oldUser () {
-                         $http ({
-                         method: "POST",
-                         url: initUrl,
-                         data: {
-                         token: initToken
-                         },
-                         timeout: 3000
-                         })
-                         .then (function (response) {
-                         /!*    $ionicLoading.hide ();
-                         var userInfoData = response.data.data;
-                         console.log (response.data);
-                         locals.setObject ($rootScope.user, userInfoData);
-                         *!/
-                         /!* 获取初始化数据 *!/
-                         var localUserInfo = window.localStorage.getItem ("userInitInfo");
-                         try {
-                         userInfo = JSON.parse (localUserInfo);
-                         } catch (error) {
-                         userInfo = null;
-                         }
-                         }, function (response) {
-                         console.log ("初始化数据失败");
-                         });
-                         }*/
-                        
                         //console.log (response.data);
                     }, function (response) {
                         alert ('加载失败，请检查网络')
@@ -161,6 +127,22 @@ angular.module ('starter.controllers', [])
                         else {
                             $state.go ('tab.account');
                         }
+    
+                        $scope.goToExchange3D = function () {
+                            $state.go ('exchange-3');
+                        };
+                        $scope.goToExchange5D = function () {
+                            $state.go ('exchange-5');
+                        };
+                        $scope.goToExchangeBigLotto2 = function () {
+                            $state.go ('BigLotto-2', {
+                                'flag2': 1
+                            });
+                        };
+                        $scope.goToExchangeBigLotto3 = function () {
+                            $state.go ('BigLotto-2');
+                        };
+                        
                     }, function (response) {
                         console.log ("初始化数据失败");
                     });
