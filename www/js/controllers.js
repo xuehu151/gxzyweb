@@ -101,7 +101,7 @@ angular.module ('starter.controllers', [])
                     method: "POST",
                     url: initUrl,
                     data: {
-                        token: initToken
+                        token: sign
                     },
                     transformRequest: function (obj) {
                         var str = [];
