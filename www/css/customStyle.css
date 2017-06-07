@@ -505,14 +505,92 @@ input.bigLotto-input2:checked:before {
     background: -moz-linear-gradient(top, #0070b2, #15236a);
     background: -webkit-linear-gradient(top, #0070b2, #15236a);
     color: white;
-    margin: 0;
     padding: 2px 15px;
-    min-width: 52px;
-    min-height: 30px;
+    max-width: 120px;
+    min-height: 35px;
     font-size: 16px;
-    line-height: 30px;
-    font-weight: bold;
+    line-height: 35px;
+    border-radius: 4px;
+    letter-spacing: 2px;
+    margin: 5px auto;
+    display: flex;
 }
+
+/*用户注册*/
+.bar .title {
+    font-family: '庞门正道标题体';
+    font-weight: bolder;
+    transform: rotateX(30deg);
+}
+
+.regiset img{
+    width: 100%;
+}
+
+.regiset h4{
+    font-size: 1.2em;
+    text-align: center;
+    color: #0472b0;
+    font-weight: 600;
+    font-family: fantasy;
+}
+
+.regiset .list{
+    width: 80%;
+    margin: 10px auto;
+}
+
+.regiset .list .item{
+    margin: 30px 0 10px 0;
+}
+
+.regiset .list .item-input{
+    border-radius: 4px;
+    padding: 0px 0 5px 16px;
+}
+
+.regiset span{
+    color: #131c81;
+    font-size: .9em;
+}
+
+.paddingTop{
+    padding-top: 40px;
+}
+
+.paddingTop .item-thumbnail-left{
+    border-radius: 8px;
+    top: -20px;
+    left: 0px
+}
+
+.paddingTop .list h2{
+    margin-top: 15px;
+    padding-left: 5px;
+}
+
+.paddingTop .list h2 span{
+    float: right;
+    right: 5px;
+    color: #1e196e;
+    font-weight: bolder;
+}
+
+.paddingTop .list .title-intro{
+    margin-top: 15px;
+    border-top: 0;
+    font-weight: bolder;
+}
+
+.paddingTop h5{
+    font-weight: bolder;
+}
+
+
+
+
+
+
 
 
 

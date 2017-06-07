@@ -1,0 +1,21 @@
+<ion-modal-view>
+    <ion-content class=" regiset">
+        <img src="./img/regiest.png" alt="">
+
+        <h4>身份注册</h4>
+        <div class="list">
+            <label class="item item-input">
+                <input ng-model="userInfo.newUserName"  ng-pattern="/^[\u4E00-\u9FA5A-Za-z0-9_]+$/" type="text" placeholder="请输入您的真实姓名">
+            </label>
+            <label class="item item-input">
+                <input ng-model="userInfo.newUserIphone" ng-pattern="/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/" type="text"  placeholder="请输入您的真实手机号">
+            </label>
+            <label class="item item-input">
+                <input ng-model="userInfo.newUserSure" type="text"  placeholder="再次确认手机号">
+            </label>
+            <span> ● 请填写真实信息才能领奖</span>
+        </div>
+
+        <button class="button button-positive loginBtn" ng-click="GetTickets()">领取彩票</button>
+    </ion-content>
+</ion-modal-view>

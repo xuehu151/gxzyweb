@@ -129,7 +129,15 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 templateUrl: 'templates/bigLottoHistoryDetails.html',
                 controller: 'bigLottoHistoryDetailsCtrl'
             })
-            
+
+            //扫码兑换首页
+            .state ('scanCodeIndex', {
+                url: '/scanCodeIndex',
+                cache:'true',
+                templateUrl: 'templates/scanCodeIndex.html',
+                controller: 'scanCodeIndexCtrl'
+            })
+    
             //账户
             .state ('tab.account', {
                 url: '/account',

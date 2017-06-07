@@ -53,7 +53,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -64,11 +64,12 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -93,11 +94,12 @@
       <option name="presentableId" value="Default" />
       <updated>1496323101678</updated>
       <workItem from="1496461212699" duration="64000" />
+      <workItem from="1496818404034" duration="21000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64000" />
+    <option name="totallyTimeSpent" value="85000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1932" height="1066" extended-state="0" />
