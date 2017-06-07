@@ -2,27 +2,27 @@ var url = "http://114.215.70.179:8088";
 var jsonWrap = []; //存放所有的注数
 var jsonWrapBit3D = []; //点击向右的修改后返回来时数据的存放
 var jsonWrapBit5D = []; //点击向右的修改后返回来时数据的存放
-//var ipUrl = 'http://192.168.0.137:8080';
+var ipUrl = 'http://192.168.1.118:8080';
 // var ipUrl = 'http://121.42.253.149:18820/service';
-var ipUrl = 'http://114.215.70.179:8088/service';
+//var ipUrl = 'http://114.215.70.179:8088/service';
 var initUrl = ipUrl + '/common/index1';
 var initUrlNew = ipUrl + '/common/index';
 // var receiveToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf1c6ef0a0a96ce3019e4ac3719789215475edac550edfcec1013a8f31e8fad0b7c7ef3f022b13670926f2928a2a49502b875dbd5fd998df689a872621fb8e61a6014e2bd80a98440b0770c13544bbeb676488b0044533019dd0215e2b94a540cd3925250b6a7e0';
 var sign = '';
 var type = '';
 var initToken = '';
-var PayType = '';
+var PayType = '';//判断是否为老用户扫码进来
 angular.module ('starter.controllers', [])
 //兑换
     .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval) {
+        
         $ionicLoading.show ();
         sign = $location.search ().sign;
         type = $location.search ().type;
         
-        if(sign != undefined ){
+        if (sign != undefined) {
             
-            if(type == 0){
-               
+            if (type == 0) {
                 //初始化用户接口
                 $http ({
                     method: "POST",
@@ -43,6 +43,11 @@ angular.module ('starter.controllers', [])
                         $ionicLoading.hide ();
                         PayType = 0;
                         /* 获取初始化数据 */
+                        //Xu 的初始化
+                        var userInfoData = response.data.data;
+                        console.log (response.data);
+                        locals.setObject ($rootScope.user, userInfoData);
+                        
                         //LQ 的初始化
                         window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
                         var localUserInfo = window.localStorage.getItem ("userInitInfo");
@@ -85,7 +90,7 @@ angular.module ('starter.controllers', [])
                          else {
                          $state.go ("tab.exchange");
                          }*/
-    
+                        
                         if (userInfo.data.user.realName != undefined) {
 //                            $state.go ('tab.account');
                         }
@@ -96,7 +101,8 @@ angular.module ('starter.controllers', [])
                     }, function (response) {
                         alert ('加载失败，请检查网络')
                     });
-            }else if(type ==1 ){
+            }
+            else if (type == 1) {
                 $http ({
                     method: "POST",
                     url: initUrl,
@@ -128,14 +134,14 @@ angular.module ('starter.controllers', [])
                         } catch (error) {
                             userInfo = null;
                         }
-                       
+                        
                         if (userInfo.data.user.realName != undefined) {
                             $state.go ('tab.account');
                         }
                         else {
                             modal ();
                         }
-    
+                        
                         $scope.goToExchange3D = function () {
                             $state.go ('exchange-3');
                         };
@@ -154,7 +160,8 @@ angular.module ('starter.controllers', [])
                     }, function (response) {
                         console.log ("初始化数据失败");
                     });
-            }else {
+            }
+            else {
                 return
             }
             //模态窗口
@@ -166,7 +173,7 @@ angular.module ('starter.controllers', [])
                 })
                     .then (function (modal) {
                         modal.show ();
-                
+                        
                         $scope.modal = modal;
                         $scope.userInfo = {
                             newUserName: "",
@@ -181,7 +188,7 @@ angular.module ('starter.controllers', [])
                             } catch (error) {
                                 userInfo = null;
                             }
-                    
+                            
                             $http ({
                                 method: "POST",
                                 url: ipUrl + '/customer/add?token=' + userInfo.data.token,
@@ -195,7 +202,14 @@ angular.module ('starter.controllers', [])
                             })
                                 .then (function (response) {
                                     $ionicLoading.hide ();
-                            
+                                    
+                                    //Xu 的数据更新
+                                    var newUserInfoData = locals.getObject ($rootScope.user);
+                                    newUserInfoData.user.realName = $scope.userInfo.newUserName;
+                                    newUserInfoData.user.phone = $scope.userInfo.newUserIphone;
+                                    locals.setObject ($rootScope.user, newUserInfoData);
+                                    console.log (locals.getObject ($rootScope.user))
+                                    
                                     if ($scope.userInfo.newUserName == '') {
                                         var alertPopup = $ionicPopup.alert ({
                                             title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
@@ -233,6 +247,14 @@ angular.module ('starter.controllers', [])
                                 });
                         }
                     });
+            }
+        }
+        else {
+            if (type == 0) {
+                PayType = 0;
+            }
+            else {
+                PayType = 1
             }
         }
     })
@@ -673,10 +695,12 @@ angular.module ('starter.controllers', [])
                     dataArray.push (dataObj);
                     //console.log (dataArray);
                 }
+//                console.log(userInfo.data.voucher);
                 var data = {
                     "LotteryID": "54",
                     "WareIssue": reques.data.wareIssue,
                     "PayType": PayType,
+                    "vid": userInfo.data.voucher.vid,
                     "data": dataArray
                 };
                 $http ({
@@ -687,6 +711,7 @@ angular.module ('starter.controllers', [])
                         "Content-Type": "application/json"
                     }
                 }).then (function (response) {
+                    console.log (dataArray);
                     $ionicLoading.hide ();
                     var alertPopup = $ionicPopup.alert ({
                         title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
@@ -696,7 +721,7 @@ angular.module ('starter.controllers', [])
                     }).then (function (response) {
                     });
                     console.log (response.data);
-                    console.log(dataArray);
+//                    console.log(dataArray);
                 }, function (response) {
                     var confirmPopup = $ionicPopup.confirm ({
                         title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
@@ -1259,6 +1284,7 @@ angular.module ('starter.controllers', [])
                     "LotteryID": "53",
                     "WareIssue": reques.data.wareIssue,
                     "PayType": PayType,
+                    "vid": userInfo.data.voucher.vid,
                     "data": dataArray
                 };
                 $http ({
@@ -1686,12 +1712,9 @@ angular.module ('starter.controllers', [])
                     for (var j in $scope.sessionJsonWarp[i]) {
                         for (var k in $scope.sessionJsonWarp[i][j]) {
                             if (typeof $scope.sessionJsonWarp[i][j][k] === 'object') {
-                                if ($scope.sessionJsonWarp[i][j][k].num * 1 < 10) {
-                                    investCode += ',' + '0' + $scope.sessionJsonWarp[i][j][k].num
-                                }
-                                else {
-                                    investCode += ',' + $scope.sessionJsonWarp[i][j][k].num
-                                }
+                                
+                                investCode += ',' + $scope.sessionJsonWarp[i][j][k].num;
+                                
                                 if (investCode.substr (0, 1) == ',') investCode = investCode.substr (1); //截取第一位逗号
                                 investCode = (investCode.substring (investCode.length - 1) == ',') ? investCode.substring (0, investCode.length - 1) : investCode; //截取最后一位逗号
                                 var get_array = investCode.split ('');
@@ -1709,6 +1732,7 @@ angular.module ('starter.controllers', [])
                     "LotteryID": "51",
                     "WareIssue": reques.data.wareIssue,
                     "PayType": PayType,
+                    "vid": userInfo.data.voucher.vid,
                     "AddFlag": "0",
                     "data": dataArrayBig
                 };
@@ -1790,6 +1814,8 @@ angular.module ('starter.controllers', [])
     .controller ('AccountCtrl', ['$scope', '$rootScope', '$ionicPopup', '$state', '$ionicModal', '$http', 'locals', 'getUser', '$ionicLoading', function ($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading) {
         //验证是否资料完善
         //        $ionicLoading.show ();
+        PayType = 1;
+        
         console.log (locals.getObject ($rootScope.user));
         var userInfo = locals.getObject ($rootScope.user);
         $scope.useableMoney = locals.getObject ($rootScope.user).user.money;
@@ -1818,15 +1844,19 @@ angular.module ('starter.controllers', [])
         
         
         /*var token = userInfo.token;
-        getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token).then (function (response) {
-            // alert(22)
-            console.log (response)
-            
-        }, function () {
-            alert ('网络异常,未获取到用户信息')
-        });*/
+         getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token).then (function (response) {
+         // alert(22)
+         console.log (response)
+         
+         }, function () {
+         alert ('网络异常,未获取到用户信息')
+         });*/
+        
+        
+        
+        
         $scope.withdrawConfirm = function () {
-            if (locals.getObject ($scope.user).user.realName) {
+            if (locals.getObject ($scope.user).user.wechat || locals.getObject ($scope.user).user.alipay || locals.getObject ($scope.user).user.bankNo) {
                 $scope.modal.show ();
             }
             else {
@@ -1913,8 +1943,10 @@ angular.module ('starter.controllers', [])
             $scope.modal2.hide ();
         };
         $scope.goToExchange = function () {
+            
             $scope.modal2.hide ();
-            $state.go ('tab.exchange')
+            $state.go ('tab.exchange');
+            
         }
         
     }])
@@ -1926,7 +1958,7 @@ angular.module ('starter.controllers', [])
              idcard: '',*/
             wechat: '',
             alipay: '',
-            bankNo: '',
+            bankNo: ''
         };
         /**
          * 功能:把提交的值保存到localstorage
@@ -1959,8 +1991,8 @@ angular.module ('starter.controllers', [])
     }])
     //完善个人资料成功
     .controller ('completeInfoSucceedCtrl', ['$scope', '$state', function ($scope, $state) {
-        $scope.toExchange = function () {
-            $state.go ('tab.exchange')
+        $scope.toAccount = function () {
+            $state.go ('tab.account')
         }
     }])
     //提现页面
