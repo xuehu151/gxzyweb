@@ -133,7 +133,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             //扫码兑换首页
             .state ('scanCodeIndex', {
                 url: '/scanCodeIndex',
-                cache:'true',
+                cache:'false',
                 templateUrl: 'templates/scanCodeIndex.html',
                 controller: 'scanCodeIndexCtrl'
             })

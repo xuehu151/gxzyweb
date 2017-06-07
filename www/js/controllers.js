@@ -11,6 +11,7 @@ var initUrlNew = ipUrl + '/common/index';
 var sign = '';
 var type = '';
 var initToken = '';
+var PayType = '';
 angular.module ('starter.controllers', [])
 //兑换
     .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval) {
@@ -21,6 +22,7 @@ angular.module ('starter.controllers', [])
         if(sign != undefined ){
             
             if(type == 0){
+               
                 //初始化用户接口
                 $http ({
                     method: "POST",
@@ -39,10 +41,8 @@ angular.module ('starter.controllers', [])
                 })
                     .then (function (response) {
                         $ionicLoading.hide ();
-            
+                        PayType = 0;
                         /* 获取初始化数据 */
-                        
-    
                         //LQ 的初始化
                         window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
                         var localUserInfo = window.localStorage.getItem ("userInitInfo");
@@ -51,13 +51,11 @@ angular.module ('starter.controllers', [])
                         } catch (error) {
                             userInfo = null;
                         }
-            
+                        console.log (response.data);
                         if (userInfo.error == '2301') {
                             alert ('二维码已失效');
                         }
                         else {
-                            
-                
                             $scope.goToExchange3D = function () {
                                 $state.go ('exchange-3');
                             };
@@ -115,6 +113,7 @@ angular.module ('starter.controllers', [])
                     timeout: 3000
                 })
                     .then (function (response) {
+                        PayType = 1;
                         $ionicLoading.hide ();
                         /* 获取初始化数据 */
                         //Xu 的初始化
@@ -239,7 +238,7 @@ angular.module ('starter.controllers', [])
     })
     
     //扫码兑换首页
-    .controller ('scanCodeIndexCtrl', function ($scope, $state, $http) {
+    .controller ('scanCodeIndexCtrl', function ($scope, $state) {
         $scope.goToExchange3D = function () {
             $state.go ('exchange-3');
         };
@@ -677,7 +676,7 @@ angular.module ('starter.controllers', [])
                 var data = {
                     "LotteryID": "54",
                     "WareIssue": reques.data.wareIssue,
-                    "PayType": "0",
+                    "PayType": PayType,
                     "data": dataArray
                 };
                 $http ({
@@ -696,7 +695,8 @@ angular.module ('starter.controllers', [])
                         okType: 'button-light'
                     }).then (function (response) {
                     });
-                    //console.log (response.data);
+                    console.log (response.data);
+                    console.log(dataArray);
                 }, function (response) {
                     var confirmPopup = $ionicPopup.confirm ({
                         title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
@@ -1258,7 +1258,7 @@ angular.module ('starter.controllers', [])
                 var data = {
                     "LotteryID": "53",
                     "WareIssue": reques.data.wareIssue,
-                    "PayType": "0",
+                    "PayType": PayType,
                     "data": dataArray
                 };
                 $http ({
@@ -1708,7 +1708,7 @@ angular.module ('starter.controllers', [])
                 var data = {
                     "LotteryID": "51",
                     "WareIssue": reques.data.wareIssue,
-                    "PayType": "0",
+                    "PayType": PayType,
                     "AddFlag": "0",
                     "data": dataArrayBig
                 };
