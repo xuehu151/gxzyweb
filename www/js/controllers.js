@@ -114,6 +114,7 @@ angular.module ('starter.controllers', [])
                 })
                     .then (function (response) {
                         /* 获取初始化数据 */
+                        window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
                         var localUserInfo = window.localStorage.getItem ("userInitInfo");
                         try {
                             userInfo = JSON.parse (localUserInfo);
