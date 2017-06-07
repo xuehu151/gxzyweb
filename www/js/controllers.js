@@ -2,9 +2,9 @@ var url = "http://114.215.70.179:8088";
 var jsonWrap = []; //存放所有的注数
 var jsonWrapBit3D = []; //点击向右的修改后返回来时数据的存放
 var jsonWrapBit5D = []; //点击向右的修改后返回来时数据的存放
-//var ipUrl = 'http://192.168.1.118:8080';
+var ipUrl = 'http://192.168.1.118:8080';
 // var ipUrl = 'http://121.42.253.149:18820/service';
-var ipUrl = 'http://114.215.70.179:8088/service';
+//var ipUrl = 'http://114.215.70.179:8088/service';
 var initUrl = ipUrl + '/common/index1';
 var initUrlNew = ipUrl + '/common/index';
 // var receiveToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf1c6ef0a0a96ce3019e4ac3719789215475edac550edfcec1013a8f31e8fad0b7c7ef3f022b13670926f2928a2a49502b875dbd5fd998df689a872621fb8e61a6014e2bd80a98440b0770c13544bbeb676488b0044533019dd0215e2b94a540cd3925250b6a7e0';
@@ -696,11 +696,18 @@ angular.module ('starter.controllers', [])
                     //console.log (dataArray);
                 }
 //                console.log(userInfo.data.voucher);
+                var vid = '';
+                if(userInfo.data.voucher == undefined){
+                    vid = '';
+                } else{
+                    vid = userInfo.data.voucher.vid;
+                }
+    
                 var data = {
                     "LotteryID": "54",
                     "WareIssue": reques.data.wareIssue,
                     "PayType": PayType,
-                    "vid": userInfo.data.voucher.vid,
+                    "vid": vid,
                     "data": dataArray
                 };
                 $http ({
@@ -1280,11 +1287,19 @@ angular.module ('starter.controllers', [])
                     dataArray.push (dataObj);
                     //console.log (dataArray);
                 }
+    
+                var vid = '';
+                if(userInfo.data.voucher == undefined){
+                    vid = '';
+                } else{
+                    vid = userInfo.data.voucher.vid;
+                }
+                
                 var data = {
                     "LotteryID": "53",
                     "WareIssue": reques.data.wareIssue,
                     "PayType": PayType,
-                    "vid": userInfo.data.voucher.vid,
+                    "vid": vid,
                     "data": dataArray
                 };
                 $http ({
@@ -1728,11 +1743,19 @@ angular.module ('starter.controllers', [])
                     dataArrayBig.push (dataObj);
                     console.log (dataArrayBig);
                 }
+    
+                var vid = '';
+                if(userInfo.data.voucher == undefined){
+                    vid = '';
+                } else{
+                    vid = userInfo.data.voucher.vid;
+                }
+                
                 var data = {
                     "LotteryID": "51",
                     "WareIssue": reques.data.wareIssue,
                     "PayType": PayType,
-                    "vid": userInfo.data.voucher.vid,
+                    "vid": vid,
                     "AddFlag": "0",
                     "data": dataArrayBig
                 };
