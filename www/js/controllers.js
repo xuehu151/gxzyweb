@@ -41,6 +41,9 @@ angular.module ('starter.controllers', [])
                         $ionicLoading.hide ();
             
                         /* 获取初始化数据 */
+                        
+    
+                        //LQ 的初始化
                         window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
                         var localUserInfo = window.localStorage.getItem ("userInitInfo");
                         try {
@@ -53,9 +56,7 @@ angular.module ('starter.controllers', [])
                             alert ('二维码已失效');
                         }
                         else {
-                            var userInfoData = response.data.data;
-                            console.log (response.data);
-                            locals.setObject ($rootScope.user, userInfoData);
+                            
                 
                             $scope.goToExchange3D = function () {
                                 $state.go ('exchange-3');
@@ -116,6 +117,11 @@ angular.module ('starter.controllers', [])
                     .then (function (response) {
                         $ionicLoading.hide ();
                         /* 获取初始化数据 */
+                        //Xu 的初始化
+                        var userInfoData = response.data.data;
+                        console.log (response.data);
+                        locals.setObject ($rootScope.user, userInfoData);
+                        
                         window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
                         var localUserInfo = window.localStorage.getItem ("userInitInfo");
                         try {
