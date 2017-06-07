@@ -129,7 +129,9 @@
   color: #fff;
 }
 
-#modalAccount {
+
+#modalAccount,
+#modalAccount2 {
   position: absolute;
   background: rgba(0, 0, 0, .6);
 }
@@ -157,6 +159,46 @@
 
 .account-modal .radio-icon {
   color: #387ef5;
+}
+
+    /*老用户获得彩票的modal*/
+
+.account-modal2
+{
+  position: absolute;
+  top: 50%;
+  width: 70%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  text-align: center;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  padding: 25px 0;
+}
+
+.account-modal2 .cancel-pop
+{
+  position: absolute;
+  right: 10px;
+  top:10px;
+  font-size: 20px;
+  color: #666;
+  width: 30px;
+  height: 30px;
+}
+
+.account-modal2 .account-style1
+{
+  color: #d21e1e;
+  font-size: 14px;
+  margin: 5px;
+}
+
+.account-modal2 .account-style2
+{
+  text-decoration: underline;
 }
 
 

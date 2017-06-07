@@ -1,10 +1,10 @@
-var url = "http://114.215.70.179:8080";
+var url = "http://114.215.70.179:8088";
 var jsonWrap = []; //存放所有的注数
 var jsonWrapBit3D = []; //点击向右的修改后返回来时数据的存放
 var jsonWrapBit5D = []; //点击向右的修改后返回来时数据的存放
 //var ipUrl = 'http://192.168.0.137:8080';
 // var ipUrl = 'http://121.42.253.149:18820/service';
-var ipUrl = 'http://114.215.70.179:8080/service';
+var ipUrl = 'http://114.215.70.179:8088/service';
 var initUrl = ipUrl + '/common/index';
 var initUrlNew = ipUrl + '/common/index';
 // var receiveToken = '28fa9fa2c554268d4c0721b05c29908064bcec105a4b6865cec9b08a6fbbf1c6ef0a0a96ce3019e4ac3719789215475edac550edfcec1013a8f31e8fad0b7c7ef3f022b13670926f2928a2a49502b875dbd5fd998df689a872621fb8e61a6014e2bd80a98440b0770c13544bbeb676488b0044533019dd0215e2b94a540cd3925250b6a7e0';
@@ -23,7 +23,6 @@ angular.module('starter.controllers', [])
       var data = {
         token: initToken
       };
-      console.log(data);
       //初始化接口
       $http({
         method: "POST",
@@ -51,6 +50,7 @@ angular.module('starter.controllers', [])
         } catch (error) {
           userInfo = null;
         }
+        console.log(userInfo.data.user.realName)
         if (userInfo.data.user.realName === undefined) {
           var confirmPopup = $ionicPopup.confirm({
             title: '完善资料',
@@ -1634,17 +1634,16 @@ angular.module('starter.controllers', [])
         $rootScope.accountNum[i].disable = true;
       }
     }
-    /*getUser.getInfo (url + "/service/common/index?token=" + initToken).then (function (response) {
-     //            alert(22)
-     $ionicLoading.hide ();
-     var userInfo = response.data;
-     console.log (userInfo)
-     // $rootScope.user={}  //保存token和用户信息
-     locals.setObject ($rootScope.user, userInfo)
+
+
+    var token = userInfo.token;
+    getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token).then (function (response) {
+                // alert(22)
+     console.log (response)
 
      }, function () {
      alert ('网络异常,未获取到用户信息')
-     });*/
+     });
     $scope.withdrawConfirm = function() {
       if (locals.getObject($scope.user).user.realName) {
         $scope.modal.show();
@@ -1698,7 +1697,8 @@ angular.module('starter.controllers', [])
     };
     //提现框的mordal窗口配置
     $ionicModal.fromTemplateUrl('accountModal.html', {
-      scope: $scope
+      scope: $scope,
+      // backdropClickToClose:true    没效果???
     }).then(function(modal) {
       $scope.modal = modal;
     });
@@ -1708,18 +1708,38 @@ angular.module('starter.controllers', [])
     $scope.closeModal = function() {
       $scope.modal.hide();
     };
+      //转到提现页面
     $scope.toWidthdraw = function(channel) {
       $rootScope.channel = channel;
       $scope.modal.hide();
       $state.go('widthdraw')
+    };
+
+    //老用户获得彩票的mordal窗口配置
+    $ionicModal.fromTemplateUrl('accountModalOldUser.html', {
+      scope: $scope,
+      // backdropClickToClose:true    没效果???
+    }).then(function(modal) {
+      $scope.modal2 = modal;
+    });
+    $scope.openPop = function() {
+      $scope.modal2.show();
+    };
+    $scope.cancelPop = function() {
+      $scope.modal2.hide();
+    };
+    $scope.goToExchange=function () {
+      $scope.modal2.hide();
+      $state.go('tab.exchange')
     }
+
   }])
   //完善个人资料
   .controller('completeInfoCtrl', ['$scope', '$rootScope', '$state', 'locals', 'postData', '$ionicLoading', function($scope, $rootScope, $state, locals, postData, $ionicLoading) {
     $scope.users = {
-      realName: '',
+     /* realName: '',
       phone: '',
-      idcard: '',
+      idcard: '',*/
       wechat: '',
       alipay: '',
       bankNo: '',
@@ -1735,9 +1755,9 @@ angular.module('starter.controllers', [])
       $ionicLoading.show({
         hideOnStateChange: true
       });
-      $rootScope.addData.user.realName = $scope.users.realName;
-      $rootScope.addData.user.phone = $scope.users.phone;
-      $rootScope.addData.user.idcard = $scope.users.idcard;
+      // $rootScope.addData.user.realName = $scope.users.realName;
+      // $rootScope.addData.user.phone = $scope.users.phone;
+      // $rootScope.addData.user.idcard = $scope.users.idcard;
       $rootScope.addData.user.wechat = $scope.users.wechat;
       $rootScope.addData.user.alipay = $scope.users.alipay;
       $rootScope.addData.user.bankNo = $scope.users.bankNo;
@@ -1762,7 +1782,7 @@ angular.module('starter.controllers', [])
   //提现页面
   .controller('widthdrawCtrl', ['$scope', '$state', '$rootScope', 'getUser', 'locals', 'postData', '$ionicLoading', function($scope, $state, $rootScope, getUser, locals, postData, $ionicLoading) {
     $ionicLoading.show({
-      hideOnStateChange: true
+      // hideOnStateChange: true
     });
     var widthdrawLocals = locals.getObject($rootScope.user);
     var token = widthdrawLocals.token;
@@ -1831,7 +1851,7 @@ angular.module('starter.controllers', [])
   .controller('prizeRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals', '$ionicLoading', function($scope, $rootScope, getUser, locals, $ionicLoading) {
     var token = locals.getObject($rootScope.user).token;
     $ionicLoading.show({
-      hideOnStateChange: true
+      // hideOnStateChange: true
     });
     getUser.getInfo(url + '/service/bonus/getList?token=' + token).then(function(response) {
       $scope.prizeItems = response.data;
@@ -2047,7 +2067,7 @@ angular.module('starter.controllers', [])
   //提现明细
   .controller('widthdrawRecordsCtrl', ['$scope', '$rootScope', 'getUser', 'locals', 'postData', '$ionicLoading', function($scope, $rootScope, getUser, locals, postData, $ionicLoading) {
     $ionicLoading.show({
-      hideOnStateChange: true
+      // hideOnStateChange: true
     });
     var token = locals.getObject($rootScope.user).token;
     getUser.getInfo(url + '/service/cash/getList?token=' + token).then(function(response) {

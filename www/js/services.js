@@ -92,4 +92,8 @@ angular.module('starter.services', [])
             return d.promise
         };
         return info;
-    }]);
+    }])
+
+    .constant('$ionicLoadingConfig', {
+        hideOnStateChange: true
+    });

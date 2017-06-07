@@ -8,7 +8,7 @@
     <ion-content style="background: #eee;">
       <ion-list class="complete-info-list">
         <form role="form" name="inputInfoForm" ng-submit="submitInfo()">
-          <label class="item item-input">
+          <!-- <label class="item item-input">
             <div class="img_001"></div>
             <input type="text" 
                 name="name" 
@@ -41,7 +41,7 @@
                 style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid">格式错误</span>
-          </label>
+          </label> -->
           <label class="item item-input">
             <div class="img_004"></div>
             <input type="text" 
@@ -58,7 +58,7 @@
             <div class="img_005"></div>
             <input type="text" 
                 name="wechat" 
-                placeholder="请输入微信账号 (必填项)" ng-model="users.wechat"
+                placeholder="请输入微信账号" ng-model="users.wechat"
                 ng-pattern="/^[a-z0-9]{6,16}$/"
                 style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
