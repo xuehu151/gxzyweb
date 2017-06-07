@@ -72,6 +72,7 @@ angular.module ('starter.controllers', [])
                                 $state.go ('BigLotto-2');
                             };
                         }
+                        
                         /*if (userInfo.error == '0') {
                          if (userInfo.data.user.realName == undefined) {
                          //oldUser ();
