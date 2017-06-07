@@ -3,7 +3,6 @@ var jsonWrap = []; //存放所有的注数
 var jsonWrapBit3D = []; //点击向右的修改后返回来时数据的存放
 var jsonWrapBit5D = []; //点击向右的修改后返回来时数据的存放
 //var ipUrl = 'http://192.168.1.118:8080';
-// var ipUrl = 'http://121.42.253.149:18820/service';
 var ipUrl = 'http://114.215.70.179:8088/service';
 var initUrl = ipUrl + '/common/index1';
 var initUrlNew = ipUrl + '/common/index';
@@ -726,6 +725,7 @@ angular.module ('starter.controllers', [])
                         okText: '确 定',
                         okType: 'button-light'
                     }).then (function (response) {
+                        $state.go('tab.account');
                     });
                     console.log (response.data);
 //                    console.log(dataArray);
@@ -737,7 +737,7 @@ angular.module ('starter.controllers', [])
                         cancelText: '返回',
                         okType: 'button-darkBlue'
                     }).then (function () {
-                        $state.go ('bigLottoHistoryDetails'); //大乐透往期详情
+                        $state.go('tab.account');
                     });
                 });
             }
@@ -1317,6 +1317,7 @@ angular.module ('starter.controllers', [])
                         okText: '确 定',
                         okType: 'button-light'
                     }).then (function () {
+                        $state.go('tab.account');
                     });
                     //                    console.log (response.data.info);
                 }, function (response) {
@@ -1327,7 +1328,7 @@ angular.module ('starter.controllers', [])
                         cancelText: '返回',
                         okType: 'button-darkBlue'
                     }).then (function () {
-                        $state.go ('bigLottoHistoryDetails'); //大乐透往期详情
+                        $state.go('tab.account');
                     });
                 });
             }
@@ -1775,6 +1776,7 @@ angular.module ('starter.controllers', [])
                         okText: '确 定',
                         okType: 'button-light'
                     }).then (function () {
+                        $state.go('tab.account');
                     });
                 }, function (response) {
                     //扫码后，所获赠注数的限制提示。
@@ -1784,9 +1786,8 @@ angular.module ('starter.controllers', [])
                         okText: '确认',
                         okType: 'button-darkBlue'
                     }).then (function () {
-                        $state.go ('bigLottoHistoryDetails'); //大乐透往期详情
+                        $state.go('tab.account');
                     });
-                    console.log ("提交失败");
                 });
             }
         }
