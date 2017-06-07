@@ -227,45 +227,10 @@ angular.module ('starter.controllers', [])
                     });
             }
         }
-        
     })
     
     //扫码兑换首页
     .controller ('scanCodeIndexCtrl', function ($scope, $state, $http) {
-        
-        /*$http ({
-            method: "POST",
-            url: initUrl,
-            data: {
-                token: initToken
-            },
-            transformRequest: function (obj) {
-                var str = [];
-                for (var s in obj) {
-                    str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
-                }
-                return str.join ("&");
-            },
-            timeout: 3000
-        })
-            .then (function (response) {
-                /!* 获取初始化数据 *!/
-                var localUserInfo = window.localStorage.getItem ("userInitInfo");
-                try {
-                    userInfo = JSON.parse (localUserInfo);
-                } catch (error) {
-                    userInfo = null;
-                }
-                /!*   if (userInfo.data.user.realName != undefined){
-                 $state.go('tab.exchange');
-                 }else {
-                 modal ();
-                 }*!/
-                console.log (response);
-            }, function (response) {
-                console.log ("初始化数据失败");
-            });*/
-        
         $scope.goToExchange3D = function () {
             $state.go ('exchange-3');
         };
