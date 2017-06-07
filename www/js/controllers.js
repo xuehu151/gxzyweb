@@ -113,6 +113,7 @@ angular.module ('starter.controllers', [])
                     timeout: 3000
                 })
                     .then (function (response) {
+                        $ionicLoading.hide ();
                         /* 获取初始化数据 */
                         window.localStorage.setItem ("userInitInfo", JSON.stringify (response.data));
                         var localUserInfo = window.localStorage.getItem ("userInitInfo");
@@ -121,12 +122,12 @@ angular.module ('starter.controllers', [])
                         } catch (error) {
                             userInfo = null;
                         }
-                        $ionicLoading.hide ();
+                       
                         if (userInfo.data.user.realName != undefined) {
-                            modal ();
+                            $state.go ('tab.account');
                         }
                         else {
-                            $state.go ('tab.account');
+                            modal ();
                         }
     
                         $scope.goToExchange3D = function () {
