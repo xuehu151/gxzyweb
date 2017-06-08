@@ -94,6 +94,23 @@ angular.module('starter.services', [])
         return info;
     }])
 
+    /*.factory('splitCode',['$http',function ($http) {
+        var code={};
+        code.split=function (obj) {
+            var investCode = obj.split ('@');
+            var investCodeFormat = [];
+            if (investCode.length == 2) {
+                investCodeFormat[0] = investCode[0].split (',');
+                investCodeFormat[1] = investCode[1].split (',');
+            }
+            else if (investCode.length == 1) {
+                investCodeFormat[0] = investCode[0].split (',');
+            }
+            return investCodeFormat;
+        }
+        return code;
+    }])*/
+
     .constant('$ionicLoadingConfig', {
         hideOnStateChange: true
     });

@@ -1841,43 +1841,69 @@ angular.module ('starter.controllers', [])
         PayType = 1;
         
         console.log (locals.getObject ($rootScope.user));
-        var userInfo = locals.getObject ($rootScope.user);
-        $scope.useableMoney = locals.getObject ($rootScope.user).user.money;
-        $scope.phone = locals.getObject ($rootScope.user).user.phone;
-        $scope.frozedMoney = locals.getObject ($rootScope.user).user.freeze;
-        $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
-        //提现时候的账户号码
-        $rootScope.accountNum = [{
-            chanel: 1,
-            num: '(' + userInfo.user.alipay + ')',
-            disable: false,
-        }, {
-            chanel: 2,
-            num: '(' + userInfo.user.wechat + ')',
-            disable: false,
-        }, {
-            chanel: 3,
-            num: '(' + userInfo.user.bankNo + ')',
-            disable: false,
-        }];
-        for (var i = 0; i < $rootScope.accountNum.length; i++) {
-            if ($rootScope.accountNum[i].num == "()") {
-                $rootScope.accountNum[i].disable = true;
+        var userInfoNew = locals.getObject ($rootScope.user);
+        
+        
+        
+        var token = userInfoNew.token;
+        //更新余额
+        getUser.getInfo(url + "/service/customer/getUser?token=" + token).then(function (response) {
+            console.log(response.data)
+            var newResponseData=response.data
+            $scope.useableMoney = newResponseData.money;
+            $scope.phone = newResponseData.phone;
+            $scope.frozedMoney = newResponseData.freeze;
+            $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
+            //提现时候的账户号码
+            $rootScope.accountNum = [{
+                chanel: 1,
+                num: '(' + newResponseData.alipay + ')',
+                disable: false,
+            }, {
+                chanel: 2,
+                num: '(' + newResponseData.wechat + ')',
+                disable: false,
+            }, {
+                chanel: 3,
+                num: '(' + newResponseData.bankNo + ')',
+                disable: false,
+            }];
+            for (var i = 0; i < $rootScope.accountNum.length; i++) {
+                if ($rootScope.accountNum[i].num == "()") {
+                    $rootScope.accountNum[i].disable = true;
+                }
             }
-        }
-        
-        
-        /*var token = userInfo.token;
-         getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token).then (function (response) {
-         // alert(22)
-         console.log (response)
-         
+        },function () {
+            alert(网络异常,未能获取到您的余额)
+        })
+
+
+        //更新待兑换
+        /*getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token).then (function (response) {
+         $scope.needExchangeAmount=response.data.length;
+         $rootScope.needExchangeItems=response.data;
+
+         $scope.modal2.show ();
          }, function () {
          alert ('网络异常,未获取到用户信息')
          });*/
         
-        
-        
+        //检测有无中奖
+        /*getUser.getInfo(url + "/service/lottery/getWinList?token=" + token).then (function (response) {
+         console.log (response)
+
+         $scope.winItems=response.data;
+         for (var i = 0; i < $scope.winItems.length; i++) {
+            $scope.winamt=$scope.winItems[i].winamt;
+            $scope.wareIssue=$scope.winItems[i].wareIssue;
+            $scope.drawTime=$scope.winItems[i].drawTime;
+
+             $scope.modal3.show ();
+         }
+
+         }, function () {
+         alert ('网络异常,未获取到用户信息')
+         });*/
         
         $scope.withdrawConfirm = function () {
             if (locals.getObject ($scope.user).user.wechat || locals.getObject ($scope.user).user.alipay || locals.getObject ($scope.user).user.bankNo) {
@@ -1960,18 +1986,29 @@ angular.module ('starter.controllers', [])
         }).then (function (modal) {
             $scope.modal2 = modal;
         });
-        $scope.openPop = function () {
+        $scope.openPop2 = function () {
             $scope.modal2.show ();
         };
-        $scope.cancelPop = function () {
+        $scope.cancelPop2 = function () {
             $scope.modal2.hide ();
         };
-        $scope.goToExchange = function () {
-            
-            $scope.modal2.hide ();
-            $state.go ('tab.exchange');
-            
+        $scope.goToExchange=function () {
+            $state.go('tab.exchange')
         }
+
+        //中奖mordal窗口配置
+        $ionicModal.fromTemplateUrl ('accountModalGetPrize.html', {
+            scope: $scope,
+            // backdropClickToClose:true    没效果???
+        }).then (function (modal) {
+            $scope.modal3 = modal;
+        });
+        $scope.openPop3 = function () {
+            $scope.modal3.show ();
+        };
+        $scope.cancelPop3 = function () {
+            $scope.modal3.hide ();
+        };
         
     }])
     //完善个人资料
@@ -2082,9 +2119,11 @@ angular.module ('starter.controllers', [])
         };
     }])
     //待兑换
-    .controller ('needExchangeCtrl', ['$scope', '$state', function ($scope, $state) {
-        $scope.toScanExchange = function () {
-            // $state.go()
+    .controller ('needExchangeCtrl', ['$scope','$rootScope', '$state', function ($scope,$rootScope, $state) {
+        $scope.needExchanges=$rootScope.needExchangeItems;
+        console.log($scope.needExchanges);
+        $scope.toScanExchange=function () {
+          $state.go('scanCodeIndex')
         }
     }])
     
@@ -2121,6 +2160,7 @@ angular.module ('starter.controllers', [])
         })
     }])
     //全部订单页面
+    // .controller ('allOrdersCtrl', ['$scope', '$rootScope', '$state', 'getUser', 'locals', '$ionicLoading','splitCode', function ($scope, $rootScope, $state, getUser, locals, $ionicLoading,splitCode) {
     .controller ('allOrdersCtrl', ['$scope', '$rootScope', '$state', 'getUser', 'locals', '$ionicLoading', function ($scope, $rootScope, $state, getUser, locals, $ionicLoading) {
         $ionicLoading.show ({
             hideOnStateChange: true
@@ -2196,7 +2236,10 @@ angular.module ('starter.controllers', [])
         })
         $scope.toOrderDetail = function (ticketID) {
             for (var i = 0; i < $scope.allOrders.length; i++) {
+                //找到当前点击的订单,保存
                 if (ticketID == $scope.allOrders[i].ticketID) {
+
+                    
                     var investCode = $scope.allOrders[i].investCode.split ('@');
                     var investCodeFormat = [];
                     if (investCode.length == 2) {
@@ -2207,7 +2250,8 @@ angular.module ('starter.controllers', [])
                         investCodeFormat[0] = investCode[0].split (',');
                         
                     }
-                    console.log (investCodeFormat)
+                    // splitCode.split($scope.allOrders[i].investCode)
+                    // console.log (splitCode.split($scope.allOrders[i].investCode))
                     if ($scope.allOrders[i].payType == 0) {
                         payType = '扫码兑换';
                     }

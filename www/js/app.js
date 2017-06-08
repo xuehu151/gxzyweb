@@ -65,6 +65,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state ('exchange-3', {
                 url: '/exchange-3',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl: 'templates/exchange-3.html',
                 controller: 'Exchange-3Ctrl'
             })
@@ -72,6 +73,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             //兑换 排列3  网期开奖详情
             .state ('exchaangehistory3D', {
                 url: '/exchaangehistory3D',
+                prefetchTemplate:false,
                 templateUrl: 'templates/exchangehistory3D.html',
                 controller: 'Exchaangehistory3DCtrl'
             })
@@ -79,6 +81,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             //兑换 排列3  详情
             .state ('exchange-3Details', {
                 url: '/exchange-3Details',
+                prefetchTemplate:false,
                 templateUrl: 'templates/exchange-3Details.html',
                 controller: 'Exchange-3DetailsCtrl'
             })
@@ -87,6 +90,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state ('exchange-5', {
                 url: '/exchange-5',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl: 'templates/exchange-5.html',
                 controller: 'Exchange-5Ctrl'
         
@@ -95,6 +99,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             //兑换 排列5  网期开奖详情
             .state ('exchangehistory5D', {
                 url: '/exchangehistory5D',
+                prefetchTemplate:false,
                 templateUrl: 'templates/exchangehistory5D.html',
                 controller: 'Exchangehistory5DCtrl'
             })
@@ -102,6 +107,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             //兑换 排列5 详情
             .state ('exchange-5Details', {
                 url: '/exchange-5Details',
+                prefetchTemplate:false,
                 templateUrl: 'templates/exchange-5Details.html',
                 controller: 'Exchange-5DetailsCtrl'
         
@@ -111,6 +117,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state ('BigLotto-2', {
                 url: '/BigLotto-2/:flag2',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl: 'templates/BigLotto-2.html',
                 controller: 'BigLotto-2Ctrl'
             })
@@ -119,6 +126,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state ('bettingDetail', {
                 url: '/bettingDetail/:flag3',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl: 'templates/bettingDetail.html',
                 controller: 'bettingDetailCtrl'
             })
@@ -126,6 +134,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             //兑换 大乐透往期开奖详情
             .state ('bigLottoHistoryDetails', {
                 url: '/bigLottoHistoryDetails',
+                prefetchTemplate:false,
                 templateUrl: 'templates/bigLottoHistoryDetails.html',
                 controller: 'bigLottoHistoryDetailsCtrl'
             })
@@ -134,6 +143,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state ('scanCodeIndex', {
                 url: '/scanCodeIndex',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl: 'templates/scanCodeIndex.html',
                 controller: 'scanCodeIndexCtrl'
             })
@@ -154,6 +164,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state('completeInfo',{
                 url:'/account/completeInfo',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl:'templates/completeInfo.html',
                 controller:'completeInfoCtrl'
             })
@@ -162,6 +173,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state('completeInfoSucceed',{
                 url:'/account/completeInfoEditSucceed',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl:'templates/completeInfoSucceed.html',
                 controller:'completeInfoSucceedCtrl'
 
@@ -171,6 +183,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state('widthdraw',{
                 url:'/account/widthdraw',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl:'templates/widthdraw.html',
                 controller:'widthdrawCtrl'
             })
@@ -179,6 +192,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state('widthdrawResult',{
                 url:'/account/widthdrawResult',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl:'templates/widthdrawResult.html',
                 controller:'widthdrawResultCtrl'
             })
@@ -186,6 +200,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state('needExchange',{
                 url:'/account/needExchange',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl:'templates/needExchange.html',
                 controller:'needExchangeCtrl'
             })
@@ -194,6 +209,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state('prizeRecords',{
                 url:'/account/prizeRecords',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl:'templates/prizeRecords.html',
                 controller:'prizeRecordsCtrl'
             })
@@ -202,6 +218,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state('allOrders',{
                 url:'/account/allOrders',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl:'templates/allOrders.html',
                 controller:'allOrdersCtrl'
             })
@@ -210,6 +227,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state('orderDetail',{
                 url:'/account/orderDetail',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl:'templates/orderDetail.html',
                 controller:'orderDetailCtrl'
             })
@@ -218,6 +236,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services'])
             .state('widthdrawRecords',{
                 url:'/account/widthdrawRecords',
                 cache:'false',
+                prefetchTemplate:false,
                 templateUrl:'templates/widthdrawRecords.html',
                 controller:'widthdrawRecordsCtrl'
             });
