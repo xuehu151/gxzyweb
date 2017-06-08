@@ -94,7 +94,7 @@ angular.module('starter.services', [])
         return info;
     }])
 
-    /*.factory('splitCode',['$http',function ($http) {
+    .factory('splitCode',['$http',function ($http) {
         var code={};
         code.split=function (obj) {
             var investCode = obj.split ('@');
@@ -109,7 +109,7 @@ angular.module('starter.services', [])
             return investCodeFormat;
         }
         return code;
-    }])*/
+    }])
 
     .constant('$ionicLoadingConfig', {
         hideOnStateChange: true
