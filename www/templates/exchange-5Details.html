@@ -14,7 +14,7 @@
     <ion-content class="content-160">
         <div>
             <ul class="list betting-detail-ul">
-                <li class="item item-button-left item-button-right" ng-repeat="liItem5D in sessionJsonWarp5D">
+                <li class="item item-button-left item-button-right" ng-repeat="liItem5D in sessionJsonWarp5D track by $index">
                     <a class="button button-clear " ng-click="deleteRow5D($index)">
                         <i class="icon ion-android-close dark"></i>
                     </a>

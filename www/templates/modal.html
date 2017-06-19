@@ -4,15 +4,26 @@
 
         <h4>身份注册</h4>
         <div class="list">
-            <label class="item item-input">
-                <input ng-model="userInfo.newUserName"  ng-pattern="/^[\u4E00-\u9FA5A-Za-z0-9_]+$/" type="text" placeholder="请输入您的真实姓名">
-            </label>
-            <label class="item item-input">
-                <input ng-model="userInfo.newUserIphone" ng-pattern="/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/" type="text"  placeholder="请输入您的真实手机号">
-            </label>
-            <label class="item item-input">
-                <input ng-model="userInfo.newUserSure" type="text"  placeholder="再次确认手机号">
-            </label>
+            <form action="" name="formModal">
+                <label class="item item-input">
+                    <input ng-model="userInfo.newUserName"  ng-pattern="/^[\u4E00-\u9FA5A-Za-z0-9_]+$/" type="text" placeholder="请输入您的真实姓名">
+                </label>
+                <label class="item item-input">
+                    <input
+                        ng-model="userInfo.newUserIphone"
+                        ng-pattern="/^1[34578]\d{9}$/"
+                        maxlength="11"
+                        type="text"
+                        name="iphone"
+                        placeholder="请输入您的11位手机号">
+                    <span style="font-size: .6em;color: red;" ng-show="formModal.iphone.$dirty && formModal.iphone.$invalid">输入你的11位手机号</span>
+                </label>
+
+                <label class="item item-input">
+                    <input ng-model="userInfo.newUserSure" type="text"  placeholder="再次确认手机号">
+                </label>
+            </form>
+
             <span> ● 请填写真实信息才能领奖</span>
         </div>
 
