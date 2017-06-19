@@ -13,7 +13,7 @@
     <ion-content class="content-160">
         <div>
             <ul class="list betting-detail-ul">
-                <li class="item item-button-left item-button-right" ng-repeat="liItem in sessionJsonWarp">
+                <li class="item item-button-left item-button-right" ng-repeat="liItem in sessionJsonWarp track by $index">
                     <a class="button button-clear " ng-click="deleteRow($index)">
                         <i class="icon ion-android-close dark"></i>
                     </a>
@@ -42,7 +42,7 @@
             <p style="height: 35px;">
                 金额：
                 <span class="font-red" ng-cloak>{{totalMoney * multiple * countMoney}}</span> 元 &nbsp;
-                <label class="checkbox" ng-show="flag3==1?false:true">
+                <label class="checkbox" ng-show="newStatus==true?false:true">
                     <input class="bigLotto-input2" type="checkbox" checked disabled />追加 (每注3元)
                 </label>
             </p>

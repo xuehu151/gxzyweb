@@ -7,17 +7,46 @@
     </ion-nav-bar>
     <ion-content style="background: #eee;">
       <ion-list class="widthdraw-records-list">
+       <!--  <ion-item ng-repeat="widthdrawItem in widthdrawItems" >
+         <div class="fl" ng-switch="widthdrawItem.status">
+           <p class="font-style3" ng-switch-when="0">未处理</p>
+           <p class="font-style3" ng-switch-when="1">审核成功</p>
+           <p class="font-style3" ng-switch-when="-1">审核失败</p>
+           <p class="font-style3" ng-switch-when="2">已完成</p>
+           <p class="font-style3" ng-cloak>{{widthdrawItem.updateDate}}</p>
+         </div>
+         <div class="fr">
+           <p class="font-style8 bg-assertive" ng-cloak>
+             立即兑换
+           </p>
+         </div>
+       </ion-item> -->
         <ion-item ng-repeat="item in needExchangeItems">
           <div class="fl">
             <p class="font-style9">
               兑换彩票<span>1</span>注
             </p>
-            <p class="font-style10" ng-cloak>
-              {{item.createDate}}
+            <p class="font-style10">
+              审核成功
             </p>
           </div>
           <div class="fr">
-            <p class="font-style8 padding" ng-click="toScanExchange()" >
+            <p class="font-style8 padding" ng-click="toScanExchange()" ng-cloak>
+            立即兑换
+            </p>
+          </div>
+        </ion-item>
+        <ion-item >
+          <div class="fl">
+            <p class="font-style9">
+              兑换彩票<span>1</span>注
+            </p>
+            <p class="font-style10">
+              审核成功
+            </p>
+          </div>
+          <div class="fr">
+            <p class="font-style8 padding" ng-cloak>
             立即兑换
             </p>
           </div>

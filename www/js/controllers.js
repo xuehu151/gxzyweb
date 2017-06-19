@@ -1757,13 +1757,12 @@ angular.module('starter.controllers', [])
     };
   })
   //账户页面
-  .controller('AccountCtrl', ['$scope', '$rootScope', '$ionicPopup', '$state', '$ionicModal', '$http', 'locals', 'getUser', '$ionicLoading', function($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading) {
+  .controller('AccountCtrl', ['$scope', '$rootScope', '$ionicPopup', '$state', '$ionicModal', '$http', 'locals', 'getUser', '$ionicLoading','splitCode', function($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading,splitCode) {
     //验证是否资料完善
     //        $ionicLoading.show ();
     PayType = 1;
     console.log(locals.getObject($rootScope.user));
-    var userInfoNew = locals.getObject($rootScope.user);
-    var token = userInfoNew.token;
+    var token = locals.getObject($rootScope.user).token;
     //更新余额
     getUser.getInfo(url + "/service/customer/getUser?token=" + token).then(function(response) {
       console.log(response.data)
@@ -1794,31 +1793,36 @@ angular.module('starter.controllers', [])
     }, function() {
       alert(网络异常, 未能获取到您的余额)
     })
+    
+
     //更新待兑换
-    /*getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token).then (function (response) {
+    getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token).then (function (response) {
      $scope.needExchangeAmount=response.data.length;
      $rootScope.needExchangeItems=response.data;
-
+     console.log(response)
      $scope.modal2.show ();
      }, function () {
      alert ('网络异常,未获取到用户信息')
-     });*/
+     });
     //检测有无中奖
-    /*getUser.getInfo(url + "/service/lottery/getWinList?token=" + token).then (function (response) {
+    getUser.getInfo(url + "/service/lottery/getWinList?token=" + token).then (function (response) {
      console.log (response)
 
      $scope.winItems=response.data;
+         //for 也没办法循环多次弹modal!!!!
      for (var i = 0; i < $scope.winItems.length; i++) {
         $scope.winamt=$scope.winItems[i].winamt;
         $scope.wareIssue=$scope.winItems[i].wareIssue;
         $scope.drawTime=$scope.winItems[i].drawTime;
 
+        $scope.investCode=splitCode.split($scope.winItems[i].investCode)
+        console.log($scope.investCode)
          $scope.modal3.show ();
      }
 
      }, function () {
      alert ('网络异常,未获取到用户信息')
-     });*/
+     });
     $scope.withdrawConfirm = function() {
       if (locals.getObject($scope.user).user.wechat || locals.getObject($scope.user).user.alipay || locals.getObject($scope.user).user.bankNo) {
         $scope.modal.show();
@@ -1854,7 +1858,8 @@ angular.module('starter.controllers', [])
     //未兑换
     $scope.haventExchange = true;
     $scope.toNeedExchange = function() {
-      $state.go('needExchange')
+
+      $state.go('needExchange',)
     }
     //转到奖金纪录页面
     $scope.toPrizeRecords = function() {
@@ -1901,6 +1906,7 @@ angular.module('starter.controllers', [])
       $scope.modal2.hide();
     };
     $scope.goToExchange = function() {
+        $scope.modal2.hide();
       $state.go('tab.exchange')
     }
     //中奖mordal窗口配置
