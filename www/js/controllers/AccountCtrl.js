@@ -15,23 +15,19 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         $scope.frozedMoney = userInfo.data.user.freeze;
         $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
         //提现时候的账户号码
-        $rootScope.accountNum = [
-            {
-                chanel: 1,
-                num: '(' + userInfo.data.user.alipay + ')',
-                disable: false
-            },
-            {
-                chanel: 2,
-                num: '(' + userInfo.data.user.wechat + ')',
-                disable: false
-            },
-            {
-                chanel: 3,
-                num: '(' + userInfo.data.user.bankNo + ')',
-                disable: false
-            }
-        ];
+        $rootScope.accountNum = [{
+            chanel: 1,
+            num: '(' + userInfo.data.user.alipay + ')',
+            disable: false
+        }, {
+            chanel: 2,
+            num: '(' + userInfo.data.user.wechat + ')',
+            disable: false
+        }, {
+            chanel: 3,
+            num: '(' + userInfo.data.user.bankNo + ')',
+            disable: false
+        }];
         for (var i = 0; i < $rootScope.accountNum.length; i++) {
             if ($rootScope.accountNum[i].num == "()") {
                 $rootScope.accountNum[i].disable = true;
@@ -73,6 +69,10 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
          $scope.notCompleteInfo=function () {
          $scope.confirmInfoComplete=false;
          }*/
+        //点击完善资料,转到完善资料页面
+        /* $scope.toCompleteInfo=function () {
+         $state.go('completeInfo')
+         };*/
         //冻结金额的解释
         $scope.toggleShowAnswer = function () {
             $scope.showAnswer = !$scope.showAnswer;
@@ -101,10 +101,9 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         $ionicModal.fromTemplateUrl ('accountModal.html', {
             scope: $scope
             // backdropClickToClose:true    没效果???
-        })
-            .then (function (modal) {
-                $scope.modal = modal;
-            });
+        }).then (function (modal) {
+            $scope.modal = modal;
+        });
         $scope.openModal = function () {
             $scope.modal.show ();
         };
@@ -122,10 +121,9 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         $ionicModal.fromTemplateUrl ('accountModalOldUser.html', {
             scope: $scope
             // backdropClickToClose:true    没效果???
-        })
-            .then (function (modal) {
-                $scope.modal2 = modal;
-            });
+        }).then (function (modal) {
+            $scope.modal2 = modal;
+        });
         $scope.openPop = function () {
             $scope.modal2.show ();
         };
@@ -133,6 +131,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             $scope.modal2.hide ();
         };
         $scope.goToExchange = function () {
+            
             $scope.modal2.hide ();
             $state.go ('tab.exchange');
         }
