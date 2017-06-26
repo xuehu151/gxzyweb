@@ -1,16 +1,20 @@
 angular.module('starter.services', [])
-//封装localStorage
+
     .factory('locals', ['$window', function ($window) {
-        return { //存储单个属性
+        return {
+            //存储单个属性
             set: function (key, value) {
                 $window.localStorage[key] = value;
-            }, //读取单个属性
+            },
+            //读取单个属性
             get: function (key, defaultValue) {
                 return $window.localStorage[key] || defaultValue;
-            }, //存储对象，以JSON格式存储
+            },
+            //存储对象，以JSON格式存储
             setObject: function (key, value) {
                 $window.localStorage[key] = JSON.stringify(value);
-            }, //读取对象
+            },
+            //读取对象
             getObject: function (key) {
                 return JSON.parse($window.localStorage[key] || '{}');
             }
@@ -154,7 +158,24 @@ angular.module('starter.services', [])
     };
     return info;
 }])
-
+    
+    .factory('splitCode',['$http',function ($http) {
+        var code={};
+        code.split=function (obj) {
+            var investCode = obj.split ('@');
+            var investCodeFormat = [];
+            if (investCode.length == 2) {
+                investCodeFormat[0] = investCode[0].split (',');
+                investCodeFormat[1] = investCode[1].split (',');
+            }
+            else if (investCode.length == 1) {
+                investCodeFormat[0] = investCode[0].split (',');
+            }
+            return investCodeFormat;
+        };
+        return code;
+    }])
+    
     .constant('$ionicLoadingConfig', {
         hideOnStateChange: true
     });

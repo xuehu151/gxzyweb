@@ -5,7 +5,7 @@ var url = "http://114.215.70.179:8088";
 //全部订单页面
 angular.module ('starter.allOrdersCtrl', ['starter.services'])
     
-    .controller ('allOrdersCtrl', function ($scope, $rootScope, $state, $ionicLoading, getUser, locals, $util) {
+    .controller ('allOrdersCtrl', function ($scope, $rootScope, $state, getUser, locals, $ionicLoading, splitCode, $util) {
         $ionicLoading.show ({
             hideOnStateChange: true
         });
@@ -36,7 +36,6 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
                         else if ($scope.allOrders[i].payType == 1) {
                             $scope.allOrders[i].RT = '奖金支付: ¥' + $scope.allOrders[i].money;
                         }
-                        
                     }
                     else if ($scope.allOrders[i].status == 4) {
                         $scope.allOrders[i].whetherRed = true;
@@ -81,30 +80,29 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
             });
         $scope.toOrderDetail = function (ticketID) {
             for (var i = 0; i < $scope.allOrders.length; i++) {
+                //找到当前点击的订单,保存
                 if (ticketID == $scope.allOrders[i].ticketID) {
-                    var investCode = $scope.allOrders[i].investCode.split ('@');
-                    var investCodeFormat = [];
-                    if (investCode.length == 2) {
-                        investCodeFormat[0] = investCode[0].split (',');
-                        investCodeFormat[1] = investCode[1].split (',');
-                    }
-                    else if (investCode.length == 1) {
-                        investCodeFormat[0] = investCode[0].split (',');
-                        
-                    }
-                    console.log (investCodeFormat);
+                    /*var investCode = $scope.allOrders[i].investCode.split('@');
+                     var investCodeFormat = [];
+                     if (investCode.length == 2) {
+                     investCodeFormat[0] = investCode[0].split(',');
+                     investCodeFormat[1] = investCode[1].split(',');
+                     } else if (investCode.length == 1) {
+                     investCodeFormat[0] = investCode[0].split(',');
+                     }*/
+                    var investCode = splitCode.split ($scope.allOrders[i].investCode);
+                    console.log (investCode);
                     if ($scope.allOrders[i].payType == 0) {
                         payType = '扫码兑换';
                     }
                     else if ($scope.allOrders[i].payType == 1) {
                         payType = '¥' + $scope.allOrders[i].money;
                     }
-                    
                     $rootScope.orderDetail = {
                         lotteryID: $scope.allOrders[i].lotteryID,
                         openTime: $scope.allOrders[i].drawTime,
                         status: $scope.allOrders[i].status,
-                        investCode: investCodeFormat,
+                        investCode: investCode,
                         payType: payType,
                         // pay: $scope.allOrders[i].money,
                         ticketID: ticketID,

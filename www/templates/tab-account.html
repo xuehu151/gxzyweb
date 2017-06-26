@@ -1,7 +1,8 @@
 <ion-view view-title="账户 {{phone}}">
     <ion-nav-bar class="light bg1">
         <ion-nav-buttons ng-click="" side="left">
-            <a class="button button-icon ion-ios-arrow-left light" href="#/tab/exchange" style="font-size: 1.5em;line-height: 31px;">
+            <a class="button button-icon ion-ios-arrow-left light" href="#/tab/exchange"
+               style="font-size: 1.5em;line-height: 31px;">
             </a>
         </ion-nav-buttons>
     </ion-nav-bar>
@@ -34,8 +35,8 @@
                                     冻结金额：
                                 </h5>
                                 <span>
-                                    冻结金额为需要支付的金额，只是出票成功前该笔金额先暂时冻结在您的奖金余额内，等出票成功后，该笔冻结金额会自动支付给出票商家；
-                                </span>
+                  冻结金额为需要支付的金额，只是出票成功前该笔金额先暂时冻结在您的奖金余额内，等出票成功后，该笔冻结金额会自动支付给出票商家；
+                </span>
                             </div>
                         </div>
                     </div>
@@ -44,10 +45,13 @@
                     </div>
                 </div>
             </div>
-            <!--<ion-item ng-show="haventExchange" class="f18" style="border-bottom-width: 2px" ng-click="toNeedExchange()">
+            <ion-item class="f18" ng-click="toNeedExchange()" ng-show="needExchangeAmount"
+                      style="border-bottom-width: 2px;">
                 待兑换
-                <span class="badge badge-style1" >1</span>
-            </ion-item>-->
+                <span class="badge badge-style1" ng-cloak>
+                  {{needExchangeAmount}}
+                </span>
+            </ion-item>
             <ion-item class="item-icon-right f18" ng-click="toPrizeRecords()">
                 奖金纪录
                 <i class="icon ion-ios-arrow-right">
@@ -68,60 +72,90 @@
             <p class="account-common account-bg-blue" ng-click="withdrawConfirm()">
                 提现
             </p>
-            <a class="account-common account-bg-none"  ui-sref="tab.exchange">
+            <a class="account-common account-bg-none" ui-sref="tab.exchange">
                 投注
             </a>
         </ion-list>
-
-
         <!-- modal弹窗选择提现方式 -->
         <script id="accountModal.html" type="text/ng-template">
-            <ion-modal-view id="modalAccount" >
-        <div class="account-modal">
-            <ion-item class="item-icon-left " >
-                <i class="icon ion-ios-close-empty" ng-click="closeModal()">
-                </i>
-                选择提现方式
-            </ion-item>
-            </ion-item>
-           <ion-radio ng-class="accountNum[0].disable?'disable-class':''" ng-click="toWidthdraw(1,accountNum[0].num)" ng-disabled="accountNum[0].disable">
-                <img src="./img/img_010.png" />
-                支付宝账户 <span ng-cloak>{{accountNum[0].num}}</span>
-            </ion-radio>
-            <ion-radio ng-class="accountNum[1].disable?'disable-class':''"  ng-click="toWidthdraw(2,accountNum[1].num)" ng-disabled="accountNum[1].disable" >
-                <img src="./img/img_011.png" />
-                微信账户 <span ng-cloak>{{accountNum[1].num}}</span>
-            </ion-radio>
-            <ion-radio ng-class="accountNum[2].disable?'disable-class':''" ng-click="toWidthdraw(3,accountNum[2].num)" ng-disabled="accountNum[2].disable">
-                <img src="./img/img_012.png" />
-                银行卡账户 <span ng-cloak>{{accountNum[2].num}}</span>
-            </ion-radio>
-        </div>
-    </ion-modal-view>
+            <ion-modal-view id="modalAccount">
+                <div class="account-modal">
+                    <ion-item class="item-icon-left ">
+                        <i class="icon ion-ios-close-empty" ng-click="closeModal()">
+                        </i>
+                        选择提现方式
+                    </ion-item>
+                    <ion-radio ng-class="accountNum[0].disable?'disable-class':''"
+                               ng-click="toWidthdraw(1,accountNum[0].num)" ng-disabled="accountNum[0].disable">
+                        <img src="./img/img_010.png"/>
+                        支付宝账户 <span ng-cloak>{{accountNum[0].num}}</span>
+                    </ion-radio>
+                    <ion-radio ng-class="accountNum[1].disable?'disable-class':''"
+                               ng-click="toWidthdraw(2,accountNum[1].num)" ng-disabled="accountNum[1].disable">
+                        <img src="./img/img_011.png"/>
+                        微信账户 <span ng-cloak>{{accountNum[1].num}}</span>
+                    </ion-radio>
+                    <ion-radio ng-class="accountNum[2].disable?'disable-class':''"
+                               ng-click="toWidthdraw(3,accountNum[2].num)" ng-disabled="accountNum[2].disable">
+                        <img src="./img/img_012.png"/>
+                        银行卡账户 <span ng-cloak>{{accountNum[2].num}}</span>
+                    </ion-radio>
+                </div>
+            </ion-modal-view>
         </script>
-
-            <!-- modal弹窗 老用户获得彩票 -->
-            <script id="accountModalOldUser.html" type="text/ng-template">
-                <ion-modal-view id="modalAccount2" >
-            <div class="account-modal2">
-                <div class="cancel-pop" ng-click="cancelPop()">X</div>
-                <img src="./img/completeInfoSucceed.png" alt="获得一注彩票" style="width: 110px;" />
-                <div class="account-style1">恭喜您，获得一注彩票；</div>
-                <a ng-click="goToExchange()" class="account-style1 account-style2">点击立即兑换</a>
-            </div>
-        </ion-modal-view>
-            </script>
-
-            <!-- modal弹窗 中奖 -->
-            <script id="accountModalGetPrize.html" type="text/ng-template">
-                <ion-modal-view id="modalAccount3" >
-            <div class="account-modal3">
-                <div class="cancel-pop" ng-click="cancelPop()">X</div>
-                <img src="./img/completeInfoSucceed.png" alt="获得一注彩票" style="width: 110px;" />
-                <div class="account-style1">恭喜您，获得一注彩票；</div>
-                <a ng-click="goToExchange()" class="account-style1 account-style2">点击立即兑换</a>
-            </div>
-        </ion-modal-view>
-            </script>
+        <!-- modal弹窗 老用户获得彩票 -->
+        <script id="accountModalOldUser.html" type="text/ng-template">
+            <ion-modal-view id="modalAccount2">
+                <div class="account-modal2">
+                    <div class="cancel-pop" ng-click="cancelPop2()">X</div>
+                    <img src="./img/completeInfoSucceed.png" alt="获得一注彩票" style="width: 110px;"/>
+                    <div class="account-style1">恭喜您，获得一注彩票；</div>
+                    <a ng-click="goToExchange()" class="account-style1 account-style2">点击立即兑换</a>
+                </div>
+            </ion-modal-view>
+        </script>
+        <!-- modal弹窗 中奖 -->
+        <script id="accountModalGetPrize.html" type="text/ng-template">
+            <ion-modal-view id="modalAccount3">
+                <div class="account-modal3">
+                    <div class="modal3-title-img-wrap">
+                        <img class="modal3-title-img" src="./img/completeInfoSucceed.png" alt="中奖"/>
+                    </div>
+                    <div class="account-modal3-win">
+                        恭喜您,中奖啦
+                    </div>
+                    <div class="account-modal3-style1">
+                        奖金<span ng-cloak>{{winamt}}元</span>
+                    </div>
+                    <div class="account-modal3-style2">
+                        <span class="fl">期 数:</span><span ng-cloak>{{wareIssue}}</span>
+                    </div>
+                    <div class="account-modal3-style2">
+                        <span class="fl">时 间:</span><span ng-cloak>{{drawTime}}</span>
+                    </div>
+                    <div class="account-modal3-style2">
+                        <span class="fl">获赠号码:</span>
+                        <i>01</i>
+                        <i>01</i>
+                        <i>01</i>
+                        <i>01</i>
+                        <i class="blue">01</i>
+                        <i class="blue">01</i>
+                    </div>
+                    <div class="account-modal3-style2">
+                        <span class="fl">开奖号码:</span>
+                        <i>01</i>
+                        <i>01</i>
+                        <i>01</i>
+                        <i>01</i>
+                        <i>01</i>
+                        <i class="blue">01</i>
+                        <i class="blue">01</i>
+                    </div>
+                    <div class="account-modal3-style3">*奖金已发送至奖金余额,请查收!</div>
+                    <div class="account-modal3-style4" ng-click="cancelPop3()"></div>
+                </div>
+            </ion-modal-view>
+        </script>
     </ion-content>
 </ion-view>

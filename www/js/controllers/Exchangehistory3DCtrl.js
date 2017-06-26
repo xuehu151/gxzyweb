@@ -7,10 +7,12 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
     .controller ('Exchangehistory3DCtrl', function ($scope, $http, $interval, $ionicPopup, $ionicLoading, $util, historyPastService) {
         $ionicLoading.show ();
         var userInfo = $util.getUserInfo ();
+        var pageSize = 8;
+        var pageNum = 1;
         var data = {
             lotteryID: '54',
-            pageSize: '8',
-            pageNum: '1'
+            pageSize: pageSize,
+            pageNum: pageNum
         };
         /*$http ({
             method: "POST",
@@ -25,10 +27,10 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
                 $ionicLoading.hide ();
                 $scope.historyPast3 = response.data;
                 
-                if (response.data.length === 0) {
+                if ($scope.historyPast3.length === 0) {
                     var alertPopup = $ionicPopup.alert ({
                         title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
-                        template: '<div class="alert-left">' + '<p style="text-align: center">' + response.data.info + '</p>' + '</div>',
+                        template: '<div class="alert-left"><p style="text-align: center">暂无数据</p></div>',
                         okText: '确 定',
                         okType: 'button-light'
                     })

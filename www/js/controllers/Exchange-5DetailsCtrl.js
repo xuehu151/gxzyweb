@@ -127,8 +127,8 @@ angular.module('starter.Exchange-5DetailsCtrl', ['starter.services'])
                 return
             }
             //获取5D期号
-            /*var reques = {};
-            var userInfo = $util.getUserInfo();*/
+            var reques = {};
+            var userInfo = $util.getUserInfo();
             /*$http({
                 method: "POST",
                 url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
@@ -139,7 +139,7 @@ angular.module('starter.Exchange-5DetailsCtrl', ['starter.services'])
                     "Content-Type": "application/json"
                 }
             })*/
-           /* var data = {
+            var data = {
                 LotteryID: 53
             };
             getWareIssueService.getWareIssue(data, userInfo.data.token)
@@ -150,9 +150,9 @@ angular.module('starter.Exchange-5DetailsCtrl', ['starter.services'])
                     getPl5add();
                 }, function (response) {
                     console.log("获取列表失败");
-                });*/
+                });
             // 排列五投注信息
-//            function getPl5add() {
+            function getPl5add() {
                 $ionicLoading.show();
                 var userInfo = $util.getUserInfo();
 
@@ -183,7 +183,7 @@ angular.module('starter.Exchange-5DetailsCtrl', ['starter.services'])
 
                 var data = {
                     "LotteryID": "53",
-                    "WareIssue":16055 /*reques.wareIssue*/,
+                    "WareIssue": reques.wareIssue,
                     "PayType": PayType,
                     "vid": vid,
                     "data": dataArray
@@ -218,7 +218,7 @@ angular.module('starter.Exchange-5DetailsCtrl', ['starter.services'])
                             $state.go('tab.account');
                         });
                     });
-//            }
+            }
         }
     });
 

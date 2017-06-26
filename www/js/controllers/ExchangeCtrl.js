@@ -15,20 +15,20 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
             if (type == 0) {
                 //初始化用户接口
                 /*$http ({
-                    method: "POST",
-                    url: initUrlNew,
-                    data: {
-                        token: sign
-                    },
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var s in obj) {
-                            str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
-                        }
-                        return str.join ("&");
-                    },
-                    timeout: 3000
-                })*/
+                 method: "POST",
+                 url: initUrlNew,
+                 data: {
+                 token: sign
+                 },
+                 transformRequest: function (obj) {
+                 var str = [];
+                 for (var s in obj) {
+                 str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
+                 }
+                 return str.join ("&");
+                 },
+                 timeout: 3000
+                 })*/
                 
                 var userToken = {
                     token: sign
@@ -79,20 +79,20 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
             }
             else if (type == 1) {
                 /*$http ({
-                    method: "POST",
-                    url: initUrl,
-                    data: {
-                        token: sign
-                    },
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var s in obj) {
-                            str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
-                        }
-                        return str.join ("&");
-                    },
-                    timeout: 3000
-                })*/
+                 method: "POST",
+                 url: initUrl,
+                 data: {
+                 token: sign
+                 },
+                 transformRequest: function (obj) {
+                 var str = [];
+                 for (var s in obj) {
+                 str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
+                 }
+                 return str.join ("&");
+                 },
+                 timeout: 3000
+                 })*/
                 
                 var data = {
                     token: sign
@@ -119,12 +119,14 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         $scope.goToExchange5D = function () {
                             $state.go ('exchange-5');
                         };
-                        $scope.goToExchangeBigLotto2 = function () {
+                        $scope.goToExchangeBigLotto2 = function (status) {
+                            $rootScope.newStatus = status;
                             $state.go ('BigLotto-2', {
                                 'flag2': 1
                             });
                         };
-                        $scope.goToExchangeBigLotto3 = function () {
+                        $scope.goToExchangeBigLotto3 = function (status) {
+                            $rootScope.newStatus = status;
                             $state.go ('BigLotto-2');
                         };
                         
@@ -152,9 +154,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             newUserSure: ""
                         };
                         $scope.GetTickets = function () {  //领取彩票按钮
-//                            console.log ($scope.userInfo.newUserName);
-//                            console.log($scope.userInfo.newUserIphone);
-                            
                             if ($scope.userInfo.newUserName == '') {
                                 var alertPopup = $ionicPopup.alert ({
                                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
@@ -201,10 +200,10 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                 }
                             })
                             /*var data = {
-                                realName: $scope.userInfo.newUserName,
-                                phone: $scope.userInfo.newUserIphone
-                            };
-                            getUserNameService.loginModal (data, userInfo.data.token)*/
+                             realName: $scope.userInfo.newUserName,
+                             phone: $scope.userInfo.newUserIphone
+                             };
+                             getUserNameService.loginModal (data, userInfo.data.token)*/
                                 .then (function (response) {
                                     $ionicLoading.hide ();
                                     var userInfo = $util.getUserInfo ();
@@ -214,7 +213,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     userInfo.data.user.phone = $scope.userInfo.newUserIphone;
                                     //locals.setObject ($rootScope.user, userInfo);
                                     var datas = $util.setUserInfo (userInfo);
-                                    console.log(userInfo);
+                                    console.log (userInfo);
                                     
                                     $state.go ("scanCodeIndex", {}, {reload: true});
                                 }, function (response) {

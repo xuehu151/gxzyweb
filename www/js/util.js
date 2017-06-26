@@ -12,7 +12,7 @@ angular.module ('starter.util', [])
         var httpURL = {
             initUrl: ipUrl + '/service/common/index1',   //初始化
             initUrlNew: ipUrl + '/service/common/index',    //新用户
-            getUserNameUrl: ipUrl + '/service/customer/add',    //模态注册框
+            getUserNameUrl: ipUrl + '/service/customer/add',    //注册框
             pl3AddUrl: ipUrl + '/service/lottery/pl3add', //排列3投注
             pl5AddUrl: ipUrl + '/service/lottery/pl5add', //排列5投注
             dltAddUrl: ipUrl + '/service/lottery/dltadd', //大乐透投注
@@ -53,7 +53,6 @@ angular.module ('starter.util', [])
 
             /*验证密码
              * 密码由数字 字母 特殊字符的其中两种组成 6到24位
-
              checkPassword: function (text) {
              var myreg = /((?=.*[a-z])(?=.*\d)|(?=[a-z])(?=.*[.#@!~%^&*])|(?=.*\d)(?=.*[.#@!~%^&*]))[a-z\d.#@!~%^&*]{6,24}/i;
              return myreg.test (text);
@@ -92,7 +91,6 @@ angular.module ('starter.util', [])
                     $ionicLoading.hide ();
                     deferred.reject (response);
                     //$cordovaToast.showLongBottom ('网络访问超时');
-
                 });
                 return promise;
             }

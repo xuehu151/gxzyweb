@@ -117,8 +117,8 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                 return;
             }
             //获取3D期号
-           /* var reques = {};
-            var userInfo = $util.getUserInfo();*/
+            var reques = {};
+            var userInfo = $util.getUserInfo();
            /* $http ({
                 method: "POST",
                 url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
@@ -130,7 +130,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                 }
             })*/
            
-            /*var data = {
+            var data = {
                 LotteryID: 54
             };
             getWareIssueService.getWareIssue(data, userInfo.data.token)
@@ -141,9 +141,9 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                     getPl3add();
                 }, function (response) {
                     console.log("获取列表失败");
-                });*/
+                });
             // 排列三投注信息接口
-//            function getPl3add() {
+            function getPl3add() {
                 var userInfo = $util.getUserInfo();
 
                 var dataArray = [];
@@ -171,7 +171,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
 
                 var data = {
                     LotteryID: 54,
-                    WareIssue: 16055/*reques.wareIssue*/,
+                    WareIssue: reques.wareIssue,
                     PayType: PayType,
                     vid: vid,
                     data: dataArray
@@ -209,6 +209,6 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                             $state.go('tab.account');
                         });
                     });
-//            }
+            }
         }
     });

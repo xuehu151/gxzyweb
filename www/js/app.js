@@ -7,7 +7,7 @@ var sign = '';
 var type = '';
 var PayType = '';//判断是否为老用户扫码进来 0 新用户 1 老用户扫码
 
-angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl', 'starter.widthdrawRecordsCtrl', 'starter.widthdrawCtrl'])
+angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl', 'starter.widthdrawRecordsCtrl', 'starter.widthdrawCtrl', 'starter.DrawCtrl', 'starter.TrendCtrl'])
 
     .run (function ($ionicPlatform) {
         $ionicPlatform.ready (function () {
@@ -28,7 +28,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
         //解决tabs在Android顶部的方法
         $ionicConfigProvider.platform.ios.tabs.style('standard');
         $ionicConfigProvider.platform.ios.tabs.position('bottom');
-        $ionicConfigProvider.platform.android.tabs.style('standard');
+        $ionicConfigProvider.platform.android.tabs.style('standard');// 参数可以是： standard | striped => 带条
         $ionicConfigProvider.platform.android.tabs.position('bottom');
         $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
         $ionicConfigProvider.platform.android.navBar.alignTitle('center');
@@ -37,6 +37,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
 
         $ionicConfigProvider.platform.ios.views.transition('ios');
         $ionicConfigProvider.platform.android.views.transition('android');
+        $ionicConfigProvider.views.maxCache (0);
 
         //隐藏ion-nav-back-button的文字
         $ionicConfigProvider.backButton.text("");
@@ -46,7 +47,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.post['Accept'] = 'application/json, text/javascript, */*; q=0.01';
         $httpProvider.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
-
+    
         $locationProvider.html5Mode(false);
 
         $stateProvider
@@ -156,6 +157,28 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 controller: 'scanCodeIndexCtrl'
             })
 
+            //开奖
+            .state ('tab.draw', {
+                url: '/draw',
+                views: {
+                    'tab-draw': {
+                        templateUrl: 'templates/draw.html',
+                        controller: 'DrawCtrl'
+                    }
+                }
+            })
+           
+            //走势图
+            .state ('tab.trend', {
+                url: '/trend',
+                views: {
+                    'tab-trend': {
+                        templateUrl: 'templates/trend.html',
+                        controller: 'TrendCtrl'
+                    }
+                }
+            })
+            
             //账户
             .state ('tab.account', {
                 url: '/account',

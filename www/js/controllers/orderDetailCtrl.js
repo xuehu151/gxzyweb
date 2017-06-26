@@ -67,6 +67,5 @@ angular.module ('starter.orderDetailCtrl', ['starter.services'])
                 sessionStorage.editThisOrderData = JSON.stringify (wrapBigLotto); //在本地保存选中的那组数据
                 $state.go ('BigLotto-2');
             }
-            
         };
     });

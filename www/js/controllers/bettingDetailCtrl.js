@@ -142,9 +142,9 @@ angular.module('starter.bettingDetailCtrl', ['starter.services'])
                 return
             }
             //获取大乐透期号
-           /* var reques = {};
+            var reques = {};
             var userInfo = $util.getUserInfo();
-            console.log(userInfo);*/
+            console.log(userInfo);
             /*$http({
                 method: "POST",
                 url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
@@ -155,7 +155,7 @@ angular.module('starter.bettingDetailCtrl', ['starter.services'])
                     "Content-Type": "application/json"
                 }
             })*/
-            /*var data = {
+            var data = {
                 LotteryID: 51
             };
             getWareIssueService.getWareIssue(data, userInfo.data.token)
@@ -166,9 +166,9 @@ angular.module('starter.bettingDetailCtrl', ['starter.services'])
                     getdltadd();
                 }, function (response) {
                     console.log("获取列表失败");
-                });*/
+                });
             // 大乐透投注接口信息
-//            function getdltadd() {
+            function getdltadd() {
                 $ionicLoading.show();
                 var userInfo = $util.getUserInfo();
                 var dataArrayBig = [];
@@ -208,7 +208,7 @@ angular.module('starter.bettingDetailCtrl', ['starter.services'])
 
                 var data = {
                     "LotteryID": "51",
-                    "WareIssue": 16055/*reques.wareIssue*/,
+                    "WareIssue": reques.wareIssue,
                     "PayType": PayType,
                     "vid": vid,
                     "AddFlag": "0",
@@ -244,7 +244,7 @@ angular.module('starter.bettingDetailCtrl', ['starter.services'])
                             $state.go('tab.account');
                         });
                     });
-//            }
+            }
         }
     });
 

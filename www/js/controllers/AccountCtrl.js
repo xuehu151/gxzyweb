@@ -2,48 +2,76 @@
  * Created by admin on 2017/6/15.
  */
 angular.module ('starter.AccountCtrl', ['starter.services'])
-
 //账户页面
-    .controller ('AccountCtrl', function ($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, $util, locals, getUser, $ionicLoading) {
+    .controller ('AccountCtrl', function ($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading, $util) {
         //验证是否资料完善
-        //$ionicLoading.show ();
+        //        $ionicLoading.show ();
         PayType = 1;
         var userInfo = $util.getUserInfo ();
+        var token = userInfo.data.token;
+        //更新余额
+        getUser.getInfo (url + "/service/customer/getUser?token=" + token)
+            .then (function (response) {
+//                console.log (response.data);
+                $scope.useableMoney = response.data.money;
+                $scope.phone = response.data.phone;
+                $scope.frozedMoney = response.data.freeze;
+                $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
+                //提现时候的账户号码
+                $rootScope.accountNum = [{
+                    chanel: 1,
+                    num: '(' + response.data.alipay + ')',
+                    disable: false
+                }, {
+                    chanel: 2,
+                    num: '(' + response.data.wechat + ')',
+                    disable: false
+                }, {
+                    chanel: 3,
+                    num: '(' + response.data.bankNo + ')',
+                    disable: false
+                }];
+                for (var i = 0; i < $rootScope.accountNum.length; i++) {
+                    if ($rootScope.accountNum[i].num == "()") {
+                        $rootScope.accountNum[i].disable = true;
+                    }
+                }
+            }, function () {
+                alert ('网络异常, 未能获取到您的余额')
+            });
+        //更新待兑换
+        getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token)
+            .then (function (response) {
+                $scope.needExchangeAmount = response.data.length;
+                console.log($scope.needExchangeAmount);
+                
+                if($scope.needExchangeAmount){
+                    $rootScope.needExchangeItems = response.data;
+                    $scope.modal2.show ();
+                }
+                
+            }, function () {
+                alert ('网络异常,未获取到用户信息')
+            });
         
-        $scope.useableMoney = userInfo.data.user.money;
-        $scope.phone = userInfo.data.user.phone;
-        $scope.frozedMoney = userInfo.data.user.freeze;
-        $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
-        //提现时候的账户号码
-        $rootScope.accountNum = [{
-            chanel: 1,
-            num: '(' + userInfo.data.user.alipay + ')',
-            disable: false
-        }, {
-            chanel: 2,
-            num: '(' + userInfo.data.user.wechat + ')',
-            disable: false
-        }, {
-            chanel: 3,
-            num: '(' + userInfo.data.user.bankNo + ')',
-            disable: false
-        }];
-        for (var i = 0; i < $rootScope.accountNum.length; i++) {
-            if ($rootScope.accountNum[i].num == "()") {
-                $rootScope.accountNum[i].disable = true;
-            }
-        }
-        /*var token = userInfo.token;
-         getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token).then (function (response) {
-         // alert(22)
-         console.log (response)
-         
-         }, function () {
-         alert ('网络异常,未获取到用户信息')
-         });*/
+        //检测有无中奖
+        getUser.getInfo (url + "/service/lottery/getWinList?token=" + token)
+            .then (function (response) {
+//                console.log (response);
+                $scope.winItems = response.data;
+                for (var i = 0; i < $scope.winItems.length; i++) {
+                    $scope.winamt = $scope.winItems[i].winamt;
+                    $scope.wareIssue = $scope.winItems[i].wareIssue;
+                    $scope.drawTime = $scope.winItems[i].drawTime;
+                    $scope.modal3.show ();
+                }
+            }, function () {
+                alert ('网络异常,未获取到用户信息')
+            });
         
         $scope.withdrawConfirm = function () {
-            if (userInfo.data.user.wechat || userInfo.data.user.alipay || userInfo.data.user.bankNo) {
+            var userData = userInfo.data.user;
+            if (userData.wechat || userData.alipay || userData.bankNo) {
                 $scope.modal.show ();
             }
             else {
@@ -55,14 +83,13 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                     cancelType: '', // String (默认: 'button-default')。取消按钮的类型。
                     okText: '立即完善', // String (默认: 'OK')。OK按钮的文字。
                     okType: 'button-positive' // String (默认: 'button-positive')。OK按钮的类型。
-                })
-                    .then (function (res) {
-                        if (res) {
-                            $state.go ('completeInfo')
-                        }
-                        else {
-                        }
-                    });
+                }).then (function (res) {
+                    if (res) {
+                        $state.go ('completeInfo')
+                    }
+                    else {
+                    }
+                });
             }
         };
         /*//点击暂不完善,隐藏提示界面
@@ -78,13 +105,12 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             $scope.showAnswer = !$scope.showAnswer;
         };
         $scope.showAnswer = false;
-        
         //未兑换
         $scope.haventExchange = true;
         $scope.toNeedExchange = function () {
+            PayType = 1;
             $state.go ('needExchange')
         };
-        
         //转到奖金纪录页面
         $scope.toPrizeRecords = function () {
             $state.go ('prizeRecords')
@@ -116,7 +142,6 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             $scope.modal.hide ();
             $state.go ('widthdraw')
         };
-        
         //老用户获得彩票的mordal窗口配置
         $ionicModal.fromTemplateUrl ('accountModalOldUser.html', {
             scope: $scope
@@ -124,15 +149,27 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         }).then (function (modal) {
             $scope.modal2 = modal;
         });
-        $scope.openPop = function () {
+        $scope.openPop2 = function () {
             $scope.modal2.show ();
         };
-        $scope.cancelPop = function () {
+        $scope.cancelPop2 = function () {
             $scope.modal2.hide ();
         };
         $scope.goToExchange = function () {
-            
+            $state.go ('scanCodeIndex');
             $scope.modal2.hide ();
-            $state.go ('tab.exchange');
-        }
+        };
+        //中奖mordal窗口配置
+        $ionicModal.fromTemplateUrl ('accountModalGetPrize.html', {
+            scope: $scope
+            // backdropClickToClose:true    没效果???
+        }).then (function (modal) {
+            $scope.modal3 = modal;
+        });
+        $scope.openPop3 = function () {
+            $scope.modal3.show ();
+        };
+        $scope.cancelPop3 = function () {
+            $scope.modal3.hide ();
+        };
     });
