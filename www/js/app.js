@@ -160,6 +160,8 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
             //开奖
             .state ('tab.draw', {
                 url: '/draw',
+                cache:'false',
+                prefetchTemplate:false,
                 views: {
                     'tab-draw': {
                         templateUrl: 'templates/draw.html',
@@ -171,6 +173,8 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
             //走势图
             .state ('tab.trend', {
                 url: '/trend',
+                cache:'false',
+                prefetchTemplate:false,
                 views: {
                     'tab-trend': {
                         templateUrl: 'templates/trend.html',

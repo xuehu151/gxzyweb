@@ -2,8 +2,6 @@
  * Created by admin on 2017/6/14.
  */
 //兑换 排列 5 往期开奖详情
-
-
 angular.module ('starter.Exchangehistory5DCtrl', ['starter.services'])
     
     .controller ('Exchangehistory5DCtrl', function ($scope, $http, $filter, $ionicLoading, $ionicPopup,  $util, historyPastService) {
