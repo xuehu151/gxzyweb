@@ -159,6 +159,7 @@ angular.module('starter.services', [])
     return info;
 }])
     
+    //分割字符串
     .factory('splitCode',['$http',function ($http) {
         var code={};
         code.split=function (obj) {
@@ -174,6 +175,87 @@ angular.module('starter.services', [])
             return investCodeFormat;
         };
         return code;
+    }])
+
+    //allOrders.html的类型选择
+    .factory('difOrders',['$http',function ($http) {
+        var orders={};
+        orders.diff=function (obj) 
+        {
+            var arr2=[];                //待开奖
+            var arr3=[];                //已中奖奖
+            var arr4=[];                //未中奖
+            for (var i = 0; i < obj.length; i++) {
+                if (obj[i].lotteryID == 40) {
+                    obj[i].lotteryID = '排列五'
+                }
+                else if (obj[i].lotteryID == 31) {
+                    obj[i].lotteryID = '排列三'
+                }
+                else if (obj[i].lotteryID == 2) {
+                    obj[i].lotteryID = '大乐透'
+                }
+                if (obj[i].status == 0 || obj[i].status == 1 || obj[i].status == 2) {
+                    
+                    obj[i].whetherRed = true;
+                    obj[i].status = '待开奖';
+                    obj[i].whetherDate = true;
+                    obj[i].LT = '开奖时间: ' + obj[i].drawTime;
+                    if (obj[i].payType == 0) {
+                        obj[i].RT = '扫码兑换';
+                    }
+                    else if (obj[i].payType == 1) {
+                        obj[i].RT = '奖金支付: ¥' + obj[i].money;
+                    }
+                    console.log(obj[i])
+                    arr2.push(obj[i]);
+                }
+                else if (obj[i].status == 4) {
+                    
+                    obj[i].whetherRed = true;
+                    obj[i].status = '已中奖';
+                    obj[i].whetherDate = false;
+                    obj[i].LT = '奖金: ¥' + obj[i].winamt;
+                    if (obj[i].payType == 0) {
+                        obj[i].RT = '扫码兑换';
+                    }
+                    else if (obj[i].payType == 1) {
+                        obj[i].RT = '奖金支付: ¥' + obj[i].money;
+                    }
+                    console.log(obj[i])
+                    arr3.push(obj[i]);
+                }
+                else if (obj[i].status == -1) {
+                    obj[i].whetherRed = false;
+                    obj[i].status = '兑换超时';
+                    obj[i].whetherDate = false;
+                    obj[i].LT = '  ';
+                    if (obj[i].payType == 0) {
+                        obj[i].RT = '扫码兑换';
+                    }
+                    else if (obj[i].payType == 1) {
+                        obj[i].RT = '奖金支付: ¥' + obj[i].money;
+                    }
+                }
+                else if (obj[i].status == 3) {
+                    
+                    obj[i].whetherRed = false;
+                    obj[i].status = '未中奖';
+                    obj[i].whetherDate = false;
+                    obj[i].LT = '再接再厉哦~~~';
+                    if (obj[i].payType == 0) {
+                        obj[i].RT = '扫码兑换';
+                    }
+                    else if (obj[i].payType == 1) {
+                        obj[i].RT = '奖金支付: ¥' + obj[i].money;
+                    }
+                    console.log(obj[i])
+                    arr4.push(obj[i]);
+                }
+            }
+            return [arr2,arr3,arr4]
+        }
+        return orders;
     }])
     
     .constant('$ionicLoadingConfig', {

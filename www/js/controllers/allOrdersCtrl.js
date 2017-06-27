@@ -1,7 +1,74 @@
 /**
- * Created by admin on 2017/6/15.
+ * Created by admin on 2017/6/23.
  */
+//全部订单
+
 var url = "http://114.215.70.179:8088";
+angular.module ('starter.allOrdersCtrl', ['starter.services'])
+    
+    .controller ('allOrdersCtrl', function ($scope, $rootScope, $state, getUser, locals, $ionicLoading, splitCode, $util,$ionicSlideBoxDelegate,difOrders) {
+        $scope.tabNames = ['全部订单', '待开奖', '已中奖','未中奖'];
+        $scope.slectIndex = 0;
+        $scope.activeSlide = function (index) {//点击时候触发
+            $scope.slectIndex = index;
+            $ionicSlideBoxDelegate.slide (index);
+        };
+        $scope.slideChanged = function (index) {//滑动时候触发
+            $scope.slectIndex = index;
+        };
+        // $scope.pages = ["templates/bigLottoHistoryDetails.html", "templates/exchangehistory3D.html", "templates/exchangehistory5D.html"];
+
+        $ionicLoading.show ({
+            hideOnStateChange: true
+        });
+        var userInfo = $util.getUserInfo ();
+        var token = userInfo.data.token;
+        getUser.getInfo (url + '/service/lottery/getList?token=' + token)
+            .then (function (response) {
+                console.log (response);
+                $scope.allOrders = response.data;
+
+                $scope.variOrders=difOrders.diff($scope.allOrders)  //全部订单
+                 console.log($scope.variOrders)
+
+
+                
+                $ionicLoading.hide ();
+            }, function () {
+                alert ('网络异常,未能获取到全部订单');
+            });
+        $scope.toOrderDetail = function (ticketID) {
+            for (var i = 0; i < $scope.allOrders.length; i++) {
+                //找到当前点击的订单,保存
+                if (ticketID == $scope.allOrders[i].ticketID) {
+                    var investCode = splitCode.split ($scope.allOrders[i].investCode);
+                    console.log (investCode);
+                    if ($scope.allOrders[i].payType == 0) {
+                        payType = '扫码兑换';
+                    }
+                    else if ($scope.allOrders[i].payType == 1) {
+                        payType = '¥' + $scope.allOrders[i].money;
+                    }
+                    $rootScope.orderDetail = {
+                        lotteryID: $scope.allOrders[i].lotteryID,
+                        openTime: $scope.allOrders[i].drawTime,
+                        status: $scope.allOrders[i].status,
+                        investCode: investCode,
+                        payType: payType,
+                        // pay: $scope.allOrders[i].money,
+                        ticketID: ticketID,
+                        orderTime: $scope.allOrders[i].createDate,
+                        winMoney: $scope.allOrders[i].winamt
+                    }
+                }
+            }
+            $state.go ('orderDetail');
+        }
+
+    });
+
+
+/*var url = "http://114.215.70.179:8088";
 //全部订单页面
 angular.module ('starter.allOrdersCtrl', ['starter.services'])
     
@@ -82,14 +149,6 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
             for (var i = 0; i < $scope.allOrders.length; i++) {
                 //找到当前点击的订单,保存
                 if (ticketID == $scope.allOrders[i].ticketID) {
-                    /*var investCode = $scope.allOrders[i].investCode.split('@');
-                     var investCodeFormat = [];
-                     if (investCode.length == 2) {
-                     investCodeFormat[0] = investCode[0].split(',');
-                     investCodeFormat[1] = investCode[1].split(',');
-                     } else if (investCode.length == 1) {
-                     investCodeFormat[0] = investCode[0].split(',');
-                     }*/
                     var investCode = splitCode.split ($scope.allOrders[i].investCode);
                     console.log (investCode);
                     if ($scope.allOrders[i].payType == 0) {
@@ -115,3 +174,4 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
         }
     });
 
+*/

@@ -35,6 +35,7 @@
   /* Firefox 3.6 - 15 */
   background: linear-gradient(#095eab, #3a3590);
   /* 标准的语法 */
+  position: relative;
 }
 
 .bg3 {
@@ -53,6 +54,15 @@
   margin: 0;
 }
 
+.account-list .head-pic
+{
+  position: absolute;
+  width: 20px;
+  right: 35px;
+  top: 30px;
+
+}
+
 .account-list .item div, .account-list .bg3 .col {
   font-size: 16px;
   color: #fff;
@@ -61,6 +71,16 @@
 .account-list .account-question {
   width: 10px;
   vertical-align: top;
+}
+
+.account-list .icon.ion-ios-arrow-right
+{
+  color: #c9c9c9;
+}
+.account-list .item-icon-left .icon:before, 
+.account-list .item-icon-right .icon:before
+{
+  font-size: 25px;
 }
 
 .account-list .accountForLoc {
@@ -90,11 +110,12 @@
 }
 
 .bg2 h2 {
-  font-size: 75px;
+  font-size: 65px;
 }
 
 .account-modal .f18, .f18 {
   font-size: 18px;
+  color: #333;
 }
 
 .account-list .have-border {
@@ -544,13 +565,13 @@
   color: #d11d1d;
 }
 
-.prize-records-list .prize-records-all, .all-orders-list .prize-records-all, .widthdraw-records-list .prize-records-all {
+.prize-records-list .prize-records-all, .all-orders .prize-records-all, .widthdraw-records-list .prize-records-all {
   width: 100%;
   margin: 0 auto;
   text-align: center;
 }
 
-.prize-records-list .prize-records-all img, .widthdraw-records-list .prize-records-all img, .all-orders-list .prize-records-all img {
+.prize-records-list .prize-records-all img, .widthdraw-records-list .prize-records-all img, .all-orders .prize-records-all img {
   width: 30%;
   margin: 40px 0 10px;
 }
@@ -581,15 +602,49 @@
   margin-left: 20px;
 }
 
+.all-orders
+{
+  background-color: #eee;
+}
+
+.all-orders .tab-toselect
+{
+  display:flex;
+  width:100%;
+  
+  background-color: #fff;
+}
+
+.all-orders .tab_select
+{
+  color:#0e3bad;
+  font-size: 16px;
+}
+.all-orders .tab_default
+{
+  border:none;
+  height: 24px;
+  line-height: 24px;
+  padding: 0;
+  margin: 8px 0;
+  border-right: 1px solid #c8c8c8;
+}
+
+.all-orders .tab_default:last-child
+{
+  border-right: none;
+}
+
 .all-orders-list .each-order {
   position: relative;
   margin-top: 5px;
 }
 
-.all-orders-list .each-order:first-child {
+
+/* .all-orders-list .each-order:first-child {
   margin-top: 0;
 }
-
+ */
 .all-orders-list .prize-img {
   position: absolute;
   z-index: 3;
