@@ -149,14 +149,14 @@ angular.module('starter.bettingDetailCtrl', ['starter.services'])
                 method: "POST",
                 url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
                 params: {
-                    LotteryID: 51
+             l          otteryID: 51
                 },
                 headers: {
                     "Content-Type": "application/json"
                 }
             })*/
             var data = {
-                LotteryID: 51
+                lotteryID: 2
             };
             getWareIssueService.getWareIssue(data, userInfo.data.token)
                 .then(function (response) {
@@ -207,7 +207,7 @@ angular.module('starter.bettingDetailCtrl', ['starter.services'])
                 }
 
                 var data = {
-                    "LotteryID": "51",
+                    "lotteryID": "2",
                     "WareIssue": reques.wareIssue,
                     "PayType": PayType,
                     "vid": vid,

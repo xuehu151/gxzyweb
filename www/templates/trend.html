@@ -11,18 +11,15 @@
                  ng-click="activeSlide($index)"
                  ng-class="slectIndex==$index ? 'tab_select-white' : '' ">
                 {{d}}
-                <div style="left:{{15+$index*33}}%" ng-show="slectIndex==$index"></div>
+                <!--<div style="left:{{15+$index*33}}%" ng-show="slectIndex==$index"></div>-->
             </div>
         </div>
         <ion-slide-box on-slide-changed='slideChanged(index)' active-slide="slideIndex" does-continue="false"
                        show-pager="true">
-
             <ion-slide ng-repeat="p in pages">
                 <div ng-include="p"></div>
             </ion-slide>
-
         </ion-slide-box>
-
     </ion-content>
 
 </ion-view>

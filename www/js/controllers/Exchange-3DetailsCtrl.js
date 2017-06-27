@@ -131,11 +131,11 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
             })*/
            
             var data = {
-                LotteryID: 54
+                lotteryID: 31
             };
             getWareIssueService.getWareIssue(data, userInfo.data.token)
                 .then(function (response) {
-                   //console.log(response);
+//                   console.log(response);
                     reques = response.data;
                     console.log(reques);
                     getPl3add();
@@ -153,8 +153,8 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                         multiple: 1
                     };
                     var investCode = null;
-                    investCode = $scope.sessionJsonWarp3D[i].B_Bit[0].num + ",";
-                    investCode += $scope.sessionJsonWarp3D[i].S_Bit[0].num + ",";
+                    investCode = $scope.sessionJsonWarp3D[i].B_Bit[0].num + "*";
+                    investCode += $scope.sessionJsonWarp3D[i].S_Bit[0].num + "*";
                     investCode += $scope.sessionJsonWarp3D[i].G_Bit[0].num;
                     dataObj.investCode = investCode;
                     dataArray.push(dataObj);
@@ -170,7 +170,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                 }
 
                 var data = {
-                    LotteryID: 54,
+                    lotteryID: 31,
                     WareIssue: reques.wareIssue,
                     PayType: PayType,
                     vid: vid,

@@ -7,7 +7,7 @@ var sign = '';
 var type = '';
 var PayType = '';//判断是否为老用户扫码进来 0 新用户 1 老用户扫码
 
-angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl', 'starter.widthdrawRecordsCtrl', 'starter.widthdrawCtrl', 'starter.DrawCtrl', 'starter.TrendCtrl'])
+angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl', 'starter.widthdrawRecordsCtrl', 'starter.widthdrawCtrl', 'starter.DrawCtrl', 'starter.TrendCtrl', 'starter.3DTrendChart', 'starter.5DTrendChart', 'starter.bigTrendChart'])
 
     .run (function ($ionicPlatform) {
         $ionicPlatform.ready (function () {
@@ -181,6 +181,30 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                         controller: 'TrendCtrl'
                     }
                 }
+            })
+    
+            .state ('trend.bigTrendChart', {
+                url: '/bigTrendChart',
+                cache:'false',
+                prefetchTemplate:false,
+                templateUrl: 'templates/bigTrendChart.html',
+                controller: 'bigTrendChart'
+            })
+            
+            .state ('trend.3DTrendChart', {
+                url: '/3DTrendChart',
+                cache:'false',
+                prefetchTemplate:false,
+                templateUrl: 'templates/3DTrendChart.html',
+                controller: '3DTrendChart'
+            })
+    
+            .state ('trend.5DTrendChart', {
+                url: '/5DTrendChart',
+                cache:'false',
+                prefetchTemplate:false,
+                templateUrl: 'templates/5DTrendChart.html',
+                controller: '5DTrendChart'
             })
             
             //账户

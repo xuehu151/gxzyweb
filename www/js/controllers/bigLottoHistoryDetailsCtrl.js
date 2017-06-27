@@ -11,7 +11,7 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
         var pageSize = 8;
         var pageNum = 1;
         var data = {
-            lotteryID: '51',
+            lotteryID: '2',
             pageSize: pageSize,
             pageNum: pageNum
         };
@@ -44,7 +44,7 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
                 console.log ("获取列表失败");
             });
         $scope.toArray = function (string2, num) {
-            var array1 = string2.split ("-");
+            var array1 = string2.split ("*");
             var arrFront = array1[0].split (",");
             var arrBehind = array1[1].split (",");
             var array = arrFront.concat (arrBehind);

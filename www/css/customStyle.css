@@ -99,17 +99,18 @@ a {
     position: relative;
     left: 0;
     top: 6px;
-    width: 40%;
+    width: 45%;
     display: inline-block;
     background: #d11d1d;
     color: white;
     padding: 3px 5px;
+    font-size: .9rem;
 }
 
 .home-icon nav i{
     position: absolute;
     top: 3px;
-    right: -15%;
+    right: -14%;
     display: block;
     width: 20px;
     height: 20px;
@@ -730,6 +731,21 @@ input.bigLotto-input2:checked:before {
     color: white;
 }
 
+.head{
+    border-bottom:solid 1px #D1D3D6;
+    border-right:solid 1px #D1D3D6;
+    height:30px;
+    display:flex;
+    align-items:center;
+    font-size:14px;
+    padding: 0 2px;
+    color:#262626;
+    justify-content:center;
+}
 
-
-
+.head:nth-child(odd){
+    background: #dfefe1;
+}
+.head:nth-child(even){
+    background: #eeeed4;
+}

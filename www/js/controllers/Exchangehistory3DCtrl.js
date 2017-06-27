@@ -10,7 +10,7 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
         var pageSize = 8;
         var pageNum = 1;
         var data = {
-            lotteryID: '54',
+            lotteryID: '31',
             pageSize: pageSize,
             pageNum: pageNum
         };
