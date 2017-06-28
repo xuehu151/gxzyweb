@@ -1,9 +1,19 @@
 <ion-view view-title="走势图">
-    <ion-nav-bar class="bar-header bar-dark">
+   <!-- <ion-nav-bar class="bar-header bar-dark">
         <ion-nav-back-button class="button button-icon icon ion-ios-arrow-left"></ion-nav-back-button>
-    </ion-nav-bar>
+    </ion-nav-bar>-->
 
-    <ion-content has-bouncing="false" class="draw-slide">
+    <div class="bar bar-header tab_trend">
+        <div class="button">
+            <a class=" button " ui-sref="tab.trend.bigTrendChart" ng-click="change('a')" ng-class="{ 'active': data === 'a' }">大乐透</a>
+            <a class=" button " ui-sref="tab.trend.3DTrendChart" ng-click="change('b')" ng-class="{ 'active': data === 'b' }">排列3</a>
+            <a class=" button " ui-sref="tab.trend.5DTrendChart" ng-click="change('c')" ng-class="{ 'active': data === 'c' }">排列5</a>
+        </div>
+    </div>
+
+    <ion-nav-view></ion-nav-view>
+
+   <!-- <ion-content has-bouncing="false" class="draw-slide">
         <div style="display:flex;width:100%;">
             <div style="flex:1;text-align: center;"
                  class="tab_trend"
@@ -11,7 +21,7 @@
                  ng-click="activeSlide($index)"
                  ng-class="slectIndex==$index ? 'tab_select-white' : '' ">
                 {{d}}
-                <!--<div style="left:{{15+$index*33}}%" ng-show="slectIndex==$index"></div>-->
+                &lt;!&ndash;<div style="left:{{15+$index*33}}%" ng-show="slectIndex==$index"></div>&ndash;&gt;
             </div>
         </div>
         <ion-slide-box on-slide-changed='slideChanged(index)' active-slide="slideIndex" does-continue="false"
@@ -20,6 +30,6 @@
                 <div ng-include="p"></div>
             </ion-slide>
         </ion-slide-box>
-    </ion-content>
+    </ion-content>-->
 
 </ion-view>

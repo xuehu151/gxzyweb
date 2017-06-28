@@ -95,6 +95,14 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 controller: 'Exchange-3DetailsCtrl'
             })
 
+            //兑换 3D玩法说明
+            .state ('3DrabbitRules', {
+                url: '/3DrabbitRules',
+                cache:'false',
+                prefetchTemplate:false,
+                templateUrl: 'templates/3DrabbitRules.html'
+            })
+
             //兑换 排列5
             .state ('exchange-5', {
                 url: '/exchange-5',
@@ -119,7 +127,14 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 prefetchTemplate:false,
                 templateUrl: 'templates/exchange-5Details.html',
                 controller: 'Exchange-5DetailsCtrl'
+            })
 
+            //兑换 5D 玩法说明
+            .state ('5DrabbitRules', {
+                url: '/5DrabbitRules',
+                cache:'false',
+                prefetchTemplate:false,
+                templateUrl: 'templates/5DrabbitRules.html'
             })
 
             //兑换 大乐透 不追加
@@ -148,6 +163,14 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 controller: 'bigLottoHistoryDetailsCtrl'
             })
 
+            //兑换 大乐透 玩法说明
+            .state ('bigRabbitRules', {
+                url: '/bigRabbitRules',
+                cache:'false',
+                prefetchTemplate:false,
+                templateUrl: 'templates/bigRabbitRules.html'
+            })
+
             //扫码兑换首页
             .state ('scanCodeIndex', {
                 url: '/scanCodeIndex',
@@ -169,6 +192,30 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                     }
                 }
             })
+    
+            .state ('tab.draw.bigLottoHistoryDetails', {
+                url: '/bigLottoHistoryDetails',
+                cache:'false',
+                prefetchTemplate:false,
+                templateUrl: 'templates/bigLottoHistoryDetails.html',
+                controller: 'bigLottoHistoryDetailsCtrl'
+            })
+    
+            .state ('tab.draw.exchangehistory3D', {
+                url: '/exchangehistory3D',
+                cache:'false',
+                prefetchTemplate:false,
+                templateUrl: 'templates/exchangehistory3D.html',
+                controller: 'Exchangehistory3DCtrl'
+            })
+    
+            .state ('tab.draw.exchangehistory5D', {
+                url: '/exchangehistory5D',
+                cache:'false',
+                prefetchTemplate:false,
+                templateUrl: 'templates/exchangehistory5D.html',
+                controller: 'Exchangehistory5DCtrl'
+            })
            
             //走势图
             .state ('tab.trend', {
@@ -183,7 +230,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 }
             })
     
-            .state ('trend.bigTrendChart', {
+            .state ('tab.trend.bigTrendChart', {
                 url: '/bigTrendChart',
                 cache:'false',
                 prefetchTemplate:false,
@@ -191,7 +238,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 controller: 'bigTrendChart'
             })
             
-            .state ('trend.3DTrendChart', {
+            .state ('tab.trend.3DTrendChart', {
                 url: '/3DTrendChart',
                 cache:'false',
                 prefetchTemplate:false,
@@ -199,7 +246,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 controller: '3DTrendChart'
             })
     
-            .state ('trend.5DTrendChart', {
+            .state ('tab.trend.5DTrendChart', {
                 url: '/5DTrendChart',
                 cache:'false',
                 prefetchTemplate:false,

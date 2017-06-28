@@ -1,9 +1,10 @@
 <ion-view view-title="">
-    <ion-content overflow-scroll="false">
+
+    <ion-content overflow-scroll="false" class=" has-header">
         <div style="display:flex;width:100%;">
-            <div class="head" style="width: 5%;font-size: .6em">期号</div>
-            <div style="overflow: hidden;white-space: nowrap;width:100%;">
-                <ion-scroll direction="x" scrollbar-x="true" overflow-scroll="false" has-bouncing="false"
+            <div class="head" style="width: 5%;font-size: .6em;height: 60px; border-bottom: solid 2px #D1D3D6;">期号</div>
+            <div style="overflow: hidden;white-space: nowrap;width:95%;">
+                <ion-scroll direction="x" scrollbar-x="true" scrollbar-y="false" overflow-scroll="false" has-bouncing="false"
                             delegate-handle="headContainerHandle" on-scroll="noScroll()" style="margin-top:0;">
                     <div style="display:flex;">
                         <div class="head" style="width: 12%;font-size: .6em">开奖号</div>
@@ -13,38 +14,59 @@
                         <div class="head" style="width: 18%">个位</div>
                         <div class="head" style="border-right:0; width: 18%">和尾</div>
                     </div>
+                    <div style="display:flex;">
+                        <div class="head" style="width: 12%;font-size: .6em; padding: 0 ">
+                           <ul >
+                               <li>1</li>
+                               <li>2</li>
+                               <li>3</li>
+                           </ul>
+                        </div>
+                        <div class="head" style="width: 18%">
+                            <ul>
+                                <li ng-repeat="item in dataArrange">{{item}}</li>
+                            </ul>
+                        </div>
+                        <div class="head" style="width: 18%">百位</div>
+                        <div class="head" style="width: 18%">十位</div>
+                        <div class="head" style="width: 18%">个位</div>
+                        <div class="head" style="border-right:0; width: 18%">和尾</div>
+                    </div>
                 </ion-scroll>
             </div>
         </div>
-        <div style="display:flex;width:625px;">
+        <div style="display:flex;width:100%;">
             <ion-scroll direction="y" scrollbar-y="false" overflow-scroll="false" has-bouncing="false"
-                        delegate-handle="leftContainerHandle" on-scroll="noScroll()" style="height:{{h}}px;">
-                <div ng-repeat="d in data" class="head">
+                        delegate-handle="leftContainerHandle" on-scroll="noScroll()"  style="height:{{h}}px;">
+                <div ng-repeat="d in data" class="head" style="background: #dfefe1;">
                     {{d.zoneName}}
                 </div>
             </ion-scroll>
-            <div style="overflow: hidden;white-space: nowrap;width:100%;">
+            <div style="overflow: hidden;white-space: nowrap;width:95%;">
                 <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false"
-                            has-bouncing="false" on-scroll="scrollRightHorizon()" delegate-handle="rightContainerHandle"
-                            style="height:{{h}}px;">
-                    <div style="width:500px;">
+                            has-bouncing="false" on-scroll="scrollRightHorizon()" delegate-handle="rightContainerHandle"  style="height:{{h}}px;">
+                    <div style="100%;">
                         <div ng-repeat="d in data" style="display:flex;">
-                            <div class="head">
-                                {{d.arriveTickets}}
+                            <div class="head" style="width: 12%;font-size: .6em">
+                                <ul >
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                </ul>
                             </div>
-                            <div class="head">
-                                {{d.moniOutCnt}}
+                            <div class="head" style="width: 18%;">
+
                             </div>
-                            <div class="head">
+                            <div class="head" style="width: 18%;">
                                 {{d.moniStayCnt}}
                             </div>
-                            <div class="head">
+                            <div class="head" style="width: 18%;">
                                 {{d.moniUndeliveryCnt}}
                             </div>
-                            <div class="head">
+                            <div class="head" style="width: 18%;">
                                 {{d.moniUndeliveryCnt}}
                             </div>
-                            <div class="head" style="border-right:0;">
+                            <div class="head" style="border-right:0;width: 18%;">
                                 {{d.moniUndeliveryCnt}}
                             </div>
                         </div>
@@ -53,4 +75,5 @@
             </div>
         </div>
     </ion-content>
+
 </ion-view>

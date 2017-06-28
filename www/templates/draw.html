@@ -3,118 +3,33 @@
         <ion-nav-back-button class="button button-icon icon ion-ios-arrow-left"></ion-nav-back-button>
     </ion-nav-bar>
 
-        <ion-content has-bouncing="false" class="draw-slide">
-            <div style="display:flex;width:100%;">
-                <div style="flex:1;text-align: center;"
-                     class="tab_default"
-                     ng-repeat="d in tabNames"
-                     ng-click="activeSlide($index)"
-                     ng-class="slectIndex==$index ? 'tab_select' : '' ">
-                    {{d}}
-                </div>
+    <div class="bar bar-header tab_draw">
+        <div class="button">
+            <a class=" button " ui-sref="tab.draw.bigLottoHistoryDetails" ng-click="change('a')" ng-class="{ 'active': data === 'a' }">大乐透</a>
+            <a class=" button " ui-sref="tab.draw.exchangehistory3D" ng-click="change('b')" ng-class="{ 'active': data === 'b' }">排列3</a>
+            <a class=" button " ui-sref="tab.draw.exchangehistory5D" ng-click="change('c')" ng-class="{ 'active': data === 'c' }">排列5</a>
+        </div>
+    </div>
+
+    <ion-nav-view></ion-nav-view>
+
+
+    <!--<ion-content has-bouncing="false" class="draw-slide">
+        <div style="display:flex;width:100%;">
+            <div style="flex:1;text-align: center;"
+                 class="tab_default"
+                 ng-repeat="d in tabNames"
+                 ng-click="activeSlide($index)"
+                 ng-class="slectIndex==$index ? 'tab_select' : '' ">
+                {{d}}
             </div>
-            <ion-slide-box on-slide-changed='slideChanged(index)' active-slide="slideIndex" does-continue="false" show-pager="true">
-                <ion-slide ng-repeat="p in pages"  style="margin-top: -50px;">
-                    <div ng-include="p"></div>
-                </ion-slide>
-            </ion-slide-box>
-        </ion-content>
-    <!--<ion-tabs class="tabs-stable tabs-striped tabs-top">
+        </div>
+        <ion-slide-box on-slide-changed='slideChanged(index)' active-slide="slideIndex" does-continue="false" show-pager="true">
+            <ion-slide ng-repeat="p in pages"  style="margin-top: -50px;">
+                <div ng-include="p"></div>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>-->
 
-        <i class="draw-line"></i>
-        <ion-tab title="大乐透" >
-            <ion-view>
-                <ion-content >
-                    <div class="bar">
-                        <div class="row notice">
-                            <i class="icon ion-volume-medium"></i>
-                            <div class="noticeText">恭喜185****6868大乐透中奖1000元</div>
-                        </div>
-                    </div>
-
-                    <ion-list>
-                        <ion-item ng-repeat="item in groups">
-                            {{item}}
-                        </ion-item>
-                    </ion-list>
-                    &lt;!&ndash;<ion-list>
-                        <ion-item class="history-time"  ng-repeat="past in bitLotto">
-                            <p><span ng-cloak>{{past.wareIssue}}期</span><ins ng-cloak> {{past.createDate | date: 'MM-dd'}} 周三</ins></p>
-                            <div class="row">
-                                <div class="col col-67 show-red-ball">
-                                    <i ng-cloak>{{toArray(past.result,0)}}</i>
-                                    <i ng-cloak>{{toArray(past.result,1)}}</i>
-                                    <i ng-cloak>{{toArray(past.result,2)}}</i>
-                                    <i ng-cloak>{{toArray(past.result,3)}}</i>
-                                    <i ng-cloak>{{toArray(past.result,4)}}</i>
-                                </div>
-                                <div class="col col-33 show-blue-ball">
-                                    <i ng-cloak>{{toArray(past.result,5)}}</i>
-                                    <i ng-cloak>{{toArray(past.result,6)}}</i>
-                                </div>
-                            </div>
-                        </ion-item>
-                    </ion-list>&ndash;&gt;
-                </ion-content>
-            </ion-view>
-        </ion-tab>
-
-        <i class="draw-line" style="left: 66.67%;"></i>
-
-        <ion-tab title="排列3">
-            <ion-view>
-                <ion-content>
-                    <div class="bar">
-                        <div class="row notice">
-                            <i class="icon ion-volume-medium"></i>
-                            <div class="noticeText">恭喜185****6868排列3中奖1040元</div>
-                        </div>
-                    </div>
-
-                    <ion-list>
-                        <ion-item class="history-time" ng-repeat="past in historyPast3">
-                            <p><span ng-cloak>{{past.wareIssue}}期 </span><ins ng-cloak> {{past.createDate | date: 'MM-dd'}} 周三</ins></p>
-                            <div class="row" >
-                                <div class="col col-67 show-red-ball" >
-                                    <i ng-cloak>{{toArray(past.result,0)}}</i>
-                                    <i ng-cloak>{{toArray(past.result,1)}}</i>
-                                    <i ng-cloak>{{toArray(past.result,2)}}</i>
-                                </div>
-                            </div>
-                        </ion-item>
-                    </ion-list>
-                </ion-content>
-            </ion-view>
-        </ion-tab>
-
-        <ion-tab title="排列5">
-            <ion-view>
-                <ion-content >
-                    <div class="bar">
-                        <div class="row notice">
-                            <i class="icon ion-volume-medium"></i>
-                            <div class="noticeText">恭喜185****6868排列5中奖10元</div>
-                        </div>
-                    </div>
-
-                    <ion-list>
-                        <ion-item class="history-time"  ng-repeat="past in historyPast5">
-                            <p><span ng-cloak>{{past.wareIssue}} 期 </span><ins ng-cloak> {{past.createDate | date: 'MM-dd'}} 周三</ins></p>
-                            <div class="row">
-                                <div class="col col-67 show-red-ball">
-                                    <i ng-cloak>{{toArray(past.result,0)}}</i>
-                                    <i ng-cloak>{{toArray(past.result,1)}}</i>
-                                    <i ng-cloak>{{toArray(past.result,2)}}</i>
-                                    <i ng-cloak>{{toArray(past.result,3)}}</i>
-                                    <i ng-cloak>{{toArray(past.result,4)}}</i>
-                                </div>
-                            </div>
-                        </ion-item>
-                    </ion-list>
-                </ion-content>
-            </ion-view>
-        </ion-tab>
-
-    </ion-tabs>-->
 </ion-view>
 
