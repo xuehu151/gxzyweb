@@ -16,7 +16,7 @@
       <ion-slide >
         <ion-list class="all-orders-list">
           <div class="each-order" ng-click="toOrderDetail(order.ticketID)" ng-repeat="order in allOrders">
-            <ion-item href="">
+            <ion-item class="f13 padding-h8">
               <span ng-cloak>
                 {{order.lotteryID}}
               </span>
@@ -25,22 +25,22 @@
               </span>
             </ion-item>
             <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png"/>
-            <ion-item href="">
+            <ion-item >
               <div class="fl">
-                <p ng-class="order.whetherRed?'font-style1':'font-style3'" ng-cloak>
+                <div class="lt-style f11" ng-class="order.whetherRed?'font-style1':'font-style3'" ng-cloak>
                   {{order.LT}}
-                </p>
-                <p class="font-style2" ng-cloak>
+                </div>
+                <div class="font-style2" ng-cloak>
                   订单编号:{{order.ticketID}}
-                </p>
+                </div>
               </div>
               <div class="fr">
-                <p ng-class="order.whetherDate?'font-style3':'font-style1'" ng-cloak>
+                <div ng-class="order.whetherDate?'font-style1':'font-style3'" ng-cloak>
                   {{order.RT}}
-                </p>
-                <p class="font-style4 fr">
+                </div>
+                <div class="font-style2 fr" style="font-size: 10px;">
                   查看订单
-                </p>
+                </div>
               </div>
             </ion-item>
           </div>
@@ -53,7 +53,7 @@
       <ion-slide >
         <ion-list class="all-orders-list">
           <div class="each-order" ng-click="toOrderDetail(order.ticketID)" ng-repeat="order in variOrders[0]">
-            <ion-item href="">
+            <ion-item>
               <span ng-cloak>
                 {{order.lotteryID}}
               </span>
@@ -62,7 +62,7 @@
               </span>
             </ion-item>
             <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png"/>
-            <ion-item href="">
+            <ion-item>
               <div class="fl">
                 <p ng-class="order.whetherRed?'font-style1':'font-style3'" ng-cloak>
                   {{order.LT}}
@@ -94,7 +94,7 @@
       <ion-slide>
         <ion-list class="all-orders-list">
           <div class="each-order" ng-click="toOrderDetail(order.ticketID)" ng-repeat="order in variOrders[1]">
-            <ion-item href="">
+            <ion-item>
               <span ng-cloak>
                 {{order.lotteryID}}
               </span>
@@ -103,7 +103,7 @@
               </span>
             </ion-item>
             <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png"/>
-            <ion-item href="">
+            <ion-item>
               <div class="fl">
                 <p ng-class="order.whetherRed?'font-style1':'font-style3'" ng-cloak>
                   {{order.LT}}
@@ -135,7 +135,7 @@
       <ion-slide>
         <ion-list class="all-orders-list">
           <div class="each-order" ng-click="toOrderDetail(order.ticketID)" ng-repeat="order in variOrders[2]">
-            <ion-item href="">
+            <ion-item>
               <span ng-cloak>
                 {{order.lotteryID}}
               </span>
@@ -144,7 +144,7 @@
               </span>
             </ion-item>
             <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png"/>
-            <ion-item href="">
+            <ion-item>
               <div class="fl">
                 <p ng-class="order.whetherRed?'font-style1':'font-style3'" ng-cloak>
                   {{order.LT}}

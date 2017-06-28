@@ -8,6 +8,25 @@
   float: right;
 }
 
+.f15
+{
+  font-size: 15px;
+}
+
+.f16
+{
+  font-size: 16px;
+}
+
+.f13
+{
+  font-size: 13px;
+}
+
+.f11
+{
+  font-size: 11px;
+}
 
 /**********tab-account.html************/
 
@@ -64,7 +83,7 @@
 }
 
 .account-list .item div, .account-list .bg3 .col {
-  font-size: 16px;
+  /*font-size: 16px;*/
   color: #fff;
 }
 
@@ -110,7 +129,12 @@
 }
 
 .bg2 h2 {
-  font-size: 65px;
+  font-size: 70px;
+}
+
+ion-item.f15
+{
+  padding: 12px 16px;
 }
 
 .account-modal .f18, .f18 {
@@ -125,11 +149,21 @@
   border-bottom: none;
 }
 
+.account-list .widthdarw-pic
+{
+  width: 25px;
+  vertical-align: -3px;
+  margin-right: 4px;
+}
+
 .account-list .account-common {
   margin: 30px 13%;
   padding: 3% 0;
   text-align: center;
   border-radius: 4px;
+  font-size: 18px;
+  height:44px;
+  line-height: 22.5px;
 }
 
 .account-list .account-bg-blue {
@@ -148,6 +182,7 @@
   right: 20px;
   background-color: #c01919;
   color: #fff;
+  top: 12px;
 }
 
 
@@ -163,10 +198,21 @@
   width: 100%;
 }
 
-.account-modal ion-item:first-child {
-  font-size: 20px;
-  padding-left: 16px;
+.account-modal ion-item,
+.account-modal .item-content
+{
+  color: #000;
+  font-size: 16px;
+  padding: 21px 16px;
+}
+
+
+
+.account-modal ion-item:first-child
+{
+  font-size: 17px;
   text-align: center;
+  /*padding: 21px 16px;*/
 }
 
 .account-modal img {
@@ -195,7 +241,7 @@
   transform: translate(-50%,-50%);
   text-align: center;
   background-color: #f4f4f4;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 25px 0;
 }
 
@@ -424,8 +470,37 @@
   background: #2c4198;
 }
 
+/*needExchange.html*/
+.need-exchange-list .font-style8
+{
+  width: 47px;
+  height: 19px;
+  line-height: 21px;
+  font-size: 9px;
+  margin-top: 8px;
+  color: #fff;
+  border-radius: 4px;
+  text-align: center;
+  background-color: #c01919;
+}
+
+.need-exchange-list .font-style9
+{
+  font-size: 13px;
+    color: #1a1a1a;
+    line-height: 16px;
+    margin-bottom: 0px;
+}
+
+.need-exchange-list .font-style10
+{
+  font-size: 9px;
+    color: #999;
+    line-height: 18px;
+}
+
 /**********completeInfo.html************/
-.widthdraw-records-list .font-style8
+/* .widthdraw-records-list .font-style8
 {
   width: 90px;
   height: 30px;
@@ -436,20 +511,20 @@
   border-radius: 8px;
   text-align: center;
   background-color: #c01919;
-}
+} */
 
-.widthdraw-records-list .font-style9
+/* .widthdraw-records-list .font-style9
 {
   font-size: 18px;
   color: #1a1a1a;
-}
+} */
 
-.widthdraw-records-list .font-style10
+/* .widthdraw-records-list .font-style10
 {
   font-size: 16px;
   color: #666;
   margin-top: 6px;
-}
+} */
 
 
 /**********completeInfo.html************/
@@ -473,12 +548,14 @@
 }
 
 
+
+
 /**********widthdraw.html************/
 
 .widthdraw-list .widthdraw-amount {
-  font-size: 40px;
+  font-size: 45px;
   display: inline-block;
-  height: 42px;
+  height: 47px;
   background: transparent;
 }
 
@@ -487,13 +564,13 @@
 }
 
 .widthdraw-list .loc1 {
-  font-size: 20px;
+  font-size: 25px;
   display: inline-block;
   vertical-align: top;
 }
 
 .widthdraw-list .padding0 {
-  padding: 5px 16px;
+  padding: 15px 22px;
 }
 
 .widthdraw-list .padding0 span {
@@ -502,21 +579,23 @@
 }
 
 .widthdraw-list .widthdraw-btn-blue {
-  margin: 30px 8%;
+  margin: 10px 8%;
   padding: 3% 0;
   text-align: center;
   color: #fff;
   border-radius: 4px;
   background: #2c4198;
+  font-size: 15px;
 }
 
 .widthdraw-list .widthdraw-btn-grey {
-  margin: 30px 8%;
+  margin: 10px 8%;
   padding: 3% 0;
   text-align: center;
   color: #fff;
   border-radius: 4px;
   background: #ccc;
+  font-size: 15px;
 }
 
 .widthdraw-list .item {
@@ -531,15 +610,18 @@
   width: 90%;
   margin: 50px auto;
   text-align: center;
-  color: #000;
+  color: #333;
+  font-size: 11px;
 }
 
 .widthdraw-list .widthdraw-descri p {
-  font-size: 14px;
+  font-size: 10px;
   line-height: 22px;
   margin-top: 5px;
   text-align: left;
   color: #d11d1d;
+  width:80%;
+  margin: 5px auto;
 }
 
 
@@ -565,27 +647,36 @@
   color: #d11d1d;
 }
 
-.prize-records-list .prize-records-all, .all-orders .prize-records-all, .widthdraw-records-list .prize-records-all {
+.prize-records-list .prize-records-all, 
+.all-orders .prize-records-all, 
+.widthdraw-records-list .prize-records-all,
+.need-exchange-list .prize-records-all
+{
   width: 100%;
   margin: 0 auto;
   text-align: center;
 }
 
-.prize-records-list .prize-records-all img, .widthdraw-records-list .prize-records-all img, .all-orders .prize-records-all img {
+.prize-records-list .prize-records-all img, .widthdraw-records-list .prize-records-all img, .all-orders .prize-records-all img ,.need-exchange-list .prize-records-all img  {
   width: 30%;
   margin: 40px 0 10px;
 }
 
-.all-orders-list .font-style1, .widthdraw-records-list .font-style1, .order-detail-list .font-style1, .prize-records-list .font-style5 {
+.prize-records-list .prize-records-all p, .widthdraw-records-list .prize-records-all p, .all-orders .prize-records-all p ,.need-exchange-list .prize-records-all p  {
+  font-size: 12px;
+  color: #999;
+}
+
+.widthdraw-records-list .font-style1, .order-detail-list .font-style1, .prize-records-list .font-style5 {
   color: #d11d1d;
 }
 
-.all-orders-list .font-style2, .all-orders-list .font-style4 , .widthdraw-records-list .font-style2, .order-detail-list .font-style2, .order-detail-list .font-style4 {
+.widthdraw-records-list .font-style2, .order-detail-list .font-style2, .order-detail-list .font-style4 {
   font-size: 13px;
   color: #666;
 }
 
-.prize-records-list .font-style1, .all-orders-list .font-style3, .widthdraw-records-list .font-style3, .order-detail-list .font-style3 {
+.prize-records-list .font-style1,   .order-detail-list .font-style3 {
   color: #1a1a1a;
 }
 
@@ -613,13 +704,10 @@
   width:100%;
   
   background-color: #fff;
+  box-shadow: 0px 3px 4px #dedede;
 }
 
-.all-orders .tab_select
-{
-  color:#0e3bad;
-  font-size: 16px;
-}
+
 .all-orders .tab_default
 {
   border:none;
@@ -627,7 +715,16 @@
   line-height: 24px;
   padding: 0;
   margin: 8px 0;
+  font-size: 13px;
+  color: #999;
   border-right: 1px solid #c8c8c8;
+}
+
+.all-orders .tab_select
+{
+  color:#0e3bad;
+  font-size: 15px;
+
 }
 
 .all-orders .tab_default:last-child
@@ -640,6 +737,44 @@
   margin-top: 5px;
 }
 
+.all-orders .padding-h8
+{
+  padding: 8px 16px;
+}
+
+.all-orders .lt-style
+{
+  color: #333
+}
+
+.all-orders-list .font-style3
+{
+  color: #1a1a1a;
+  font-size: 11px;
+}
+
+.all-orders-list .font-style1
+{
+  color: #d11d1d;
+  font-size: 13px;
+}
+
+.all-orders-list .font-style2
+{
+  font-size: 11px;
+  color: #999;
+}
+
+.all-orders-list .font-style4 
+{
+  font-size: 10px;
+  color: #0055ff;
+}
+
+.all-orders-list ion-item
+{
+  padding: 10px 16px;
+}
 
 /* .all-orders-list .each-order:first-child {
   margin-top: 0;
@@ -714,7 +849,23 @@
 /**********widthdrawRecords.html************/
 
 .widthdraw-records-list .font-style7 {
-  font-size: 20px;
-  padding-top: 10px;
+  font-size: 16px;
+  line-height: 38px;
   color: #1a1a1a;
 }
+
+.widthdraw-records-list .font-style3
+{
+  color: #666;
+  font-size: 13px;
+}
+
+.widthdraw-records-list .item
+{
+  padding: 10px 16px;
+}
+.widthdraw-records-list .item p
+{
+  margin-bottom: 0px;
+}
+

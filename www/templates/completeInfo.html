@@ -30,7 +30,7 @@
                   style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.phone.$dirty && inputInfoForm.phone.$invalid" >格式错误</span>
-          </label>
+          </label> -->
           <label class="item item-input">
            <div class="img_003"></div>
             <input type="text" 
@@ -41,13 +41,13 @@
                 style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid">格式错误</span>
-          </label> -->
+          </label>
           <label class="item item-input">
             <div class="img_004"></div>
             <input type="text" 
                 name="alipay"
                 ng-pattern="/^[a-z0-9]{6,16}$/"
-                placeholder="请输入支付宝账号" 
+                placeholder="请输入微信账号" 
                 ng-model="users.alipay"
                 style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
@@ -58,7 +58,7 @@
             <div class="img_005"></div>
             <input type="text" 
                 name="wechat" 
-                placeholder="请输入微信账号" ng-model="users.wechat"
+                placeholder="请输入开户行名称" ng-model="users.wechat"
                 ng-pattern="/^[a-z0-9]{6,16}$/"
                 style="text-indent: 1px;" />
             <span class="icon ion-close-round error"
