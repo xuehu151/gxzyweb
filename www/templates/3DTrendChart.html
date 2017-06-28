@@ -1,36 +1,41 @@
 <ion-view view-title="">
 
     <ion-content overflow-scroll="false" class=" has-header">
-        <div style="display:flex;width:100%;">
-            <div class="head" style="width: 5%;font-size: .6em;height: 60px; border-bottom: solid 2px #D1D3D6;">期号</div>
-            <div style="overflow: hidden;white-space: nowrap;width:95%;">
+        <div style="display:flex;width:500px;">
+            <div class="head" style="width: 17px;font-size: .6em;height: 60px; border-bottom: solid 2px #D1D3D6;">期号</div>
+            <div style="overflow: hidden;white-space: nowrap;450px">
                 <ion-scroll direction="x" scrollbar-x="true" scrollbar-y="false" overflow-scroll="false" has-bouncing="false"
                             delegate-handle="headContainerHandle" on-scroll="noScroll()" style="margin-top:0;">
                     <div style="display:flex;">
-                        <div class="head" style="width: 12%;font-size: .6em">开奖号</div>
-                        <div class="head" style="width: 18%">开奖分布</div>
-                        <div class="head" style="width: 18%">百位</div>
-                        <div class="head" style="width: 18%">十位</div>
-                        <div class="head" style="width: 18%">个位</div>
-                        <div class="head" style="border-right:0; width: 18%">和尾</div>
+                        <div class="head" style="width: 40px;font-size: .6em">开奖号</div>
+                        <div class="head" style="width: 100px">开奖分布</div>
+                        <div class="head" style="width: 100px">百位</div>
+                        <div class="head" style="width: 100px">十位</div>
+                        <div class="head" style="width: 100px">个位</div>
+                        <div class="head" style="border-right:0; width: 100px">和尾</div>
                     </div>
                     <div style="display:flex;">
-                        <div class="head" style="width: 12%;font-size: .6em; padding: 0 ">
+                        <div class="head" style="width: 40px%;font-size: .6em; padding: 0 ">
                            <ul >
                                <li>1</li>
                                <li>2</li>
                                <li>3</li>
                            </ul>
                         </div>
-                        <div class="head" style="width: 18%">
-                            <ul>
+                        <div class="head" style="width: 24%">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="item in dataArrange">{{item}}</td>
+                                </tr>
+                            </table>
+                            <!--<ol>
                                 <li ng-repeat="item in dataArrange">{{item}}</li>
-                            </ul>
+                            </ol>-->
                         </div>
-                        <div class="head" style="width: 18%">百位</div>
-                        <div class="head" style="width: 18%">十位</div>
-                        <div class="head" style="width: 18%">个位</div>
-                        <div class="head" style="border-right:0; width: 18%">和尾</div>
+                        <div class="head" style="width: 100px">百位</div>
+                        <div class="head" style="width: 100px">十位</div>
+                        <div class="head" style="width: 100px">个位</div>
+                        <div class="head" style="border-right:0; width: 100px">和尾</div>
                     </div>
                 </ion-scroll>
             </div>

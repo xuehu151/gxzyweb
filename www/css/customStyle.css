@@ -842,7 +842,7 @@ input.bigLotto-input2:checked:before {
     height:30px;
     display:flex;
     align-items:center;
-    font-size:14px;
+    font-size:12px;
     padding: 0 2px;
     color:#262626;
     justify-content:center;
@@ -858,14 +858,21 @@ input.bigLotto-input2:checked:before {
 .head ul li{
     display: table-cell;
     border-left: solid 1px #D1D3D6;
-    padding: 0 3px;
+    padding: 4px 3px;
     text-align: center;
 }
 
+.head tr td:nth-child(1),
 .head ul li:nth-child(1){
     border-left: none;
 }
 
+.head tr td{
+    display: table-cell;
+    border-left: solid 1px #D1D3D6;
+    text-align: center;
+    font-size: .8em;
+}
 
 
 
