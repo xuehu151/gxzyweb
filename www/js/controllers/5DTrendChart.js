@@ -144,7 +144,7 @@ angular.module ('starter.5DTrendChart', ['starter.services'])
                 'arriveTickets': '4526',
                 'moniOutCnt': '2221',
                 'moniStayCnt': '233',
-                'moniUndeliveryCnt': '4454'
+                'moniUndeliveryCnt': '454'
             }
         ];
         $scope.h = Math.min (document.documentElement.clientHeight, window.innerHeight) - 44 - 50;

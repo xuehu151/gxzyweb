@@ -825,12 +825,6 @@ input.bigLotto-input2:checked:before {
     border: transparent;
 }
 
-/*.tab_draw{
-    padding:10px 0;
-    font-weight: 600;
-    color: #959595;
-}*/
-
 .tab_select_white {
     color: red;
 }

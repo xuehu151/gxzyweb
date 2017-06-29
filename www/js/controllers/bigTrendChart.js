@@ -182,4 +182,5 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
         for (var j = 1; j < 8; j++) {
             $scope.drawCount.push (j);
         }
+        
     });

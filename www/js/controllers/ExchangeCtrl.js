@@ -113,6 +113,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             modal ();
                         }
                         
+                        
                         $scope.goToExchange3D = function () {
                             $state.go ('exchange-3');
                         };

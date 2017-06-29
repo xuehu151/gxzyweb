@@ -171,4 +171,5 @@ angular.module ('starter.3DTrendChart', [])
             $scope.drawCount.push (j);
         }
         
+        
     });
