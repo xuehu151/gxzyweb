@@ -8,13 +8,41 @@
         </ion-nav-buttons>
     </ion-nav-bar> -->
     <ion-content style="background: #eee;">
-        <ion-list class="complete-info-succeed list-borderless">
-          <ion-item class="info-succeed-img">
-           <img ng-src="{{whetherWidthdrawSuc?'./img/completeInfoSucceed.png':'./img/alert-img.png'}}" alt="资料完善成功" style="width: 130px;" />
-          </ion-item>
-          <ion-item style="color: #2c4198">{{whetherWidthdrawSuc?widthdrawInfo.success:widthdrawInfo.fail}}</ion-item>
-          <ion-item href="#/tab/account">
+        <ion-list class="complete-info-succeed list-borderless" ng-switch="whetherWidthdrawSuc">
+          <!-- <ion-item class="info-succeed-img">
+           <img ng-src="{{whetherWidthdrawSuc?'./img/completeInfoSucceed.png':'./img/alert-img.png'}}" alt="资料完善成功" style="width: 110px;" />
+          </ion-item> -->
+          <img ng-src="{{whetherWidthdrawSuc!=-1?'./img/completeInfoSucceed.png':'./img/alert-img.png'}}" alt="资料完善成功" style="width: 110px;" />
+          <ion-item
+            ng-switch-when="0"
+           class="text-top">提现申请发起成功</ion-item>
+           <ion-item
+            ng-switch-when="1"
+           class="text-top">提现成功</ion-item>
+           <ion-item
+            ng-switch-when="-1"
+           class="text-top2">申请审核未通过</ion-item>
+          <!-- <ion-item href="#/tab/account">
             {{whetherWidthdrawSuc?widthdrawInfo.successInfo:widthdrawInfo.failInfo}}
+          </ion-item> -->
+          <!-- <ion-item class="text-bottom" >
+            {{whetherWidthdrawSuc?widthdrawInfo.successInfo:widthdrawInfo.failInfo}}
+          </ion-item> -->
+          <ion-item
+          ng-switch-when="0" class="text-bottom" >
+           申请已提交至财务审核,审核周期大约为48小时
+           <br />
+           请耐心等待
+          </ion-item>
+          <ion-item
+          ng-switch-when="1" class="text-bottom" >
+           资金预计2小时内到账
+           <br />
+           请耐心等待
+          </ion-item>
+          <ion-item
+          ng-switch-when="-1" class="text-bottom2" style="text-decoration: underline;" >
+           别担心，说不定再试一次就成功了
           </ion-item>
         </ion-list>
     </ion-content>

@@ -21,31 +21,34 @@ angular.module ('starter.widthdrawCtrl', ['starter.services'])
             }, function () {
                 alert ('网络异常,未能获取到您的可用余额');
             });
-        $scope.widthdrawMoney = {money:0}; //提现金额
+        $scope.widthdrawMoney = {money:''}; //提现金额
         $scope.whetherShow1 = true; //控制展示可提现余额
         $scope.whetherShow2 = false; //控制提现提交按钮disable
-        $scope.whetherOK = function (widthdrawMoney) {
-            console.log(widthdrawMoney)
-            if (widthdrawMoney > $scope.widthdrawAble) {
+        function change() {
+            // body...
+        }
+        $scope.whetherOK = function () {
+            // console.log($scope.widthdrawMoney.money)
+            if ($scope.widthdrawMoney.money > $scope.widthdrawAble) {
                 $scope.cantWidthdraw = '输入金额超出可提现余额';
                 $scope.whetherShow1 = false;
                 $scope.whetherShow2 = true;
             }
             //小于10元扣除1元手续费
-             else if ((widthdrawMoney<=10 && widthdrawMoney>1) &&(widthdrawMoney <= $scope.widthdrawAble))
+             else if (($scope.widthdrawMoney.money<=10 && $scope.widthdrawMoney.money>1) &&($scope.widthdrawMoney.money <= $scope.widthdrawAble))
              {
                 $scope.cantWidthdraw = '需扣除1元手续费';
                 $scope.whetherShow1 = false;
                 $scope.whetherShow2 = false;
              }
              //小于1 disable
-             else if (widthdrawMoney<=1)
+             else if ($scope.widthdrawMoney.money<=1)
              {
                 $scope.cantWidthdraw = '';
                 $scope.whetherShow1 = true;
                 $scope.whetherShow2 = true;
              }
-             else if (($scope.widthdrawAble<=200 && $scope.widthdrawAble>10) &&  widthdrawMoney!=$scope.widthdrawAble ) 
+             else if (($scope.widthdrawAble<=200 && $scope.widthdrawAble>10) &&  $scope.widthdrawMoney.money!=$scope.widthdrawAble ) 
              {
                 $scope.cantWidthdraw = '';
                 $scope.whetherShow1 = true;
@@ -57,7 +60,7 @@ angular.module ('starter.widthdrawCtrl', ['starter.services'])
                 $scope.whetherShow1 = true;
                 $scope.whetherShow2 = false;
             };
-            $scope.widthdrawMoney.money = widthdrawMoney;
+            // $scope.widthdrawMoney.money = widthdrawMoney;
         };
 
         
@@ -65,52 +68,9 @@ angular.module ('starter.widthdrawCtrl', ['starter.services'])
         //提现所有可用余额
         $scope.widthdrawAll = function () {
             $scope.widthdrawMoney.money = $scope.widthdrawAble;
-            console.log($scope.widthdrawMoney.money);
-            
+            // console.log($scope.widthdrawMoney.money);
+            $scope.whetherOK();
         };
-
-        /*$scope.widthdrawAll=function () {
-            var widthdrawMoney=$scope.widthdrawAble;
-            console.log(widthdrawMoney)
-            if (widthdrawMoney > $scope.widthdrawAble) {
-                $scope.cantWidthdraw = '输入金额超出可提现余额';
-                $scope.whetherShow1 = false;
-                $scope.whetherShow2 = true;
-            }
-            //小于10元扣除1元手续费
-             else if ((widthdrawMoney<=10 && widthdrawMoney>1) &&(widthdrawMoney <= $scope.widthdrawAble))
-             {
-                $scope.cantWidthdraw = '需扣除1元手续费';
-                $scope.whetherShow1 = false;
-                $scope.whetherShow2 = false;
-             }
-             //小于1 disable
-             else if (widthdrawMoney<=1)
-             {
-                $scope.cantWidthdraw = '';
-                $scope.whetherShow1 = true;
-                $scope.whetherShow2 = true;
-             }
-             else if (($scope.widthdrawAble<=200 && $scope.widthdrawAble>10) &&  widthdrawMoney!=$scope.widthdrawAble ) 
-             {
-                $scope.cantWidthdraw = '';
-                $scope.whetherShow1 = true;
-                $scope.whetherShow2 = true;
-             }
-
-            else {
-                $scope.cantWidthdraw = '';
-                $scope.whetherShow1 = true;
-                $scope.whetherShow2 = false;
-            };
-            $scope.widthdrawMoney = widthdrawMoney;
-        };*/
-
-       /* $scope.$watch('widthdrawMoney',function (newValue,oldValue) {
-                console.log(newValue);
-                console.log(oldValue);
-                $scope.widthdrawMoney = newValue;
-            })*/
 
         $scope.confirmWidthdraw = function (widthdrawMoney) {
             
@@ -118,9 +78,11 @@ angular.module ('starter.widthdrawCtrl', ['starter.services'])
                 hideOnStateChange: true
             });
             var token = userInfo.data.token;
-//            console.log (token);
-//            console.log ($scope.widthdrawMoney);
-            getUser.getInfo (url + '/service/cash/add' + '?channel=' + $rootScope.channel + '&money=' + $scope.widthdrawMoney + '&token=' + token)
+           // console.log (token);
+           // console.log ($rootScope.channel);
+           // console.log ($scope.widthdrawMoney);
+           
+            getUser.getInfo (url + '/service/cash/add' + '?channel=' + $rootScope.channel + '&money=' + $scope.widthdrawMoney.money + '&token=' + token)
                 .then (function (data) {
                     $rootScope.WidthdrawStatus = data.error;    //保存返回的状态,用于决定widthdrawResult的页面
                     $ionicLoading.hide ();
