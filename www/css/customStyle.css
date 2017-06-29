@@ -689,7 +689,6 @@ input.bigLotto-input2:checked:before {
 .bar .title {
     font-family: '庞门正道标题体';
     font-weight: bolder;
-    transform: rotateX(30deg);
 }
 
 .regiset img{
@@ -872,6 +871,7 @@ input.bigLotto-input2:checked:before {
     border-left: solid 1px #D1D3D6;
     text-align: center;
     font-size: .8em;
+    padding: 5px 2px;
 }
 
 
