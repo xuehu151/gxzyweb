@@ -14,28 +14,29 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             .then (function (response) {
 //                console.log (response.data);
                 $scope.useableMoney = response.data.money;
-                $scope.phone = response.data.phone;
+                // $scope.phone = response.data.phone;
                 $scope.frozedMoney = response.data.freeze;
                 $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
                 //提现时候的账户号码
-                $rootScope.accountNum = [{
+                $rootScope.accountNum = [/*{
                     chanel: 1,
                     num: '(' + response.data.alipay + ')',
                     disable: false
-                }, {
+                },*/ 
+                {
                     chanel: 2,
-                    num: '(' + response.data.wechat + ')',
-                    disable: false
+                    num: '(' + response.data.wechat + ')'
+                    // disable: false
                 }, {
                     chanel: 3,
-                    num: '(' + response.data.bankNo + ')',
-                    disable: false
+                    num: '(' + response.data.bankNo + ')'
+                    // disable: false
                 }];
-                for (var i = 0; i < $rootScope.accountNum.length; i++) {
+                /*for (var i = 0; i < $rootScope.accountNum.length; i++) {
                     if ($rootScope.accountNum[i].num == "()") {
                         $rootScope.accountNum[i].disable = true;
                     }
-                }
+                }*/
             }, function () {
                 alert ('网络异常, 未能获取到您的余额')
             });
@@ -75,7 +76,8 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                 $scope.modal.show ();
             }
             else {
-                var confirmPopup = $ionicPopup.confirm ({
+                $scope.modal4.show ();
+                /*var confirmPopup = $ionicPopup.confirm ({
                     title: '完善资料',
                     template: '<p style="text-align:center;"><img src="./img/completeInf.png"></p>' + '当前个人资料尚未完善，无法提现；完善个人资料后即可立即提现！',
                     // templateUrl: '', // String (可选)。放在弹窗body内的一个html模板的URL。
@@ -89,7 +91,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                     }
                     else {
                     }
-                });
+                });*/
             }
         };
         /*//点击暂不完善,隐藏提示界面
@@ -125,8 +127,8 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         };
         //提现框的mordal窗口配置
         $ionicModal.fromTemplateUrl ('accountModal.html', {
-            scope: $scope
-            // backdropClickToClose:true    没效果???
+            scope: $scope,
+            backdropClickToClose:true    
         }).then (function (modal) {
             $scope.modal = modal;
         });
@@ -144,8 +146,8 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         };
         //老用户获得彩票的mordal窗口配置
         $ionicModal.fromTemplateUrl ('accountModalOldUser.html', {
-            scope: $scope
-            // backdropClickToClose:true    没效果???
+            scope: $scope,
+            backdropClickToClose:true    
         }).then (function (modal) {
             $scope.modal2 = modal;
         });
@@ -161,8 +163,8 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         };
         //中奖mordal窗口配置
         $ionicModal.fromTemplateUrl ('accountModalGetPrize.html', {
-            scope: $scope
-            // backdropClickToClose:true    没效果???
+            scope: $scope,
+            backdropClickToClose:true    
         }).then (function (modal) {
             $scope.modal3 = modal;
         });
@@ -171,5 +173,23 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         };
         $scope.cancelPop3 = function () {
             $scope.modal3.hide ();
+        };
+
+        //提现完善资料的mordal窗口配置
+        $ionicModal.fromTemplateUrl ('widthdrawCompleteInfo.html', {
+            scope: $scope,
+            backdropClickToClose:true    
+        }).then (function (modal) {
+            $scope.modal4 = modal;
+        });
+       /* $scope.openPop4 = function () {
+            $scope.modal4.show ();
+        };*/
+        $scope.cancelPop4 = function () {
+            $scope.modal4.hide ();
+        };
+        $scope.toCompeleteInfo = function () {
+            $state.go ('completeInfo');
+            $scope.modal4.hide ();
         };
     });
