@@ -5,12 +5,11 @@
 
     <div class="bar bar-header tab_trend">
         <div class="button">
-            <a class=" button " ui-sref="tab.trend.bigTrendChart" ng-click="change('a')" ng-class="{ 'active': data === 'a' }">大乐透</a>
-            <a class=" button " ui-sref="tab.trend.3DTrendChart" ng-click="change('b')" ng-class="{ 'active': data === 'b' }">排列3</a>
-            <a class=" button " ui-sref="tab.trend.5DTrendChart" ng-click="change('c')" ng-class="{ 'active': data === 'c' }">排列5</a>
+            <a class=" button " ui-sref="tab.trend.bigTrendChart" ng-click="isActive=true" ng-class="{true:'tab_select_white',false:'tab_select_white'}[isActive]">大乐透</a>
+            <a class=" button " ui-sref="tab.trend.3DTrendChart" ng-click="isActive=false" ng-class="{false:'tab_select_white',true:'tab_select_white'}[isActive]">排列3</a>
+            <a class=" button " ui-sref="tab.trend.5DTrendChart" ng-click="isActive=false" ng-class="{false:'tab_select_white',true:'tab_select_white'}[isActive]">排列5</a>
         </div>
     </div>
-
     <ion-nav-view></ion-nav-view>
 
    <!-- <ion-content has-bouncing="false" class="draw-slide">

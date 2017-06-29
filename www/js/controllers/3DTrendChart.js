@@ -119,53 +119,56 @@ angular.module ('starter.3DTrendChart', [])
                 'moniUndeliveryCnt': '44'
             },
             {
-                'zoneName': '14',
+                'zoneName': '66',
                 'arriveTickets': '4526',
                 'moniOutCnt': '2221',
                 'moniStayCnt': '45',
                 'moniUndeliveryCnt': '44'
             },
             {
-                'zoneName': '14',
+                'zoneName': '45',
                 'arriveTickets': '4526',
                 'moniOutCnt': '2221',
-                'moniStayCnt': '45',
-                'moniUndeliveryCnt': '44'
+                'moniStayCnt': '4500',
+                'moniUndeliveryCnt': '43334'
             },
             {
-                'zoneName': '14',
+                'zoneName': '22',
                 'arriveTickets': '4526',
                 'moniOutCnt': '2221',
-                'moniStayCnt': '45',
-                'moniUndeliveryCnt': '44'
+                'moniStayCnt': '455',
+                'moniUndeliveryCnt': '4464'
             },
             {
-                'zoneName': '14',
+                'zoneName': '20',
                 'arriveTickets': '4526',
                 'moniOutCnt': '2221',
-                'moniStayCnt': '45',
-                'moniUndeliveryCnt': '44'
+                'moniStayCnt': '233',
+                'moniUndeliveryCnt': '4454'
             }
         ];
-        $scope.h=Math.min(document.documentElement.clientHeight,window.innerHeight)-44-50;
-        $scope.scrollRightHorizon=function(){
-            var rightHandle = $ionicScrollDelegate.$getByHandle("rightContainerHandle");
-            var headHandle = $ionicScrollDelegate.$getByHandle("headContainerHandle");
-            var leftHandle = $ionicScrollDelegate.$getByHandle("leftContainerHandle");
-            headHandle.scrollTo(rightHandle.getScrollPosition().left,0,false);
-            leftHandle.scrollTo(0,rightHandle.getScrollPosition().top,false);
+        $scope.h = Math.min (document.documentElement.clientHeight, window.innerHeight) - 44 - 50;
+        $scope.scrollRightHorizon = function () {
+            var rightHandle = $ionicScrollDelegate.$getByHandle ("rightContainerHandle");
+            var headHandle = $ionicScrollDelegate.$getByHandle ("headContainerHandle");
+            var leftHandle = $ionicScrollDelegate.$getByHandle ("leftContainerHandle");
+            headHandle.scrollTo (rightHandle.getScrollPosition ().left, 0, false);
+            leftHandle.scrollTo (0, rightHandle.getScrollPosition ().top, false);
         };
-        $scope.noScroll=function(){
-            var headHandle = $ionicScrollDelegate.$getByHandle("headContainerHandle");
-            headHandle.freezeScroll(true);
-            var leftHandle = $ionicScrollDelegate.$getByHandle("leftContainerHandle");
-            leftHandle.freezeScroll(true);
+        $scope.noScroll = function () {
+            var headHandle = $ionicScrollDelegate.$getByHandle ("headContainerHandle");
+            headHandle.freezeScroll (true);
+            var leftHandle = $ionicScrollDelegate.$getByHandle ("leftContainerHandle");
+            leftHandle.freezeScroll (true);
         };
         
         $scope.dataArrange = [];
-        for(var i=0;i < 10; i++){
-            $scope.dataArrange.push(i);
+        $scope.drawCount = [];
+        for (var i = 0; i < 10; i++) {
+            $scope.dataArrange.push (i);
         }
-        
+        for (var j = 1; j < 4; j++) {
+            $scope.drawCount.push (j);
+        }
         
     });

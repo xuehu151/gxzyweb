@@ -1,1 +1,120 @@
-fd;klgdkfglkndf
+<ion-view view-title="" >
+    <ion-content overflow-scroll="false" class=" has-header" >
+        <div style="display:flex;width:100%;">
+            <div class="head5D" style="width: 20px; height: 59px;background: #dfefe1;text-align: center">期号</div>
+            <div style="overflow: hidden;white-space: nowrap;width:355px;">
+                <ion-scroll direction="x" scrollbar-x="false" overflow-scroll="false" has-bouncing="false" delegate-handle="headContainerHandle" on-scroll="noScroll()" style="margin-top:0;">
+                    <div style="display:flex;width:600px;">
+                        <div class="head5D" style="width: 79px;font-size: 9px;overflow: hidden">开奖号</div>
+                        <div class="head5D">万位</div>
+                        <div class="head5D">千位</div>
+                        <div class="head5D">百位</div>
+                        <div class="head5D">十位</div>
+                        <div class="head5D" style="border-right:0;">个位</div>
+                    </div>
+                    <div style="display:flex;width:600px;" class="titleTd">
+                        <div class="head5D" style="width: 79px;font-size: 9px;">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="drawItem in drawCount">{{drawItem}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="head5D">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="item in dataArrange">{{item}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="head5D">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="item in dataArrange">{{item}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="head5D">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="item in dataArrange">{{item}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="head5D">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="item in dataArrange">{{item}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="head5D" style="border-right:0;">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="item in dataArrange">{{item}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </ion-scroll>
+            </div>
+        </div>
+        <div style="display:flex;width:100%;">
+            <ion-scroll direction="y" scrollbar-y="false" overflow-scroll="false" has-bouncing="false" delegate-handle="leftContainerHandle" on-scroll="noScroll()" style="height:{{h}}px;">
+                <div ng-repeat="d in data" class="head5D" style="width: 20px;background: #dfefe1">
+                    {{d.zoneName}}
+                </div>
+            </ion-scroll>
+            <div style="overflow: hidden;white-space: nowrap;width:355px;">
+                <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false" has-bouncing="false" on-scroll="scrollRightHorizon()" delegate-handle="rightContainerHandle" style="height:{{h}}px;">
+                    <div style="width:600px;">
+                        <div ng-repeat="d in data" style="display:flex;"  class="padding-td">
+                            <div class="head5D" style="width: 79px">
+                                <table>
+                                    <tr>
+                                        <td ng-repeat="drawItem in drawCount">{{drawItem}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="head5D">
+                                <table>
+                                    <tr>
+                                        <td ng-repeat="item in dataArrange">{{item}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="head5D">
+                                <table>
+                                    <tr>
+                                        <td ng-repeat="item in dataArrange">{{item}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="head5D">
+                                <table>
+                                    <tr>
+                                        <td ng-repeat="item in dataArrange">{{item}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="head5D">
+                                <table>
+                                    <tr>
+                                        <td ng-repeat="item in dataArrange">{{item}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="head5D" style="border-right:0;">
+                                <table>
+                                    <tr>
+                                        <td ng-repeat="item in dataArrange">{{item}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </ion-scroll>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

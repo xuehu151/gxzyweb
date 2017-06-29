@@ -831,14 +831,15 @@ input.bigLotto-input2:checked:before {
     color: #959595;
 }*/
 
-.tab_select-white {
-    color: white;
+.tab_select_white {
+    color: red;
 }
 
 .head{
     border-bottom:solid 1px #D1D3D6;
     border-right:solid 1px #D1D3D6;
     height:30px;
+    width: 160px;
     display:flex;
     align-items:center;
     font-size:12px;
@@ -848,21 +849,13 @@ input.bigLotto-input2:checked:before {
 }
 
 .head:nth-child(odd){
-    background: #dfefe1;
-}
-.head:nth-child(even){
     background: #eeeed4;
 }
-
-.head ul li{
-    display: table-cell;
-    border-left: solid 1px #D1D3D6;
-    padding: 4px 3px;
-    text-align: center;
+.head:nth-child(even){
+    background: #dfefe1;
 }
 
-.head tr td:nth-child(1),
-.head ul li:nth-child(1){
+.head tr td:nth-child(1){
     border-left: none;
 }
 
@@ -871,20 +864,107 @@ input.bigLotto-input2:checked:before {
     border-left: solid 1px #D1D3D6;
     text-align: center;
     font-size: .8em;
-    padding: 5px 2px;
+    padding: 5px 1px;
+    color: #bcbcbc;
+}
+
+.head table{
+    width: 100%;
+}
+
+.titleTd div td{
+    color: #000;
+}
+
+.head5D{
+    border-bottom:solid 1px #D1D3D6;
+    border-right:solid 1px #D1D3D6;
+    height:30px;
+    width: 152px;
+    display:flex;
+    align-items:center;
+    font-size:12px;
+    color:#262626;
+    justify-content:center;
+}
+
+.head5D:nth-child(odd){
+    background: #eeeed4;
+}
+.head5D:nth-child(even){
+    background: #dfefe1;
+}
+
+.head5D tr td:nth-child(1){
+    border-left: none;
+}
+
+.head5D tr td{
+    display: table-cell;
+    border-left: solid 1px #D1D3D6;
+    text-align: center;
+    font-size: .8em;
+    padding: 5px 1px;
+    color: #bcbcbc;
+}
+
+.head5D table{
+    width: 100%;
+}
+
+.titleTd .head5D td{
+    color: #000;
+}
+
+.padding-td .head5D tr td{
+    padding: 5px 0;
 }
 
 
+.head5DBig{
+    border-bottom:solid 1px #D1D3D6;
+    border-right:solid 1px #D1D3D6;
+    height:30px;
+    width: 180px;
+    display:flex;
+    align-items:center;
+    font-size:12px;
+    color:#262626;
+    justify-content:center;
+}
 
+.head5DBig:nth-child(odd){
+    background: #eeeed4;
+}
+.head5DBig:nth-child(even){
+    background: #dfefe1;
+}
 
+.head5DBig tr td:nth-child(1){
+    border-left: none;
+}
 
+.head5DBig tr td{
+    display: table-cell;
+    border-left: solid 1px #D1D3D6;
+    text-align: center;
+    font-size: .8em;
+    padding: 5px 0;
+    color: #bcbcbc;
+    width: 9px;
+}
 
+.head5DBig table{
+    width: 100%;
+}
 
+.titleTd .head5DBig td{
+    color: #000;
+}
 
-
-
-
-
+.padding-td .head5DBig tr td{
+    padding: 5px 0;
+}
 
 
 

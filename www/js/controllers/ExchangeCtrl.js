@@ -7,7 +7,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
     
     .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService) {
         $rootScope.newStatus = true;
-        $ionicLoading.show ();
+        //$ionicLoading.show ();
         sign = $location.search ().sign;
         type = $location.search ().type;
         
