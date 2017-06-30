@@ -138,6 +138,7 @@ a {
 
 .col-44 h5{
     padding-left: 10px;
+    padding-bottom: 2px;
     margin-bottom: 0;
     color: #ec7600;
     font-family: inherit;
@@ -781,8 +782,8 @@ input.bigLotto-input2:checked:before {
      font-weight: 600;
      color: #959595;
 }
-.tab_select{
-    color: #1a3f86;
+.current{
+    color: #1a3f86!important;
 }
 
 /*走势图*/
@@ -833,7 +834,7 @@ input.bigLotto-input2:checked:before {
 .head{
     border-bottom:solid 1px #D1D3D6;
     border-right:solid 1px #D1D3D6;
-    height:30px;
+    height:20px;
     width: 160px;
     display:flex;
     align-items:center;
@@ -859,7 +860,7 @@ input.bigLotto-input2:checked:before {
     border-left: solid 1px #D1D3D6;
     text-align: center;
     font-size: .8em;
-    padding: 5px 1px;
+    padding: 0 1px;
     color: #bcbcbc;
 }
 
@@ -874,7 +875,7 @@ input.bigLotto-input2:checked:before {
 .head5D{
     border-bottom:solid 1px #D1D3D6;
     border-right:solid 1px #D1D3D6;
-    height:30px;
+    height:20px;
     width: 152px;
     display:flex;
     align-items:center;
@@ -899,7 +900,7 @@ input.bigLotto-input2:checked:before {
     border-left: solid 1px #D1D3D6;
     text-align: center;
     font-size: .8em;
-    padding: 5px 1px;
+    padding: 0 1px;
     color: #bcbcbc;
 }
 
@@ -911,15 +912,10 @@ input.bigLotto-input2:checked:before {
     color: #000;
 }
 
-.padding-td .head5D tr td{
-    padding: 5px 0;
-}
-
-
 .head5DBig{
     border-bottom:solid 1px #D1D3D6;
     border-right:solid 1px #D1D3D6;
-    height:30px;
+    height:20px;
     width: 180px;
     display:flex;
     align-items:center;
@@ -944,7 +940,7 @@ input.bigLotto-input2:checked:before {
     border-left: solid 1px #D1D3D6;
     text-align: center;
     font-size: .8em;
-    padding: 5px 0;
+    padding: 0 0;
     color: #bcbcbc;
     width: 9px;
 }
@@ -955,10 +951,6 @@ input.bigLotto-input2:checked:before {
 
 .titleTd .head5DBig td{
     color: #000;
-}
-
-.padding-td .head5DBig tr td{
-    padding: 5px 0;
 }
 
 

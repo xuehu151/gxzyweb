@@ -5,9 +5,9 @@
 
     <div class="bar bar-header tab_draw">
         <div class="button">
-            <a class=" button " ui-sref="tab.draw.bigLottoHistoryDetails" ng-click="change('a')" ng-class="{ 'active': data === 'a' }">大乐透</a>
-            <a class=" button " ui-sref="tab.draw.exchangehistory3D" ng-click="change('b')" ng-class="{ 'active': data === 'b' }">排列3</a>
-            <a class=" button " ui-sref="tab.draw.exchangehistory5D" ng-click="change('c')" ng-class="{ 'active': data === 'c' }">排列5</a>
+            <a class=" button " ui-sref="tab.draw.bigLottoHistoryDetails" ng-init="isActive =1"  ng-click="isActive=1" ng-class="{current: isActive == 1}">大乐透</a>
+            <a class=" button " ui-sref="tab.draw.exchangehistory3D" ng-click="isActive=2" ng-class="{current: isActive == 2}">排列3</a>
+            <a class=" button " ui-sref="tab.draw.exchangehistory5D" ng-click="isActive=3" ng-class="{current: isActive == 3}">排列5</a>
         </div>
     </div>
 

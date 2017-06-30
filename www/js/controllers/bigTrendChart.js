@@ -147,7 +147,7 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
                 'moniUndeliveryCnt': '4454'
             }
         ];
-        $scope.h = Math.min (document.documentElement.clientHeight, window.innerHeight) - 44 - 50;
+        $scope.h = Math.min (document.documentElement.clientHeight, window.innerHeight) - 44 - 88;
         $scope.scrollRightHorizon = function () {
             var rightHandle = $ionicScrollDelegate.$getByHandle ("rightContainerHandle");
             var headHandle = $ionicScrollDelegate.$getByHandle ("headContainerHandle");

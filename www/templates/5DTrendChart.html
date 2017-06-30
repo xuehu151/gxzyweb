@@ -1,8 +1,8 @@
 <ion-view view-title="" >
     <ion-content overflow-scroll="false" class=" has-header" >
         <div style="display:flex;width:100%;">
-            <div class="head5D" style="width: 20px; height: 59px;background: #dfefe1;text-align: center">期号</div>
-            <div style="overflow: hidden;white-space: nowrap;width:355px;">
+            <div class="head5D" style="width: 20px; height: 39px;background: #dfefe1;text-align: center">期号</div>
+            <div style="overflow: hidden;white-space: nowrap;width:100%;">
                 <ion-scroll direction="x" scrollbar-x="false" overflow-scroll="false" has-bouncing="false" delegate-handle="headContainerHandle" on-scroll="noScroll()" style="margin-top:0;">
                     <div style="display:flex;width:600px;">
                         <div class="head5D" style="width: 79px;font-size: 9px;overflow: hidden">开奖号</div>
@@ -65,7 +65,7 @@
                     {{d.zoneName}}
                 </div>
             </ion-scroll>
-            <div style="overflow: hidden;white-space: nowrap;width:355px;">
+            <div style="overflow: hidden;white-space: nowrap;width:100%;">
                 <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false" has-bouncing="false" on-scroll="scrollRightHorizon()" delegate-handle="rightContainerHandle" style="height:{{h}}px;">
                     <div style="width:600px;">
                         <div ng-repeat="d in data" style="display:flex;"  class="padding-td">
