@@ -4,9 +4,11 @@
 //开奖
 angular.module ('starter.TrendCtrl', ['starter.services'])
     
-    .controller ('TrendCtrl', function ($scope, $ionicSlideBoxDelegate) {
-        
-        
+    .controller ('TrendCtrl', function ($scope) {
+    
+        $scope.isActive = true;
+       
+       
         /*$scope.tabNames = ['大乐透', '排列 3', '排列 5'];
         $scope.slectIndex = 0;
         $scope.activeSlide = function (index) {//点击时候触发
