@@ -4,3 +4,12 @@
 node_modules/
 platforms/
 plugins/
+.idea/
+hooks/
+scss/
+.json/
+.xml/
+.md/
+.sh/
+.editorconfig/
+.bowerrc/

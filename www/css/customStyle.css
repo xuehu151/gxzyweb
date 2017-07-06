@@ -76,6 +76,10 @@ a {
     text-decoration: none;
 }
 
+ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
+    color: #293e97;
+}
+
 /*
     首页 兑换
 */
@@ -688,7 +692,7 @@ input.bigLotto-input2:checked:before {
 
 /*用户注册*/
 .bar .title {
-    font-family: '庞门正道标题体';
+    /*font-family: '庞门正道标题体';*/
     font-weight: bolder;
 }
 
@@ -802,11 +806,22 @@ input.bigLotto-input2:checked:before {
 
 .tab_trend a.button,
 .tab_draw a.button{
-    width: 31%;
     font-size: 1.1em;
     background: transparent;
     color: #ffffff;
     margin-top: -5px;
+}
+
+.tab_draw a.button{
+    width: 31%;
+    color: #989898;
+    margin-top: 0;
+}
+
+.tab_trend a.button{
+    width: 20%;
+    color: #989898;
+    margin: -5px 20px 0 20px;
 }
 
 .tab_trend > .button,
@@ -816,18 +831,13 @@ input.bigLotto-input2:checked:before {
     background: transparent;
 }
 
-.tab_draw a.button{
-    color: #989898;
-    margin-top: 0;
-}
-
 .tab_trend a.activated,
 .tab_draw a.activated{
     border: transparent;
 }
 
 .actives {
-    color: #F00 !important;
+    color: #FFFFff !important;
     border-bottom: 1px solid #FFFFff;
 }
 
@@ -839,7 +849,6 @@ input.bigLotto-input2:checked:before {
     display:flex;
     align-items:center;
     font-size:12px;
-    padding: 0 2px;
     color:#262626;
     justify-content:center;
 }
@@ -860,7 +869,7 @@ input.bigLotto-input2:checked:before {
     border-left: solid 1px #D1D3D6;
     text-align: center;
     font-size: .8em;
-    padding: 0 1px;
+    padding: 0 2px;
     color: #bcbcbc;
 }
 
@@ -870,6 +879,20 @@ input.bigLotto-input2:checked:before {
 
 .titleTd div td{
     color: #000;
+}
+
+.count-color1{
+    color: red!important;
+    font-size: 15px!important;
+    font-weight: bold;
+    padding: 0 1px!important;
+}
+
+.count-color5DGS{
+    color: #1f2288!important;
+    font-size: 15px!important;
+    font-weight: bold;
+    padding: 0 1px!important;
 }
 
 .head5D{
@@ -900,12 +923,16 @@ input.bigLotto-input2:checked:before {
     border-left: solid 1px #D1D3D6;
     text-align: center;
     font-size: .8em;
-    padding: 0 1px;
+    padding: 0 2px;
     color: #bcbcbc;
 }
 
 .head5D table{
     width: 100%;
+}
+
+.padding-td > table > tbody > tr > td {
+    color: #2a2a2a!important;
 }
 
 .titleTd .head5D td{

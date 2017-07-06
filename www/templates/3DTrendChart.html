@@ -1,10 +1,10 @@
 <ion-view view-title="" >
     <ion-content overflow-scroll="false" class=" has-header" >
         <div style="display:flex;width:100%;">
-            <div class="head" style="width: 20px; height: 39px;background: #dfefe1;text-align: center">期号</div>
+            <div class="head" style="width: 25px; height: 39px;background: #dfefe1;text-align: center">期号</div>
             <div style="overflow: hidden;white-space: nowrap;width:100%;">
                 <ion-scroll direction="x" scrollbar-x="false" overflow-scroll="false" has-bouncing="false" delegate-handle="headContainerHandle" on-scroll="noScroll()" style="margin-top:0;">
-                    <div style="display:flex;width:600px;">
+                    <div style="display:flex;width:700px;">
                         <div class="head" style="width: 60px;font-size: 9px;overflow: hidden">开奖号</div>
                         <div class="head">开奖分布</div>
                         <div class="head">百位</div>
@@ -12,8 +12,8 @@
                         <div class="head">个位</div>
                         <div class="head" style="border-right:0;">和尾</div>
                     </div>
-                    <div style="display:flex;width:600px;" class="titleTd">
-                        <div class="head" style="width: 60px;font-size: 9px;overflow: hidden">
+                    <div style="display:flex;width:700px;" class="titleTd">
+                        <div class="head" style="width:60px;font-size: 9px;overflow: hidden">
                             <table>
                                 <tr>
                                     <td ng-repeat="drawItem in drawCount">{{drawItem}}</td>
@@ -61,17 +61,17 @@
         </div>
         <div style="display:flex;width:100%;">
             <ion-scroll direction="y" scrollbar-y="false" overflow-scroll="false" has-bouncing="false" delegate-handle="leftContainerHandle" on-scroll="noScroll()" style="height:{{h}}px;">
-                <div ng-repeat="count in historyPast3" class="head" style="width: 20px;background: #dfefe1">
+                <div ng-repeat="count in historyPast3" class="head" style="width: 25px;background: #dfefe1; padding: 0 2px">
                     {{count.wareIssue | limitTo: -3}}
                 </div>
             </ion-scroll>
             <div style="overflow: hidden;white-space: nowrap;width:100%;">
                 <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false" has-bouncing="false" on-scroll="scrollRightHorizon()" delegate-handle="rightContainerHandle" style="height:{{h}}px;">
-                    <div style="width:600px;">
+                    <div style="width:700px;">
                         <div ng-repeat="drawItem in historyPast3" style="display:flex;">
                             <div class="head" style="width: 60px;">
                                 <table>
-                                    <tr >
+                                    <tr>
                                         <td >{{toArray(drawItem.result,0)}}</td>
                                         <td >{{toArray(drawItem.result,1)}}</td>
                                         <td >{{toArray(drawItem.result,2)}}</td>
@@ -88,21 +88,21 @@
                             <div class="head">
                                 <table>
                                     <tr>
-                                        <td ng-repeat="item in dataArrange">{{toArray(drawItem.result,0)}}</td>
+                                        <td ng-repeat="item in dataArrange" ng-class="item == toArray(drawItem.result,0)?'count-color1':''">{{item}}</td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="head">
                                 <table>
                                     <tr>
-                                        <td ng-repeat="item in dataArrange">{{toArray(drawItem.result,1)}}</td>
+                                        <td ng-repeat="item in dataArrange" ng-class="item == toArray(drawItem.result,1)?'count-color1':''">{{item}}</td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="head">
                                 <table>
                                     <tr>
-                                        <td ng-repeat="item in dataArrange">{{toArray(drawItem.result,2)}}</td>
+                                        <td ng-repeat="item in dataArrange" ng-class="item == toArray(drawItem.result,2)?'count-color1':''">{{item}}</td>
                                     </tr>
                                 </table>
                             </div>
