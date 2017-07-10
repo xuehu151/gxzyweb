@@ -3,7 +3,7 @@
  */
 //大乐透走势图
 angular.module ('starter.bigTrendChart', ['starter.services'])
-    
+
     .controller ('bigTrendChart', function ($scope, $ionicScrollDelegate, $util, $ionicLoading, historyPastService) {
         $scope.h = Math.min (document.documentElement.clientHeight, window.innerHeight) - 44 - 88;
         $scope.scrollRightHorizon = function () {
@@ -19,7 +19,7 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
             var leftHandle = $ionicScrollDelegate.$getByHandle ("leftContainerHandle");
             leftHandle.freezeScroll (true);
         };
-        
+
         $scope.formerAreaOne = [];
         $scope.formerAreaTwo = [];
         $scope.formerAreaThree = [];
@@ -37,10 +37,11 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
         for (var i = 1; i < 13; i++) {
             $scope.backArea.push (i);
         }
+        console.info($scope.backArea);
         for (var j = 1; j < 8; j++) {
             $scope.drawCount.push (j);
         }
-        
+
         $ionicLoading.show ();
         //获取历史投注记录............
         var userInfo = $util.getUserInfo ();
@@ -63,18 +64,21 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
             .then (function (response) {
                 $ionicLoading.hide ();
                 $scope.bitLotto = response.data;
-    
+
                 for (var i = 0; i < $scope.bitLotto.length; i++) {
                     //console.info($scope.bitLotto[i].result);
                     var array1 = $scope.bitLotto[i].result.split ("*");
-                    $scope.arrFront = array1[0].split (",");
-                    $scope.arrBehind = array1[1].split (",");
-        
-                    console.info ($scope.arrFront);
-                    console.info ($scope.arrBehind);
-                    
+                    var arrFront = array1[0].split (",");
+                    var arrBehind = array1[1].split (",");
                 }
-              
+
+                $scope.blueBallData = [];
+                for (var i = 0; i < arrBehind.length; i++) {
+                    $scope.blueBallData.push(arrBehind[i] * 1);
+                }
+                console.info($scope.blueBallData);
+
+
             }, function (response) {
                 console.log ("获取列表失败");
             });
@@ -86,5 +90,5 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
             //console.log(array);
             return array[num];
         };
-        
+
     });
