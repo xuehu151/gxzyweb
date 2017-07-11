@@ -29,7 +29,7 @@ angular.module ('starter.3DTrendChart', [])
             $scope.drawCount.push (j);
         }
     
-//        $ionicLoading.show ();
+        $ionicLoading.show ();
         var userInfo = $util.getUserInfo ();
         var pageSize = 8;
         var pageNum = 1;
@@ -39,19 +39,18 @@ angular.module ('starter.3DTrendChart', [])
             pageNum: pageNum
         };
         /*$http ({
-         method: "POST",
-         url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
-         params: data,
-         headers: {
-         "Content-Type": "application/json"
-         }
-         })*/
+            method: "POST",
+            url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
+            params: data,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })*/
         historyPastService.PastLottery (data, userInfo.data.token)
             .then (function (response) {
                 $ionicLoading.hide ();
                 $scope.historyPast3 = response.data;
     
-                //console.log ($scope.historyPast3);
               
             }, function (error) {
                 console.log ("获取列表失败");

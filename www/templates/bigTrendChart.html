@@ -4,15 +4,15 @@
             <div class="head5DBig" style="width: 22px; height: 39px;background: #dfefe1;text-align: center">期号</div>
             <div style="overflow: hidden;white-space: nowrap;width:100%;">
                 <ion-scroll direction="x" scrollbar-x="false" overflow-scroll="false" has-bouncing="false" delegate-handle="headContainerHandle" on-scroll="noScroll()" style="margin-top:0;">
-                    <div style="display:flex;width:720px;">
-                        <div class="head5DBig" style="width: 117px;font-size: 9px;overflow: hidden">开奖号</div>
+                    <div style="display:flex;width:750px;">
+                        <div class="head5DBig" style="width: 160px;font-size: 9px;overflow: hidden">开奖号</div>
                         <div class="head5DBig">前一区</div>
-                        <div class="head5DBig">前二区</div>
+                        <div class="head5DBig" style="width: 235px">前二区</div>
                         <div class="head5DBig">前三区</div>
                         <div class="head5DBig" style="border-right:0;">后区</div>
                     </div>
-                    <div style="display:flex;width:720px;" class="titleTd">
-                        <div class="head5DBig" style="width: 117px;font-size: 9px;">
+                    <div style="display:flex;width:750px;" class="titleTd">
+                        <div class="head5DBig" style="width: 161px;font-size: 9px;">
                             <table>
                                 <tr>
                                     <td ng-repeat="drawItem in drawCount">{{drawItem}}</td>
@@ -59,9 +59,9 @@
             </ion-scroll>
             <div style="overflow: hidden;white-space: nowrap;width:100%;">
                 <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false" has-bouncing="false" on-scroll="scrollRightHorizon()" delegate-handle="rightContainerHandle" style="height:{{h}}px;">
-                    <div style="width:720px;">
+                    <div style="width:750px;">
                         <div ng-repeat="drawItem in bitLotto" style="display:flex;"  class="padding-td">
-                            <div class="head5DBig" style="width: 117px; padding: 0 .1em;">
+                            <div class="head5DBig" style="width: 117px; padding: 0 .4em;">
                                 <table>
                                     <tr>
                                         <td style="color: #e50014; font-weight: 600">{{toArray(drawItem.result,0)}}</td>
@@ -77,28 +77,56 @@
                             <div class="head5DBig">
                                 <table>
                                     <tr>
-                                        <td ng-repeat="item in formerAreaOne" ng-class="item == toArray(drawItem.result,0)?'count-color1':''">{{item}}</td>
+                                        <td
+                                            ng-repeat="item in formerAreaOne"
+                                            ng-class="item == toArray(drawItem.result,0)
+                                            || item == toArray(drawItem.result,1)
+                                            || item == toArray(drawItem.result,2)
+                                            || item == toArray(drawItem.result,3)
+                                            || item == toArray(drawItem.result,4)?'countBig':''">
+                                            {{item}}
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="head5DBig">
                                 <table>
                                     <tr>
-                                        <td ng-repeat="item in formerAreaTwo" ng-class="item == toArray(drawItem.result,drawItem)?'count-color1':''">{{item}}</td>
+                                        <td
+                                            ng-repeat="item in formerAreaTwo"
+                                            ng-class="item == toArray(drawItem.result,0)
+                                            || item == toArray(drawItem.result,1)
+                                            || item == toArray(drawItem.result,2)
+                                            || item == toArray(drawItem.result,3)
+                                            || item == toArray(drawItem.result,4)?'countBig':''">
+                                            {{item}}
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="head5DBig">
                                 <table>
                                     <tr>
-                                        <td ng-repeat="item in formerAreaThree" ng-class="item == toArray(drawItem.result,drawItem)?'count-color1':''">{{item}}</td>
+                                        <td
+                                            ng-repeat="item in formerAreaThree"
+                                            ng-class="item == toArray(drawItem.result,0)
+                                            || item == toArray(drawItem.result,1)
+                                            || item == toArray(drawItem.result,2)
+                                            || item == toArray(drawItem.result,3)
+                                            || item == toArray(drawItem.result,4)?'countBig':''">
+                                            {{item}}
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="head5DBig" style="border-right:0;">
                                 <table>
                                     <tr>
-                                        <td ng-repeat="item in backArea"  ng-class="item == blueBallData?'count-color1':''">{{item}}</td>
+                                        <td
+                                            ng-repeat="item in backArea"
+                                            ng-class="item == toArray(drawItem.result,5) || item == toArray(drawItem.result,6)?'countBigBlue':''">
+                                            {{item}}
+                                        </td>
                                     </tr>
                                 </table>
                             </div>

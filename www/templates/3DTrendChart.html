@@ -68,20 +68,42 @@
             <div style="overflow: hidden;white-space: nowrap;width:100%;">
                 <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false" has-bouncing="false" on-scroll="scrollRightHorizon()" delegate-handle="rightContainerHandle" style="height:{{h}}px;">
                     <div style="width:700px;">
-                        <div ng-repeat="drawItem in historyPast3" style="display:flex;">
+                        <div ng-repeat="drawItem in historyPast3" style="color: #000201; display:flex;">
                             <div class="head" style="width: 60px;">
-                                <table>
+                                <table class="arrange3">
                                     <tr>
-                                        <td >{{toArray(drawItem.result,0)}}</td>
-                                        <td >{{toArray(drawItem.result,1)}}</td>
-                                        <td >{{toArray(drawItem.result,2)}}</td>
+                                        <td
+                                            ng-class="toArray(drawItem.result,0) == toArray(drawItem.result,2)
+                                            || toArray(drawItem.result,0) == toArray(drawItem.result,1)
+                                            || toArray(drawItem.result,1) == toArray(drawItem.result,2)?'spread':''">
+                                            {{toArray(drawItem.result,0)}}
+                                        </td>
+                                        <td ng-class="toArray(drawItem.result,0) == toArray(drawItem.result,2)
+                                            || toArray(drawItem.result,0) == toArray(drawItem.result,1)
+                                            || toArray(drawItem.result,1) == toArray(drawItem.result,2)?'spread':''">
+                                            {{toArray(drawItem.result,1)}}
+                                        </td>
+                                        <td ng-class="toArray(drawItem.result,0) == toArray(drawItem.result,2)
+                                            || toArray(drawItem.result,0) == toArray(drawItem.result,1)
+                                            || toArray(drawItem.result,1) == toArray(drawItem.result,2)?'spread':''">
+                                            {{toArray(drawItem.result,2)}}
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="head">
                                 <table>
                                     <tr>
-                                        <td ng-repeat="item in dataArrange">{{item}}</td>
+                                        <td
+                                            ng-repeat="item in dataArrange"
+                                            ng-class="item == toArray(drawItem.result,0)
+                                            || item == toArray(drawItem.result,1)
+                                            || item == toArray(drawItem.result,2)
+                                            || toArray(drawItem.result,0) == toArray(drawItem.result,1)
+                                            || toArray(drawItem.result,1) == toArray(drawItem.result,2)
+                                            || toArray(drawItem.result,0) == toArray(drawItem.result,2)?'count-color1':''">
+                                            {{item}}
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -109,7 +131,11 @@
                             <div class="head" style="border-right:0;">
                                 <table>
                                     <tr>
-                                        <td ng-repeat="item in dataArrange">{{item}}</td>
+                                        <td
+                                            ng-class="item == ((toArray(drawItem.result,0))*1 + (toArray(drawItem.result,1))*1 + (toArray(drawItem.result,2))*1).toString().charAt(1)?'arrange3Blue':''"
+                                            ng-repeat="item in dataArrange">
+                                            {{item}}
+                                        </td>
                                     </tr>
                                 </table>
                             </div>

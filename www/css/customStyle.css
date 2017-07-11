@@ -841,6 +841,7 @@ input.bigLotto-input2:checked:before {
     border-bottom: 1px solid #FFFFff;
 }
 
+/*排列三*/
 .head{
     border-bottom:solid 1px #D1D3D6;
     border-right:solid 1px #D1D3D6;
@@ -881,13 +882,43 @@ input.bigLotto-input2:checked:before {
     color: #000;
 }
 
-.count-color1{
+.arrange3 tbody tr td{
+    color: #000201;
+    font-weight: 600;
+}
+/*排列三分布*/
+.spread{
     color: red!important;
+}
+
+/*和尾*/
+.arrange3Blue{
+    color: #1f2288 !important;
+    padding: 0 0.08em!important;
+    font-weight: 600;
+    font-size: 15px!important;
+}
+
+.count-color1{
+    color: #010100!important;
     font-size: 15px!important;
     font-weight: bold;
     padding: 0 1px!important;
 }
-
+/*大乐透*/
+.countBig,
+.countBigBlue{
+    font-size: 13px!important;
+    font-weight: bold;
+    padding: 0 0!important;
+}
+.countBig{
+    color: #000000 !important;
+}
+.countBigBlue{
+    color: #1f2288 !important;
+}
+/*************/
 .count-color5DGS{
     color: #1f2288!important;
     font-size: 15px!important;
@@ -943,7 +974,7 @@ input.bigLotto-input2:checked:before {
     border-bottom:solid 1px #D1D3D6;
     border-right:solid 1px #D1D3D6;
     height:20px;
-    width: 180px;
+    width: 220px;
     display:flex;
     align-items:center;
     font-size:12px;
@@ -967,7 +998,7 @@ input.bigLotto-input2:checked:before {
     border-left: solid 1px #D1D3D6;
     text-align: center;
     font-size: .8em;
-    padding: 0 0;
+    padding: 0 0.08em;
     color: #bcbcbc;
     width: 9px;
 }

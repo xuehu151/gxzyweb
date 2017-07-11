@@ -37,7 +37,6 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
         for (var i = 1; i < 13; i++) {
             $scope.backArea.push (i);
         }
-        console.info($scope.backArea);
         for (var j = 1; j < 8; j++) {
             $scope.drawCount.push (j);
         }
@@ -60,28 +59,16 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
          "Content-Type": "application/json"
          }
          })*/
+        $scope.blueBallData = [];
         historyPastService.PastLottery (data, userInfo.data.token)
             .then (function (response) {
                 $ionicLoading.hide ();
                 $scope.bitLotto = response.data;
 
-                for (var i = 0; i < $scope.bitLotto.length; i++) {
-                    //console.info($scope.bitLotto[i].result);
-                    var array1 = $scope.bitLotto[i].result.split ("*");
-                    var arrFront = array1[0].split (",");
-                    var arrBehind = array1[1].split (",");
-                }
-
-                $scope.blueBallData = [];
-                for (var i = 0; i < arrBehind.length; i++) {
-                    $scope.blueBallData.push(arrBehind[i] * 1);
-                }
-                console.info($scope.blueBallData);
-
-
             }, function (response) {
                 console.log ("获取列表失败");
             });
+        
         $scope.toArray = function (string2, num) {
             var array1 = string2.split ("*");
             var arrFront = array1[0].split (",");
