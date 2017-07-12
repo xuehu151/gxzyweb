@@ -7,9 +7,11 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
     
     .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService) {
         $rootScope.newStatus = true;
-        //$ionicLoading.show ();
-        sign = $location.search ().sign;
-        type = $location.search ().type;
+        $ionicLoading.show ();
+        if ($location.search ().sign && $location.search ().type) {
+            sign = $location.search ().sign;
+            type = $location.search ().type;
+        }
         
         if (sign != undefined) {
             if (type == 0) {
@@ -65,11 +67,8 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                 $state.go ('BigLotto-2');
                             };
                         }
-                        
-                        if (userInfo.data.user.realName != undefined) {
-//                            $state.go ('tab.account');
-                        }
-                        else {
+
+                        if (!userInfo.data.user.realName) {
                             modal ();
                         }
                         //console.log (response.data);
@@ -106,13 +105,12 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         var userInfo = $util.getUserInfo ();
                         console.log (userInfo);
                         
-                        if (userInfo.data.user.realName != undefined) {
-                            $state.go ('tab.account');
-                        }
-                        else {
+                        if (!userInfo.data.user.realName) {
                             modal ();
                         }
-                        
+                        else {
+                            $state.go ('tab.account');
+                        }
                         
                         $scope.goToExchange3D = function () {
                             $state.go ('exchange-3');
@@ -126,10 +124,10 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                 'flag2': 1
                             });
                         };
-                        $scope.goToExchangeBigLotto3 = function (status) {
+                     /*   $scope.goToExchangeBigLotto3 = function (status) {
                             $rootScope.newStatus = status;
                             $state.go ('BigLotto-2');
-                        };
+                        };*/
                         
                     }, function (response) {
                         console.log ("初始化数据失败");

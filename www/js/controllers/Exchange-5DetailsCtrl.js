@@ -102,12 +102,7 @@ angular.module('starter.Exchange-5DetailsCtrl', ['starter.services'])
             sessionStorage.jsonWrap5D = changeToStr;
             //console.log (sessionStorage.jsonWrap3D);
             $scope.totalMoney -= 1;
-            if ($scope.totalMoney >= userInfo.data.user.voucher) {
-                $scope.isDisabled = true;
-            }
-            else {
-                $scope.isDisabled = false;
-            }
+            disabledBtn5D();
         };
         //点击返回选择号码页面
         $scope.editThisOrder5D = function ($index) {
@@ -182,11 +177,11 @@ angular.module('starter.Exchange-5DetailsCtrl', ['starter.services'])
                 }
 
                 var data = {
-                    "lotteryID": "40",
-                    "WareIssue": reques.wareIssue,
-                    "PayType": PayType,
-                    "vid": vid,
-                    "data": dataArray
+//                    "lotteryID": "40",
+                    wareIssue: reques.wareIssue,
+                    payType: PayType,
+                    vid: vid,
+                    data: dataArray
                 };
                 $http({
                     method: "POST",
@@ -198,6 +193,8 @@ angular.module('starter.Exchange-5DetailsCtrl', ['starter.services'])
                 })
                     .then(function (response) {
                         $ionicLoading.hide();
+                        console.info(response);
+                        console.dir(data);
                         var alertPopup = $ionicPopup.alert({
                             title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
                             template: '<div class="alert-left">' + '<p style="text-align: center">' + response.data.info + '</p>' + '</div>',

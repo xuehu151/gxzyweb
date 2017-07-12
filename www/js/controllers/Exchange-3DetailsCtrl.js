@@ -18,13 +18,13 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
         var PayType3D = null;
         function disabledBtn3D() {
             //判断用户要用什么来兑换彩票    余额还是赠送的金额
-           /* if (PayType == 0) {
+            if (PayType == 0) {
                 PayType3D = userInfo.data.voucher.money
             }
             else if (PayType == 1) {
                 PayType3D = userInfo.data.user.money
-            }*/
-            if ($scope.totalMoney >= userInfo.data.user.voucher) {
+            }
+            if ($scope.totalMoney >= PayType3D) {
                 $scope.isDisabled = true;
                 var alertPopup = $ionicPopup.alert({
                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
@@ -93,13 +93,9 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
             sessionStorage.jsonWrap3D = changeToStr;
             //            console.log (sessionStorage.jsonWrap3D);
             $scope.totalMoney -= 1;
-            if ($scope.totalMoney >= userInfo.data.user.voucher) {
-                $scope.isDisabled = true;
-            }
-            else {
-                $scope.isDisabled = false;
-            }
+            disabledBtn3D();
         };
+  
         //点击返回选择号码页面
         $scope.editThisOrder3D = function ($index) {
             var thisIndexOrder3D = $scope.sessionJsonWarp3D[$index];
@@ -145,7 +141,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
             // 排列三投注信息接口
             function getPl3add() {
                 var userInfo = $util.getUserInfo();
-
+                
                 var dataArray = [];
                 for (var i in $scope.sessionJsonWarp3D) {
                     var dataObj = {
@@ -170,9 +166,9 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                 }
 
                 var data = {
-                    lotteryID: 31,
-                    WareIssue: reques.wareIssue,
-                    PayType: PayType,
+//                    lotteryID: 31,
+                    wareIssue: reques.wareIssue,
+                    payType: PayType,
                     vid: vid,
                     data: dataArray
                 };
@@ -188,7 +184,8 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
 //                BettingService.pl3Add(data, userInfo.data.token)
                     .then(function (response) {
                         $ionicLoading.hide();
-                        console.log(response);
+                        console.info(data);
+                        console.log(response.data);
                         var alertPopup = $ionicPopup.alert({
                             title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
                             template: '<div class="alert-left"><p style="text-align: center">' + response.data.info + '</p></div>',

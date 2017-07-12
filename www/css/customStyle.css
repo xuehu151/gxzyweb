@@ -69,7 +69,8 @@
     样式重置
 */
 * {
-    font-family: "新宋体";
+    /*font-family: 'PingFangSC', 'Microsoft YaHei';*/
+    font-family: '新宋体';
 }
 
 a {
@@ -874,6 +875,16 @@ input.bigLotto-input2:checked:before {
     color: #bcbcbc;
 }
 
+.Arrange > table > tbody > tr td{
+    display: table-cell;
+    border-left: solid 1px #D1D3D6;
+    text-align: center;
+    font-size: 14px;
+    padding: 0 .1em;
+    color: #010100;
+    font-weight: 600;
+}
+
 .head table{
     width: 100%;
 }
@@ -889,6 +900,7 @@ input.bigLotto-input2:checked:before {
 /*排列三分布*/
 .spread{
     color: red!important;
+    padding: 0 1px!important;
 }
 
 /*和尾*/
@@ -904,6 +916,13 @@ input.bigLotto-input2:checked:before {
     font-size: 15px!important;
     font-weight: bold;
     padding: 0 1px!important;
+}
+
+.count-grey{
+    color: #bcbcbc!important;
+    font-size: 12px!important;
+    padding: 0 2px!important;
+    font-weight: 500!important;
 }
 /*大乐透*/
 .countBig,
@@ -963,7 +982,8 @@ input.bigLotto-input2:checked:before {
 }
 
 .padding-td > table > tbody > tr > td {
-    color: #2a2a2a!important;
+    color: #2a2a2a;
+    /*font-weight: 600;*/
 }
 
 .titleTd .head5D td{

@@ -72,9 +72,24 @@
                             <div class="head5D padding-td" style="width: 79px" >
                                 <table>
                                     <tr>
-                                        <td >{{toArray(drawItem.result,0)}}</td>
-                                        <td >{{toArray(drawItem.result,1)}}</td>
-                                        <td >{{toArray(drawItem.result,2)}}</td>
+                                        <td
+                                            ng-class="toArray(drawItem.result,0) == toArray(drawItem.result,2)
+                                            || toArray(drawItem.result,0) == toArray(drawItem.result,1)
+                                            || toArray(drawItem.result,1) == toArray(drawItem.result,2)?'spread':''">
+                                            {{toArray(drawItem.result,0)}}
+                                        </td>
+                                        <td
+                                            ng-class="toArray(drawItem.result,0) == toArray(drawItem.result,2)
+                                            || toArray(drawItem.result,0) == toArray(drawItem.result,1)
+                                            || toArray(drawItem.result,1) == toArray(drawItem.result,2)?'spread':''">
+                                            {{toArray(drawItem.result,1)}}
+                                        </td>
+                                        <td
+                                            ng-class="toArray(drawItem.result,0) == toArray(drawItem.result,2)
+                                            || toArray(drawItem.result,0) == toArray(drawItem.result,1)
+                                            || toArray(drawItem.result,1) == toArray(drawItem.result,2)?'spread':''">
+                                            {{toArray(drawItem.result,2)}}
+                                        </td>
                                         <td >{{toArray(drawItem.result,3)}}</td>
                                         <td >{{toArray(drawItem.result,4)}}</td>
                                     </tr>

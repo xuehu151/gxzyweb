@@ -91,17 +91,25 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="head">
+                            <div class="head Arrange">
                                 <table>
                                     <tr>
-                                        <td
+                                        <!--<td
                                             ng-repeat="item in dataArrange"
                                             ng-class="item == toArray(drawItem.result,0)
                                             || item == toArray(drawItem.result,1)
-                                            || item == toArray(drawItem.result,2)
+                                            || item == toArray(drawItem.result,2)?'count-color1':(toArray(drawItem.result,0) == toArray(drawItem.result,2)
                                             || toArray(drawItem.result,0) == toArray(drawItem.result,1)
-                                            || toArray(drawItem.result,1) == toArray(drawItem.result,2)
-                                            || toArray(drawItem.result,0) == toArray(drawItem.result,2)?'count-color1':''">
+                                            || toArray(drawItem.result,1) == toArray(drawItem.result,2)?'spread':'')">
+                                            {{item}}
+                                        </td>-->
+                                        <td
+                                            ng-repeat="item in dataArrange"
+                                            ng-class="{'count-grey':!(item == toArray(drawItem.result,0)
+                                            || item == toArray(drawItem.result,1)
+                                            || item == toArray(drawItem.result,2)), 'spread':(toArray(drawItem.result,0) == toArray(drawItem.result,2)
+                                            || toArray(drawItem.result,0) == toArray(drawItem.result,1)
+                                            || toArray(drawItem.result,1) == toArray(drawItem.result,2))}">
                                             {{item}}
                                         </td>
                                     </tr>
