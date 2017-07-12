@@ -6,7 +6,5 @@ var url = "http://114.215.70.179:8088";
 angular.module ('starter.completeInfoSucceedCtrl', ['starter.services'])
     
     .controller ('completeInfoSucceedCtrl', ['$scope', '$state', function ($scope, $state) {
-        $scope.toAccount = function () {
-            $state.go ('tab.account')
-        }
+        
     }]);

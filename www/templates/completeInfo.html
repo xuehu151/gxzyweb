@@ -33,53 +33,58 @@
           </label> -->
           <label class="item item-input">
            <!-- <div class="img_003"></div> -->
-           <i class="icon-id"></i>
+           <i class="icon-id f22"></i>
             <input type="text" 
                 name="idcard" 
-                placeholder="请输入身份证号 (必填项)" ng-model="users.idcard"
+                placeholder="请输入身份证号" ng-model="users.idcard"
                 required
                 ng-pattern="/^\d{15}|\d{18}$/"
-                style="text-indent: 1px;" />
+                class="completeInfo-style" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid">格式错误</span>
-          </label>
-          <label class="item item-input">
-            <div class="img_004"></div>
-            <input type="text" 
-                name="alipay"
-                ng-pattern="/^[a-z0-9]{6,16}$/"
-                placeholder="请输入微信账号" 
-                ng-model="users.alipay"
-                style="text-indent: 1px;" />
-            <span class="icon ion-close-round error"
-                ng-show="inputInfoForm.alipay.$dirty && inputInfoForm.alipay.$invalid">6-16个字符</span>
             <span class="fr" style="color: #d21e1e">*</span>
           </label>
           <label class="item item-input">
-            <div class="img_005"></div>
+            <!-- <div class="img_004"></div> -->
+            <i class="icon-wechat f22"></i>
             <input type="text" 
-                name="wechat" 
-                placeholder="请输入开户行名称" ng-model="users.wechat"
+                name="wechat"
                 ng-pattern="/^[a-z0-9]{6,16}$/"
-                style="text-indent: 1px;" />
+                placeholder="请输入微信账号" 
+                ng-model="users.wechat"
+                class="completeInfo-style" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.wechat.$dirty && inputInfoForm.wechat.$invalid">6-16个字符</span>
             <span class="fr" style="color: #d21e1e">*</span>
           </label>
           <label class="item item-input">
-            <div class="img_006"></div>
+            <i class="icon-bank f22"></i>
+            <!-- <div class="img_005"></div> -->
+            <input type="text" 
+                name="bank" 
+                placeholder="请输入开户行名称" ng-model="users.bank"
+                ng-pattern="/[\u4E00-\u9FA5\uF900-\uFA2D]/"
+                class="completeInfo-style" />
+            <span class="icon ion-close-round error"
+                ng-show="inputInfoForm.bank.$dirty && inputInfoForm.bank.$invalid">请输入中文</span>
+            <span class="fr" style="color: #d21e1e">*</span>
+          </label>
+          <label class="item item-input">
+            <!-- <div class="img_006"></div> -->
+            <!-- <i class="icon-bank-no"></i> -->
+            <img class="icon-style1" src="./img/bankNo.png" alt="bankNo" />
             <input type="text" 
                 name="bankNo"  
                 placeholder="请输入银行卡号" 
                 ng-model="users.bankNo" 
                 ng-pattern="/^[0-9]*$/"
-                style="text-indent: 1px;" />
+                class="completeInfo-style" />
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.bankNo.$dirty && inputInfoForm.bankNo.$invalid">请输入数字</span>
             <span class="fr" style="color: #d21e1e">*</span>
           </label>
-          <ion-item class="completeInfoNote">注意：为了不影响您中奖资金的提现，请确保您的资料真实有效;
-          带*为三项至少填写一项</ion-item >
+          <ion-item class="completeInfo-note">注意：为了不影响您中奖资金的提现，请确保您的资料真实有效;
+          </ion-item >
          <input type="submit" class="comform-edit-info" ng-class="inputInfoForm.$invalid?'comform-edit-info1':'comform-edit-info2'" ng-disabled="inputInfoForm.$invalid" value="点击提交" />
        </form>
       </ion-list>

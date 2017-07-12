@@ -8,11 +8,11 @@
         </ion-nav-buttons>
     </ion-nav-bar> -->
     <ion-content style="background: #eee;">
-        <ion-list class="complete-info-succeed list-borderless" ng-switch="whetherWidthdrawSuc">
+        <ion-list class="complete-info-succeed list-borderless" ng-switch="WidthdrawStatus">
           <!-- <ion-item class="info-succeed-img">
            <img ng-src="{{whetherWidthdrawSuc?'./img/completeInfoSucceed.png':'./img/alert-img.png'}}" alt="资料完善成功" style="width: 110px;" />
           </ion-item> -->
-          <img ng-src="{{whetherWidthdrawSuc!=-1?'./img/completeInfoSucceed.png':'./img/alert-img.png'}}" alt="资料完善成功" style="width: 110px;" />
+          <img class="info-succeed-img" ng-src="{{WidthdrawStatus!=-1?'./img/completeInfoSucceed.png':'./img/alert-img.png'}}" alt="资料完善成功" style="width: 110px;" />
           <ion-item
             ng-switch-when="0"
            class="text-top">提现申请发起成功</ion-item>
@@ -44,6 +44,11 @@
           ng-switch-when="-1" class="text-bottom2" style="text-decoration: underline;" >
            别担心，说不定再试一次就成功了
           </ion-item>
+
+          <p class="account-common account-bg-blue" ui-sref="tab.account">
+            确定
+          </p>
+
         </ion-list>
     </ion-content>
 </ion-view>

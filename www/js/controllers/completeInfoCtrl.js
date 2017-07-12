@@ -7,11 +7,11 @@ angular.module ('starter.completeInfoCtrl', ['starter.services'])
     
     .controller ('completeInfoCtrl', function ($scope, $rootScope, $state, locals, postData, $ionicLoading, $util) {
         $scope.users = {
-            /* realName: '',
-             phone: '',
-             idcard: '',*/
+             // realName: '',
+             // phone: '',
+             idcard: '',
             wechat: '',
-            alipay: '',
+            bank: '',
             bankNo: ''
         };
         /**
@@ -21,6 +21,7 @@ angular.module ('starter.completeInfoCtrl', ['starter.services'])
          *     3.再把这个对象赋给localstorage
          */
         var userInfo = $util.getUserInfo ();
+        console.log(userInfo);
         $rootScope.addData = userInfo;
 //        console.log ($rootScope.addData);
         
@@ -30,9 +31,9 @@ angular.module ('starter.completeInfoCtrl', ['starter.services'])
             });
             // $rootScope.addData.user.realName = $scope.users.realName;
             // $rootScope.addData.user.phone = $scope.users.phone;
-            // $rootScope.addData.user.idcard = $scope.users.idcard;
+            $rootScope.addData.data.user.idcard = $scope.users.idcard;
             $rootScope.addData.data.user.wechat = $scope.users.wechat;
-            $rootScope.addData.data.user.alipay = $scope.users.alipay;
+            $rootScope.addData.data.user.bank = $scope.users.bank;
             $rootScope.addData.data.user.bankNo = $scope.users.bankNo;
 //            locals.setObject ($rootScope.user, $rootScope.addData);
             var datas = $util.setUserInfo ($rootScope.addData);
@@ -42,12 +43,20 @@ angular.module ('starter.completeInfoCtrl', ['starter.services'])
              * 功能:把提交的值上传到后台
              */
             postData.getInfo (url + "/service/customer/add", userInfo)
-                .then (function (data) {
-                    console.log(data);
+                .then (function (response) {
+                    console.log(response.error);
                     $ionicLoading.hide ();
-                    $state.go ('completeInfoSucceed');
-                }, function () {
-                    alert ('网络异常,未能更新您的资料')
+                    if (response.error==0) 
+                    {
+                       $state.go ('completeInfoSucceed'); 
+                    }
+                    else
+                    {
+                        alert(response);
+                    }
+                    
+                }, function (response) {
+                    alert ('异常,未能更新您的资料 error'+response)
                 })
         }
     });

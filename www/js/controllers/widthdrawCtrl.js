@@ -84,6 +84,7 @@ angular.module ('starter.widthdrawCtrl', ['starter.services'])
            
             getUser.getInfo (url + '/service/cash/add' + '?channel=' + $rootScope.channel + '&money=' + $scope.widthdrawMoney.money + '&token=' + token)
                 .then (function (data) {
+                    console.log(data);
                     $rootScope.WidthdrawStatus = data.error;    //保存返回的状态,用于决定widthdrawResult的页面
                     $ionicLoading.hide ();
                     $state.go ('widthdrawResult')

@@ -28,6 +28,11 @@
   font-size: 11px;
 }
 
+.f22
+{
+  font-size: 22px;
+}
+
 /*字体图标*/
 @font-face {
   font-family: 'icomoon';
@@ -67,6 +72,25 @@
 .icon-bank-no:before {
   content: "\e903";
   color: #d21e1e;
+}
+
+
+
+/**
+ *  iPhone 5/5s landscape & portrait
+ *  marx-device-widthb本来应是568px
+ */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 350px)      
+and (-webkit-min-device-pixel-ratio: 2) {
+    .complete-info-list label.item {
+      margin: 7px 15px -1px 15px;
+      padding: 10px 0;
+      border-width: 0 0 1px 0;
+      background: #eee;
+    }
+
 }
 
 
@@ -199,7 +223,8 @@ ion-item.f15
   margin-right: 4px;
 }
 
-.account-list .account-common {
+.account-list .account-common,
+.complete-info-succeed .account-common {
   margin: 30px 13%;
   padding: 3% 0;
   text-align: center;
@@ -209,7 +234,9 @@ ion-item.f15
   line-height: 22.5px;
 }
 
-.account-list .account-bg-blue {
+.account-list .account-bg-blue ,
+.complete-info-succeed .account-bg-blue
+{
   color: #fff;
   background: #2c4198;
 }
@@ -433,7 +460,7 @@ ion-item.f15
 .account-modal4
 {
   position: absolute;
-  top: 15%;
+  top: 25%;
   width: 74.4%;
   left: 50%;
   -webkit-transform: translate(-50%,0);
@@ -540,25 +567,39 @@ ion-item.f15
 /**********completeInfo.html************/
 
 .complete-info-list .item {
-  margin: 7px 30px -1px;
-  padding-left: 16px;
+  margin: 7px 47px -1px 44px;
+  padding: 17px 0;
   border-width: 0 0 1px 0;
   background: #eee;
 }
 
-.account-modal ion-item div, .complete-info-list .item-input div {
+/* .account-modal ion-item div, .complete-info-list .item-input div {
   display: inline-block;
   width: 29px;
   padding-right: 10px;
-}
+} */
 
 .complete-info-list .error {
   min-width: 78px;
-  color: red;
-  font-size: 12px;
+  color: #d21e1e;
+  font-size: 9px;
+  text-align: right;
 }
 
-.img_001, .img_002, .img_003, .img_004, .img_005, .img_006, .img_008, .img_009, .img_010, .img_011, .img_012 {
+.complete-info-list .icon-style1
+{
+  width: 22px;
+  vertical-align: middle;
+}
+
+.complete-info-list .completeInfo-style
+{
+  margin-left: 18px;
+  font-size: 13px;
+}
+
+
+/* .img_001, .img_002, .img_003, .img_004, .img_005, .img_006, .img_008, .img_009, .img_010, .img_011, .img_012 {
   background: url(../img/iconsBg.png) no-repeat;
 }
 
@@ -644,17 +685,18 @@ ion-item.f15
 
 .complete-info-list .loc6 {
   background-position: -125px 0;
-}
+} */
 
-.complete-info-list img, .payList img {
+/*.complete-info-list img, */
+.payList img {
   display: inline-block;
   width: 25px;
   margin-right: 10px;
   vertical-align: middle;
 }
 
-.complete-info-list .completeInfoNote {
-  font-size: 10px;
+.complete-info-list .completeInfo-note {
+  font-size: 9px;
   text-align: center;
   white-space: normal;
   color: #d21e1e;
@@ -663,12 +705,14 @@ ion-item.f15
 
 .complete-info-list .comform-edit-info {
   display: block;
-  width: 80%;
-  margin: 0 auto 30px;
+  width: 220px;
+  margin: 30px auto 0px;
   padding: 3% 0;
   text-align: center;
+  font-size: 16px;
   color: #fff;
   border-radius: 4px;
+  border-radius: 6px;
   /*  background: #2c4198;*/
 }
 
@@ -752,7 +796,7 @@ ion-item.f15
   padding: 60px 0 25px;
 }
 
-.complete-info-succeed .text-text-bottom
+.complete-info-succeed .text-bottom
 {
   color: #1a4a9e;
   font-size:13px;
@@ -767,6 +811,14 @@ ion-item.f15
 {
   color: #1a1a1a;
   font-size:16px;
+}
+
+.complete-info-succeed .success-red
+{
+  font-size: 13px;
+    color: #ff3600;
+    text-decoration: underline;
+    padding: 0;
 }
 
 /* .complete-info-succeed a.item-content {
@@ -1087,6 +1139,12 @@ ion-item.f15
 {
   color: #666;
   font-size: 13px;
+}
+
+.widthdraw-records-list .font-style4
+{
+  color:#999;
+  font-size: 11px;
 }
 
 .widthdraw-records-list .item

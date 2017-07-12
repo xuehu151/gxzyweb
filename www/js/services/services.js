@@ -104,16 +104,17 @@ angular.module('starter.services', [])
     .factory('postData', ['$http', '$q', function ($http, $q) {
         var info = {};
         info.getInfo = function (url, addData) {
+            console.log(addData);
             var d = $q.defer();
             $http({
                 method: "POST",
                 url: url + '?token=' + addData.data.token,
                 data: {
-                    "realName": addData.data.user.realName,
-                    "phone": addData.data.user.phone,
+                    // "realName": addData.data.user.realName,
+                    // "phone": addData.data.user.phone,
                     "idcard": addData.data.user.idcard,
                     "wechat": addData.data.user.wechat,
-                    "alipay": addData.data.user.alipay,
+                    "bank": addData.data.user.bank,
                     "bankNo": addData.data.user.bankNo
                 },
                 headers: {
@@ -130,9 +131,10 @@ angular.module('starter.services', [])
         return info;
     }])
 
-    .factory('postWidthdraw', ['$http', '$q', function ($http, $q) {
+    /*.factory('postWidthdraw', ['$http', '$q', function ($http, $q) {
     var info = {};
     info.postMoney = function (url, postData) {
+        console.log(postData)
         var d = $q.defer();
         $http({
             method: "POST",
@@ -157,7 +159,7 @@ angular.module('starter.services', [])
         return d.promise
     };
     return info;
-}])
+}])*/
     
     //分割字符串
     .factory('splitCode',['$http',function ($http) {

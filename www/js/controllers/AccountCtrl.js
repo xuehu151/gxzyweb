@@ -56,7 +56,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             });
         
         //检测有无中奖
-        getUser.getInfo (url + "/service/lottery/getWinList?token=" + token)
+       /* getUser.getInfo (url + "/service/lottery/getWinList?token=" + token)
             .then (function (response) {
 //                console.log (response);
                 $scope.winItems = response.data;
@@ -68,7 +68,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                 }
             }, function () {
                 alert ('网络异常,未获取到用户信息')
-            });
+            });*/
         
         $scope.withdrawConfirm = function () {
             var userData = userInfo.data.user;
