@@ -22,9 +22,17 @@ angular.module('starter.bettingDetailCtrl', ['starter.services'])
             $scope.countMoney = '3';
         }
         disabledBtnBigBitting();
-
+        
+        var PayTypeBig = null;
         function disabledBtnBigBitting() {
-            if ($scope.totalMoney >= userInfo.data.voucher.money) {
+            //判断用户要用什么来兑换彩票    余额还是赠送的金额
+            if (PayType == 0) {
+                PayTypeBig = userInfo.data.voucher.money
+            }
+            else if (PayType == 1) {
+                PayTypeBig = userInfo.data.user.money
+            }
+            if ($scope.totalMoney >= PayTypeBig) {
                 $scope.isDisabled = true;
                 var alertPopup = $ionicPopup.alert({
                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
@@ -32,6 +40,7 @@ angular.module('starter.bettingDetailCtrl', ['starter.services'])
                     okText: '确 定',
                     okType: 'button-light'
                 }).then(function () {
+                
                 });
             }
             else {
@@ -157,7 +166,7 @@ angular.module('starter.bettingDetailCtrl', ['starter.services'])
                 .then(function (response) {
                     $ionicLoading.hide();
                     reques = response.data;
-                    console.log (reques);
+//                    console.log (reques);
                     getdltadd();
                 }, function (response) {
                     console.log("获取列表失败");
@@ -219,7 +228,7 @@ angular.module('starter.bettingDetailCtrl', ['starter.services'])
                 })
                     .then(function (response) {
                         $ionicLoading.hide();
-                        console.log(data);
+//                        console.log(data);
                         var alertPopup = $ionicPopup.alert({
                             title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
                             template: '<div class="alert-left">' + '<p style="text-align: center;">' + response.data.info + '</p>' + '</div>',

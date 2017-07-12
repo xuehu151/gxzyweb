@@ -4,7 +4,7 @@
 
 angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
 //兑换 排列3
-    .controller ('Exchange-3Ctrl', function ($scope, $state, $rootScope) {
+    .controller ('Exchange-3Ctrl', function ($scope, $state, $rootScope, $util, getWareIssueService) {
         //设置排列3球百位号码
         $scope.numDataBit100 = [];
         var filterBit100 = [];
@@ -228,8 +228,18 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
             }
         };
         //玩法说明时间
-        
-        
+        var userInfo = $util.getUserInfo ();
+        var data = {
+            lotteryID: 31
+        };
+        getWareIssueService.getWareIssue(data, userInfo.data.token)
+            .then(function (response) {
+//                $ionicLoading.hide();
+                $scope.reques = response.data;
+                console.log ($scope.reques);
+            }, function (response) {
+                console.log("获取列表失败");
+            });
         
         //网期开奖
         $scope.history3D = function () {

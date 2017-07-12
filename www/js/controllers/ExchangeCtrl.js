@@ -109,7 +109,9 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             modal ();
                         }
                         else {
-                            $state.go ('tab.account');
+                            if($location.search ().sign && $location.search ().type){
+                                $state.go ('tab.account');
+                            }
                         }
                         
                         $scope.goToExchange3D = function () {

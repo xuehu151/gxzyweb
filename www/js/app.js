@@ -324,7 +324,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
             //全部订单页面
             .state('allOrders',{
                 url:'/account/allOrders',
-                cache:'false',
+                cache:'true',
                 prefetchTemplate:false,
                 templateUrl:'templates/allOrders.html',
                 controller:'allOrdersCtrl'
