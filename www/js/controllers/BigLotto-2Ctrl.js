@@ -4,7 +4,7 @@
 angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
 
 //兑换  大乐透不追加
-    .controller ('BigLotto-2Ctrl', function ($scope, $state, $ionicPopover, $interval, $ionicPopup, $stateParams) {
+    .controller ('BigLotto-2Ctrl', function ($scope, $state, $ionicPopover, $interval, $ionicPopup, $stateParams, $util, getWareIssueService) {
         var flag2 = $stateParams.flag2;
         //设置红球和篮球号码
         $scope.numDataRed = [];
@@ -212,6 +212,20 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 return
             }
         };
+    
+        //玩法说明时间
+        var userInfo = $util.getUserInfo ();
+        var data = {
+            lotteryID: 2
+        };
+        getWareIssueService.getWareIssue(data, userInfo.data.token)
+            .then(function (response) {
+//                $ionicLoading.hide();
+                $scope.reques = response.data;
+                console.log ($scope.reques);
+            }, function (response) {
+                console.log("获取列表失败");
+            });
         //网期开奖
         $scope.historyBiglotto = function () {
             $state.go ('bigLottoHistoryDetails');
