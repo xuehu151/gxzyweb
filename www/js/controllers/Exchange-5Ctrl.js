@@ -4,7 +4,7 @@
 //兑换 排列5
 angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
     
-    .controller ('Exchange-5Ctrl', function ($scope, $state, $util, getWareIssueService) {
+    .controller ('Exchange-5Ctrl', function ($scope, $state) {
         //设置排列3球万位号码
         $scope.numDataBit10000 = [];
         var filterBit10000 = [];
@@ -338,26 +338,8 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                 alert ('请正确选择号码');
             }
         };
-    
-        //玩法说明时间
-        var userInfo = $util.getUserInfo ();
-        var data = {
-            lotteryID: 40
-        };
-        getWareIssueService.getWareIssue(data, userInfo.data.token)
-            .then(function (response) {
-//                $ionicLoading.hide();
-                $scope.reques = response.data;
-                
-                
-                
-                console.log ($scope.reques);
-            }, function (response) {
-                console.log("获取列表失败");
-            });
-    
         //网期开奖
         $scope.history5D = function () {
             $state.go ('exchangehistory5D');
         }
-    });
+    })

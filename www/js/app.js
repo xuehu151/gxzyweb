@@ -279,7 +279,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
             //完善资料成功
             .state('completeInfoSucceed',{
                 url:'/account/completeInfoEditSucceed',
-                cache:'false',
+                cache:'true',
                 prefetchTemplate:false,
                 templateUrl:'templates/completeInfoSucceed.html',
                 controller:'completeInfoSucceedCtrl'
@@ -298,7 +298,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
             //提现结果页面
             .state('widthdrawResult',{
                 url:'/account/widthdrawResult',
-                cache:'false',
+                cache:'true',
                 prefetchTemplate:false,
                 templateUrl:'templates/widthdrawResult.html',
                 controller:'widthdrawResultCtrl'
@@ -306,7 +306,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
 
             .state('needExchange',{
                 url:'/account/needExchange',
-                cache:'false',
+                cache:'true',
                 prefetchTemplate:false,
                 templateUrl:'templates/needExchange.html',
                 controller:'needExchangeCtrl'
@@ -315,7 +315,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
             //奖金纪录页面
             .state('prizeRecords',{
                 url:'/account/prizeRecords',
-                cache:'false',
+                cache:'true',
                 prefetchTemplate:false,
                 templateUrl:'templates/prizeRecords.html',
                 controller:'prizeRecordsCtrl'
@@ -333,7 +333,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
             //订单详情
             .state('orderDetail',{
                 url:'/account/orderDetail',
-                cache:'false',
+                cache:'true',
                 prefetchTemplate:false,
                 templateUrl:'templates/orderDetail.html',
                 controller:'orderDetailCtrl'
@@ -342,7 +342,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
             //提现明细
             .state('widthdrawRecords',{
                 url:'/account/widthdrawRecords',
-                cache:'false',
+                cache:'true',
                 prefetchTemplate:false,
                 templateUrl:'templates/widthdrawRecords.html',
                 controller:'widthdrawRecordsCtrl'

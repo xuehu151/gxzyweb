@@ -7,6 +7,7 @@ angular.module ('starter.orderDetailCtrl', ['starter.services'])
     
     .controller ('orderDetailCtrl', function ($scope, $rootScope, $state) {
         $scope.orderDetail = $rootScope.orderDetail;
+        console.log($scope.orderDetail)
         if ($scope.orderDetail.payType == '扫码兑换') {
             $scope.explainInfo = '*兑换资格已返还至待兑换处';
         }

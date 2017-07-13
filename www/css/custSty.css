@@ -907,24 +907,39 @@ ion-item.f15
 
 
 /**********prizeRecords.html************/
+.prize-records-list ion-item
+{
+  padding: 9px 16px;
+}
+
+.prize-records-list p
+{
+  margin-bottom: 0;
+}
+
+.prize-records-list div.fl,
+.prize-records-list div.fr
+{
+  margin-top: 3px;
+}
 
 .prize-records-list .font-style2 {
-  font-size: 12px;
-  color: #666;
+  font-size: 9px;
+  color: #999;
 }
 
 .prize-records-list .font-style3 {
-  font-size: 20px;
+  font-size: 17px;
   color: #1a1a1a;
 }
 
 .prize-records-list .font-style4 {
-  font-size: 12px;
+  font-size: 11px;
   color: #1a1a1a;
 }
 
 .prize-records-list .font-style6 {
-  font-size: 20px;
+  font-size: 17px;
   color: #d11d1d;
 }
 
@@ -948,11 +963,11 @@ ion-item.f15
   color: #999;
 }
 
-.widthdraw-records-list .font-style1, .order-detail-list .font-style1, .prize-records-list .font-style5 {
+.widthdraw-records-list .font-style1, .prize-records-list .font-style5 {
   color: #d11d1d;
 }
 
-.widthdraw-records-list .font-style2, .order-detail-list .font-style2, .order-detail-list .font-style4 {
+.widthdraw-records-list .font-style2,  .order-detail-list .font-style4 {
   font-size: 13px;
   color: #666;
 }
@@ -974,6 +989,12 @@ ion-item.f15
   margin-left: 20px;
 }
 
+.allorders-scroll
+{
+  top: 10px;
+  width: 100%;
+  height: 90%;
+}
 .all-orders
 {
   background-color: #eee;
@@ -983,7 +1004,6 @@ ion-item.f15
 {
   display:flex;
   width:100%;
-  
   background-color: #fff;
   box-shadow: 0px 3px 4px #dedede;
 }
@@ -999,6 +1019,8 @@ ion-item.f15
   font-size: 13px;
   color: #999;
   border-right: 1px solid #c8c8c8;
+  text-align: center;
+  flex: 1;
 }
 
 .all-orders .tab_select
@@ -1015,12 +1037,18 @@ ion-item.f15
 
 .all-orders-list .each-order {
   position: relative;
-  margin-top: 5px;
+  margin-top: 11px;
+}
+
+.all-orders-list .each-order:first-child
+{
+  margin-top: 0;
 }
 
 .all-orders .padding-h8
 {
   padding: 8px 16px;
+  color: #333;
 }
 
 .all-orders .lt-style
@@ -1030,11 +1058,12 @@ ion-item.f15
 
 .all-orders-list .font-style3
 {
-  color: #1a1a1a;
+  color: #333;
   font-size: 11px;
 }
 
-.all-orders-list .font-style1
+.all-orders-list .font-style1,
+.order-detail-list .font-style1
 {
   color: #d11d1d;
   font-size: 13px;
@@ -1051,11 +1080,18 @@ ion-item.f15
   font-size: 10px;
   color: #0055ff;
 }
-
-.all-orders-list ion-item
+.all-orders-list .font-style6
 {
-  padding: 10px 16px;
+  font-size: 11px;
+  color: #d11d1d;
 }
+
+.all-orders-list .font-style7
+{
+  color: #333;
+  font-size: 13px;
+}
+
 
 /* .all-orders-list .each-order:first-child {
   margin-top: 0;
@@ -1064,17 +1100,21 @@ ion-item.f15
 .all-orders-list .prize-img {
   position: absolute;
   z-index: 3;
-  top: 10%;
-  left: 50%;
-  width: 80px;
-  transform: translate(-50%, 0);
+  top: 20%;
+  left: 52%;
+  width: 70px;
 }
 
 
 /**********orderDetail.html************/
+.order-detail-list .lottery-type
+{
+  font-size: 13px;
+  color: #333;
+}
 
 .order-detail-list .detail {
-  padding: 30px;
+  padding: 16px 40px;
 }
 
 .order-detail-list .detail>div {
@@ -1082,9 +1122,17 @@ ion-item.f15
   margin-top: 10px;
 }
 
-.order-detail-list .line-height {
-  line-height: 40px;
+.order-detail-list .purchase-code {
+  line-height: 32px;
   display: inline-block;
+  font-size: 10px;
+  color: #333;
+  /*font-family: 待加;*/
+}
+
+.order-detail-list .font-style2{
+  font-size: 10px;
+  color: #999;
 }
 
 .order-detail-list .dis-inlineblock {
@@ -1093,22 +1141,29 @@ ion-item.f15
 }
 
 .order-detail-list .font-style6 {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
+  color: #c01919;
+  /*font-family: 待加;*/
+}
+
+.order-detail-list .font-style {
+  font-size: 13px;
   color: #d11d1d;
 }
 
 .order-detail-list .ball {
   font-size: 20px;
-  line-height: 30px;
+  line-height: 22px;
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   margin: 5px;
   text-align: center;
   color: #fff;
-  border-radius: 15px;
-  background: #d11d1d;
+  border-radius: 11px;
+  background: #c01919;
+  font-size: 12px;
 }
 
 .exchange-fail
@@ -1122,8 +1177,9 @@ ion-item.f15
 }
 
 .order-detail-list .open-time {
-  font-size: 12px;
+  font-size: 11px;
   color: #d11d1d;
+  margin-left:10px;
 }
 
 

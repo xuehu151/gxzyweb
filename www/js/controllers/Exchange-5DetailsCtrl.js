@@ -14,18 +14,8 @@ angular.module('starter.Exchange-5DetailsCtrl', ['starter.services'])
         $scope.totalMoney = $scope.sessionJsonWarp5D.length;
         $scope.isDisabled = true;
         disabledBtn5D(); //判断当投注金额大于余额时按钮的点击效果函数
-        
-        var PayType5D = null;
         function disabledBtn5D() {
-            //判断用户要用什么来兑换彩票    余额还是赠送的金额
-            if (PayType == 0) {
-                PayType5D = userInfo.data.voucher.money
-            }
-            else if (PayType == 1) {
-                PayType5D = userInfo.data.user.money
-            }
-            
-            if ($scope.totalMoney >= PayType5D) {
+            if ($scope.totalMoney >= userInfo.data.user.voucher) {
                 $scope.isDisabled = true;
                 var alertPopup = $ionicPopup.alert({
                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',

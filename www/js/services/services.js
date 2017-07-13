@@ -165,15 +165,21 @@ angular.module('starter.services', [])
     .factory('splitCode',['$http',function ($http) {
         var code={};
         code.split=function (obj) {
-            var investCode = obj.split ('@');
+            var investCode = obj.split ('*');
+            console.log(investCode)
             var investCodeFormat = [];
             if (investCode.length == 2) {
                 investCodeFormat[0] = investCode[0].split (',');
                 investCodeFormat[1] = investCode[1].split (',');
             }
-            else if (investCode.length == 1) {
-                investCodeFormat[0] = investCode[0].split (',');
+            else if (investCode.length == 3 || investCode.length == 5) {
+                
+                for (var i = 0; i < investCode.length; i++) {
+                    investCode[i]='0'+investCode[i]
+                }
+                investCodeFormat[0] = investCode;
             }
+            console.log(investCodeFormat);
             return investCodeFormat;
         };
         return code;
@@ -207,9 +213,9 @@ angular.module('starter.services', [])
                         obj[i].RT = '扫码兑换';
                     }
                     else if (obj[i].payType == 1) {
-                        obj[i].RT = '奖金支付: ¥' + obj[i].money;
+                        obj[i].RT = '¥' + obj[i].money;
                     }
-                    console.log(obj[i])
+                    // console.log(obj[i])
                     arr2.push(obj[i]);
                 }
                 else if (obj[i].status == 4) {
@@ -217,14 +223,14 @@ angular.module('starter.services', [])
                     obj[i].whetherRed = true;
                     obj[i].status = '已中奖';
                     obj[i].whetherDate = false;
-                    obj[i].LT = '奖金: ¥' + obj[i].winamt;
+                    obj[i].LT = '¥' + obj[i].winamt;
                     if (obj[i].payType == 0) {
                         obj[i].RT = '扫码兑换';
                     }
                     else if (obj[i].payType == 1) {
-                        obj[i].RT = '奖金支付: ¥' + obj[i].money;
+                        obj[i].RT = '¥' + obj[i].money;
                     }
-                    console.log(obj[i])
+                    // console.log(obj[i])
                     arr3.push(obj[i]);
                 }
                 else if (obj[i].status == -1) {
@@ -236,7 +242,7 @@ angular.module('starter.services', [])
                         obj[i].RT = '扫码兑换';
                     }
                     else if (obj[i].payType == 1) {
-                        obj[i].RT = '奖金支付: ¥' + obj[i].money;
+                        obj[i].RT = '¥' + obj[i].money;
                     }
                 }
                 else if (obj[i].status == 3) {
@@ -249,9 +255,9 @@ angular.module('starter.services', [])
                         obj[i].RT = '扫码兑换';
                     }
                     else if (obj[i].payType == 1) {
-                        obj[i].RT = '奖金支付: ¥' + obj[i].money;
+                        obj[i].RT = ' ¥' + obj[i].money;
                     }
-                    console.log(obj[i])
+                    // console.log(obj[i])
                     arr4.push(obj[i]);
                 }
             }
@@ -259,6 +265,8 @@ angular.module('starter.services', [])
         }
         return orders;
     }])
+
+
     
     .constant('$ionicLoadingConfig', {
         hideOnStateChange: true

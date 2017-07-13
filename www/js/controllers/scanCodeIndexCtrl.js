@@ -6,7 +6,7 @@
 angular.module('starter.scanCodeIndexCtrl', ['starter.services'])
 
 .controller('scanCodeIndexCtrl', function ($scope, $state) {
-    PayType = 0;
+    PayType=0;
     $scope.goToExchange3D = function () {
         $state.go('exchange-3');
     };

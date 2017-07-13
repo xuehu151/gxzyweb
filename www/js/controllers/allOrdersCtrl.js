@@ -8,14 +8,18 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
     
     .controller ('allOrdersCtrl', function ($scope, $rootScope, $state, getUser, locals, $ionicLoading, splitCode, $util,$ionicSlideBoxDelegate,difOrders) {
         $scope.tabNames = ['全部订单', '待开奖', '已中奖','未中奖'];
-        $scope.slectIndex = 0;
-        $scope.activeSlide = function (index) {//点击时候触发
+        $scope.selectIndex = 0;
+       /* $scope.activeSlide = function (index) {//点击时候触发
             $scope.slectIndex = index;
             $ionicSlideBoxDelegate.slide (index);
         };
         $scope.slideChanged = function (index) {//滑动时候触发
             $scope.slectIndex = index;
-        };
+        };*/
+
+        $scope.activeTab=function (index) {
+            $scope.selectIndex=index;
+        }
         // $scope.pages = ["templates/bigLottoHistoryDetails.html", "templates/exchangehistory3D.html", "templates/exchangehistory5D.html"];
 
         $ionicLoading.show ({
