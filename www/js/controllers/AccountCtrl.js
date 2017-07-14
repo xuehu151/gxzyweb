@@ -22,7 +22,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                     chanel: 1,
                     num: '(' + response.data.alipay + ')',
                     disable: false
-                },*/ 
+                },*/
                 {
                     chanel: 2,
                     num: '(' + response.data.wechat + ')'
@@ -159,7 +159,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         //提现框的mordal窗口配置
         $ionicModal.fromTemplateUrl ('accountModal.html', {
             scope: $scope,
-            backdropClickToClose:true    
+            backdropClickToClose:true
         }).then (function (modal) {
             $scope.modal = modal;
         });
@@ -178,7 +178,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         //老用户获得彩票的mordal窗口配置
         $ionicModal.fromTemplateUrl ('accountModalOldUser.html', {
             scope: $scope,
-            backdropClickToClose:true    
+            backdropClickToClose:true
         }).then (function (modal) {
             $scope.modal2 = modal;
         });
@@ -195,7 +195,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         //中奖mordal窗口配置
         $ionicModal.fromTemplateUrl ('accountModalGetPrize.html', {
             scope: $scope,
-            backdropClickToClose:true    
+            backdropClickToClose:true
         }).then (function (modal) {
             $scope.modal3 = modal;
         });
@@ -315,7 +315,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         //提现完善资料的mordal窗口配置
         $ionicModal.fromTemplateUrl ('widthdrawCompleteInfo.html', {
             scope: $scope,
-            backdropClickToClose:true    
+            backdropClickToClose:true
         }).then (function (modal) {
             $scope.modal4 = modal;
         });
