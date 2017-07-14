@@ -38,14 +38,14 @@ angular.module ('starter.5DTrendChart', ['starter.services'])
             pageNum: pageNum
         };
         console.log(data);
-        /*$http ({
-         method: "POST",
-         url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
-         params: data,
-         headers: {
-         "Content-Type": "application/json"
-         }
-         })*/
+      /*  $http ({
+            method: "POST",
+            url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
+            params: data,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })*/
         historyPastService.PastLottery (data, userInfo.data.token)
             .then (function (response) {
                 $ionicLoading.hide ();

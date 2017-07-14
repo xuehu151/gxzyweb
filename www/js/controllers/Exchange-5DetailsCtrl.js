@@ -16,14 +16,24 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
         disabledBtn5D (); //判断当投注金额大于余额时按钮的点击效果函数
         
         var PayType5D = null;
-        
         function disabledBtn5D () {
-            //判断用户要用什么来兑换彩票    余额还是赠送的金额
-            if (PayType == 0) {
-                PayType5D = userInfo.data.voucher.money
-            }
-            else if (PayType == 1) {
-                PayType5D = userInfo.data.user.money
+            //判断用户要用什么来兑换彩票    余额 || 抵用券
+            if (type == 0) {
+                if (PayType == 0) {
+                    PayType5D = userInfo.data.voucher.money
+                }else if(PayType == 1){
+                    PayType5D = userInfo.data.user.money
+                }
+            }else if(type == 1){
+                if (PayType == 0) {
+                    for(var k = 0; k < userInfo.data.vouchers.length; k++){
+                        PayType5D = userInfo.data.vouchers[k].money;
+//                        console.info(userInfo.data.vouchers[k]);
+                    }
+                }
+                else if (PayType == 1) {
+                    PayType5D = userInfo.data.user.money
+                }
             }
             
             if ($scope.totalMoney >= PayType5D) {
@@ -153,7 +163,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                 .then (function (response) {
                     $ionicLoading.hide ();
                     reques = response.data;
-                    // console.log (reques);
+                     console.log (reques);
                     getPl5add ();
                 }, function (response) {
                     console.log ("获取列表失败");
@@ -181,11 +191,22 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                 }
                 
                 var vid = '';
-                if (userInfo.data.voucher == undefined) {
-                    vid = '';
-                }
-                else {
-                    vid = userInfo.data.voucher.vid;
+                if(type == 0){
+                    if (userInfo.data.voucher == undefined) {
+                        vid = '';
+                    }
+                    else {
+                        vid = userInfo.data.voucher.vid;
+                    }
+                }else if(type == 1) {
+                    for(var k = 0; k < userInfo.data.vouchers.length; k++ ){
+                        if (userInfo.data.vouchers == undefined) {
+                            vid = '';
+                        }
+                        else {
+                            vid = userInfo.data.vouchers[k].vid;
+                        }
+                    }
                 }
                 
                 var data = {

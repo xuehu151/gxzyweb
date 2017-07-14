@@ -28,7 +28,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                 if (PayType == 0) {
                     for(var k = 0; k < userInfo.data.vouchers.length; k++){
                         PayType3D = userInfo.data.vouchers[k].money;
-                        console.info(userInfo.data.vouchers[k]);
+//                        console.info(userInfo.data.vouchers[k]);
                     }
                 }
                 else if (PayType == 1) {
