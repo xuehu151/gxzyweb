@@ -4,7 +4,7 @@
 //兑换 排列5
 angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
     
-    .controller ('Exchange-5Ctrl', function ($scope, $state) {
+    .controller ('Exchange-5Ctrl', function ($scope, $state, $interval, $util, getWareIssueService) {
         //设置排列3球万位号码
         $scope.numDataBit10000 = [];
         var filterBit10000 = [];
@@ -338,8 +338,56 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                 alert ('请正确选择号码');
             }
         };
+    
+        //玩法说明时间
+        var userInfo = $util.getUserInfo ();
+        var data = {
+            lotteryID: 40
+        };
+        getWareIssueService.getWareIssue(data, userInfo.data.token)
+            .then(function (response) {
+//                $ionicLoading.hide();
+                $scope.reques = response.data;
+                console.log ($scope.reques);
+    
+                var end_sale_time = $scope.reques.end_sale_time;
+                var end_sale_timeStr = end_sale_time.split ('T').join (' ');
+    
+                var timer = $interval (countTime, 1000);
+    
+                function countTime () {
+                    var date = new Date ();//获取当前时间
+                    var now = date.getTime ();
+        
+                    var endDate = new Date (end_sale_timeStr); //设置截止时间
+                    var end = endDate.getTime ();
+        
+                    var leftTime = end - now;//计算时间差
+        
+                    var d, h, m, s;
+                    if (leftTime >= 0) {//定义变量 d,h,m,s保存倒计时的时间
+                        d = Math.floor (leftTime / 1000 / 60 / 60 / 24);
+                        h = Math.floor (leftTime / 1000 / 60 / 60 % 24);
+                        m = Math.floor (leftTime / 1000 / 60 % 60);
+                        s = Math.floor (leftTime / 1000 % 60);
+                    }
+                    $scope.hours = checkTime ((d * 24) + h);
+                    $scope.minute = checkTime (m);
+                    $scope.second = checkTime (s);
+        
+                    function checkTime (i) { //将0-9的数字前面加上0，例1变为01
+                        if (i < 10) {
+                            i = "0" + i;
+                        }
+                        return i;
+                    }
+                }
+            }, function (response) {
+                console.log("获取列表失败");
+            });
+    
         //网期开奖
         $scope.history5D = function () {
             $state.go ('exchangehistory5D');
         }
-    })
+    });

@@ -4,7 +4,7 @@
 angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
 
 //兑换  大乐透不追加
-    .controller ('BigLotto-2Ctrl', function ($scope, $state, $ionicPopover, $interval, $ionicPopup, $stateParams) {
+    .controller ('BigLotto-2Ctrl', function ($scope, $state, $ionicPopover, $interval, $ionicPopup, $stateParams, $util, getWareIssueService) {
         var flag2 = $stateParams.flag2;
         //设置红球和篮球号码
         $scope.numDataRed = [];
@@ -212,6 +212,54 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 return
             }
         };
+    
+        //玩法说明时间
+        var userInfo = $util.getUserInfo ();
+        var data = {
+            lotteryID: 2
+        };
+        getWareIssueService.getWareIssue(data, userInfo.data.token)
+            .then(function (response) {
+//                $ionicLoading.hide();
+                $scope.reques = response.data;
+                console.log ($scope.reques);
+    
+                var end_sale_time = $scope.reques.end_sale_time;
+                var end_sale_timeStr = end_sale_time.split ('T').join (' ');
+
+                var timer = $interval (countTime, 1000);
+    
+                function countTime () {
+                    var date = new Date ();//获取当前时间
+                    var now = date.getTime ();
+        
+                    var endDate = new Date (end_sale_timeStr); //设置截止时间
+                    var end = endDate.getTime ();
+        
+                    var leftTime = end - now;//计算时间差
+        
+                    var d, h, m, s;
+                    if (leftTime >= 0) {//定义变量 d,h,m,s保存倒计时的时间
+                        d = Math.floor (leftTime / 1000 / 60 / 60 / 24);
+                        h = Math.floor (leftTime / 1000 / 60 / 60 % 24);
+                        m = Math.floor (leftTime / 1000 / 60 % 60);
+                        s = Math.floor (leftTime / 1000 % 60);
+                    }
+                    $scope.hours = checkTime ((d * 24) + h);
+                    $scope.minute = checkTime (m);
+                    $scope.second = checkTime (s);
+        
+                    function checkTime (i) { //将0-9的数字前面加上0，例1变为01
+                        if (i < 10) {
+                            i = "0" + i;
+                        }
+                        return i;
+                    }
+                }
+            }, function (response) {
+                console.log("获取列表失败");
+            });
+        
         //网期开奖
         $scope.historyBiglotto = function () {
             $state.go ('bigLottoHistoryDetails');

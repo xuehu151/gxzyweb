@@ -4,7 +4,7 @@
 
 angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
 //兑换 排列3
-    .controller ('Exchange-3Ctrl', function ($scope, $state, $rootScope, $util, getWareIssueService) {
+    .controller ('Exchange-3Ctrl', function ($scope, $state, $rootScope, $interval, getWareIssueService, $util) {
         //设置排列3球百位号码
         $scope.numDataBit100 = [];
         var filterBit100 = [];
@@ -232,13 +232,47 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         var data = {
             lotteryID: 31
         };
-        getWareIssueService.getWareIssue(data, userInfo.data.token)
-            .then(function (response) {
+        getWareIssueService.getWareIssue (data, userInfo.data.token)
+            .then (function (response) {
+                var timer = $interval (countTime, 1000);
 //                $ionicLoading.hide();
                 $scope.reques = response.data;
                 console.log ($scope.reques);
+                
+                var end_sale_time = $scope.reques.end_sale_time;
+                var end_sale_timeStr = end_sale_time.split ('T').join (' ');
+                
+//                var timer = $interval (countTime, 1000);
+                
+                function countTime () {
+                    var date = new Date ();//获取当前时间
+                    var now = date.getTime ();
+                    
+                    var endDate = new Date (end_sale_timeStr); //设置截止时间
+                    var end = endDate.getTime ();
+                    
+                    var leftTime = end - now;//计算时间差
+                    
+                    var d, h, m, s;
+                    if (leftTime >= 0) {//定义变量 d,h,m,s保存倒计时的时间
+                        d = Math.floor (leftTime / 1000 / 60 / 60 / 24);
+                        h = Math.floor (leftTime / 1000 / 60 / 60 % 24);
+                        m = Math.floor (leftTime / 1000 / 60 % 60);
+                        s = Math.floor (leftTime / 1000 % 60);
+                    }
+                    $scope.hours = checkTime ((d * 24) + h);
+                    $scope.minute = checkTime (m);
+                    $scope.second = checkTime (s);
+                    
+                    function checkTime (i) { //将0-9的数字前面加上0，例1变为01
+                        if (i < 10) {
+                            i = "0" + i;
+                        }
+                        return i;
+                    }
+                }
             }, function (response) {
-                console.log("获取列表失败");
+                console.log ("获取列表失败");
             });
         
         //网期开奖
