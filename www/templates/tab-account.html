@@ -47,10 +47,10 @@
           </div>
         </div>
       </div>
-      <ion-item class="f15" ng-click="toNeedExchange()" ng-show="needExchangeAmount" style="border-bottom-width: 2px;">
+      <ion-item class="f15" ng-click="toNeedExchange()" ng-show="needExchangeAmount.amount" style="border-bottom-width: 2px;">
         待兑换
         <span class="badge badge-style1" ng-cloak>
-          {{needExchangeAmount}}
+          {{needExchangeAmount.amount}}
         </span>
       </ion-item>
       <ion-item class="item-icon-right f15" ng-click="toPrizeRecords()">
@@ -132,7 +132,7 @@
     <!-- modal弹窗 中奖 -->
     <script id="accountModalGetPrize.html" type="text/ng-template">
       <ion-modal-view id="modalAccount3">
-                <div class="account-modal3">
+                <!-- <div class="account-modal3">
                     <div class="modal3-title-img-wrap">
                         <img class="modal3-title-img" src="./img/completeInfoSucceed.png" alt="中奖"/>
                     </div>
@@ -140,7 +140,7 @@
                         恭喜您,中奖啦
                     </div>
                     <div class="account-modal3-style1">
-                        奖金<span ng-cloak>{{winamt}}元</span>
+                        奖金<span ng-cloak>{{winamt | number:2}}元</span>
                     </div>
                     <div class="account-modal3-style2">
                         <span class="fl">期 数:</span><span ng-cloak>{{wareIssue}}</span>
@@ -150,6 +150,7 @@
                     </div>
                     <div class="account-modal3-style2">
                         <span class="fl">获赠号码:</span>
+                        <i>01</i>
                         <i>01</i>
                         <i>01</i>
                         <i>01</i>
@@ -169,7 +170,42 @@
                     </div>
                     <div class="account-modal3-style3">*奖金已发送至奖金余额,请查收!</div>
                     <div class="account-modal3-style4" ng-click="cancelPop3()"></div>
+                </div> -->
+                <div class="account-modal3">
+                    <div class="modal3-title-img-wrap">
+                        <img class="modal3-title-img" src="./img/completeInfoSucceed.png" alt="中奖"/>
+                    </div>
+                   <!--  <div class="account-modal3-win">
+                       恭喜您,中奖啦
+                   </div> -->
+                    <div class="account-modal3-style1">
+                        奖金 <span ng-cloak>{{winamt | number:2}}元</span>
+                    </div>
+                    <div class="account-modal3-style2" style="margin-top: 18px">
+                        <span class="fl">期 数:</span><span ng-cloak>{{wareIssue}}</span>
+                    </div>
+                    <div class="account-modal3-style2">
+                        <span class="fl">时 间:</span><span ng-cloak>{{drawTime}}</span>
+                    </div>
+                    <div class="account-modal3-style2">
+                        <span class="fl">获赠号码:</span>
+                        <span>
+                          <i ng-cloak ng-repeat="codeRed in investCode[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in investCode[1] track by $index" ng-if="investCode[1]" class="blue">{{codeBlue}}</i>
+                          <!-- <i>01</i><i>11</i><i>21</i><i>01</i><i>01</i> </span><i class="blue">01</i><i class="blue">01</i> -->
+                        
+                    </div>
+                    <div class="account-modal3-style2">
+                        <span class="fl">开奖号码:</span>
+                        <span>
+                          <i ng-cloak ng-repeat="codeRed in investCode[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in investCode[1] track by $index" ng-if="investCode[1]" class="blue">{{codeBlue}}</i>
+                          <!-- <i>01</i><i>01</i><i>11</i><i>13</i><i>01</i><i class="blue">01</i><i class="blue">22</i> -->
+                        </span>
+                        
+                    </div>
+                    <div class="account-modal3-style3">*奖金已发送至奖金余额,请查收!</div>
+                    <div class="account-modal3-style4" ng-click="cancelPop3()"></div>
                 </div>
+
             </ion-modal-view>
     </script>
 

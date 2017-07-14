@@ -3,7 +3,7 @@
  */
 angular.module ('starter.AccountCtrl', ['starter.services'])
 //账户页面
-    .controller ('AccountCtrl', function ($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading, $util) {
+    .controller ('AccountCtrl', function ($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading, $util,splitCode,$timeout) {
         //验证是否资料完善
         //        $ionicLoading.show ();
         PayType = 1;
@@ -40,68 +40,99 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             }, function () {
                 alert ('网络异常, 未能获取到您的余额')
             });
-        //更新待兑换
-        getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token)
+        
+
+            //测试
+        /*var winItems=[
+        {   
+            winamt:45,
+            wareIssue:20170515,
+            drawTime:"2017-05-3",
+            investCode:"4*9*3"
+        },
+        {
+            winamt:4,
+            wareIssue:20174115,
+            drawTime:"2017-07-3",
+            investCode:"1*2*3*6*9"
+        },
+        {
+            winamt:12,
+            wareIssue:201714115,
+            drawTime:"2017-07-13",
+            investCode:"01,05,03,07,09*11,21"
+        },
+        {
+            winamt:1133,
+            wareIssue:201714115,
+            drawTime:"2017-07-13",
+            investCode:"01,05,03,07,09*11,21"
+        }
+
+        ];*/
+        var winItems=[];
+        var winAlertStatus={first:false,second:false,third:false,forth:false}   //最多四次弹窗
+        var haveShowAllWin=false;
+        var nextShow=null;   //定时器
+
+        $scope.needExchangeAmount={amount:0};
+        //检测有无中奖
+        getUser.getInfo (url + "/service/lottery/getWinList?token=" + token)
             .then (function (response) {
-                $scope.needExchangeAmount = response.data.length;
-                console.log($scope.needExchangeAmount);
+               console.log (response);
+                winItems = response.data;
                 
-                if($scope.needExchangeAmount){
-                    $rootScope.needExchangeItems = response.data;
-                    $scope.modal2.show ();
+                if (winItems[0]) 
+                {
+                    $scope.winamt = winItems[0].winamt;
+                    $scope.wareIssue = winItems[0].wareIssue;
+                    $scope.drawTime = winItems[0].drawTime;
+                    $scope.investCode=splitCode.split(winItems[0].investCode);
+                    console.log($scope.investCode);
+                    winAlertStatus.first=true;
+                    $scope.modal3.show ();
                 }
-                
+                else if (!winItems[0]) 
+                {
+                    $timeout.cancel(nextShow);
+
+                    //更新待兑换
+                    getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token)
+                        .then (function (response) {
+                            $scope.needExchangeAmount.amount = response.data.length;
+                            console.log($scope.needExchangeAmount.amount);
+                            
+                            if($scope.needExchangeAmount.amount){
+                                $rootScope.needExchangeItems = response.data;
+                                $scope.modal2.show ();
+                            }
+                            
+                        }, function () {
+                            alert ('网络异常,未获取到用户信息')
+                        });
+                    
+                }
+
             }, function () {
                 alert ('网络异常,未获取到用户信息')
             });
+
+
         
-        //检测有无中奖
-       /* getUser.getInfo (url + "/service/lottery/getWinList?token=" + token)
-            .then (function (response) {
-//                console.log (response);
-                $scope.winItems = response.data;
-                for (var i = 0; i < $scope.winItems.length; i++) {
-                    $scope.winamt = $scope.winItems[i].winamt;
-                    $scope.wareIssue = $scope.winItems[i].wareIssue;
-                    $scope.drawTime = $scope.winItems[i].drawTime;
-                    $scope.modal3.show ();
-                }
-            }, function () {
-                alert ('网络异常,未获取到用户信息')
-            });*/
+
         
         $scope.withdrawConfirm = function () {
+            
+
+            
             var userData = userInfo.data.user;
             if (userData.wechat || userData.alipay || userData.bankNo) {
                 $scope.modal.show ();
             }
             else {
                 $scope.modal4.show ();
-                /*var confirmPopup = $ionicPopup.confirm ({
-                    title: '完善资料',
-                    template: '<p style="text-align:center;"><img src="./img/completeInf.png"></p>' + '当前个人资料尚未完善，无法提现；完善个人资料后即可立即提现！',
-                    // templateUrl: '', // String (可选)。放在弹窗body内的一个html模板的URL。
-                    cancelText: '暂不完善', // String (默认: 'Cancel')。一个取消按钮的文字。
-                    cancelType: '', // String (默认: 'button-default')。取消按钮的类型。
-                    okText: '立即完善', // String (默认: 'OK')。OK按钮的文字。
-                    okType: 'button-positive' // String (默认: 'button-positive')。OK按钮的类型。
-                }).then (function (res) {
-                    if (res) {
-                        $state.go ('completeInfo')
-                    }
-                    else {
-                    }
-                });*/
             }
         };
-        /*//点击暂不完善,隐藏提示界面
-         $scope.notCompleteInfo=function () {
-         $scope.confirmInfoComplete=false;
-         }*/
-        //点击完善资料,转到完善资料页面
-        /* $scope.toCompleteInfo=function () {
-         $state.go('completeInfo')
-         };*/
         //冻结金额的解释
         $scope.toggleShowAnswer = function () {
             $scope.showAnswer = !$scope.showAnswer;
@@ -173,6 +204,112 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         };
         $scope.cancelPop3 = function () {
             $scope.modal3.hide ();
+            nextShow=$timeout(function () {
+                if (winAlertStatus.first==true && winAlertStatus.second==false && winAlertStatus.third==false && winAlertStatus.forth==false && winItems[1]) 
+                {
+                    $scope.winamt = winItems[1].winamt;
+                    $scope.wareIssue = winItems[1].wareIssue;
+                    $scope.drawTime = winItems[1].drawTime;
+                    $scope.investCode=splitCode.split(winItems[1].investCode);
+                    winAlertStatus.second=true;
+                    console.log($scope.investCode);
+                    // $scope.modal3.show ();
+                    if (winItems[1]) 
+                    {
+                        $scope.modal3.show ();
+                    }
+                    else if (!winItems[1]) 
+                    {
+                        $timeout.cancel(nextShow);
+                        
+                        //更新待兑换
+                        getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token)
+                            .then (function (response) {
+                                $scope.needExchangeAmount.amount = response.data.length;
+                                console.log($scope.needExchangeAmount.amount);
+                                
+                                if($scope.needExchangeAmount.amount){
+                                    $rootScope.needExchangeItems = response.data;
+                                    $scope.modal2.show ();
+                                }
+                                
+                            }, function () {
+                                alert ('网络异常,未获取到用户信息')
+                            });
+
+                    }
+                }
+                else if (winAlertStatus.first==true && winAlertStatus.second==true && winAlertStatus.third==false && winAlertStatus.forth==false && winItems[2]) 
+                {
+                    $scope.winamt = winItems[2].winamt;
+                    $scope.wareIssue = winItems[2].wareIssue;
+                    $scope.drawTime = winItems[2].drawTime;
+                    $scope.investCode=splitCode.split(winItems[2].investCode);
+                    winAlertStatus.third=true;
+                    console.log($scope.investCode);
+                    if (winItems[2]) 
+                    {
+                        $scope.modal3.show ();
+                    }
+                    else if (!winItems[2]) 
+                    {
+                        $timeout.cancel(nextShow);
+
+                        //更新待兑换
+                        getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token)
+                            .then (function (response) {
+                                $scope.needExchangeAmount.amount = response.data.length;
+                                console.log($scope.needExchangeAmount.amount);
+                                
+                                if($scope.needExchangeAmount.amount){
+                                    $rootScope.needExchangeItems = response.data;
+                                    $scope.modal2.show ();
+                                }
+                                
+                            }, function () {
+                                alert ('网络异常,未获取到用户信息')
+                            });
+
+
+                    }
+                }
+                else if (winAlertStatus.first==true && winAlertStatus.second==true && winAlertStatus.third==true && winAlertStatus.forth==false && winItems[3]) 
+                {
+                    $scope.winamt = winItems[3].winamt;
+                    $scope.wareIssue = winItems[3].wareIssue;
+                    $scope.drawTime = winItems[3].drawTime;
+                    $scope.investCode=splitCode.split(winItems[3].investCode);
+                    winAlertStatus.forth=true;
+                    if (winItems[3]) 
+                    {
+                        $scope.modal3.show ();
+                    }
+                    else if (!winItems[3]) 
+                    {
+                        $timeout.cancel(nextShow);
+
+                        //更新待兑换
+                        getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token)
+                            .then (function (response) {
+                                $scope.needExchangeAmount.amount = response.data.length;
+                                console.log($scope.needExchangeAmount.amount);
+                                
+                                if($scope.needExchangeAmount.amount){
+                                    $rootScope.needExchangeItems = response.data;
+                                    $scope.modal2.show ();
+                                }
+                                
+                            }, function () {
+                                alert ('网络异常,未获取到用户信息')
+                            });
+
+                    }
+                    console.log($scope.investCode);
+                   
+                }
+                
+            },1000)
+
         };
 
         //提现完善资料的mordal窗口配置
