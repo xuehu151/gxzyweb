@@ -3,7 +3,7 @@
  */
 //排列3 走势图
 angular.module ('starter.3DTrendChart', [])
-    
+
     .controller ('3DTrendChart', function ($scope, $ionicScrollDelegate, $ionicLoading, $util, historyPastService) {
         $scope.h = Math.min (document.documentElement.clientHeight, window.innerHeight) - 44 - 88;
         $scope.scrollRightHorizon = function () {
@@ -19,7 +19,7 @@ angular.module ('starter.3DTrendChart', [])
             var leftHandle = $ionicScrollDelegate.$getByHandle ("leftContainerHandle");
             leftHandle.freezeScroll (true);
         };
-        
+
         $scope.dataArrange = [];
         $scope.drawCount = [];
         for (var i = 0; i < 10; i++) {
@@ -28,7 +28,7 @@ angular.module ('starter.3DTrendChart', [])
         for (var j = 1; j < 4; j++) {
             $scope.drawCount.push (j);
         }
-    
+
         $ionicLoading.show ();
         var userInfo = $util.getUserInfo ();
         var pageSize = 8;
@@ -50,8 +50,8 @@ angular.module ('starter.3DTrendChart', [])
             .then (function (response) {
                 $ionicLoading.hide ();
                 $scope.historyPast3 = response.data;
-    
-              
+
+
             }, function (error) {
                 console.log ("获取列表失败");
             });

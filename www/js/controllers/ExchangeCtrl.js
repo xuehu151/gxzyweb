@@ -4,15 +4,15 @@
 var ipUrl = 'http://114.215.70.179:8088/service';
 //兑换
 angular.module ('starter.ExchangeCtrl', ['starter.services'])
-    
-    .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService, $cordovaToast) {
+
+    .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService, $cordovaToast, ionicToast) {
         $rootScope.newStatus = true;
         $ionicLoading.show ();
         if ($location.search ().sign && $location.search ().type) {
             sign = $location.search ().sign;
             type = $location.search ().type;
         }
-        
+
         if (sign != undefined) {
             if (type == 0) {
                 //初始化用户接口
@@ -31,7 +31,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                  },
                  timeout: 3000
                  })*/
-                
+
                 var userToken = {
                     token: sign
                 };
@@ -43,11 +43,11 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         var datas = $util.setUserInfo (response);
                         var userInfo = $util.getUserInfo ();
                         console.log (userInfo);
-    
+
                         if (!userInfo.data.user.realName) {
                             modal ();
                         }
-                        
+
                         //初始化
                         if (userInfo.error == '2301') {
                             alert ('二维码已失效');
@@ -93,7 +93,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                  },
                  timeout: 3000
                  })*/
-                
+
                 var data = {
                     token: sign
                 };
@@ -105,7 +105,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         var datas = $util.setUserInfo (response);
                         var userInfo = $util.getUserInfo ();
                         console.log (userInfo);
-                        
+
                         if (!userInfo.data.user.realName) {
                             modal ();
                         }
@@ -114,7 +114,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                 $state.go ('tab.account');
                             }
                         }
-                        
+
                         $scope.goToExchange3D = function () {
                             $state.go ('exchange-3');
                         };
@@ -131,7 +131,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             $rootScope.newStatus = status;
                             $state.go ('BigLotto-2');
                         };*/
-                        
+
                     }, function (response) {
                         console.log ("初始化数据失败");
                     });
@@ -149,7 +149,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     .then (function (modal) {
                         modal.show ();
                         $scope.modal = modal;
-                        
+
                         $scope.userInfo = {
                             newUserName: "",
                             newUserIphone: "",
@@ -163,31 +163,34 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     okText: '确 定',
                                     okType: 'button-light'
                                 });*/
-                                $cordovaToast
+                                /*$cordovaToast
                                     .show('ionic中文网', 'long', 'center')
                                     .then(function(success) {
                                         // success
                                     }, function (error) {
                                         // error
-                                    });
+                                    });*/
+                                ionicToast.show('两次手机号码不一致哦!', 'middle', false, 1000);
                                 return;
                             }
                             else if ($scope.userInfo.newUserIphone == '') {
-                                var alertPopup = $ionicPopup.alert ({
+                                /*var alertPopup = $ionicPopup.alert ({
                                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
                                     template: '<div class="alert-left"><p style="text-align: center">请填写电话号码</p></div>',
                                     okText: '确 定',
                                     okType: 'button-light'
-                                });
+                                });*/
+                                ionicToast.show('请填写电话号码!', 'middle', false, 1000);
                                 return;
                             }
                             else if (parseInt ($scope.userInfo.newUserIphone) != parseInt ($scope.userInfo.newUserSure)) {
-                                var alertPopup = $ionicPopup.alert ({
+                                /*var alertPopup = $ionicPopup.alert ({
                                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
                                     template: '<div class="alert-left"><p style="text-align: center">电话号码不一致</p></div>',
                                     okText: '确 定',
                                     okType: 'button-light'
-                                });
+                                });*/
+                                ionicToast.show('电话号码不一致!', 'middle', false, 1000);
                                 return;
                             }
                             else {
@@ -195,7 +198,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     modal.hide ();
                                 }, 1000, 100);
                             }
-                            
+
                             $ionicLoading.show ();
                             $http ({
                                 method: "POST",
@@ -223,7 +226,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     //locals.setObject ($rootScope.user, userInfo);
                                     var datas = $util.setUserInfo (userInfo);
                                     console.log (userInfo);
-                                    
+
                                     $state.go ("scanCodeIndex", {}, {reload: true});
                                 }, function (response) {
                                     alert ('加载失败，请检查网络')

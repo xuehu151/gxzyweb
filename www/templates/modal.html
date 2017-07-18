@@ -23,9 +23,10 @@
                     <input ng-model="userInfo.newUserSure"
                            maxlength="11"
                            type="text"
+                           ng-pattern="/^1[34578]\d{9}$/"
                            name="phones"
                            placeholder="再次确认手机号">
-                    <span style="font-size: .6em;color: red;" ng-show="formModal.phones.$dirty && formModal.phones.$invalid">输入你的11位手机号&nbsp;</span>
+                    <span style="font-size: .6em;color: red;" ng-show="formModal.phones.$dirty && formModal.phones.$invalid">再次确认11位手机号&nbsp;</span>
                 </label>
             </form>
 
