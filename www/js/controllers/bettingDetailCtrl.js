@@ -3,7 +3,7 @@
  */
 
 //兑换  大乐透不追加详情
-angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('bettingDetailCtrl', function ($scope, $ionicPopup, $timeout, $state, $http, $stateParams, $ionicLoading, $rootScope, $util, BettingService, getWareIssueService) {
+angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('bettingDetailCtrl', function ($scope, $ionicPopup, $timeout, $state, $http, $stateParams, $ionicLoading, $rootScope, $ionicModal, $util, BettingService, getWareIssueService) {
 //        console.log($rootScope.newStatus);
     $scope.flag3 = $stateParams.flag3;
     $scope.sessionJsonWarp = JSON.parse (sessionStorage.jsonWrap); //反解析
@@ -178,7 +178,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
             .then (function (response) {
                 $ionicLoading.hide ();
                 reques = response.data;
-//                    console.log (reques);
+//             console.log (reques);
                 getdltadd ();
             }, function (response) {
                 console.log ("获取列表失败");
@@ -235,7 +235,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
             }
             
             var data = {
-//                    "lotteryID": "2",
+//              "lotteryID": "2",
                 wareIssue : reques.wareIssue,
                 payType : PayType,
                 vid : vid,
@@ -253,7 +253,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
                 .then (function (response) {
                     $ionicLoading.hide ();
 //                        console.log(data);
-                    var alertPopup = $ionicPopup.alert ({
+                    /*var alertPopup = $ionicPopup.alert ({
                         title : '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
                         template : '<div class="alert-left">' + '<p style="text-align: center;">' + response.data.info + '</p>' + '</div>',
                         okText : '确 定',
@@ -261,6 +261,40 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
                     })
                         .then (function () {
                             $state.go ('tab.account');
+                        });*/
+    
+                    //提交成功窗口配置
+                    $ionicModal.fromTemplateUrl ('submission.html', {
+                        scope: $scope,
+                        backdropClickToClose:true
+                    })
+                        .then (function (modal) {
+                            modal.show ();
+                            $scope.info = response.data.info;
+                            $scope.realName = userInfo.data.user.realName;
+                            $scope.phones = userInfo.data.user.phone;
+//                                $scope.receive = receive; //获赠时间
+                            $scope.draw_time = reques.draw_time.split('T').join(' ');//开奖时间
+            
+                            $scope.receiveNum = [];
+                            var receiveNumArr = data.data;//获赠号码
+                            
+                            for(var i in receiveNumArr){
+                                var receiveNum = receiveNumArr[i].investCode;
+                                var receiveNumArray = receiveNum.split('*');
+                                var receiveStr1 = receiveNumArray[0].split(',');
+                                var receiveStr2 = receiveNumArray[1].split(',');
+    
+//                                var receiveNumStr = receiveStr1.concat(receiveStr2);
+                                $scope.receiveNum.push(receiveStr1, receiveStr2);
+                            }
+                           /* console.info($scope.receiveNum[0]);
+                            console.info($scope.receiveNum[1]);*/
+//                            $scope.modal3 = modal;
+                            $scope.makeSure = function () {
+                                modal.hide ();
+                                $state.go ('tab.account');
+                            }
                         });
                 }, function (response) {
                     //扫码后，所获赠注数的限制提示。

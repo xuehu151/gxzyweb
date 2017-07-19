@@ -143,7 +143,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 .account-list .head-pic
 {
   position: absolute;
-  
+  width: 20px;
   right: 35px;
   top: 30px;
 
@@ -509,54 +509,64 @@ ion-item.f15
 }
 
 
-/**********selfInfo.html************/
-.self-info .list
-{
-  margin: 7px;
-}
-.self-info .row-wrap
-{
 
-  padding: 0 30px 0 22px;
-  background-color: #fff;
-  font-size: 16px;
-  color: #333;
-}
-.self-info .row-wrap div
+/*这是流程是首先进入完善资料页面的css,确定后再删除*/
+
+
+/*.chooseCompleteInfo
 {
-  
-  border-bottom: 1px solid #e9e9e9;
-  height: 66px;
-  line-height: 66px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    z-index: 11;
+    position: absolute;
+    text-align: center;
 }
 
-.self-info .row-wrap span.fr
+.chooseCompleteInfo .prompt
 {
-  color: #999;
-  font-size: 14px;
+    position: fixed;
+    left: 50%;
+    top:20%;
+    transform: translate(-50%,0);
+    width: 280px;
 }
 
-/* div.save
+ .chooseCompleteInfo .prompt .item
 {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  text-align: center;
-  width: 100%;
-  font-size: 16px;
-  color: #fff;
-  height: 54px;
-  line-height: 54px;
+    margin-left: 0;
+    margin-right: 0;
+}
 
-  background: -webkit-linear-gradient(#0462aa, #2e2f8b);
-  Safari 5.1 - 6.0
-  background: -o-linear-gradient(#0462aa, #2e2f8b);
-  Opera 11.1 - 12.0
-  background: -moz-linear-gradient(#0462aa, #2e2f8b);
-  Firefox 3.6 - 15
-  background: linear-gradient(#0462aa, #2e2f8b);
-  标准的语法
-} */
+.chooseCompleteInfo .prompt h4
+{
+    border-bottom: 2px solid #255fb3;
+    color: #255fb3;
+}
+
+.chooseCompleteInfo .prompt p
+{
+    white-space: normal;
+}
+
+.chooseCompleteInfo .prompt .row
+{
+    padding: 0
+}
+
+.chooseCompleteInfo .prompt .col:first-child
+{
+    border-right: 1px solid rgb(221,221,221);
+    color:#666;
+}
+
+.chooseCompleteInfo .prompt .col
+{
+    padding: 10px;
+    color: #255fb3;
+}
+ */
+
 
 /**********completeInfo.html************/
 

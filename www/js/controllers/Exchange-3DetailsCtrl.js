@@ -6,7 +6,7 @@ var ipUrl = 'http://114.215.70.179:8088/service';
 
 angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
 //兑换 排列 3 详情
-    .controller('Exchange-3DetailsCtrl', function ($scope, $state, $http, $ionicPopup, $rootScope, $ionicLoading, $util, BettingService, getWareIssueService) {
+    .controller('Exchange-3DetailsCtrl', function ($scope, $state, $http, $ionicPopup, $rootScope, $ionicLoading, $ionicModal, $util, BettingService, getWareIssueService) {
         $scope.sessionJsonWarp3D = JSON.parse(sessionStorage.jsonWrap3D); //反解析
         //console.log ($scope.sessionJsonWarp3D);
         //设置表单初始值
@@ -208,7 +208,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                         $ionicLoading.hide();
                         console.info(data);
                         console.log(response.data);
-                        var alertPopup = $ionicPopup.alert({
+                        /*var alertPopup = $ionicPopup.alert({
                             title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
                             template: '<div class="alert-left"><p style="text-align: center">' + response.data.info + '</p></div>',
                             okText: '确 定',
@@ -216,7 +216,36 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                         })
                             .then(function (response) {
                                 $state.go('tab.account');
-                            });
+                            });*/
+                        //提交成功窗口配置
+                        $ionicModal.fromTemplateUrl ('submission.html', {
+                            scope: $scope,
+                            backdropClickToClose:true
+                        })
+                            .then (function (modal) {
+                                modal.show ();
+                                $scope.info = response.data.info;
+                                $scope.realName = userInfo.data.user.realName;
+                                $scope.phones = userInfo.data.user.phone;
+//                                $scope.receive = receive; //获赠时间
+                                $scope.draw_time = reques.draw_time.split('T').join(' ');//开奖时间
+                                
+                                $scope.receiveNumArr = data.data;//获赠号码
+                                $scope.receiveNum = [];
+                                for(var i in $scope.receiveNumArr){
+                                    var receiveNum = $scope.receiveNumArr[i].investCode;
+                                    var receiveNumStr = receiveNum.split('*');
+                                    
+                                    $scope.receiveNum.push(receiveNumStr);
+                                }
+                                console.info($scope.receiveNumArr);
+                                console.info($scope.receiveNum);
+//                            $scope.modal3 = modal;
+                                $scope.makeSure = function () {
+                                    modal.hide ();
+                                    $state.go ('tab.account');
+                                }
+                        });
                     }, function (response) {
                         var confirmPopup = $ionicPopup.confirm({
                             title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',

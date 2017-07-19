@@ -1,15 +1,15 @@
-
 /*自定义图标*/
 @font-face {
     font-family: 'iconCustorm';
-    src:  url('../lib/ionic/fonts/iconCustorm.eot?qu5r4n');
-    src:  url('../lib/ionic/fonts/iconCustorm.eot?qu5r4n#iefix') format('embedded-opentype'),
+    src: url('../lib/ionic/fonts/iconCustorm.eot?qu5r4n');
+    src: url('../lib/ionic/fonts/iconCustorm.eot?qu5r4n#iefix') format('embedded-opentype'),
     url('../lib/ionic/fonts/iconCustorm.ttf?qu5r4n') format('truetype'),
     url('../lib/ionic/fonts/iconCustorm.woff?qu5r4n') format('woff'),
     url('../lib/ionic/fonts/iconCustorm.svg?qu5r4n#iconCustorm') format('svg');
     font-weight: normal;
     font-style: normal;
 }
+
 [class^="ion-"], [class*=" ion-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'iconCustorm' !important;
@@ -24,41 +24,49 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 .ion-exchange:before {
     content: "\e900";
     color: #293e97;
     font-size: .8em;
 }
+
 .ion-exchange-outline:before {
     content: "\e901";
     color: #515151;
     font-size: .8em;
 }
+
 .ion-draw:before {
     content: "\e902";
     color: #293e97;
     font-size: .8em;
 }
+
 .ion-draw-outline:before {
     content: "\e903";
     color: #515151;
     font-size: .8em;
 }
+
 .ion-trend:before {
     content: "\e904";
     color: #293e97;
     font-size: .8em;
 }
+
 .ion-trend-outline:before {
     content: "\e905";
     color: #515151;
     font-size: .8em;
 }
+
 .ion-user:before {
     content: "\e906";
     color: #293e97;
     font-size: .8em;
 }
+
 .ion-user-outline:before {
     content: "\e907";
     color: #515151;
@@ -77,13 +85,18 @@ a {
     text-decoration: none;
 }
 
-ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
+ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     color: #293e97;
 }
 
 /*
     首页 兑换
 */
+
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
+    margin-top: 0;
+}
+
 .warp-bg {
     background-color: #f2f2f2;
 }
@@ -100,7 +113,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
     /*margin-top: 15%;*/
 }
 
-.home-icon nav{
+.home-icon nav {
     position: relative;
     left: 0;
     top: 6px;
@@ -112,7 +125,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
     font-size: .9rem;
 }
 
-.home-icon nav i{
+.home-icon nav i {
     position: absolute;
     top: 3px;
     right: -14%;
@@ -141,7 +154,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
     padding: 0;
 }
 
-.col-44 h5{
+.col-44 h5 {
     padding-left: 10px;
     padding-bottom: 2px;
     margin-bottom: 0;
@@ -177,15 +190,19 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
 
 /*兑换   排列3*/
 
-.bar .back-button.hide, .bar .buttons .hide{
+.bar .back-button.hide, .bar .buttons .hide {
     display: inline-block;
 }
 
-.num-arrange-3 {
-    padding:0;
+.bar .title {
+    line-height: 64px;
 }
 
-.num-arrange-3 .col-20{
+.num-arrange-3 {
+    padding: 0;
+}
+
+.num-arrange-3 .col-20 {
     text-align: center;
     padding-top: 15px;
     color: #036bb4;
@@ -208,7 +225,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
     display: inline-block;
 }
 
-.arrange-3-bg-red{
+.arrange-3-bg-red {
     border: solid 1px #d11d1d;
     background-color: #d11d1d;
 }
@@ -219,6 +236,114 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
     color: #959595;
 }
 
+/*提交成功modal*/
+.sure-modal3 {
+    position: absolute;
+    top: 50%;
+    width: 270px;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: url(../img/alert-info.png) no-repeat center;
+    background-size: contain;
+    padding: 150px 10px 126px;
+}
+
+.sure-modal3 .modal3-title-img-wrap {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    width: 84px;
+    height: 84px;
+    border-radius: 42px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.sure-modal3 .modal3-title-img {
+    width: 60px;
+    margin-top: 13px;
+}
+
+.sure-modal3 .sure-modal3-style1 {
+    /*width: 260px;*/
+    font-size: 13px;
+    color: #666;
+}
+
+.sure-modal3 .sure-modal3-style1 span {
+    font-size: 21px;
+    color: #d21e1e;
+    text-decoration: underline;
+}
+
+.sure-modal3 .sure-modal3-style2 {
+    /*width: 260px;*/
+    /*margin-top: 8px;*/
+    color: #666;
+    font-size: 11px;
+    height: 20px;
+    text-align: left;
+}
+
+.sure-modal3 .sure-modal3-style2 span:first-child {
+    width: 65px;
+    text-align: left;
+    display: inline-block;
+    padding-left: 10px
+}
+
+.sure-modal3 .sure-modal3-style2 i {
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    border-radius: 8px;
+    font-size: 9px;
+    background-color: #d21e1e;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.sure-modal3 .sure-modal3-style2 i.blue {
+    background-color: #1d90d1;
+}
+
+.sure-modal3 .sure-modal3-style3 {
+    color: #d21e1e;
+    font-size: 9px;
+    margin-top: 15px
+
+}
+
+.sure-modal3 .sure-modal3-style4 {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    color: #fffefb;
+}
+
+.sure-modal3-win{
+    position: absolute;
+    top: 27%;
+    left: 50%;
+    color: #fffefb;
+    transform: translate(-50%, 0);
+    letter-spacing: 5px;
+}
 /*兑换   排列5*/
 
 /*兑换   大乐透不追加*/
@@ -243,7 +368,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
     width: 100%;
 }
 
-.rabbitRules{
+.rabbitRules {
     background: white;
     height: 30px;
     margin-top: -4px;
@@ -252,18 +377,18 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
     font-weight: bold;
 }
 
-.rabbitRules a{
+.rabbitRules a {
     float: right;
     margin-right: 12px;
     color: #0753d1;
 }
 
-.rabbitRules ins{
+.rabbitRules ins {
     color: #ff9307;
     text-decoration: none;
 }
 
-.detaileRules{
+.detaileRules {
     width: 100%;
     min-height: 300px;
     padding: 6px 6px;
@@ -271,25 +396,26 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
     color: #333333;
 }
 
-.detaileRules table{
+.detaileRules table {
     width: 100%;
 }
 
 .detaileRules table,
 .detaileRules tr,
-.detaileRules td{
+.detaileRules td {
     border: solid 1px #2a2a2a;
     padding: 4px 5px;
     text-align: center;
     vertical-align: middle;
 }
-.detaileRules td>s,
-.detaileRules td>i{
+
+.detaileRules td > s,
+.detaileRules td > i {
     float: left;
 }
 
 .detaileRules s,
-.detaileRules i{
+.detaileRules i {
     width: 15px;
     height: 15px;
     display: inline-block;
@@ -297,11 +423,11 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
     margin: 3px 2px 0 2px;
 }
 
-.detaileRules i{
+.detaileRules i {
     background: #cc1a1a;
 }
 
-.detaileRules s{
+.detaileRules s {
     background: #1696c5;
 }
 
@@ -442,15 +568,15 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
 }
 
 /*兑换   大乐透不追加详情*/
-.bar-lightBlue{
+.bar-lightBlue {
     background: #ffffff;
     color: #036ebc;
     font-weight: bold;
 }
 
-.content-160{
+.content-160 {
     bottom: 160px;
-    top: 88px;
+    top: 44px !important;
 }
 
 .h44 {
@@ -505,11 +631,11 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
 }
 
 .num-bg-red i {
-    background: #e42112;
+    background: #d11d1d;
 }
 
 .num-bg-blue i {
-    background: blue;
+    background: #3f97d5;
 }
 
 .betting-detail-footer {
@@ -520,7 +646,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
     margin: 0 auto;
 }
 
-.betting-detail-footer .checkbox{
+.betting-detail-footer .checkbox {
     padding: 0;
 }
 
@@ -555,7 +681,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active{
 }
 
 .checkbox input:disabled:checked:before, .checkbox input:disabled:checked + .checkbox-icon:before {
-     background: #e42112;
+    background: #e42112;
 }
 
 input.bigLotto-input2:checked:before {
@@ -572,7 +698,7 @@ input.bigLotto-input2:checked:before {
     color: red;
 }
 
-.button-liner-gradiend{
+.button-liner-gradiend {
     color: white;
     margin: 6px auto;
     min-height: 40px !important;
@@ -585,7 +711,7 @@ input.bigLotto-input2:checked:before {
     background: -webkit-linear-gradient(top, #0070b2, #15236a);
 }
 
-.popup-heads{
+.popup-heads {
     position: relative;
     top: -47px;
     width: 110%;
@@ -598,7 +724,7 @@ input.bigLotto-input2:checked:before {
     width: 28%;
 }
 
-.confirmPopup-heads{
+.confirmPopup-heads {
     position: relative;
     top: -10px;
     width: 110%;
@@ -607,14 +733,14 @@ input.bigLotto-input2:checked:before {
     height: 60px;
 }
 
-.button-darkBlue{
+.button-darkBlue {
     background: #132d8e;
     color: white;
     border-radius: 5px;
 }
 
 /*大乐透往期开奖详情*/
-.bar-linerBlue{
+.bar-linerBlue {
     color: white;
     border-color: transparent;
     background: #00548b;
@@ -624,8 +750,8 @@ input.bigLotto-input2:checked:before {
     background: -webkit-linear-gradient(right, #0070b2, #15236a);
 }
 
-.h40{
-    top: 84px;
+.h40 {
+    top: 44px !important;
 }
 
 .notice {
@@ -649,30 +775,30 @@ input.bigLotto-input2:checked:before {
     color: #11288e;
 }
 
-.history-time{
+.history-time {
     padding: 6px 16px;
 }
 
-.history-time .row{
+.history-time .row {
     padding: 0 5px;
 }
 
-.history-time .row .col{
+.history-time .row .col {
     padding: 0;
 }
 
-.history-time p{
+.history-time p {
     font-size: .6em;
     color: #a2a2a2;
 }
 
-.history-time ins{
+.history-time ins {
     float: right;
     text-decoration: none;
 }
 
 /*注册账号*/
-.loginBtn{
+.loginBtn {
     border-color: transparent;
     background: #00548b;
     background: -o-linear-gradient(top, #0070b2, #15236a);
@@ -697,11 +823,11 @@ input.bigLotto-input2:checked:before {
     font-weight: bolder;
 }
 
-.regiset img{
+.regiset img {
     width: 100%;
 }
 
-.regiset h4{
+.regiset h4 {
     font-size: 1.2em;
     text-align: center;
     color: #0472b0;
@@ -710,60 +836,60 @@ input.bigLotto-input2:checked:before {
     margin-bottom: 0;
 }
 
-.regiset .list{
+.regiset .list {
     width: 80%;
     margin: 5px auto 15px;
 }
 
-.regiset .list .item{
+.regiset .list .item {
     margin: 20px 0 5px 0;
 }
 
-.regiset .list .item-input{
+.regiset .list .item-input {
     border-radius: 4px;
     padding: 3px 0 3px 16px;
 }
 
-.regiset span{
+.regiset span {
     color: #131c81;
     font-size: .9em;
 }
 
-.paddingTop{
+.paddingTop {
     padding-top: 40px;
 }
 
-.list-marginTop{
+.list-marginTop {
     margin-bottom: 11px;
 }
 
-.paddingTop span{
+.paddingTop span {
     display: block;
     text-align: center;
     color: #0055ff;
     font-family: "Microsoft YaHei";
 }
 
-.paddingTop .item-thumbnail-left{
+.paddingTop .item-thumbnail-left {
     border-radius: 8px;
     top: -20px;
     left: 0;
 }
 
-.paddingTop .list h1{
+.paddingTop .list h1 {
     margin-top: 15px;
     padding-left: 10px;
     font-size: 1.6em;
     color: #333333;
 }
 
-.paddingTop .list .title-intro{
+.paddingTop .list .title-intro {
     margin-top: 15px;
     border-top: 0;
     font-weight: bolder;
 }
 
-.paddingTop h5{
+.paddingTop h5 {
     font-weight: bolder;
     padding-left: 10px;
     margin-bottom: 0;
@@ -774,27 +900,28 @@ input.bigLotto-input2:checked:before {
 }
 
 /*开奖*/
-.draw-slide .slider-slides{
+.draw-slide .slider-slides {
     height: 600px;
 }
 
-.draw-line:nth-child(1){
+.draw-line:nth-child(1) {
     left: 33.33%;
 }
 
-.tab_default{
-     border-bottom:solid 1px #F2F2F2;
-     padding:6px 0;
-     font-weight: 600;
-     color: #959595;
+.tab_default {
+    border-bottom: solid 1px #F2F2F2;
+    padding: 6px 0;
+    font-weight: 600;
+    color: #959595;
 }
-.current{
-    color: #1a3f86!important;
+
+.current {
+    color: #1a3f86 !important;
 }
 
 /*走势图*/
-.tab_trend{
-    padding:10px 0;
+.tab_trend {
+    padding: 10px 0;
     font-weight: 600;
     color: #959595;
     border-color: transparent;
@@ -807,34 +934,42 @@ input.bigLotto-input2:checked:before {
 }
 
 .tab_trend a.button,
-.tab_draw a.button{
+.tab_draw a.button {
     font-size: 1.1em;
     background: transparent;
     color: #ffffff;
     margin-top: -5px;
 }
 
-.tab_draw a.button{
+.tab_draw a.button {
     width: 31%;
     color: #989898;
     margin-top: 0;
 }
 
-.tab_trend a.button{
+.tab_trend a.button {
     width: 20%;
     color: #989898;
     margin: -5px 20px 0 20px;
+    border-radius: 0;
 }
 
 .tab_trend > .button,
-.tab_draw > .button{
+.tab_draw > .button {
     width: 100%;
     border: none;
     background: transparent;
 }
 
+/*
+
+.tab_trend > .button{
+    margin-top: 15px!important;
+}
+*/
+
 .tab_trend a.activated,
-.tab_draw a.activated{
+.tab_draw a.activated {
     border: transparent;
 }
 
@@ -844,30 +979,31 @@ input.bigLotto-input2:checked:before {
 }
 
 /*排列三*/
-.head{
-    border-bottom:solid 1px #D1D3D6;
-    border-right:solid 1px #D1D3D6;
-    height:20px;
+.head {
+    border-bottom: solid 1px #D1D3D6;
+    border-right: solid 1px #D1D3D6;
+    height: 20px;
     width: 160px;
-    display:flex;
-    align-items:center;
-    font-size:12px;
-    color:#262626;
-    justify-content:center;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #262626;
+    justify-content: center;
 }
 
-.head:nth-child(odd){
+.head:nth-child(odd) {
     background: #eeeed4;
 }
-.head:nth-child(even){
+
+.head:nth-child(even) {
     background: #dfefe1;
 }
 
-.head tr td:nth-child(1){
+.head tr td:nth-child(1) {
     border-left: none;
 }
 
-.head tr td{
+.head tr td {
     display: table-cell;
     border-left: solid 1px #D1D3D6;
     text-align: center;
@@ -876,7 +1012,7 @@ input.bigLotto-input2:checked:before {
     color: #bcbcbc;
 }
 
-.Arrange > table > tbody > tr td{
+.Arrange > table > tbody > tr td {
     display: table-cell;
     border-left: solid 1px #D1D3D6;
     text-align: center;
@@ -886,90 +1022,96 @@ input.bigLotto-input2:checked:before {
     font-weight: 600;
 }
 
-.head table{
+.head table {
     width: 100%;
 }
 
-.titleTd div td{
+.titleTd div td {
     color: #000;
 }
 
-.arrange3 tbody tr td{
+.arrange3 tbody tr td {
     color: #000201;
     font-weight: 600;
 }
+
 /*排列三分布*/
-.spread{
-    color: red!important;
-    padding: 0 1px!important;
+.spread {
+    color: red !important;
+    padding: 0 1px !important;
 }
 
 /*和尾*/
-.arrange3Blue{
+.arrange3Blue {
     color: #1f2288 !important;
-    padding: 0 0.08em!important;
+    padding: 0 0.08em !important;
     font-weight: 600;
-    font-size: 15px!important;
+    font-size: 15px !important;
 }
 
-.count-color1{
-    color: #010100!important;
-    font-size: 15px!important;
+.count-color1 {
+    color: #010100 !important;
+    font-size: 15px !important;
     font-weight: bold;
-    padding: 0 1px!important;
+    padding: 0 1px !important;
 }
 
-.count-grey{
-    color: #bcbcbc!important;
-    font-size: 12px!important;
-    padding: 0 2px!important;
-    font-weight: 500!important;
+.count-grey {
+    color: #bcbcbc !important;
+    font-size: 12px !important;
+    padding: 0 2px !important;
+    font-weight: 500 !important;
 }
+
 /*大乐透*/
 .countBig,
-.countBigBlue{
-    font-size: 13px!important;
+.countBigBlue {
+    font-size: 13px !important;
     font-weight: bold;
-    padding: 0 0!important;
+    padding: 0 0 !important;
 }
-.countBig{
+
+.countBig {
     color: #000000 !important;
 }
-.countBigBlue{
+
+.countBigBlue {
     color: #1f2288 !important;
 }
+
 /*************/
-.count-color5DGS{
-    color: #1f2288!important;
-    font-size: 15px!important;
+.count-color5DGS {
+    color: #1f2288 !important;
+    font-size: 15px !important;
     font-weight: bold;
-    padding: 0 1px!important;
+    padding: 0 1px !important;
 }
 
-.head5D{
-    border-bottom:solid 1px #D1D3D6;
-    border-right:solid 1px #D1D3D6;
-    height:20px;
+.head5D {
+    border-bottom: solid 1px #D1D3D6;
+    border-right: solid 1px #D1D3D6;
+    height: 20px;
     width: 152px;
-    display:flex;
-    align-items:center;
-    font-size:12px;
-    color:#262626;
-    justify-content:center;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #262626;
+    justify-content: center;
 }
 
-.head5D:nth-child(odd){
+.head5D:nth-child(odd) {
     background: #eeeed4;
 }
-.head5D:nth-child(even){
+
+.head5D:nth-child(even) {
     background: #dfefe1;
 }
 
-.head5D tr td:nth-child(1){
+.head5D tr td:nth-child(1) {
     border-left: none;
 }
 
-.head5D tr td{
+.head5D tr td {
     display: table-cell;
     border-left: solid 1px #D1D3D6;
     text-align: center;
@@ -978,7 +1120,7 @@ input.bigLotto-input2:checked:before {
     color: #bcbcbc;
 }
 
-.head5D table{
+.head5D table {
     width: 100%;
 }
 
@@ -987,34 +1129,35 @@ input.bigLotto-input2:checked:before {
     /*font-weight: 600;*/
 }
 
-.titleTd .head5D td{
+.titleTd .head5D td {
     color: #000;
 }
 
-.head5DBig{
-    border-bottom:solid 1px #D1D3D6;
-    border-right:solid 1px #D1D3D6;
-    height:20px;
+.head5DBig {
+    border-bottom: solid 1px #D1D3D6;
+    border-right: solid 1px #D1D3D6;
+    height: 20px;
     width: 220px;
-    display:flex;
-    align-items:center;
-    font-size:12px;
-    color:#262626;
-    justify-content:center;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #262626;
+    justify-content: center;
 }
 
-.head5DBig:nth-child(odd){
+.head5DBig:nth-child(odd) {
     background: #eeeed4;
 }
-.head5DBig:nth-child(even){
+
+.head5DBig:nth-child(even) {
     background: #dfefe1;
 }
 
-.head5DBig tr td:nth-child(1){
+.head5DBig tr td:nth-child(1) {
     border-left: none;
 }
 
-.head5DBig tr td{
+.head5DBig tr td {
     display: table-cell;
     border-left: solid 1px #D1D3D6;
     text-align: center;
@@ -1024,11 +1167,11 @@ input.bigLotto-input2:checked:before {
     width: 9px;
 }
 
-.head5DBig table{
+.head5DBig table {
     width: 100%;
 }
 
-.titleTd .head5DBig td{
+.titleTd .head5DBig td {
     color: #000;
 }
 

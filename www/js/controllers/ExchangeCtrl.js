@@ -170,7 +170,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     }, function (error) {
                                         // error
                                     });*/
-                                ionicToast.show('两次手机号码不一致哦!', 'middle', false, 1000);
+                                ionicToast.show('请填写个人真实姓名!', 'middle', false, 1000);
                                 return;
                             }
                             else if ($scope.userInfo.newUserIphone == '') {

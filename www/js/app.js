@@ -7,9 +7,7 @@ var sign = '';
 var type = '';
 var PayType = '';//判断是否为老用户扫码进来 0 新用户 1 老用户扫码
 
-
-angular.module ('starter', ['ionic','ngCordova', 'ionic-toast', 'starter.controllers', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl', 'starter.widthdrawRecordsCtrl', 'starter.widthdrawCtrl', 'starter.DrawCtrl', 'starter.TrendCtrl', 'starter.3DTrendChart', 'starter.5DTrendChart', 'starter.bigTrendChart','starter.selfInfoCtrl'])
-
+angular.module ('starter', ['ionic','ngCordova', 'ionic-toast', 'starter.controllers', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl', 'starter.widthdrawRecordsCtrl', 'starter.widthdrawCtrl', 'starter.DrawCtrl', 'starter.TrendCtrl', 'starter.3DTrendChart', 'starter.5DTrendChart', 'starter.bigTrendChart'])
 
     .run (function ($ionicPlatform) {
         $ionicPlatform.ready (function () {
@@ -267,15 +265,6 @@ angular.module ('starter', ['ionic','ngCordova', 'ionic-toast', 'starter.control
                         controller: 'AccountCtrl'
                     }
                 }
-            })
-
-            //个人资料
-            .state ('selfInfo', {
-                url: '/account/selfInfo',
-                cache:'false',
-                prefetchTemplate:false,
-                templateUrl: 'templates/selfInfo.html',
-                controller: 'selfInfoCtrl'
             })
 
             //完善资料
