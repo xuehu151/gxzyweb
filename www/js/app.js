@@ -7,7 +7,9 @@ var sign = '';
 var type = '';
 var PayType = '';//判断是否为老用户扫码进来 0 新用户 1 老用户扫码
 
-angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl', 'starter.widthdrawRecordsCtrl', 'starter.widthdrawCtrl', 'starter.DrawCtrl', 'starter.TrendCtrl', 'starter.3DTrendChart', 'starter.5DTrendChart', 'starter.bigTrendChart','starter.selfInfoCtrl'])
+
+angular.module ('starter', ['ionic','ngCordova', 'ionic-toast', 'starter.controllers', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl', 'starter.widthdrawRecordsCtrl', 'starter.widthdrawCtrl', 'starter.DrawCtrl', 'starter.TrendCtrl', 'starter.3DTrendChart', 'starter.5DTrendChart', 'starter.bigTrendChart'])
+
 
     .run (function ($ionicPlatform) {
         $ionicPlatform.ready (function () {
@@ -47,7 +49,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.post['Accept'] = 'application/json, text/javascript, */*; q=0.01';
         $httpProvider.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
-    
+
         $locationProvider.html5Mode(false);
 
         $stateProvider
@@ -192,7 +194,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                     }
                 }
             })
-    
+
             .state ('tab.draw.bigLottoHistoryDetails', {
                 url: '/bigLottoHistoryDetails',
                 cache:'false',
@@ -200,7 +202,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 templateUrl: 'templates/bigLottoHistoryDetails.html',
                 controller: 'bigLottoHistoryDetailsCtrl'
             })
-    
+
             .state ('tab.draw.exchangehistory3D', {
                 url: '/exchangehistory3D',
                 cache:'false',
@@ -208,7 +210,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 templateUrl: 'templates/exchangehistory3D.html',
                 controller: 'Exchangehistory3DCtrl'
             })
-    
+
             .state ('tab.draw.exchangehistory5D', {
                 url: '/exchangehistory5D',
                 cache:'false',
@@ -216,7 +218,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 templateUrl: 'templates/exchangehistory5D.html',
                 controller: 'Exchangehistory5DCtrl'
             })
-           
+
             //走势图
             .state ('tab.trend', {
                 url: '/trend',
@@ -229,7 +231,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                     }
                 }
             })
-    
+
             .state ('tab.trend.bigTrendChart', {
                 url: '/bigTrendChart',
                 cache:'false',
@@ -237,7 +239,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 templateUrl: 'templates/bigTrendChart.html',
                 controller: 'bigTrendChart'
             })
-            
+
             .state ('tab.trend.3DTrendChart', {
                 url: '/3DTrendChart',
                 cache:'false',
@@ -245,7 +247,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 templateUrl: 'templates/3DTrendChart.html',
                 controller: '3DTrendChart'
             })
-    
+
             .state ('tab.trend.5DTrendChart', {
                 url: '/5DTrendChart',
                 cache:'false',
@@ -253,7 +255,7 @@ angular.module ('starter', ['ionic', 'starter.controllers', 'starter.services', 
                 templateUrl: 'templates/5DTrendChart.html',
                 controller: '5DTrendChart'
             })
-            
+
             //账户
             .state ('tab.account', {
                 url: '/account',
