@@ -20,9 +20,9 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
         $scope.countMoney = '3';
     }
     disabledBtnBigBitting ();
-    
+
     var PayTypeBig = null;
-    
+
     function disabledBtnBigBitting () {
         //判断用户要用什么来兑换彩票    余额 || 抵用券
         if (type == 0) {
@@ -52,14 +52,14 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
                 okText : '确 定',
                 okType : 'button-light'
             }).then (function () {
-            
+
             });
         }
         else {
             $scope.isDisabled = false;
         }
     }
-    
+
     //手动添加一组，返回大乐透选中页面
     $scope.manualAdd = function () {
         $state.go ('BigLotto-2');
@@ -165,7 +165,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
          method: "POST",
          url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
          params: {
-         l          otteryID: 51
+         lotteryID: 51
          },
          headers: {
          "Content-Type": "application/json"
@@ -197,9 +197,9 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
                 for (var j in $scope.sessionJsonWarp[i]) {
                     for (var k in $scope.sessionJsonWarp[i][j]) {
                         if (typeof $scope.sessionJsonWarp[i][j][k] === 'object') {
-                            
+
                             investCode += ',' + $scope.sessionJsonWarp[i][j][k].num;
-                            
+
                             if (investCode.substr (0, 1) == ',') investCode = investCode.substr (1); //截取第一位逗号
                             investCode = (investCode.substring (investCode.length - 1) == ',') ? investCode.substring (0, investCode.length - 1) : investCode; //截取最后一位逗号
                             var get_array = investCode.split ('');
@@ -211,9 +211,9 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
                 //console.log (investCodeStr);
                 dataObj.investCode = investCodeStr;
                 dataArrayBig.push (dataObj);
-                console.log (dataArrayBig);
+                // console.log (dataArrayBig);
             }
-            
+
             var vid = '';
             if (type == 0) {
                 if (userInfo.data.voucher == undefined) {
@@ -233,7 +233,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
                     }
                 }
             }
-            
+
             var data = {
 //              "lotteryID": "2",
                 wareIssue : reques.wareIssue,
@@ -262,7 +262,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
                         .then (function () {
                             $state.go ('tab.account');
                         });*/
-    
+
                     //提交成功窗口配置
                     $ionicModal.fromTemplateUrl ('submission.html', {
                         scope: $scope,
@@ -275,21 +275,20 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
                             $scope.phones = userInfo.data.user.phone;
 //                                $scope.receive = receive; //获赠时间
                             $scope.draw_time = reques.draw_time.split('T').join(' ');//开奖时间
-            
+
                             $scope.receiveNum = [];
                             var receiveNumArr = data.data;//获赠号码
-                            
                             for(var i in receiveNumArr){
+                                var receiveNumWarp = [];
                                 var receiveNum = receiveNumArr[i].investCode;
                                 var receiveNumArray = receiveNum.split('*');
                                 var receiveStr1 = receiveNumArray[0].split(',');
                                 var receiveStr2 = receiveNumArray[1].split(',');
-    
-//                                var receiveNumStr = receiveStr1.concat(receiveStr2);
-                                $scope.receiveNum.push(receiveStr1, receiveStr2);
+
+                                receiveNumWarp.push(receiveStr1, receiveStr2);
+                                $scope.receiveNum.push(receiveNumWarp);
+                                // console.info($scope.receiveNum);
                             }
-                           /* console.info($scope.receiveNum[0]);
-                            console.info($scope.receiveNum[1]);*/
 //                            $scope.modal3 = modal;
                             $scope.makeSure = function () {
                                 modal.hide ();

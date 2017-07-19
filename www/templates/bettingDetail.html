@@ -74,12 +74,14 @@
             <div class="sure-modal3-style2">
                 <span class="fl">开奖时间:</span><span ng-cloak>{{draw_time}}</span>
             </div>
-            <div class="sure-modal3-style2">
+            <div class="sure-modal3-style2 ">
                 <span class="fl">获赠号码:</span>
-                <span ng-repeat="codeRed in receiveNum track by $index" style="display: flex; margin-top: 3px; letter-spacing: 1px;">
-                    <i ng-cloak  ng-repeat="codeNum in codeRed track by $index">{{codeNum}}</i>
-                    <i ng-cloak ng-repeat="codeBlue in codeRed track by $index" class="blue">{{codeBlue}}</i>
-                </span>
+                <div class="ballNum">
+                    <span ng-repeat="codeRed in receiveNum track by $index" style="display: flex; margin-top: 3px;">
+                        <i ng-cloak ng-repeat="codeNum in codeRed[0] track by $index">{{codeNum}}</i>
+                        <i ng-cloak ng-repeat="codeNum in codeRed[1] track by $index" class="blue">{{codeNum}}</i>
+                    </span>
+                </div>
             </div>
             <div class="sure-modal3-style4" ng-click="makeSure()">确 定</div>
         </div>

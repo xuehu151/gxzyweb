@@ -291,7 +291,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     text-align: left;
 }
 
-.sure-modal3 .sure-modal3-style2 span:first-child {
+.sure-modal3 .sure-modal3-style2 > span:first-child {
     width: 65px;
     text-align: left;
     display: inline-block;
@@ -320,7 +320,6 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     color: #d21e1e;
     font-size: 9px;
     margin-top: 15px
-
 }
 
 .sure-modal3 .sure-modal3-style4 {
@@ -344,6 +343,22 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     transform: translate(-50%, 0);
     letter-spacing: 5px;
 }
+
+.sure-modal3 .ballNum{
+    display: grid;
+    width: 74%;
+    height: 75px;
+    overflow: scroll;
+}
+
+.sure-modal3 .ballNum i {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    margin-left: 5px;
+}
+
 /*兑换   排列5*/
 
 /*兑换   大乐透不追加*/
