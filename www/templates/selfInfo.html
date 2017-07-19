@@ -1,0 +1,50 @@
+<ion-view view-title="个人资料">
+  <ion-content class="self-info" style="background: #eee;">
+    <ion-list>
+      <div class="row-wrap">
+        <div>
+          <span>
+            用户名
+          </span>
+          <span class="fr" ng-cloak>
+            {{userInfo.realName}}
+          </span>
+        </div>
+      </div>
+      <div class="row-wrap">
+        <div>
+          <span>
+            手机号
+          </span>
+          <span class="fr" ng-cloak>
+            {{userInfo.phone}}
+          </span>
+        </div>
+      </div>
+      <div class="row-wrap" style="margin-top: 4px;">
+        <div>
+          <span>
+            微信号
+          </span>
+          <span class="fr" ng-cloak>
+            {{userInfo.wechat}}
+          </span>
+        </div>
+      </div>
+      <div class="row-wrap" style="padding-bottom: 15px;">
+        <div>
+          <span>
+            银行卡号
+          </span>
+          <span class="fr" ng-cloak>
+            {{userInfo.bankNo}}
+          </span>
+        </div>
+      </div>
+    </ion-list>
+    
+  </ion-content>
+<!--   <div class="save">
+  保存
+</div> -->
+</ion-view>
