@@ -273,7 +273,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
                             $scope.info = response.data.info;
                             $scope.realName = userInfo.data.user.realName;
                             $scope.phones = userInfo.data.user.phone;
-//                                $scope.receive = receive; //获赠时间
+                            $scope.receives = userInfo.data.user.updateDate; //获赠时间
                             $scope.draw_time = reques.draw_time.split('T').join(' ');//开奖时间
 
                             $scope.receiveNum = [];
@@ -293,6 +293,8 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services']).controller ('
                             $scope.makeSure = function () {
                                 modal.hide ();
                                 $state.go ('tab.account');
+                                jsonWrap = [];
+                                sessionStorage.jsonWrap = '';
                             }
                         });
                 }, function (response) {

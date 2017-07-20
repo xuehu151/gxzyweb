@@ -13,6 +13,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         getUser.getInfo (url + "/service/customer/getUser?token=" + token)
             .then (function (response) {
                console.log (response.data);
+                $rootScope.
                 $scope.useableMoney = response.data.money;
                 // $scope.phone = response.data.phone;
                 $scope.frozedMoney = response.data.freeze;
@@ -44,7 +45,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
 
             //测试
         /*var winItems=[
-        {   
+        {
             winamt:45,
             wareIssue:20170515,
             drawTime:"2017-05-3",
@@ -82,7 +83,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                console.log (response);
                 winItems = response.data;
                 
-                if (winItems[0]) 
+                if (winItems[0])
                 {
                     $scope.winamt = winItems[0].winamt;
                     $scope.wareIssue = winItems[0].wareIssue;
@@ -92,7 +93,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                     winAlertStatus.first=true;
                     $scope.modal3.show ();
                 }
-                else if (!winItems[0]) 
+                else if (!winItems[0])
                 {
                     $timeout.cancel(nextShow);
 
@@ -205,7 +206,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         $scope.cancelPop3 = function () {
             $scope.modal3.hide ();
             nextShow=$timeout(function () {
-                if (winAlertStatus.first==true && winAlertStatus.second==false && winAlertStatus.third==false && winAlertStatus.forth==false && winItems[1]) 
+                if (winAlertStatus.first==true && winAlertStatus.second==false && winAlertStatus.third==false && winAlertStatus.forth==false && winItems[1])
                 {
                     $scope.winamt = winItems[1].winamt;
                     $scope.wareIssue = winItems[1].wareIssue;
@@ -214,11 +215,11 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                     winAlertStatus.second=true;
                     console.log($scope.investCode);
                     // $scope.modal3.show ();
-                    if (winItems[1]) 
+                    if (winItems[1])
                     {
                         $scope.modal3.show ();
                     }
-                    else if (!winItems[1]) 
+                    else if (!winItems[1])
                     {
                         $timeout.cancel(nextShow);
                         
@@ -239,7 +240,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
 
                     }
                 }
-                else if (winAlertStatus.first==true && winAlertStatus.second==true && winAlertStatus.third==false && winAlertStatus.forth==false && winItems[2]) 
+                else if (winAlertStatus.first==true && winAlertStatus.second==true && winAlertStatus.third==false && winAlertStatus.forth==false && winItems[2])
                 {
                     $scope.winamt = winItems[2].winamt;
                     $scope.wareIssue = winItems[2].wareIssue;
@@ -247,11 +248,11 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                     $scope.investCode=splitCode.split(winItems[2].investCode);
                     winAlertStatus.third=true;
                     console.log($scope.investCode);
-                    if (winItems[2]) 
+                    if (winItems[2])
                     {
                         $scope.modal3.show ();
                     }
-                    else if (!winItems[2]) 
+                    else if (!winItems[2])
                     {
                         $timeout.cancel(nextShow);
 
@@ -273,18 +274,18 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
 
                     }
                 }
-                else if (winAlertStatus.first==true && winAlertStatus.second==true && winAlertStatus.third==true && winAlertStatus.forth==false && winItems[3]) 
+                else if (winAlertStatus.first==true && winAlertStatus.second==true && winAlertStatus.third==true && winAlertStatus.forth==false && winItems[3])
                 {
                     $scope.winamt = winItems[3].winamt;
                     $scope.wareIssue = winItems[3].wareIssue;
                     $scope.drawTime = winItems[3].drawTime;
                     $scope.investCode=splitCode.split(winItems[3].investCode);
                     winAlertStatus.forth=true;
-                    if (winItems[3]) 
+                    if (winItems[3])
                     {
                         $scope.modal3.show ();
                     }
-                    else if (!winItems[3]) 
+                    else if (!winItems[3])
                     {
                         $timeout.cancel(nextShow);
 

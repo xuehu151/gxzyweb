@@ -1,10 +1,11 @@
 /**
  * Created by admin on 2017/6/14.
  */
+var ipUrl = 'http://114.215.70.179:8088/service';
 
 angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
 //兑换 排列3
-    .controller ('Exchange-3Ctrl', function ($scope, $state, $rootScope, $interval, getWareIssueService, $util) {
+    .controller ('Exchange-3Ctrl', function ($scope, $state, $rootScope, $interval, getWareIssueService, $util, $ionicLoading, $http, $ionicModal) {
         //设置排列3球百位号码
         $scope.numDataBit100 = [];
         var filterBit100 = [];
@@ -15,9 +16,9 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         $scope.numDataBit1 = [];
         var filterBit1 = [];
         //初始化选中的值
-        $scope.generate100 = 0;
-        $scope.generate10 = 0;
-        $scope.generate1 = 0;
+        $scope.generate100 = '';
+        $scope.generate10 = '';
+        $scope.generate1 = '';
         // Create the ball items   百位
         for (var j = 0; j < 10; j++) {
             var itemsBit = {
@@ -117,7 +118,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         
         function filterBit100Data () {
             if (filterBit100.length == 0) {
-                $scope.generate100 = 0;
+                $scope.generate100 = '';
             }
             else {
                 $scope.generate100 = filterBit100[0].num;
@@ -126,7 +127,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         
         function filterBit10Data () {
             if (filterBit10.length == 0) {
-                $scope.generate10 = 0;
+                $scope.generate10 = '';
             }
             else {
                 $scope.generate10 = filterBit10[0].num;
@@ -135,7 +136,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         
         function filterBit1Data () {
             if (filterBit1.length == 0) {
-                $scope.generate1 = 0;
+                $scope.generate1 = '';
             }
             else {
                 $scope.generate1 = filterBit1[0].num;
@@ -191,42 +192,200 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
             $scope.generate10 = changeToArray3D.S_Bit[0].num;
             $scope.generate1 = changeToArray3D.G_Bit[0].num;
         }
-        //加入选单
-        $scope.saveBallSelect3D = function ($index) {
-            var json3D = {
-                B_Bit: filterBit100,
-                S_Bit: filterBit10,
-                G_Bit: filterBit1
-            };
-            if (sessionStorage.jsonWrap3D) { //判断是否第一次点击确定 并且对进行完删除后赋值
-                var changeToArray3D = JSON.parse (sessionStorage.jsonWrap3D);
-                //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
-                jsonWrapBit3D = changeToArray3D;
-            }
-            if (filterBit100.length != 0 && filterBit10 != 0 && filterBit1 != 0) {
-                jsonWrapBit3D.push (json3D);
-                //                console.log($rootScope.jsonWrapBit3D);
-                var sessionJsonWarp3D = JSON.stringify (jsonWrapBit3D); //解析数组
-                //console.log (sessionJsonWarp3D);
-                sessionStorage.jsonWrap3D = sessionJsonWarp3D; //session保存数据
-                //console.log(sessionStorage.jsonWrap3D);
-                $scope.generate100 = 0;
-                $scope.generate10 = 0;
-                $scope.generate1 = 0;
-                for (var i = 0; i < 10; i++) { //再次点击之前 首先清空上次选中的号码效果
-                    $scope.numDataBit100[i].check = false;
-                    $scope.numDataBit10[i].check = false;
-                    $scope.numDataBit1[i].check = false;
-                    filterBit100 = [];
-                    filterBit10 = [];
-                    filterBit1 = [];
+    
+        if(type == 0){
+            if (PayType == 0) {
+                $scope.saveBallSelect3D = function () {
+                    joinMenu ();
                 }
-                $state.go ('exchange-3Details');
+            }
+        }else if(type == 1){
+            if (PayType == 0) {
+                $scope.saveBallSelect3D = function () {
+                    joinMenu ();
+                }
             }
             else {
-                alert ('请正确选择号码');
+                //加入选单
+                $scope.saveBallSelect3D = function ($index) {
+                    var json3D = {
+                        B_Bit : filterBit100,
+                        S_Bit : filterBit10,
+                        G_Bit : filterBit1
+                    };
+                    if (sessionStorage.jsonWrap3D) { //判断是否第一次点击确定 并且对进行完删除后赋值
+                        var changeToArray3D = JSON.parse (sessionStorage.jsonWrap3D);
+                        //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
+                        jsonWrapBit3D = changeToArray3D;
+                    }
+                    if (filterBit100.length != 0 && filterBit10 != 0 && filterBit1 != 0) {
+                        jsonWrapBit3D.push (json3D);
+                        //                console.log($rootScope.jsonWrapBit3D);
+                        var sessionJsonWarp3D = JSON.stringify (jsonWrapBit3D); //解析数组
+                        //console.log (sessionJsonWarp3D);
+                        sessionStorage.jsonWrap3D = sessionJsonWarp3D; //session保存数据
+                        //console.log(sessionStorage.jsonWrap3D);
+                        $scope.generate100 = 0;
+                        $scope.generate10 = 0;
+                        $scope.generate1 = 0;
+                        for (var i = 0; i < 10; i++) { //再次点击之前 首先清空上次选中的号码效果
+                            $scope.numDataBit100[i].check = false;
+                            $scope.numDataBit10[i].check = false;
+                            $scope.numDataBit1[i].check = false;
+                            filterBit100 = [];
+                            filterBit10 = [];
+                            filterBit1 = [];
+                        }
+                        $state.go ('exchange-3Details');
+                    }
+                    else {
+                        alert ('请正确选择号码');
+                    }
+                };
             }
-        };
+        }
+        //PayType =0 用抵用券扫码
+        function joinMenu () {
+            //获取3D期号
+            var reques = {};
+            var userInfo = $util.getUserInfo ();
+            /* $http ({
+             method: "POST",
+             url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
+             params: {
+             LotteryID: 54
+             },
+             headers: {
+             "Content-Type": "application/json"
+             }
+             })*/
+    
+            var data = {
+                lotteryID : 31
+            };
+            getWareIssueService.getWareIssue (data, userInfo.data.token)
+                .then (function (response) {
+                    //                   console.log(response);
+                    reques = response.data;
+                    console.log (reques);
+                    getPl3add ();
+                }, function (response) {
+                    console.log ("获取列表失败");
+                });
+            // 排列三投注信息接口
+            function getPl3add () {
+                var userInfo = $util.getUserInfo ();
+        
+                var dataArray = [];
+                var dataObj = {
+                    investCode : "",
+                    multiple : 1
+                };
+                var investCode = null;
+                investCode = $scope.numDataBit100[randomBall[2]].num + '*';
+                investCode += $scope.numDataBit10[randomBall[1]].num + '*';
+                investCode += $scope.numDataBit1[randomBall[0]].num ;
+        
+                dataObj.investCode = investCode;
+                dataArray.push (dataObj);
+                console.log (dataArray);
+                //console.log(userInfo.data.voucher);
+                var vid = '';
+                if (type == 0) {
+                    if (userInfo.data.voucher == undefined) {
+                        vid = '';
+                    }
+                    else {
+                        vid = userInfo.data.voucher.vid;
+                    }
+                }
+                else if (type == 1) {
+                    for (var k = 0; k < userInfo.data.vouchers.length; k++) {
+                        if (userInfo.data.vouchers == undefined) {
+                            vid = '';
+                        }
+                        else {
+                            vid = userInfo.data.vouchers[k].vid;
+                        }
+                    }
+                }
+        
+                var data = {
+                    //lotteryID: 31,
+                    wareIssue : reques.wareIssue,
+                    payType : PayType,
+                    vid : vid,
+                    data : dataArray
+                };
+                // console.log(data.token);
+                $http ({
+                    method : "POST",
+                    url : ipUrl + '/lottery/pl3add?token=' + userInfo.data.token,
+                    data : data,
+                    headers : {
+                        "Content-Type" : "application/json"
+                    }
+                })
+                //BettingService.pl3Add(data, userInfo.data.token)
+                    .then (function (response) {
+                        $ionicLoading.hide ();
+                        console.info (data);
+                        console.log (response.data);
+                        /*var alertPopup = $ionicPopup.alert({
+                         title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
+                         template: '<div class="alert-left"><p style="text-align: center">' + response.data.info + '</p></div>',
+                         okText: '确 定',
+                         okType: 'button-light'
+                         })
+                         .then(function (response) {
+                         $state.go('tab.account');
+                         });*/
+                        //提交成功窗口配置
+                        $ionicModal.fromTemplateUrl ('submission.html', {
+                            scope : $scope,
+                            backdropClickToClose : true
+                        })
+                            .then (function (modal) {
+                                modal.show ();
+                                $scope.info = response.data.info;
+                                $scope.realName = userInfo.data.user.realName;
+                                $scope.phones = userInfo.data.user.phone;
+                                $scope.receives = userInfo.data.user.updateDate; //获赠时间
+                                $scope.draw_time = reques.draw_time.split ('T').join (' ');//开奖时间
+                        
+                                $scope.receiveNumArr = data.data;//获赠号码
+                                $scope.receiveNum = [];
+                                for (var i in $scope.receiveNumArr) {
+                                    var receiveNum = $scope.receiveNumArr[i].investCode;
+                                    var receiveNumStr = receiveNum.split ('*');
+                            
+                                    $scope.receiveNum.push (receiveNumStr);
+                                }
+                                console.info ($scope.receiveNumArr);
+                                console.info ($scope.receiveNum);
+                                //                            $scope.modal3 = modal;
+                                $scope.makeSure = function () {
+                                    modal.hide ();
+                                    $state.go ('tab.account');
+                                    jsonWrapBit3D = [];
+                                    sessionStorage.jsonWrap3D = '';
+                                }
+                            });
+                    }, function (response) {
+                        var confirmPopup = $ionicPopup.confirm ({
+                            title : '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
+                            template : '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
+                            okText : '确认',
+                            cancelText : '返回',
+                            okType : 'button-darkBlue'
+                        }).then (function () {
+                            $state.go ('tab.account');
+                        });
+                    });
+            }
+        }
+        
+        
         //玩法说明时间
         var userInfo = $util.getUserInfo ();
         var data = {

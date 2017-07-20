@@ -559,6 +559,10 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     font-weight: bold;
 }
 
+.show-red-ball{
+    height: 40px;
+}
+
 .show-red-ball i,
 .show-blue-ball i {
     width: 2em;

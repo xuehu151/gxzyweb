@@ -21,11 +21,11 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
         $scope.numDataBit1 = [];
         var filterBit1 = [];
         //初始化选中的值
-        $scope.generate10000 = 0;
-        $scope.generate1000 = 0;
-        $scope.generate100 = 0;
-        $scope.generate10 = 0;
-        $scope.generate1 = 0;
+        $scope.generate10000 = '';
+        $scope.generate1000 = '';
+        $scope.generate100 = '';
+        $scope.generate10 = '';
+        $scope.generate1 = '';
         // Create the ball items   万位
         for (var j = 0; j < 10; j++) {
             var itemsBit10000 = {

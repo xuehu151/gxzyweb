@@ -89,11 +89,11 @@
 
         <div class="row">
             <div class="col show-red-ball">
-                <i ng-cloak>{{generate10000}}</i>
-                <i ng-cloak>{{generate1000}}</i>
-                <i ng-cloak>{{generate100}}</i>
-                <i ng-cloak>{{generate10}}</i>
-                <i ng-cloak>{{generate1}}</i>
+                <i ng-cloak ng-show="generate10000.toString() != ''">{{generate10000}}</i>
+                <i ng-cloak ng-show="generate1000.toString() != ''">{{generate1000}}</i>
+                <i ng-cloak ng-show="generate100.toString() != ''">{{generate100}}</i>
+                <i ng-cloak ng-show="generate10.toString() != ''">{{generate10}}</i>
+                <i ng-cloak ng-show="generate1.toString() != ''">{{generate1}}</i>
             </div>
         </div>
         <div class="row">
