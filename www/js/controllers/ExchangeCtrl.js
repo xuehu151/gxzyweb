@@ -5,7 +5,7 @@ var ipUrl = 'http://114.215.70.179:8088/service';
 //兑换
 angular.module ('starter.ExchangeCtrl', ['starter.services'])
 
-    .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService, $cordovaToast, ionicToast) {
+    .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService/*, $cordovaToast, ionicToast*/) {
         $rootScope.newStatus = true;
         $ionicLoading.show ();
         if ($location.search ().sign && $location.search ().type) {
@@ -157,12 +157,12 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         };
                         $scope.GetTickets = function () {  //领取彩票按钮
                             if ($scope.userInfo.newUserName == '') {
-                                /*var alertPopup = $ionicPopup.alert ({
+                                var alertPopup = $ionicPopup.alert ({
                                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
                                     template: '<div class="alert-left"><p style="text-align: center">请填写个人真实姓名</p></div>',
                                     okText: '确 定',
                                     okType: 'button-light'
-                                });*/
+                                });
                                 /*$cordovaToast
                                     .show('ionic中文网', 'long', 'center')
                                     .then(function(success) {
@@ -170,27 +170,27 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     }, function (error) {
                                         // error
                                     });*/
-                                ionicToast.show('请填写个人真实姓名!', 'middle', false, 1000);
+                                //ionicToast.show('请填写个人真实姓名!', 'middle', false, 1000);
                                 return;
                             }
                             else if ($scope.userInfo.newUserIphone == '') {
-                                /*var alertPopup = $ionicPopup.alert ({
+                                var alertPopup = $ionicPopup.alert ({
                                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
                                     template: '<div class="alert-left"><p style="text-align: center">请填写电话号码</p></div>',
                                     okText: '确 定',
                                     okType: 'button-light'
-                                });*/
-                                ionicToast.show('请填写电话号码!', 'middle', false, 1000);
+                                });
+                                //ionicToast.show('请填写电话号码!', 'middle', false, 1000);
                                 return;
                             }
                             else if (parseInt ($scope.userInfo.newUserIphone) != parseInt ($scope.userInfo.newUserSure)) {
-                                /*var alertPopup = $ionicPopup.alert ({
+                                var alertPopup = $ionicPopup.alert ({
                                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
                                     template: '<div class="alert-left"><p style="text-align: center">电话号码不一致</p></div>',
                                     okText: '确 定',
                                     okType: 'button-light'
-                                });*/
-                                ionicToast.show('电话号码不一致!', 'middle', false, 1000);
+                                });
+                                //ionicToast.show('电话号码不一致!', 'middle', false, 1000);
                                 return;
                             }
                             else {

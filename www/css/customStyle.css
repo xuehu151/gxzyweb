@@ -1,11 +1,11 @@
 /*自定义图标*/
 @font-face {
     font-family: 'iconCustorm';
-    src: url('../lib/ionic/fonts/iconCustorm.eot?qu5r4n');
-    src: url('../lib/ionic/fonts/iconCustorm.eot?qu5r4n#iefix') format('embedded-opentype'),
-    url('../lib/ionic/fonts/iconCustorm.ttf?qu5r4n') format('truetype'),
-    url('../lib/ionic/fonts/iconCustorm.woff?qu5r4n') format('woff'),
-    url('../lib/ionic/fonts/iconCustorm.svg?qu5r4n#iconCustorm') format('svg');
+    src: url('fonts/iconCustorm.eot?qu5r4n');
+    src: url('fonts/iconCustorm.eot?qu5r4n#iefix') format('embedded-opentype'),
+    url('fonts/iconCustorm.ttf?qu5r4n') format('truetype'),
+    url('fonts/iconCustorm.woff?qu5r4n') format('woff'),
+    url('fonts/iconCustorm.svg?qu5r4n#iconCustorm') format('svg');
     font-weight: normal;
     font-style: normal;
 }
