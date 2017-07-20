@@ -13,7 +13,6 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         getUser.getInfo (url + "/service/customer/getUser?token=" + token)
             .then (function (response) {
                console.log (response.data);
-                $rootScope.
                 $scope.useableMoney = response.data.money;
                 // $scope.phone = response.data.phone;
                 $scope.frozedMoney = response.data.freeze;
@@ -41,7 +40,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             }, function () {
                 alert ('网络异常, 未能获取到您的余额')
             });
-        
+
 
             //测试
         /*var winItems=[
@@ -82,7 +81,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             .then (function (response) {
                console.log (response);
                 winItems = response.data;
-                
+
                 if (winItems[0])
                 {
                     $scope.winamt = winItems[0].winamt;
@@ -102,16 +101,16 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                         .then (function (response) {
                             $scope.needExchangeAmount.amount = response.data.length;
                             console.log($scope.needExchangeAmount.amount);
-                            
+
                             if($scope.needExchangeAmount.amount){
                                 $rootScope.needExchangeItems = response.data;
                                 $scope.modal2.show ();
                             }
-                            
+
                         }, function () {
                             alert ('网络异常,未获取到用户信息')
                         });
-                    
+
                 }
 
             }, function () {
@@ -119,13 +118,13 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             });
 
 
-        
 
-        
+
+
         $scope.withdrawConfirm = function () {
-            
 
-            
+
+
             var userData = userInfo.data.user;
             if (userData.wechat || userData.alipay || userData.bankNo) {
                 $scope.modal.show ();
@@ -222,18 +221,18 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                     else if (!winItems[1])
                     {
                         $timeout.cancel(nextShow);
-                        
+
                         //更新待兑换
                         getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token)
                             .then (function (response) {
                                 $scope.needExchangeAmount.amount = response.data.length;
                                 console.log($scope.needExchangeAmount.amount);
-                                
+
                                 if($scope.needExchangeAmount.amount){
                                     $rootScope.needExchangeItems = response.data;
                                     $scope.modal2.show ();
                                 }
-                                
+
                             }, function () {
                                 alert ('网络异常,未获取到用户信息')
                             });
@@ -261,12 +260,12 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                             .then (function (response) {
                                 $scope.needExchangeAmount.amount = response.data.length;
                                 console.log($scope.needExchangeAmount.amount);
-                                
+
                                 if($scope.needExchangeAmount.amount){
                                     $rootScope.needExchangeItems = response.data;
                                     $scope.modal2.show ();
                                 }
-                                
+
                             }, function () {
                                 alert ('网络异常,未获取到用户信息')
                             });
@@ -294,21 +293,21 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                             .then (function (response) {
                                 $scope.needExchangeAmount.amount = response.data.length;
                                 console.log($scope.needExchangeAmount.amount);
-                                
+
                                 if($scope.needExchangeAmount.amount){
                                     $rootScope.needExchangeItems = response.data;
                                     $scope.modal2.show ();
                                 }
-                                
+
                             }, function () {
                                 alert ('网络异常,未获取到用户信息')
                             });
 
                     }
                     console.log($scope.investCode);
-                   
+
                 }
-                
+
             },1000)
 
         };
