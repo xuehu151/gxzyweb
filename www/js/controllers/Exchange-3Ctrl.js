@@ -196,13 +196,13 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         if(type == 0){
             if (PayType == 0) {
                 $scope.saveBallSelect3D = function () {
-                    joinMenu ();
+                    joinMenu3D ();
                 }
             }
         }else if(type == 1){
             if (PayType == 0) {
                 $scope.saveBallSelect3D = function () {
-                    joinMenu ();
+                    joinMenu3D ();
                 }
             }
             else {
@@ -245,7 +245,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
             }
         }
         //PayType =0 用抵用券扫码
-        function joinMenu () {
+        function joinMenu3D () {
             //获取3D期号
             var reques = {};
             var userInfo = $util.getUserInfo ();
