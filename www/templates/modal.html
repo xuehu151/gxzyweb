@@ -6,12 +6,19 @@
         <div class="list">
             <form action="" name="formModal">
                 <label class="item item-input">
-                    <input ng-model="userInfo.newUserName"  ng-pattern="/^[\u4E00-\u9FA5A-Za-z0-9_]+$/" type="text" placeholder="请输入您的真实姓名">
+                    <input
+                        ng-model="userInfo.newUserName"
+                        ng-pattern=/^[\u4e00-\u9fa5]*$/
+                        ng-trim="false"
+                        type="text"
+                        name="userName"
+                        placeholder="请输入您的真实姓名">
+                    <span style="font-size: .6em;color: red;" ng-show="formModal.userName.$dirty && formModal.userName.$invalid">请输入您的真实姓名&nbsp;</span>
                 </label>
                 <label class="item item-input">
                     <input
                         ng-model="userInfo.newUserIphone"
-                        ng-pattern="/^1[34578]\d{9}$/"
+                        ng-pattern="/^1[345789]\d{9}$/"
                         maxlength="11"
                         type="text"
                         name="iphone"
