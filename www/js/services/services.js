@@ -223,7 +223,7 @@ angular.module('starter.services', [])
                     obj[i].whetherRed = true;
                     obj[i].status = '已中奖';
                     obj[i].whetherDate = false;
-                    obj[i].LT = '¥' + obj[i].winamt;
+                    obj[i].LT = '¥' + obj[i].lotteryList[0].winamt;
                     if (obj[i].payType == 0) {
                         obj[i].RT = '扫码兑换';
                     }
