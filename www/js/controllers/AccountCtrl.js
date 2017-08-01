@@ -18,11 +18,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                 $scope.frozedMoney = response.data.freeze;
                 $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
                 //提现时候的账户号码
-                $rootScope.accountNum = [/*{
-                    chanel: 1,
-                    num: '(' + response.data.alipay + ')',
-                    disable: false
-                },*/
+                $rootScope.accountNum = [
                 {
                     chanel: 2,
                     num: '(' + response.data.wechat + ')'
@@ -32,44 +28,9 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                     num: '(' + response.data.bankNo + ')'
                     // disable: false
                 }];
-                /*for (var i = 0; i < $rootScope.accountNum.length; i++) {
-                    if ($rootScope.accountNum[i].num == "()") {
-                        $rootScope.accountNum[i].disable = true;
-                    }
-                }*/
             }, function () {
                 alert ('网络异常, 未能获取到您的余额')
             });
-
-
-            //测试
-        /*var winItems=[
-        {
-            winamt:45,
-            wareIssue:20170515,
-            drawTime:"2017-05-3",
-            investCode:"4*9*3"
-        },
-        {
-            winamt:4,
-            wareIssue:20174115,
-            drawTime:"2017-07-3",
-            investCode:"1*2*3*6*9"
-        },
-        {
-            winamt:12,
-            wareIssue:201714115,
-            drawTime:"2017-07-13",
-            investCode:"01,05,03,07,09*11,21"
-        },
-        {
-            winamt:1133,
-            wareIssue:201714115,
-            drawTime:"2017-07-13",
-            investCode:"01,05,03,07,09*11,21"
-        }
-
-        ];*/
         var winItems=[];
         var winAlertStatus={first:false,second:false,third:false,forth:false}   //最多四次弹窗
         var haveShowAllWin=false;
@@ -176,7 +137,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             $state.go ('widthdraw')
         };
         //老用户获得彩票的mordal窗口配置
-        $ionicModal.fromTemplateUrl ('accountModalOldUser.html', {
+        $ionicModal.fromTemplateUrl ('templates/getOneBetModal.html', {
             scope: $scope,
             backdropClickToClose:true
         }).then (function (modal) {
