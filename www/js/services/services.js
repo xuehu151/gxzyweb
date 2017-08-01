@@ -99,7 +99,7 @@ angular.module('starter.services', [])
         };
         return info;
     }])
-    
+
     //上传数据的http请求
     .factory('postData', ['$http', '$q', function ($http, $q) {
         var info = {};
@@ -160,7 +160,7 @@ angular.module('starter.services', [])
     };
     return info;
 }])*/
-    
+
     //分割字符串
     .factory('splitCode',['$http',function ($http) {
         var code={};
@@ -173,7 +173,7 @@ angular.module('starter.services', [])
                 investCodeFormat[1] = investCode[1].split (',');
             }
             else if (investCode.length == 3 || investCode.length == 5) {
-                
+
                 for (var i = 0; i < investCode.length; i++) {
                     investCode[i]='0'+investCode[i]
                 }
@@ -188,7 +188,7 @@ angular.module('starter.services', [])
     //allOrders.html的类型选择
     .factory('difOrders',['$http',function ($http) {
         var orders={};
-        orders.diff=function (obj) 
+        orders.diff=function (obj)
         {
             var arr2=[];                //待开奖
             var arr3=[];                //已中奖奖
@@ -204,11 +204,11 @@ angular.module('starter.services', [])
                     obj[i].lotteryID = '大乐透'
                 }
                 if (obj[i].status == 0 || obj[i].status == 1 || obj[i].status == 2) {
-                    
+
                     obj[i].whetherRed = true;
                     obj[i].status = '待开奖';
                     obj[i].whetherDate = true;
-                    obj[i].LT = '开奖时间: ' + obj[i].drawTime;
+                    obj[i].LT = '开奖时间: ' + obj[i].lotteryList[0].drawTime;
                     if (obj[i].payType == 0) {
                         obj[i].RT = '扫码兑换';
                     }
@@ -219,7 +219,7 @@ angular.module('starter.services', [])
                     arr2.push(obj[i]);
                 }
                 else if (obj[i].status == 4) {
-                    
+
                     obj[i].whetherRed = true;
                     obj[i].status = '已中奖';
                     obj[i].whetherDate = false;
@@ -246,7 +246,7 @@ angular.module('starter.services', [])
                     }
                 }
                 else if (obj[i].status == 3) {
-                    
+
                     obj[i].whetherRed = false;
                     obj[i].status = '未中奖';
                     obj[i].whetherDate = false;
@@ -267,7 +267,7 @@ angular.module('starter.services', [])
     }])
 
 
-    
+
     .constant('$ionicLoadingConfig', {
         hideOnStateChange: true
     });

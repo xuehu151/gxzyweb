@@ -1,7 +1,7 @@
 /**
  * Created by admin on 2017/6/14.
  */
-var ipUrl = 'http://114.215.70.179:8088/service';
+var ipUrl = 'http://121.42.253.149:18820/service';
 
 angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
 //兑换 排列 5 详情
@@ -199,13 +199,17 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                         vid = userInfo.data.voucher.vid;
                     }
                 }else if(type == 1) {
-                    for(var k = 0; k < userInfo.data.vouchers.length; k++ ){
-                        if (userInfo.data.vouchers == undefined) {
-                            vid = '';
+                    if(userInfo.data.vouchers){
+                        for (var k = 0; k < userInfo.data.vouchers.length; k++) {
+                            if (userInfo.data.vouchers == undefined) {
+                                vid = '';
+                            }
+                            else {
+                                vid = userInfo.data.vouchers[k].vid;
+                            }
                         }
-                        else {
-                            vid = userInfo.data.vouchers[k].vid;
-                        }
+                    }else {
+                        vid = '';
                     }
                 }
                 
@@ -246,7 +250,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                                 $scope.info = response.data.info;
                                 $scope.realName = userInfo.data.user.realName;
                                 $scope.phones = userInfo.data.user.phone;
-//                                $scope.receive = receive; //获赠时间
+                                $scope.receives = userInfo.data.user.updateDate; //获赠时间
                                 $scope.draw_time = reques.draw_time.split('T').join(' ');//开奖时间
             
                                 $scope.receiveNumArr = data.data;//获赠号码
@@ -263,6 +267,8 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                                 $scope.makeSure = function () {
                                     modal.hide ();
                                     $state.go ('tab.account');
+                                    jsonWrapBit5D = [];
+                                    sessionStorage.jsonWrap5D = '';
                                 }
                             });
                         //console.log (response.data.info);

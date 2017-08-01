@@ -40,11 +40,11 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             }, function () {
                 alert ('网络异常, 未能获取到您的余额')
             });
-        
+
 
             //测试
         /*var winItems=[
-        {   
+        {
             winamt:45,
             wareIssue:20170515,
             drawTime:"2017-05-3",
@@ -81,8 +81,8 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             .then (function (response) {
                console.log (response);
                 winItems = response.data;
-                
-                if (winItems[0]) 
+
+                if (winItems[0])
                 {
                     $scope.winamt = winItems[0].winamt;
                     $scope.wareIssue = winItems[0].wareIssue;
@@ -92,7 +92,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                     winAlertStatus.first=true;
                     $scope.modal3.show ();
                 }
-                else if (!winItems[0]) 
+                else if (!winItems[0])
                 {
                     $timeout.cancel(nextShow);
 
@@ -101,16 +101,16 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                         .then (function (response) {
                             $scope.needExchangeAmount.amount = response.data.length;
                             console.log($scope.needExchangeAmount.amount);
-                            
+
                             if($scope.needExchangeAmount.amount){
                                 $rootScope.needExchangeItems = response.data;
                                 $scope.modal2.show ();
                             }
-                            
+
                         }, function () {
                             alert ('网络异常,未获取到用户信息')
                         });
-                    
+
                 }
 
             }, function () {
@@ -118,13 +118,13 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
             });
 
 
-        
 
-        
+
+
         $scope.withdrawConfirm = function () {
-            
 
-            
+
+
             var userData = userInfo.data.user;
             if (userData.wechat || userData.alipay || userData.bankNo) {
                 $scope.modal.show ();
@@ -205,7 +205,7 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
         $scope.cancelPop3 = function () {
             $scope.modal3.hide ();
             nextShow=$timeout(function () {
-                if (winAlertStatus.first==true && winAlertStatus.second==false && winAlertStatus.third==false && winAlertStatus.forth==false && winItems[1]) 
+                if (winAlertStatus.first==true && winAlertStatus.second==false && winAlertStatus.third==false && winAlertStatus.forth==false && winItems[1])
                 {
                     $scope.winamt = winItems[1].winamt;
                     $scope.wareIssue = winItems[1].wareIssue;
@@ -214,32 +214,32 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                     winAlertStatus.second=true;
                     console.log($scope.investCode);
                     // $scope.modal3.show ();
-                    if (winItems[1]) 
+                    if (winItems[1])
                     {
                         $scope.modal3.show ();
                     }
-                    else if (!winItems[1]) 
+                    else if (!winItems[1])
                     {
                         $timeout.cancel(nextShow);
-                        
+
                         //更新待兑换
                         getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token)
                             .then (function (response) {
                                 $scope.needExchangeAmount.amount = response.data.length;
                                 console.log($scope.needExchangeAmount.amount);
-                                
+
                                 if($scope.needExchangeAmount.amount){
                                     $rootScope.needExchangeItems = response.data;
                                     $scope.modal2.show ();
                                 }
-                                
+
                             }, function () {
                                 alert ('网络异常,未获取到用户信息')
                             });
 
                     }
                 }
-                else if (winAlertStatus.first==true && winAlertStatus.second==true && winAlertStatus.third==false && winAlertStatus.forth==false && winItems[2]) 
+                else if (winAlertStatus.first==true && winAlertStatus.second==true && winAlertStatus.third==false && winAlertStatus.forth==false && winItems[2])
                 {
                     $scope.winamt = winItems[2].winamt;
                     $scope.wareIssue = winItems[2].wareIssue;
@@ -247,11 +247,11 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                     $scope.investCode=splitCode.split(winItems[2].investCode);
                     winAlertStatus.third=true;
                     console.log($scope.investCode);
-                    if (winItems[2]) 
+                    if (winItems[2])
                     {
                         $scope.modal3.show ();
                     }
-                    else if (!winItems[2]) 
+                    else if (!winItems[2])
                     {
                         $timeout.cancel(nextShow);
 
@@ -260,12 +260,12 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                             .then (function (response) {
                                 $scope.needExchangeAmount.amount = response.data.length;
                                 console.log($scope.needExchangeAmount.amount);
-                                
+
                                 if($scope.needExchangeAmount.amount){
                                     $rootScope.needExchangeItems = response.data;
                                     $scope.modal2.show ();
                                 }
-                                
+
                             }, function () {
                                 alert ('网络异常,未获取到用户信息')
                             });
@@ -273,18 +273,18 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
 
                     }
                 }
-                else if (winAlertStatus.first==true && winAlertStatus.second==true && winAlertStatus.third==true && winAlertStatus.forth==false && winItems[3]) 
+                else if (winAlertStatus.first==true && winAlertStatus.second==true && winAlertStatus.third==true && winAlertStatus.forth==false && winItems[3])
                 {
                     $scope.winamt = winItems[3].winamt;
                     $scope.wareIssue = winItems[3].wareIssue;
                     $scope.drawTime = winItems[3].drawTime;
                     $scope.investCode=splitCode.split(winItems[3].investCode);
                     winAlertStatus.forth=true;
-                    if (winItems[3]) 
+                    if (winItems[3])
                     {
                         $scope.modal3.show ();
                     }
-                    else if (!winItems[3]) 
+                    else if (!winItems[3])
                     {
                         $timeout.cancel(nextShow);
 
@@ -293,21 +293,21 @@ angular.module ('starter.AccountCtrl', ['starter.services'])
                             .then (function (response) {
                                 $scope.needExchangeAmount.amount = response.data.length;
                                 console.log($scope.needExchangeAmount.amount);
-                                
+
                                 if($scope.needExchangeAmount.amount){
                                     $rootScope.needExchangeItems = response.data;
                                     $scope.modal2.show ();
                                 }
-                                
+
                             }, function () {
                                 alert ('网络异常,未获取到用户信息')
                             });
 
                     }
                     console.log($scope.investCode);
-                   
+
                 }
-                
+
             },1000)
 
         };

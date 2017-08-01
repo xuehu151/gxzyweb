@@ -4,7 +4,7 @@
 angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
 
 //兑换  大乐透不追加
-    .controller ('BigLotto-2Ctrl', function ($scope, $state, $ionicPopover, $interval, $ionicPopup, $stateParams, $util, getWareIssueService) {
+    .controller ('BigLotto-2Ctrl', function ($scope, $state, $ionicPopover, $interval, $ionicPopup, $stateParams, $ionicModal, $http, $ionicLoading, $util, getWareIssueService) {
         var flag2 = $stateParams.flag2;
         //设置红球和篮球号码
         $scope.numDataRed = [];
@@ -107,6 +107,8 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
             }
         };
         //随机选择   红蓝  色球
+        var randomRed = []; //原数组
+        var randomBlue = []; //原数组
         $scope.randomBall = function () {
             $scope.filterDataRed = [];
             $scope.filterDataBlue = [];
@@ -115,7 +117,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 $scope.numDataRed[i].check = false;
                 $scope.filterDataRed = [];
             }
-            var randomRed = []; //原数组
+            
             //给原数组randomBlue赋值
             for (var i = 1; i <= 35; i++) {
                 randomRed[i] = i;
@@ -134,7 +136,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 $scope.numDataBlue[i].check = false;
                 $scope.filterDataBlue = [];
             }
-            var randomBlue = []; //原数组
+           
             //给原数组randomBlue赋值
             for (var i = 1; i <= 12; i++) {
                 randomBlue[i] = i;
@@ -167,52 +169,216 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 $scope.numDataBlue[changeToArray1.blue[i].num - 1].check = true;
             }
         }
-        //加入选单按钮
-        $scope.saveBallSelect = function () {
-            var filterDataRed1 = []; //用来保存本次点击确定后的红球
-            var filterDataBlue1 = []; //用来保存本次点击确定后的蓝球
-            if ($scope.filterDataRed.length == 5 && $scope.filterDataBlue.length == 2) { //判断用户未选择号码时点击确定无效
-                if (sessionStorage.jsonWrap) //判断是否第一次点击确定
-                {
-                    var changeToArray = JSON.parse (sessionStorage.jsonWrap);
-                    //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
-                    jsonWrap = changeToArray;
+    
+        if(type == 0){
+            if (PayType == 0) {
+                $scope.saveBallSelect = function () {
+                    joinMenuBig ();
                 }
-                //如果红篮球就添加进数组
-                for (var i = 0; i < 35; i++) {
-                    if ($scope.numDataRed[i].check == true) {
-                        filterDataRed1.push ($scope.numDataRed[i]);
-                    }
+            }
+        }else if(type == 1){
+            if (PayType == 0) {
+                $scope.saveBallSelect = function () {
+                    joinMenuBig ();
                 }
-                for (var i = 0; i < 12; i++) {
-                    if ($scope.numDataBlue[i].check == true) {
-                        filterDataBlue1.push ($scope.numDataBlue[i]);
-                    }
-                }
-                // console.log(filterDataBlue1)
-                //以对象的方式存放每一注的  红篮球 的数据
-                var jsonInner = {
-                    red: filterDataRed1,
-                    blue: filterDataBlue1
-                };
-                jsonWrap.push (jsonInner);
-                // console.log (jsonWrap);
-                var sessionJsonWarp = JSON.stringify (jsonWrap); //解析数组
-                sessionStorage.jsonWrap = sessionJsonWarp; //保存解析后的数组
-                // console.log (sessionStorage.jsonWrap);
-                $state.go ('bettingDetail', {
-                    'flag3': flag2
-                });
             }
             else {
-                var alertPopup = $ionicPopup.alert ({
-                    template: '<p style="text-align: center; letter-spacing: 2px;">你还未选择号码，请正确选择号码！</p>',
-                    okText: "确定"
-                });
+                //加入选单按钮
+                $scope.saveBallSelect = function () {
+                    var filterDataRed1 = []; //用来保存本次点击确定后的红球
+                    var filterDataBlue1 = []; //用来保存本次点击确定后的蓝球
+                    if ($scope.filterDataRed.length == 5 && $scope.filterDataBlue.length == 2) { //判断用户未选择号码时点击确定无效
+                        if (sessionStorage.jsonWrap) //判断是否第一次点击确定
+                        {
+                            var changeToArray = JSON.parse (sessionStorage.jsonWrap);
+                            //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
+                            jsonWrap = changeToArray;
+                        }
+                        //如果红篮球就添加进数组
+                        for (var i = 0; i < 35; i++) {
+                            if ($scope.numDataRed[i].check == true) {
+                                filterDataRed1.push ($scope.numDataRed[i]);
+                            }
+                        }
+                        for (var i = 0; i < 12; i++) {
+                            if ($scope.numDataBlue[i].check == true) {
+                                filterDataBlue1.push ($scope.numDataBlue[i]);
+                            }
+                        }
+                        // console.log(filterDataBlue1)
+                        //以对象的方式存放每一注的  红篮球 的数据
+                        var jsonInner = {
+                            red: filterDataRed1,
+                            blue: filterDataBlue1
+                        };
+                        jsonWrap.push (jsonInner);
+                        // console.log (jsonWrap);
+                        var sessionJsonWarp = JSON.stringify (jsonWrap); //解析数组
+                        sessionStorage.jsonWrap = sessionJsonWarp; //保存解析后的数组
+                        // console.log (sessionStorage.jsonWrap);
+                        $state.go ('bettingDetail', {
+                            'flag3': flag2
+                        });
+                    }
+                    else {
+                        var alertPopup = $ionicPopup.alert ({
+                            template: '<p style="text-align: center; letter-spacing: 2px;">你还未选择号码，请正确选择号码！</p>',
+                            okText: "确定"
+                        });
+                        return
+                    }
+                };
+            }
+        }
+    
+        //PayType =0 用抵用券扫码
+        function joinMenuBig () {
+            $ionicLoading.show ();
+            if ($scope.multiple == 0) { //投注倍数限制
+                alert ('请重新设置投注倍数');
                 return
             }
-        };
+            //获取大乐透期号
+            var reques = {};
+            var userInfo = $util.getUserInfo ();
+//            console.log(userInfo);
+            /*$http({
+             method: "POST",
+             url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
+             params: {
+             lotteryID: 51
+             },
+             headers: {
+             "Content-Type": "application/json"
+             }
+             })*/
+            var data = {
+                lotteryID : 2
+            };
+            getWareIssueService.getWareIssue (data, userInfo.data.token)
+                .then (function (response) {
+                    $ionicLoading.hide ();
+                    reques = response.data;
+//             console.log (reques);
+                    getdltadd ();
+                }, function (response) {
+                    console.log ("获取列表失败");
+                });
+            // 大乐透投注接口信息
+            function getdltadd () {
+                $ionicLoading.show ();
+                var userInfo = $util.getUserInfo ();
+            
+                var dataArrayBig = [];
+                var dataObj = {
+                    investCode : "", //"investCode":"01,03,05,07,09*06,08"
+                    multiple : 1
+                };
+                var investCodeRed = [];
+                var investCodeBlue = [];
+                var investCodeStr;
+                for (var i = 0; i < 5; i++) {
+                    investCodeRed.push($scope.numDataRed[randomRed[i] - 1].num);
+                }
+                for (var i = 0; i < 2; i++) {
+                    investCodeBlue.push($scope.numDataBlue[randomBlue[i] - 1].num);
+                }
+                investCodeStr = investCodeRed + '*' + investCodeBlue;
+              
+                dataObj.investCode = investCodeStr;
+                dataArrayBig.push (dataObj);
+                console.log (dataArrayBig);
+
+                var vid = '';
+                if(type == 0){
+                    if (userInfo.data.voucher == undefined) {
+                        vid = '';
+                    }
+                    else {
+                        vid = userInfo.data.voucher.vid;
+                    }
+                }else if(type == 1) {
+                    for(var k = 0; k < userInfo.data.vouchers.length; k++ ){
+                        if (userInfo.data.vouchers == undefined) {
+                            vid = '';
+                        }
+                        else {
+                            vid = userInfo.data.vouchers[k].vid;
+                        }
+                    }
+                }
     
+                var data = {
+//              "lotteryID": "2",
+                    wareIssue : reques.wareIssue,
+                    payType : PayType,
+                    vid : vid,
+                    addFlag : "0",
+                    data : dataArrayBig
+                };
+                $http ({
+                    method : "POST",
+                    url : ipUrl + '/lottery/dltadd?token=' + userInfo.data.token,
+                    data : data,
+                    headers : {
+                        "Content-Type" : "application/json"
+                    }
+                })
+                    .then (function (response) {
+                        $ionicLoading.hide ();
+                        console.info (response);
+                        console.dir (data);
+                        //提交成功窗口配置
+                        $ionicModal.fromTemplateUrl ('submission.html', {
+                            scope: $scope,
+                            backdropClickToClose:true
+                        })
+                            .then (function (modal) {
+                                modal.show ();
+                                $scope.info = response.data.info;
+                                $scope.realName = userInfo.data.user.realName;
+                                $scope.phones = userInfo.data.user.phone;
+                                $scope.receives = userInfo.data.user.updateDate; //获赠时间
+                                $scope.draw_time = reques.draw_time.split('T').join(' ');//开奖时间
+                            
+                                $scope.receiveNumArr = data.data;//获赠号码
+                                $scope.receiveNumRed = [];
+                                $scope.receiveNumBlue = [];
+                                for(var i in $scope.receiveNumArr){
+                                    var receiveNum = $scope.receiveNumArr[i].investCode;
+                                    var receiveNumRedBlue = receiveNum.split('*');
+                                    var receiveNumArrRed = receiveNumRedBlue[0].split(',');
+                                    var receiveNumArrBlue = receiveNumRedBlue[1].split(',');
+//                                    var receiveNumStr = receiveNumArrRed.concat(receiveNumArrBlue);
+                                    
+                                    $scope.receiveNumRed.push(receiveNumArrRed);
+                                    $scope.receiveNumBlue.push(receiveNumArrBlue);
+                                }
+//                                console.info($scope.receiveNumArr);
+//                                console.info($scope.receiveNum);
+//                            $scope.modal3 = modal;
+                                $scope.makeSure = function () {
+                                    modal.hide ();
+                                    $state.go ('tab.account');
+                                    jsonWrapBit5D = [];
+                                    sessionStorage.jsonWrap5D = '';
+                                }
+                            });
+                        //console.log (response.data.info);
+                    }, function (response) {
+                        var confirmPopup = $ionicPopup.confirm ({
+                            title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
+                            template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
+                            okText: '确认',
+                            cancelText: '返回',
+                            okType: 'button-darkBlue'
+                        }).then (function () {
+                            $state.go ('tab.account');
+                        });
+                    });
+            }
+        }
+ 
         //玩法说明时间
         var userInfo = $util.getUserInfo ();
         var data = {

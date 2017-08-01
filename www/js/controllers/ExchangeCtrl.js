@@ -1,7 +1,7 @@
 /**
  * Created by admin on 2017/6/14.
  */
-var ipUrl = 'http://114.215.70.179:8088/service';
+var ipUrl = 'http://121.42.253.149:18820/service';
 //兑换
 angular.module ('starter.ExchangeCtrl', ['starter.services'])
 
@@ -66,10 +66,10 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     'flag2': 1
                                 });
                             };
-                            $scope.goToExchangeBigLotto3 = function (status) {
+                            /*$scope.goToExchangeBigLotto3 = function (status) {
                                 $rootScope.newStatus = status;
                                 $state.go ('BigLotto-2');
-                            };
+                            };*/
                         }
 
                         //console.log (response.data);
@@ -127,10 +127,10 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                 'flag2': 1
                             });
                         };
-                     /*   $scope.goToExchangeBigLotto3 = function (status) {
+                        $scope.goToExchangeBigLotto3 = function (status) {
                             $rootScope.newStatus = status;
                             $state.go ('BigLotto-2');
-                        };*/
+                        };
 
                     }, function (response) {
                         console.log ("初始化数据失败");
@@ -144,11 +144,11 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 //注册信息模态窗口
                 $ionicModal.fromTemplateUrl ('templates/modal.html', {
                     scope: $scope,
-                    animation: '3s'
+                    animation: '0'
                 })
                     .then (function (modal) {
                         modal.show ();
-                        $scope.modal = modal;
+                        //$scope.modal = modal;
 
                         $scope.userInfo = {
                             newUserName: "",
@@ -220,10 +220,8 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     $ionicLoading.hide ();
                                     var userInfo = $util.getUserInfo ();
                                     //数据更新
-                                    // var newUserInfoData = locals.getObject($rootScope.user);
                                     userInfo.data.user.realName = $scope.userInfo.newUserName;
                                     userInfo.data.user.phone = $scope.userInfo.newUserIphone;
-                                    //locals.setObject ($rootScope.user, userInfo);
                                     var datas = $util.setUserInfo (userInfo);
                                     console.log (userInfo);
 
