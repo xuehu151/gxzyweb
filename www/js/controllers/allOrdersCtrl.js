@@ -5,7 +5,7 @@
 
 var url = "http://121.42.253.149:18820";
 angular.module ('starter.allOrdersCtrl', ['starter.services'])
-    
+
     .controller ('allOrdersCtrl', function ($scope, $rootScope, $state, getUser, locals, $ionicLoading, splitCode, $util,$ionicSlideBoxDelegate,difOrders) {
         $scope.tabNames = ['全部订单', '待开奖', '已中奖','未中奖'];
         $scope.selectIndex = 0;
@@ -36,7 +36,7 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
                  console.log($scope.variOrders)
 
 
-                
+
                 $ionicLoading.hide ();
             }, function () {
                 alert ('网络异常,未能获取到全部订单');
@@ -44,8 +44,8 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
         $scope.toOrderDetail = function (ticketID) {
             for (var i = 0; i < $scope.allOrders.length; i++) {
                 //找到当前点击的订单,保存
-                if (ticketID == $scope.allOrders[i].ticketID) {
-                    var investCode = splitCode.split ($scope.allOrders[i].investCode);
+                if (ticketID == $scope.allOrders[i].lotteryList[0].ticketID) {
+                    var investCode = splitCode.split ($scope.allOrders[i].lotteryList[0].investCode);
                     console.log (investCode);
                     if ($scope.allOrders[i].payType == 0) {
                         payType = '扫码兑换';
@@ -55,7 +55,7 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
                     }
                     $rootScope.orderDetail = {
                         lotteryID: $scope.allOrders[i].lotteryID,
-                        openTime: $scope.allOrders[i].drawTime,
+                        openTime: $scope.allOrders[i].lotteryList[0].drawTime,
                         status: $scope.allOrders[i].status,
                         investCode: investCode,
                         payType: payType,
@@ -75,7 +75,7 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
 /*var url = "http://121.42.253.149:18820";
 //全部订单页面
 angular.module ('starter.allOrdersCtrl', ['starter.services'])
-    
+
     .controller ('allOrdersCtrl', function ($scope, $rootScope, $state, getUser, locals, $ionicLoading, splitCode, $util) {
         $ionicLoading.show ({
             hideOnStateChange: true

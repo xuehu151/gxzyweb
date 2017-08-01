@@ -12,9 +12,9 @@
       </a>
     </div>
     <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==0" >
- 
+
       <ion-list class="all-orders-list" >
-        <div class="each-order" ng-click="toOrderDetail(order.ticketID)" ng-repeat="order in allOrders">
+        <div class="each-order" ng-click="toOrderDetail(order.lotteryList[0].ticketID)" ng-repeat="order in allOrders">
           <ion-item class="f13 padding-h8">
             <span ng-cloak>
               {{order.lotteryID}}
@@ -29,10 +29,10 @@
               <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'" >
                 <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
                 <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
-                
+
               </div>
               <div class="font-style2" ng-cloak>
-                订单编号:{{order.ticketID}}
+                订单编号:{{order.lotteryList[0].ticketID}}
               </div>
             </div>
             <div class="fr">
@@ -50,10 +50,10 @@
    </ion-scroll>
 
 
-    
+
      <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==1" >
      <ion-list class="all-orders-list">
-       <div class="each-order" ng-click="toOrderDetail(order.ticketID)" ng-repeat="order in variOrders[0]">
+       <div class="each-order" ng-click="toOrderDetail(order.lotteryList[0].ticketID)" ng-repeat="order in variOrders[0]">
          <ion-item class="f13 padding-h8">
                      <span ng-cloak>
                        {{order.lotteryID}}
@@ -68,15 +68,16 @@
                        <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'" >
                          <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
                          <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
-                         
+
                        </div>
                        <div class="font-style2" ng-cloak>
-                         订单编号:{{order.ticketID}}
+                         订单编号:{{order.lotteryList[0].ticketID}}
                        </div>
                      </div>
                      <div class="fr">
-                       <div ng-class="order.payType?'font-style1':'font-style3'" ng-cloak>
-                         {{order.RT}}
+                       <div>
+                         <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
+                         <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
                        </div>
                        <div class="font-style4 fr" >
                          查看订单
@@ -92,10 +93,10 @@
        </p>
      </div>
    </ion-scroll>
-   
+
     <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==2" >
      <ion-list class="all-orders-list">
-       <div class="each-order" ng-click="toOrderDetail(order.ticketID)" ng-repeat="order in variOrders[1]">
+       <div class="each-order" ng-click="toOrderDetail(order.lotteryList[0].ticketID)" ng-repeat="order in variOrders[1]">
          <ion-item class="f13 padding-h8">
                      <span ng-cloak>
                        {{order.lotteryID}}
@@ -110,16 +111,17 @@
                        <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'" >
                          <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
                          <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
-                         
+
                        </div>
                        <div class="font-style2" ng-cloak>
-                         订单编号:{{order.ticketID}}
+                         订单编号:{{order.lotteryList[0].ticketID}}
                        </div>
                      </div>
                      <div class="fr">
-                       <div ng-class="order.payType?'font-style1':'font-style3'" ng-cloak>
-                         {{order.RT}}
-                       </div>
+                        <div>
+                          <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
+                          <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
+                        </div>
                        <div class="font-style4 fr" >
                          查看订单
                        </div>
@@ -134,10 +136,10 @@
        </p>
      </div>
    </ion-scroll>
-   
+
     <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==3" >
      <ion-list class="all-orders-list">
-       <div class="each-order" ng-click="toOrderDetail(order.ticketID)" ng-repeat="order in variOrders[2]">
+       <div class="each-order" ng-click="toOrderDetail(order.lotteryList[0].ticketID)" ng-repeat="order in variOrders[2]">
          <ion-item class="f13 padding-h8">
            <span ng-cloak>
              {{order.lotteryID}}
@@ -152,16 +154,17 @@
              <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'" >
                <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
                <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
-               
+
              </div>
              <div class="font-style2" ng-cloak>
                订单编号:{{order.ticketID}}
              </div>
            </div>
            <div class="fr">
-             <div ng-class="order.payType?'font-style1':'font-style3'" ng-cloak>
-               {{order.RT}}
-             </div>
+              <div>
+                <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
+                <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
+              </div>
              <div class="font-style4 fr">
                查看订单
              </div>
@@ -176,10 +179,10 @@
        </p>
      </div>
    </div>
-      
-  </ion-scroll>
-   
 
-    
+  </ion-scroll>
+
+
+
   </ion-content>
 </ion-view>
