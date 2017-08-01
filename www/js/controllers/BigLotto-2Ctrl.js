@@ -342,6 +342,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                                 $scope.draw_time = reques.draw_time.split('T').join(' ');//开奖时间
                             
                                 $scope.receiveNumArr = data.data;//获赠号码
+                                $scope.receiveNum = [];
                                 $scope.receiveNumRed = [];
                                 $scope.receiveNumBlue = [];
                                 for(var i in $scope.receiveNumArr){
@@ -349,13 +350,13 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                                     var receiveNumRedBlue = receiveNum.split('*');
                                     var receiveNumArrRed = receiveNumRedBlue[0].split(',');
                                     var receiveNumArrBlue = receiveNumRedBlue[1].split(',');
-//                                    var receiveNumStr = receiveNumArrRed.concat(receiveNumArrBlue);
                                     
                                     $scope.receiveNumRed.push(receiveNumArrRed);
                                     $scope.receiveNumBlue.push(receiveNumArrBlue);
+                                    $scope.receiveNum.push($scope.receiveNumRed , $scope.receiveNumBlue);
                                 }
 //                                console.info($scope.receiveNumArr);
-//                                console.info($scope.receiveNum);
+                                console.info($scope.receiveNum);
 //                            $scope.modal3 = modal;
                                 $scope.makeSure = function () {
                                     modal.hide ();

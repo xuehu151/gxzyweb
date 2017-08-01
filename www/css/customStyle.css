@@ -298,6 +298,14 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     padding-left: 10px
 }
 
+.sure-modal3 .sure-modal3-style2 .betting i{
+    margin-left: 5px;
+}
+
+.sure-modal3 .sure-modal3-style2 .betting i.blue{
+    background-color: #1d90d1;
+}
+
 .sure-modal3 .sure-modal3-style2 i {
     width: 16px;
     height: 16px;
@@ -310,10 +318,6 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     color: #fff;
     margin-left: 10px;
     vertical-align: middle;
-}
-
-.sure-modal3 .sure-modal3-style2 i.blue {
-    background-color: #1d90d1;
 }
 
 .sure-modal3 .sure-modal3-style3 {

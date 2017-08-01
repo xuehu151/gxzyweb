@@ -104,10 +104,6 @@
                 <span class="fl">获赠号码:</span>
                 <span ng-repeat="codeRed in receiveNum track by $index" style="display: flex; margin-top: 3px;">
                     <i ng-cloak  ng-repeat="codeNum in codeRed track by $index">{{codeNum}}</i>
-                    <!-- <i ng-cloak
-                        ng-repeat="codeBlue in investCode[1] track by $index"
-                        ng-if="investCode[1]" class="blue">{{codeBlue}}
-                     </i>-->
                 </span>
             </div>
             <div class="sure-modal3-style4" ng-click="makeSure()">确 定</div>

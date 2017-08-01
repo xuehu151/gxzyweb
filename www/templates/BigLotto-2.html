@@ -35,7 +35,6 @@
         </div>
     </ion-content>
 
-
     <div class=" order-btns">
         <div class="row">
             <div class="col col-67">
@@ -67,8 +66,6 @@
 
 </ion-view>
 
-</ion-view>
-
 <!-- modal提交成功 -->
 <script id="submission.html" type="text/ng-template">
     <ion-modal-view id="modalAccount3">
@@ -90,9 +87,9 @@
             </div>
             <div class="sure-modal3-style2">
                 <span class="fl">获赠号码:</span>
-                <span ng-repeat="codeRed in receiveNum track by $index" style="display: flex; margin-top: 3px;">
-                    <i ng-cloak  ng-repeat="codeNum in receiveNumRed track by $index">{{codeNum}}</i>
-                    <i ng-cloak ng-repeat="codeBlue in receiveNumBlue track by $index" class="blue">{{codeBlue}} </i>
+                <span ng-repeat="codeArr in receiveNum track by $index" style=" margin-top: 3px;" class="betting">
+                    <i ng-cloak  ng-repeat="codeRed in codeArr[0] track by $index" class="red">{{codeRed}}</i>
+                    <i ng-cloak ng-repeat="codeRed in codeArr[1] track by $index" class="blue">{{codeRed}} </i>
                 </span>
             </div>
             <div class="sure-modal3-style4" ng-click="makeSure()">确 定</div>
