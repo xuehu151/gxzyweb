@@ -1,7 +1,7 @@
 /**
  * Created by admin on 2017/6/14.
  */
-var ipUrl = 'http://114.215.70.179:8088/service';
+var ipUrl = 'http://121.42.253.149:18820/service';
 //兑换
 angular.module ('starter.ExchangeCtrl', ['starter.services'])
 

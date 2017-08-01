@@ -3,7 +3,7 @@
  */
 //全部订单
 
-var url = "http://114.215.70.179:8088";
+var url = "http://121.42.253.149:18820";
 angular.module ('starter.allOrdersCtrl', ['starter.services'])
     
     .controller ('allOrdersCtrl', function ($scope, $rootScope, $state, getUser, locals, $ionicLoading, splitCode, $util,$ionicSlideBoxDelegate,difOrders) {
@@ -72,7 +72,7 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
     });
 
 
-/*var url = "http://114.215.70.179:8088";
+/*var url = "http://121.42.253.149:18820";
 //全部订单页面
 angular.module ('starter.allOrdersCtrl', ['starter.services'])
     

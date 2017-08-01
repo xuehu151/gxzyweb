@@ -1,7 +1,7 @@
 /**
  * Created by admin on 2017/6/15.
  */
-var url = "http://114.215.70.179:8088";
+var url = "http://121.42.253.149:18820";
 //完善个人资料
 angular.module ('starter.completeInfoCtrl', ['starter.services'])
     
@@ -46,9 +46,9 @@ angular.module ('starter.completeInfoCtrl', ['starter.services'])
                 .then (function (response) {
                     console.log(response.error);
                     $ionicLoading.hide ();
-                    if (response.error==0) 
+                    if (response.error==0)
                     {
-                       $state.go ('completeInfoSucceed'); 
+                       $state.go ('completeInfoSucceed');
                     }
                     else
                     {

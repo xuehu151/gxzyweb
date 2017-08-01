@@ -1,7 +1,7 @@
 /**
  * Created by admin on 2017/6/15.
  */
-var url = "http://114.215.70.179:8088";
+var url = "http://121.42.253.149:18820";
 //提现页面
 angular.module ('starter.widthdrawCtrl', ['starter.services'])
     
@@ -48,7 +48,7 @@ angular.module ('starter.widthdrawCtrl', ['starter.services'])
                 $scope.whetherShow1 = true;
                 $scope.whetherShow2 = true;
              }
-             else if (($scope.widthdrawAble<=200 && $scope.widthdrawAble>10) &&  $scope.widthdrawMoney.money!=$scope.widthdrawAble ) 
+             else if (($scope.widthdrawAble<=200 && $scope.widthdrawAble>10) &&  $scope.widthdrawMoney.money!=$scope.widthdrawAble )
              {
                 $scope.cantWidthdraw = '';
                 $scope.whetherShow1 = true;
