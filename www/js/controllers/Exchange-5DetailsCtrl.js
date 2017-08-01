@@ -199,13 +199,17 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                         vid = userInfo.data.voucher.vid;
                     }
                 }else if(type == 1) {
-                    for(var k = 0; k < userInfo.data.vouchers.length; k++ ){
-                        if (userInfo.data.vouchers == undefined) {
-                            vid = '';
+                    if(userInfo.data.vouchers){
+                        for (var k = 0; k < userInfo.data.vouchers.length; k++) {
+                            if (userInfo.data.vouchers == undefined) {
+                                vid = '';
+                            }
+                            else {
+                                vid = userInfo.data.vouchers[k].vid;
+                            }
                         }
-                        else {
-                            vid = userInfo.data.vouchers[k].vid;
-                        }
+                    }else {
+                        vid = '';
                     }
                 }
                 

@@ -328,14 +328,6 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         $ionicLoading.hide ();
                         console.info (response);
                         console.dir (data);
-                        /*var alertPopup = $ionicPopup.alert ({
-                         title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
-                         template: '<div class="alert-left">' + '<p style="text-align: center">' + response.data.info + '</p>' + '</div>',
-                         okText: '确 定',
-                         okType: 'button-light'
-                         }).then (function () {
-                         $state.go ('tab.account');
-                         });*/
                         //提交成功窗口配置
                         $ionicModal.fromTemplateUrl ('submission.html', {
                             scope: $scope,
@@ -350,15 +342,20 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                                 $scope.draw_time = reques.draw_time.split('T').join(' ');//开奖时间
                             
                                 $scope.receiveNumArr = data.data;//获赠号码
-                                $scope.receiveNum = [];
-                               /* for(var i in $scope.receiveNumArr){
+                                $scope.receiveNumRed = [];
+                                $scope.receiveNumBlue = [];
+                                for(var i in $scope.receiveNumArr){
                                     var receiveNum = $scope.receiveNumArr[i].investCode;
-                                    var receiveNumStr = receiveNum.split('*');
-                                
-                                    $scope.receiveNum.push(receiveNumStr);
+                                    var receiveNumRedBlue = receiveNum.split('*');
+                                    var receiveNumArrRed = receiveNumRedBlue[0].split(',');
+                                    var receiveNumArrBlue = receiveNumRedBlue[1].split(',');
+//                                    var receiveNumStr = receiveNumArrRed.concat(receiveNumArrBlue);
+                                    
+                                    $scope.receiveNumRed.push(receiveNumArrRed);
+                                    $scope.receiveNumBlue.push(receiveNumArrBlue);
                                 }
-                                console.info($scope.receiveNumArr);
-                                console.info($scope.receiveNum);*/
+//                                console.info($scope.receiveNumArr);
+//                                console.info($scope.receiveNum);
 //                            $scope.modal3 = modal;
                                 $scope.makeSure = function () {
                                     modal.hide ();
