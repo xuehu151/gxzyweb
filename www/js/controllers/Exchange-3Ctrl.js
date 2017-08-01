@@ -152,7 +152,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 var randomExchage = parseInt (Math.random () * 10);
                 randomBall.push (randomExchage);
             }
-            //            console.log (randomBall);
+            // console.log (randomBall);
             randomBall.sort (function () {
                 return Math.random ();
             });
@@ -282,9 +282,14 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     multiple : 1
                 };
                 var investCode = null;
-                investCode = $scope.numDataBit100[randomBall[2]].num + '*';
-                investCode += $scope.numDataBit10[randomBall[1]].num + '*';
-                investCode += $scope.numDataBit1[randomBall[0]].num ;
+                if($scope.numDataBit100[randomBall[2]] && $scope.numDataBit10[randomBall[1]] && $scope.numDataBit1[randomBall[0]]){
+                    investCode = $scope.numDataBit100[randomBall[2]].num + '*';
+                    investCode += $scope.numDataBit10[randomBall[1]].num + '*';
+                    investCode += $scope.numDataBit1[randomBall[0]].num ;
+                }else {
+                    alert('请先选择号码！');
+                    return
+                }
         
                 dataObj.investCode = investCode;
                 dataArray.push (dataObj);
@@ -300,13 +305,17 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     }
                 }
                 else if (type == 1) {
-                    for (var k = 0; k < userInfo.data.vouchers.length; k++) {
-                        if (userInfo.data.vouchers == undefined) {
-                            vid = '';
+                    if(userInfo.data.vouchers){
+                        for (var k = 0; k < userInfo.data.vouchers.length; k++) {
+                            if (userInfo.data.vouchers == undefined) {
+                                vid = '';
+                            }
+                            else {
+                                vid = userInfo.data.vouchers[k].vid;
+                            }
                         }
-                        else {
-                            vid = userInfo.data.vouchers[k].vid;
-                        }
+                    }else {
+                        vid = ''
                     }
                 }
         
@@ -317,7 +326,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     vid : vid,
                     data : dataArray
                 };
-                // console.log(data.token);
+                 console.log(dataArray);
                 $http ({
                     method : "POST",
                     url : ipUrl + '/lottery/pl3add?token=' + userInfo.data.token,

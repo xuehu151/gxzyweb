@@ -40,11 +40,12 @@
                 </label> 倍
             </p>
             <p style="height: 35px;">
-                金额：
-                <span class="font-red" ng-cloak>{{totalMoney * multiple * countMoney}}</span> 元 &nbsp;
-                <label class="checkbox" ng-show="newStatus==true?false:true">
-                    <input class="bigLotto-input2" type="checkbox" checked disabled />追加 (每注3元)
-                </label>
+                金额:<span class="font-red" ng-cloak>{{totalMoney * multiple * countMoney}}</span> 元 &nbsp;&nbsp;&nbsp;
+                <span class="checkSected">
+                    <label class="checkbox" ng-show="newStatus==true?false:true">
+                        <input class="bigLotto-input2" type="checkbox" checked disabled />追加(每注3元)
+                    </label>
+                </span>
             </p>
             <button class="button button-block button-liner-gradiend" ng-click="showOrderAlertCms(res)"
                     style="font-size: 16px;" ng-disabled="isDisabled">

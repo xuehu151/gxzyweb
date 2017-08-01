@@ -88,8 +88,8 @@
             <div class="sure-modal3-style2">
                 <span class="fl">获赠号码:</span>
                 <span ng-repeat="codeArr in receiveNum track by $index" style=" margin-top: 3px;" class="betting">
-                    <i ng-cloak  ng-repeat="codeRed in codeArr[0] track by $index" class="red">{{codeRed}}</i>
-                    <i ng-cloak ng-repeat="codeRed in codeArr[1] track by $index" class="blue" style="background: #1d90d1">{{codeRed}} </i>
+                    <i ng-cloak ng-repeat="codeRed in codeArr[0] track by $index" class="red">{{codeRed}}</i>
+                    <i ng-cloak ng-repeat="codeBlue in codeArr[1] track by $index" class="blue" style="background: #1d90d1">{{codeBlue}} </i>
                 </span>
             </div>
             <div class="sure-modal3-style4" ng-click="makeSure()">确 定</div>

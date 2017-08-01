@@ -721,6 +721,10 @@ input.bigLotto-input2:checked:before {
     color: red;
 }
 
+.checkSected{
+    margin-left: 2%;
+}
+
 .button-liner-gradiend {
     color: white;
     margin: 6px auto;

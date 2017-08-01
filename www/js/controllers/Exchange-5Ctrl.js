@@ -275,7 +275,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
          */
         if (sessionStorage.editThisOrderData5D) {
             var changeToArray5D = JSON.parse (sessionStorage.editThisOrderData5D);
-            console.log (changeToArray5D)
+            console.log (changeToArray5D);
             
             filterBit10000 = changeToArray5D.W_Bit;
             filterBit1000 = changeToArray5D.Q_Bit;
@@ -394,11 +394,16 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     multiple: 1
                 };
                 var investCode = null;
-                investCode = $scope.numDataBit10000[randomBall[4]].num + '*';
-                investCode += $scope.numDataBit1000[randomBall[3]].num + '*';
-                investCode += $scope.numDataBit100[randomBall[2]].num + '*';
-                investCode += $scope.numDataBit10[randomBall[1]].num + '*';
-                investCode += $scope.numDataBit1[randomBall[0]].num ;
+                if($scope.numDataBit10000[randomBall[4]] && $scope.numDataBit1000[randomBall[3]] && $scope.numDataBit100[randomBall[2]] && $scope.numDataBit10[randomBall[1]] && $scope.numDataBit1[randomBall[0]]){
+                    investCode = $scope.numDataBit10000[randomBall[4]].num + '*';
+                    investCode += $scope.numDataBit1000[randomBall[3]].num + '*';
+                    investCode += $scope.numDataBit100[randomBall[2]].num + '*';
+                    investCode += $scope.numDataBit10[randomBall[1]].num + '*';
+                    investCode += $scope.numDataBit1[randomBall[0]].num ;
+                }else {
+                    alert('请先选择号码！');
+                    return
+                }
                 dataObj.investCode = investCode;
                 dataArray.push (dataObj);
                 console.log (dataArray);
@@ -412,13 +417,17 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                         vid = userInfo.data.voucher.vid;
                     }
                 }else if(type == 1) {
-                    for(var k = 0; k < userInfo.data.vouchers.length; k++ ){
-                        if (userInfo.data.vouchers == undefined) {
-                            vid = '';
+                    if(userInfo.data.vouchers){
+                        for(var k = 0; k < userInfo.data.vouchers.length; k++ ){
+                            if (userInfo.data.vouchers == undefined) {
+                                vid = '';
+                            }
+                            else {
+                                vid = userInfo.data.vouchers[k].vid;
+                            }
                         }
-                        else {
-                            vid = userInfo.data.vouchers[k].vid;
-                        }
+                    }else {
+                        vid = ''
                     }
                 }
         

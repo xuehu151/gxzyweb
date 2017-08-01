@@ -131,7 +131,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 $scope.numDataRed[randomRed[i] - 1].check = true;
                 $scope.filterDataRed.push ($scope.numDataRed[randomRed[i] - 1]);
             }
-            //处理随机选取蓝色球***********************
+            //处理随机选取蓝色球*************
             for (var i = 0; i < 12; i++) { //首先清空选中的号码效果
                 $scope.numDataBlue[i].check = false;
                 $scope.filterDataBlue = [];
@@ -266,7 +266,6 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 });
             // 大乐透投注接口信息
             function getdltadd () {
-                $ionicLoading.show ();
                 var userInfo = $util.getUserInfo ();
             
                 var dataArrayBig = [];
@@ -278,17 +277,29 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 var investCodeBlue = [];
                 var investCodeStr;
                 for (var i = 0; i < 5; i++) {
-                    investCodeRed.push($scope.numDataRed[randomRed[i] - 1].num);
+                    if($scope.numDataRed[randomRed[i] - 1]){
+                        investCodeRed.push($scope.numDataRed[randomRed[i] - 1].num);
+                    }
+                    else {
+                        alert('请正确选择红色号码!!!');
+                        return
+                    }
                 }
                 for (var i = 0; i < 2; i++) {
-                    investCodeBlue.push($scope.numDataBlue[randomBlue[i] - 1].num);
+                    if($scope.numDataBlue[randomBlue[i] - 1]){
+                        investCodeBlue.push($scope.numDataBlue[randomBlue[i] - 1].num);
+                    }
+                    else{
+                        alert('请正确选择蓝色号码!!!');
+                        return
+                    }
                 }
                 investCodeStr = investCodeRed + '*' + investCodeBlue;
-              
                 dataObj.investCode = investCodeStr;
                 dataArrayBig.push (dataObj);
                 console.log (dataArrayBig);
-
+    
+                $ionicLoading.show ();
                 var vid = '';
                 if(type == 0){
                     if (userInfo.data.voucher == undefined) {
@@ -298,13 +309,17 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         vid = userInfo.data.voucher.vid;
                     }
                 }else if(type == 1) {
-                    for(var k = 0; k < userInfo.data.vouchers.length; k++ ){
-                        if (userInfo.data.vouchers == undefined) {
-                            vid = '';
+                    if (userInfo.data.vouchers){
+                        for(var k = 0; k < userInfo.data.vouchers.length; k++ ){
+                            if (userInfo.data.vouchers == undefined) {
+                                vid = '';
+                            }
+                            else {
+                                vid = userInfo.data.vouchers[k].vid;
+                            }
                         }
-                        else {
-                            vid = userInfo.data.vouchers[k].vid;
-                        }
+                    }else {
+                        vid = ''
                     }
                 }
     
@@ -353,11 +368,12 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                                     
                                     $scope.receiveNumRed.push(receiveNumArrRed);
                                     $scope.receiveNumBlue.push(receiveNumArrBlue);
-                                    $scope.receiveNum.push($scope.receiveNumRed , $scope.receiveNumBlue);
                                 }
-//                                console.info($scope.receiveNumArr);
-                                console.info($scope.receiveNum);
-//                            $scope.modal3 = modal;
+                                $scope.receiveNum.push($scope.receiveNumRed.concat($scope.receiveNumBlue));
+                                
+                                //console.info($scope.receiveNumArr);
+//                                console.info($scope.receiveNum);
+                                //$scope.modal3 = modal;
                                 $scope.makeSure = function () {
                                     modal.hide ();
                                     $state.go ('tab.account');
