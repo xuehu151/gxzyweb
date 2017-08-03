@@ -1,11 +1,4 @@
-<ion-view view-title="我的">
-    <!-- <ion-nav-bar class="light bg1">
-        <ion-nav-buttons ng-click="" side="left">
-            <a class="button button-icon ion-ios-arrow-left light" href="#/tab/exchange"
-               style="font-size: 1.5em;line-height: 31px;">
-            </a>
-        </ion-nav-buttons>
-    </ion-nav-bar> -->
+<ion-view view-title="账户">
     <ion-content class="bg0">
         <ion-list class="list-borderless account-list">
             <ion-item class="bg2">
@@ -49,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <ion-item class="f15" ng-click="toNeedExchange()" ng-show="needExchangeAmount.amount" style="border-bottom-width: 2px;">
+            <ion-item class="f15" ng-click="toNeedExchange()" style="border-bottom-width: 2px;">
                 待兑换
                 <span class="badge badge-style1" ng-cloak>
           {{needExchangeAmount.amount}}
@@ -85,26 +78,6 @@
                         <i class="icon ion-ios-close-empty" ng-click="closeModal()" style="font-size:40px">
                         </i> 选择提现方式
                     </ion-item>
-                    <!-- <ion-radio ng-if="!accountNum[0].disable"
-                               ng-click="toWidthdraw(1,accountNum[0].num)" ng-disabled="accountNum[0].disable">
-                        <img src="./img/img_010.png"/>
-                        支付宝账户 <span ng-cloak>{{accountNum[0].num}}</span>
-                    </ion-radio>
-                    <ion-radio ng-if="!accountNum[1].disable"
-                               ng-click="toWidthdraw(2,accountNum[1].num)" ng-disabled="accountNum[1].disable">
-                        <img src="./img/img_011.png"/>
-                        微信账户 <span ng-cloak>{{accountNum[1].num}}</span>
-                    </ion-radio>
-                    <ion-radio ng-if="!accountNum[2].disable"
-                               ng-click="toWidthdraw(3,accountNum[2].num)" ng-disabled="accountNum[2].disable">
-                        <img src="./img/img_012.png"/>
-                        银行卡账户 <span ng-cloak>{{accountNum[2].num}}</span>
-                    </ion-radio> -->
-                    <!--  <ion-radio ng-if="!accountNum[0].disable"
-                              ng-click="toWidthdraw(1,accountNum[0].num)" ng-disabled="accountNum[0].disable">
-                       <img src="./img/img_010.png"/>
-                       支付宝账户 <span ng-cloak>{{accountNum[0].num}}</span>
-                   </ion-radio> -->
                     <ion-radio ng-click="toWidthdraw(2,accountNum[0].num)">
                         <img src="./img/img_011.png" /> 微信账户 <span ng-cloak>{{accountNum[0].num}}</span>
                     </ion-radio>
@@ -132,9 +105,7 @@
                     <div class="modal3-title-img-wrap">
                         <img class="modal3-title-img" src="./img/completeInfoSucceed.png" alt="中奖" />
                     </div>
-                    <!--  <div class="account-modal3-win">
-                       恭喜您,中奖啦
-                   </div> -->
+
                     <div class="account-modal3-style1">
                         奖金 <span ng-cloak>{{winamt | number:2}}元</span>
                     </div>
@@ -148,13 +119,11 @@
                         <span class="fl">获赠号码:</span>
                         <span>
                           <i ng-cloak ng-repeat="codeRed in investCode[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in investCode[1] track by $index" ng-if="investCode[1]" class="blue">{{codeBlue}}</i>
-                          <!-- <i>01</i><i>11</i><i>21</i><i>01</i><i>01</i> </span><i class="blue">01</i><i class="blue">01</i> -->
                     </div>
                     <div class="account-modal3-style2">
                         <span class="fl">开奖号码:</span>
                         <span>
                           <i ng-cloak ng-repeat="codeRed in investCode[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in investCode[1] track by $index" ng-if="investCode[1]" class="blue">{{codeBlue}}</i>
-                          <!-- <i>01</i><i>01</i><i>11</i><i>13</i><i>01</i><i class="blue">01</i><i class="blue">22</i> -->
                         </span>
                     </div>
                     <div class="account-modal3-style3">*奖金已发送至奖金余额,请查收!</div>
@@ -175,8 +144,25 @@
                     </div>
                     <div class="row bottom">
                         <div class="col" style="color: #999;border-right: 1px solid #bdbdbd;" ng-click="cancelPop4()">暂不完善</div>
-                        <div class="col" style="color: #255fb3" ; ng-click="toCompeleteInfo()">立即完善</div>
+                        <div class="col" style="color: #255fb3;"  ng-click="toCompeleteInfo()">立即完善</div>
                     </div>
+                </div>
+            </ion-modal-view>
+        </script>
+        <!-- 选择兑换方式 -->
+        <script id="accountModal.html" type="text/ng-template">
+            <ion-modal-view id="modalAccount">
+                <div class="account-modal">
+                    <ion-item class="item-icon-left ">
+                        <i class="icon ion-ios-close-empty" ng-click="closeModal()" style="font-size:40px">
+                        </i> 选择兑换方式
+                    </ion-item>
+                    <ion-radio ng-click="toWidthdraw(2,accountNum[0].num)">
+                        <img src="./img/img_011.png" /> 奖金余额 </span>
+                    </ion-radio>
+                    <ion-radio ng-click="toWidthdraw(3,accountNum[1].num)">
+                        <img src="./img/img_012.png" /> 龙币</span>
+                    </ion-radio>
                 </div>
             </ion-modal-view>
         </script>
