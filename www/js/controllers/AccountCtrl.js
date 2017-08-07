@@ -261,7 +261,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
             $scope.modal4.hide();
         };
 
-
+/*
         $scope.chooseExchangeType = function() {
             $scope.modal5.show();
         }
@@ -273,15 +273,15 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         }).then(function(modal) {
             $scope.modal5 = modal;
         });
-        /* $scope.openPop5 = function () {
+         $scope.openPop5 = function () {
              $scope.modal5.show ();
-         };*/
+         };
         $scope.cancelPop5 = function() {
             $scope.modal5.hide();
         };
         $scope.toExchangeWithBalance = function() {
             $scope.modal5.hide();
             $state.go('tab.exchange');
-        };
+        };*/
 
     });

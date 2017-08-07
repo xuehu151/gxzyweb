@@ -1,27 +1,24 @@
 var url = "http://121.42.253.149:18820";
 
 //待兑换
-angular.module ('starter.needExchangeCtrl', [])
+angular.module('starter.needExchangeCtrl', [])
 
-    .controller ('needExchangeCtrl', function ($scope, $state, $rootScope) {
+    .controller('needExchangeCtrl', function($scope, $state, $rootScope) {
         $scope.needExchanges = $rootScope.needExchangeItems;
         console.log($scope.needExchanges);
-        if ($scope.needExchanges.length)
-        {
-          $scope.needExchangeAmount=$scope.needExchanges.length;
-        }
-        else
-        {
-          $scope.needExchangeAmount=0;
+        if ($scope.needExchanges.length) {
+            $scope.needExchangeAmount = $scope.needExchanges.length;
+        } else {
+            $scope.needExchangeAmount = 0;
         }
 
         console.log($scope.needExchangeAmount);
-        $scope.toScanExchange = function ($index,convert) {
+        $scope.toScanExchange = function($index, convert) {
             $scope.needExchanges.splice($index, 1);
             $rootScope.needExchangeItems = $scope.needExchanges;
 
             console.log($rootScope.needExchangeItems);
 
-            $state.go ('scanCodeIndex')
+            $state.go('scanCodeIndex')
         };
     });

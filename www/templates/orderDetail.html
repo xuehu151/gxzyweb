@@ -10,22 +10,23 @@
            <span class="fr font-style1" style="margin-top: 2px;">{{orderDetail.status}}</span>
          </ion-item>
          <div class="detail">
-           <div>
+           <div style="display: flex">
              <span class="purchase-code">购买方案：</span>
-             <div class="dis-inlineblock">
-              <div>
-                <span class="ball" ng-repeat="ball in orderDetail.investCode[0] track by $index">{{ball}}</span>
-              </div>
-              <div ng-if="orderDetail.investCode[1]">
-                <span class="ball" style="background-color: #00a0e9" ng-repeat="ball in orderDetail.investCode[1] track by $index">{{ball}}</span>
-              </div>
-            </div>
+             <div>
+                <div class="dis-inlineblock" ng-repeat="ele in orderDetail.investCode" >
+                 <div style="font-size: 0;">
+                   <span class="ball" ng-repeat="ball1 in ele[0] track by $index">{{ball1}}</span>
+
+                   <span class="ball" style="background-color: #00a0e9" ng-repeat="ball2 in ele[1] track by $index">{{ball2}}</span>
+                 </div>
+               </div>
+             </div>
            </div>
            <div>
            <span class="purchase-code">订单支付：</span>
-           
+
             <span ng-class="orderDetail.status=='已中奖'||orderDetail.status=='待开奖'?'font-style6':'font-style3'" ng-cloak>{{orderDetail.payType }}</span>
-            <!-- <span class="explain-info" ng-show="{{orderDetail.status=='兑换超时'}}" ng-cloak>{{explainInfo}}</span> -->
+            <span class="explain-info" ng-show="{{orderDetail.status=='兑换超时'}}" ng-cloak>{{explainInfo}}</span>
             </div>
            <div>
            <span class="purchase-code">订单编号：</span>

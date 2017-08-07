@@ -225,7 +225,7 @@ ion-item.f15
 
 .account-list .account-common,
 .complete-info-succeed .account-common {
-  margin: 30px 13%;
+  margin: 28px 13%;
   padding: 3% 0;
   text-align: center;
   border-radius: 4px;
@@ -300,6 +300,7 @@ ion-item.f15
 
 .account-modal .radio-icon {
   color: #387ef5;
+  line-height:40px;
 }
 
     /*老用户获得彩票的modal*/
@@ -522,6 +523,11 @@ ion-item.f15
   background-color:#1d2088;
 }
 
+#modalAccount5 .account
+{
+  font-size:14px;
+  color:#fe2423;
+}
 
 /**********selfInfo.html************/
 .self-info .list
@@ -755,6 +761,7 @@ ion-item.f15
     margin-bottom: 10px;
 }
 
+
 .need-exchange-list .font-style10
 {
   font-size: 10px;
@@ -981,7 +988,7 @@ ion-item.f15
 }
 
 .prize-records-list .prize-records-all img, .widthdraw-records-list .prize-records-all img, .all-orders .prize-records-all img ,.need-exchange-list .prize-records-all img  {
-  width: 30%;
+  width: 25%;
   margin: 40px 0 10px;
 }
 
@@ -1146,7 +1153,7 @@ ion-item.f15
 }
 
 .order-detail-list .detail {
-  padding: 16px 40px;
+  padding: 16px 0 16px 40px;
 }
 
 .order-detail-list .detail>div {
@@ -1174,7 +1181,6 @@ ion-item.f15
 }
 
 .order-detail-list .dis-inlineblock {
-  display: inline-block;
   vertical-align: top;
 }
 
@@ -1191,7 +1197,6 @@ ion-item.f15
 }
 
 .order-detail-list .ball {
-  font-size: 20px;
   line-height: 22px;
   display: inline-block;
   width: 22px;

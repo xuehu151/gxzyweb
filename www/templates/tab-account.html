@@ -58,15 +58,10 @@
                 <i class="icon ion-ios-arrow-right">
         </i>
             </ion-item>
-            <ion-item style="font-size: 18px;color: #333;" class="item-icon-right " ng-click="toWidthdrawRecords()">
-                <img class="widthdarw-pic" src="./img/img_013.png" alt="" /> 提现明细
-                <i class="icon ion-ios-arrow-right">
-        </i>
-            </ion-item>
             <p class="account-common account-bg-blue" ng-click="withdrawConfirm()">
                 提现
             </p>
-            <a class="account-common account-bg-none" ng-click="chooseExchangeType()">
+            <a class="account-common account-bg-none" ui-sref="tab.exchange">
         兑换
       </a>
         </ion-list>
@@ -147,7 +142,7 @@
                 </div>
             </ion-modal-view>
         </script>
-        <!-- 选择兑换方式 -->
+        <!-- 选择兑换方式
         <script id="chooseExchangeTypeModal.html" type="text/ng-template">
             <ion-modal-view id="modalAccount5">
                 <div class="account-modal">
@@ -160,9 +155,12 @@
                     </ion-radio>
                     <ion-radio ng-click="">
                         <span class="dragon">龙</span> 龙币
+                        <span class="account">
+                            (余额:<span>18</span>龙币)
+                        </span>
                     </ion-radio>
                 </div>
             </ion-modal-view>
-        </script>
+        </script> -->
     </ion-content>
 </ion-view>

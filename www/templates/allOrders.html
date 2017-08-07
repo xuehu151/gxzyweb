@@ -1,10 +1,4 @@
 <ion-view >
-  <!-- <ion-nav-bar class="light bg1">
-    <ion-nav-buttons ng-click="" side="left">
-      <a class="button button-icon ion-ios-arrow-left light" href="#/tab/account" style="font-size: 1.5em;line-height: 31px;">
-      </a>
-    </ion-nav-buttons>
-  </ion-nav-bar> -->
   <ion-content scroll="false" class="all-orders" has-bouncing="true">
     <div class="tab-toselect">
       <a class="tab_default" ng-class="selectIndex==$index ? 'tab_select' : '' " ng-click="activeTab($index)" ng-repeat="d in tabNames" >
@@ -14,7 +8,7 @@
     <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==0" >
 
       <ion-list class="all-orders-list" >
-        <div class="each-order" ng-click="toOrderDetail(order.lotteryList[0].ticketID)" ng-repeat="order in allOrders">
+        <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in allOrders">
           <ion-item class="f13 padding-h8">
             <span ng-cloak>
               {{order.lotteryID}}
@@ -53,7 +47,7 @@
 
      <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==1" >
      <ion-list class="all-orders-list">
-       <div class="each-order" ng-click="toOrderDetail(order.lotteryList[0].ticketID)" ng-repeat="order in variOrders[0]">
+       <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[0]">
          <ion-item class="f13 padding-h8">
                      <span ng-cloak>
                        {{order.lotteryID}}
@@ -96,7 +90,7 @@
 
     <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==2" >
      <ion-list class="all-orders-list">
-       <div class="each-order" ng-click="toOrderDetail(order.lotteryList[0].ticketID)" ng-repeat="order in variOrders[1]">
+       <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[1]">
          <ion-item class="f13 padding-h8">
                      <span ng-cloak>
                        {{order.lotteryID}}
@@ -139,7 +133,7 @@
 
     <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==3" >
      <ion-list class="all-orders-list">
-       <div class="each-order" ng-click="toOrderDetail(order.lotteryList[0].ticketID)" ng-repeat="order in variOrders[2]">
+       <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[2]">
          <ion-item class="f13 padding-h8">
            <span ng-cloak>
              {{order.lotteryID}}

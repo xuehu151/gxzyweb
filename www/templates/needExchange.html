@@ -1,17 +1,11 @@
 <ion-view view-title="待兑换">
-    <!-- <ion-nav-bar class="light bg1">
-        <ion-nav-buttons ng-click="" side="left">
-            <a class="button button-icon ion-ios-arrow-left light" href="#/tab/account"
-               style="font-size: 1.5em;line-height: 31px;">
-            </a>
-        </ion-nav-buttons>
-    </ion-nav-bar> -->
     <ion-content style="background: #eee;">
         <ion-list class="need-exchange-list" ng-if="needExchangeAmount!=0">
             <ion-item style="padding: 12px 16px 6px;" ng-repeat="item in needExchanges">
                 <div class="fl">
                     <p class="font-style9">
                         兑换彩票<span>1</span>注
+                        <span style="font-size: 10px;" ng-cloak>(扫码兑换)</span>
                     </p>
                     <p class="font-style10" ng-cloak>
                         {{item.updateDate}}

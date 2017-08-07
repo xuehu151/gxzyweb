@@ -5,20 +5,24 @@ var url = "http://121.42.253.149:18820";
 //订单详情
 angular.module('starter.orderDetailCtrl', ['starter.services']).controller('orderDetailCtrl', function($scope, $rootScope, $state) {
   $scope.orderDetail = $rootScope.orderDetail;
+  console.log($scope.orderDetail);
   if ($scope.orderDetail.payType == '扫码兑换') {
     $scope.explainInfo = '*兑换资格已返还至待兑换';
   } else {
     $scope.explainInfo = '*资金已返还至奖金余额';
   }
   var returnCode = [];
-  if ($scope.orderDetail.investCode.length == 1) {
-    returnCode.push($scope.orderDetail.investCode[0].slice(0));
-  } else if ($scope.orderDetail.investCode.length == 2) {
-    returnCode = $scope.orderDetail.investCode;
-  }
+  if ($scope.orderDetail.investCode.length == 1)
+  {
+    if ($scope.orderDetail.investCode[0].length == 1) {
+      returnCode.push($scope.orderDetail.investCode[0][0].slice(0));
+    } else if ($scope.orderDetail.investCode[0].length == 2) {
+      returnCode = $scope.orderDetail.investCode[0];
+    }
+
   $scope.failThenExchange = function() {
     //字符串转成数字
-    if ($scope.orderDetail.investCode.length == 1) {
+    if ($scope.orderDetail.investCode[0].length == 1) {
       for (var i = 0; i < returnCode.length; i++) {
         for (var j = 0; j < returnCode[i].length; j++) {
           returnCode[i][j] = returnCode[i][j] * 1;
@@ -101,4 +105,22 @@ angular.module('starter.orderDetailCtrl', ['starter.services']).controller('orde
       $state.go('BigLotto-2');
     }
   };
+  }
+  else if ($scope.orderDetail.investCode.length == 2)
+  {
+    $scope.failThenExchange=function () {
+      if ($scope.orderDetail.lotteryID=='排列三')
+      {
+        $state.go('exchange-3');
+      }
+      else if ($scope.orderDetail.lotteryID=='排列五')
+      {
+        $state.go('exchange-5');
+      }
+      else if ($scope.orderDetail.lotteryID=='大乐透')
+      {
+        $state.go('BigLotto-2');
+      }
+    }
+  }
 });
