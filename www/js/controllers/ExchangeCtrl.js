@@ -5,7 +5,7 @@ var ipUrl = 'http://121.42.253.149:18820/service';
 //兑换
 angular.module ('starter.ExchangeCtrl', ['starter.services'])
 
-    .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService/*, $cordovaToast, ionicToast*/) {
+    .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService) {
         $rootScope.newStatus = true;
         $ionicLoading.show ();
         if ($location.search ().sign && $location.search ().type) {
