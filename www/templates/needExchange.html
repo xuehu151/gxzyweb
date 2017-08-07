@@ -7,8 +7,8 @@
         </ion-nav-buttons>
     </ion-nav-bar> -->
     <ion-content style="background: #eee;">
-        <ion-list class="need-exchange-list">
-            <ion-item style="padding: 13px 16px;" ng-repeat="item in needExchanges">
+        <ion-list class="need-exchange-list" ng-if="needExchangeAmount!=0">
+            <ion-item style="padding: 12px 16px 6px;" ng-repeat="item in needExchanges">
                 <div class="fl">
                     <p class="font-style9">
                         兑换彩票<span>1</span>注
@@ -21,14 +21,23 @@
                     <p class="font-style8 " ng-click="toScanExchange($index)" ng-cloak>
                         立即兑换
                     </p>
+                    <br />
+                    <p class="font-style11" ng-cloak>
+                        距离有效期结束还剩{{expiredDays}}
+                    </p>
                 </div>
+                <img class="expired-img" src="./img/haveExpired.png" alt="已过期" />
             </ion-item>
-
             <div class="prize-records-all">
-                <img src="./img/prizeRecords.png"/>
+                <img src="./img/prizeRecords.png" />
                 <p>就这么多咯~兑换彩票中奖金吧~~</p>
             </div>
-
+        </ion-list>
+        <ion-list class="need-exchange-list" ng-if="needExchangeAmount==0">
+            <div class="prize-records-all">
+                <img src="./img/completeInf.png" />
+                <p>啊~哦~，您还没有待兑换的彩票哦！</p>
+            </div>
         </ion-list>
     </ion-content>
 </ion-view>

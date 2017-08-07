@@ -59,10 +59,10 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                             $scope.needExchangeAmount.amount = response.data.length;
                             console.log($scope.needExchangeAmount.amount);
 
-                            if ($scope.needExchangeAmount.amount) {
+
                                 $rootScope.needExchangeItems = response.data;
-                                $scope.modal2.show();
-                            }
+                                // $scope.modal2.show();
+
                         }, function() {
                             alert('网络异常,未获取到用户信息')
                         });

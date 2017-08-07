@@ -41,19 +41,20 @@
                     </div>
                 </div>
             </div>
-            <ion-item class="f15" ng-click="toNeedExchange()" style="border-bottom-width: 2px;">
+            <ion-item class="item-icon-right f15" ng-click="toNeedExchange()" style="border-bottom-width: 2px;">
                 待兑换
-                <span class="badge badge-style1" ng-cloak>
+                <i class="icon ion-ios-arrow-right" ng-if="needExchangeAmount.amount==0"></i>
+                <span class="badge badge-style1" ng-if="needExchangeAmount.amount!=0" ng-cloak>
           {{needExchangeAmount.amount}}
         </span>
             </ion-item>
             <ion-item class="item-icon-right f15" ng-click="toPrizeRecords()">
-                奖金纪录
+                账户记录
                 <i class="icon ion-ios-arrow-right">
         </i>
             </ion-item>
             <ion-item class="item-icon-right f15 have-border" ng-click="toAllOrders()">
-                全部订单
+                兑换记录
                 <i class="icon ion-ios-arrow-right">
         </i>
             </ion-item>

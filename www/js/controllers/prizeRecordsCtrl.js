@@ -4,14 +4,19 @@
 var url = "http://121.42.253.149:18820";
 //奖金纪录页面
 angular.module ('starter.prizeRecordsCtrl', ['starter.services'])
-    
+
     .controller ('prizeRecordsCtrl', function ($scope, $rootScope, getUser, locals, $ionicLoading, $util) {
         var userInfo = $util.getUserInfo();
         var token = userInfo.data.token;
+        $scope.selectIndex = 0;   //切换奖金记录和提现记录
         $ionicLoading.show ({
-            // hideOnStateChange: true
+            hideOnStateChange: true,
+            // delay: 1000,
         });
-//        console.log(token);
+        $scope.activeTab=function (which) {
+            $scope.selectIndex=which;
+        }
+//        console.log(tokden);
         getUser.getInfo (url + '/service/bonus/getList?token=' + token)
             .then (function (response) {
                 $scope.prizeItems = response.data;
@@ -34,7 +39,16 @@ angular.module ('starter.prizeRecordsCtrl', ['starter.services'])
                     }
                 }
                 $ionicLoading.hide ();
-            }, function () {
-                alert ('网络异常,未能获取到奖金纪录');
-            })
+            }, function (error) {
+                alert ('网络异常,未能获取到奖金纪录' + error);
+            });
+
+            getUser.getInfo (url + '/service/cash/getList?token=' + token)
+                .then (function (response) {
+                    $ionicLoading.hide ();
+                    console.log (response);
+                    $scope.widthdrawItems = response.data;
+                }, function () {
+                    alert ('网络异常,未能获取到提现明细')
+                })
     });
