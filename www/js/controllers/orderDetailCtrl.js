@@ -1,7 +1,7 @@
 /**
  * Created by admin on 2017/6/15.
  */
-var url = "http://121.42.253.149:18820";
+var url = "http://lottery.zhenlong.wang";
 //订单详情
 angular.module('starter.orderDetailCtrl', ['starter.services']).controller('orderDetailCtrl', function($scope, $rootScope, $state) {
   $scope.orderDetail = $rootScope.orderDetail;

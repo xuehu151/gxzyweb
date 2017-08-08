@@ -1,7 +1,7 @@
 /**
  * Created by admin on 2017/6/15.
  */
-var url = "http://121.42.253.149:18820";
+var url = "http://lottery.zhenlong.wang";
 //奖金纪录页面
 angular.module ('starter.prizeRecordsCtrl', ['starter.services'])
 

@@ -1,4 +1,4 @@
-var url = "http://121.42.253.149:18820";
+var url = "http://lottery.zhenlong.wang";
 
 //待兑换
 angular.module('starter.needExchangeCtrl', [])

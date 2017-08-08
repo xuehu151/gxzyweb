@@ -1,10 +1,10 @@
 /**
  * Created by admin on 2017/6/15.
  */
-var url = "http://121.42.253.149:18820";
+var url = "http://lottery.zhenlong.wang";
 //提现明细
 angular.module ('starter.widthdrawRecordsCtrl', ['starter.services'])
-    
+
     .controller ('widthdrawRecordsCtrl', function ($scope, $rootScope, getUser, locals, postData, $ionicLoading, $util) {
         $ionicLoading.show ();
         var userInfo = $util.getUserInfo ();

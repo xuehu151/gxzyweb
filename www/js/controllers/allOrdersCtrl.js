@@ -3,7 +3,7 @@
  */
 //全部订单
 
-var url = "http://121.42.253.149:18820";
+var url = "http://lottery.zhenlong.wang";
 angular.module ('starter.allOrdersCtrl', ['starter.services'])
 
     .controller ('allOrdersCtrl', function ($scope, $rootScope, $state, getUser, locals, $ionicLoading, splitCode, $util,$ionicSlideBoxDelegate,difOrders) {

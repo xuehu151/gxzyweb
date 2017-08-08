@@ -1,10 +1,10 @@
 /**
  * Created by admin on 2017/6/15.
  */
-var url = "http://121.42.253.149:18820";
+var url = "http://lottery.zhenlong.wang";
 //提现页面
 angular.module ('starter.widthdrawCtrl', ['starter.services'])
-    
+
     .controller ('widthdrawCtrl', function ($scope, $state, $rootScope, getUser, locals, postData, $ionicLoading, $util) {
         $ionicLoading.show ({
             // hideOnStateChange: true
@@ -13,7 +13,7 @@ angular.module ('starter.widthdrawCtrl', ['starter.services'])
 //        var token = widthdrawLocals.token;
         var userInfo = $util.getUserInfo ();
         var token = userInfo.data.token;
-        
+
         getUser.getInfo (url + "/service/customer/getUser?token=" + token)
             .then (function (response) {
                 $scope.widthdrawAble = response.data.money; //可用余额
@@ -63,7 +63,7 @@ angular.module ('starter.widthdrawCtrl', ['starter.services'])
             // $scope.widthdrawMoney.money = widthdrawMoney;
         };
 
-        
+
 
         //提现所有可用余额
         $scope.widthdrawAll = function () {
@@ -73,7 +73,7 @@ angular.module ('starter.widthdrawCtrl', ['starter.services'])
         };
 
         $scope.confirmWidthdraw = function (widthdrawMoney) {
-            
+
             $ionicLoading.show ({
                 hideOnStateChange: true
             });
@@ -81,7 +81,7 @@ angular.module ('starter.widthdrawCtrl', ['starter.services'])
            // console.log (token);
            // console.log ($rootScope.channel);
            // console.log ($scope.widthdrawMoney);
-           
+
             getUser.getInfo (url + '/service/cash/add' + '?channel=' + $rootScope.channel + '&money=' + $scope.widthdrawMoney.money + '&token=' + token)
                 .then (function (data) {
                     console.log(data);

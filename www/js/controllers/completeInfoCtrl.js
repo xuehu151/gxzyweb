@@ -1,10 +1,10 @@
 /**
  * Created by admin on 2017/6/15.
  */
-var url = "http://121.42.253.149:18820";
+var url = "http://lottery.zhenlong.wang";
 //完善个人资料
 angular.module ('starter.completeInfoCtrl', ['starter.services'])
-    
+
     .controller ('completeInfoCtrl', function ($scope, $rootScope, $state, locals, postData, $ionicLoading, $util) {
         $scope.users = {
              // realName: '',
@@ -24,7 +24,7 @@ angular.module ('starter.completeInfoCtrl', ['starter.services'])
         console.log(userInfo);
         $rootScope.addData = userInfo;
 //        console.log ($rootScope.addData);
-        
+
         $scope.submitInfo = function () {
             $ionicLoading.show ({
                 hideOnStateChange: true
@@ -54,7 +54,7 @@ angular.module ('starter.completeInfoCtrl', ['starter.services'])
                     {
                         alert(response);
                     }
-                    
+
                 }, function (response) {
                     alert ('异常,未能更新您的资料 error'+response)
                 })
