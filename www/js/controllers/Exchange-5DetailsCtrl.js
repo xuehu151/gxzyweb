@@ -251,7 +251,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                                 $scope.realName = userInfo.data.user.realName;
                                 $scope.phones = userInfo.data.user.phone;
                                 $scope.receives = userInfo.data.user.updateDate; //获赠时间
-                                $scope.draw_time = reques.draw_time.split('T').join(' ');//开奖时间
+                                $scope.draw_time = reques.draw_time;    //开奖时间
             
                                 $scope.receiveNumArr = data.data;//获赠号码
                                 $scope.receiveNum = [];

@@ -324,7 +324,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     }
                     if (filterBit10000.length != 0 && filterBit1000.length != 0 && filterBit100.length != 0 && filterBit10 != 0 && filterBit1 != 0) {
                         jsonWrapBit5D.push (json5D);
-                        //                console.log($rootScope.jsonWrapBit3D);
+                        //console.log($rootScope.jsonWrapBit3D);
                         var sessionJsonWarp5D = JSON.stringify (jsonWrapBit5D); //解析数组
                         //console.log (sessionJsonWarp3D);
                         sessionStorage.jsonWrap5D = sessionJsonWarp5D; //session保存数据
@@ -357,6 +357,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
     
         //PayType =0 用抵用券扫码
         function joinMenu5 () {
+            $ionicLoading.show ();
             //获取5D期号
             var reques = {};
             var userInfo = $util.getUserInfo ();
@@ -385,7 +386,6 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                 });
             // 排列五投注信息
             function getPl5add () {
-                $ionicLoading.show ();
                 var userInfo = $util.getUserInfo ();
         
                 var dataArray = [];
@@ -469,7 +469,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                                 $scope.realName = userInfo.data.user.realName;
                                 $scope.phones = userInfo.data.user.phone;
                                 $scope.receives = userInfo.data.user.updateDate; //获赠时间
-                                $scope.draw_time = reques.draw_time.split('T').join(' ');//开奖时间
+                                $scope.draw_time = reques.drawTime;    //开奖时间
                         
                                 $scope.receiveNumArr = data.data;//获赠号码
                                 $scope.receiveNum = [];
@@ -516,7 +516,6 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                 console.log ($scope.reques);
     
                 var end_sale_time = $scope.reques.end_sale_time;
-                var end_sale_timeStr = end_sale_time.split ('T').join (' ');
     
                 var timer = $interval (countTime, 1000);
     
@@ -524,7 +523,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     var date = new Date ();//获取当前时间
                     var now = date.getTime ();
         
-                    var endDate = new Date (end_sale_timeStr); //设置截止时间
+                    var endDate = new Date (end_sale_time); //设置截止时间
                     var end = endDate.getTime ();
         
                     var leftTime = end - now;//计算时间差

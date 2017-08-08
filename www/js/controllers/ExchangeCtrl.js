@@ -43,35 +43,38 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         var datas = $util.setUserInfo (response);
                         var userInfo = $util.getUserInfo ();
                         console.log (userInfo);
-
-                        if (!userInfo.data.user.realName) {
-                            modal ();
-                        }
-
-                        //初始化
-                        if (userInfo.error == '2301') {
-                            alert ('二维码已失效');
-                            return
+                        if(userInfo.error != '0'){
+                            alert(userInfo.info);
                         }
                         else {
-                            $scope.goToExchange3D = function () {
-                                $state.go ('exchange-3');
-                            };
-                            $scope.goToExchange5D = function () {
-                                $state.go ('exchange-5');
-                            };
-                            $scope.goToExchangeBigLotto2 = function (status) {
-                                $rootScope.newStatus = status;
-                                $state.go ('BigLotto-2', {
-                                    'flag2': 1
-                                });
-                            };
-                            /*$scope.goToExchangeBigLotto3 = function (status) {
-                                $rootScope.newStatus = status;
-                                $state.go ('BigLotto-2');
-                            };*/
+                            if (!userInfo.data.user.realName) {
+                                modal ();
+                            }
+    
+                            //初始化
+                            if (userInfo.error == '2301') {
+                                alert ('二维码已失效');
+                                return
+                            }
+                            else {
+                                $scope.goToExchange3D = function () {
+                                    $state.go ('exchange-3');
+                                };
+                                $scope.goToExchange5D = function () {
+                                    $state.go ('exchange-5');
+                                };
+                                $scope.goToExchangeBigLotto2 = function (status) {
+                                    $rootScope.newStatus = status;
+                                    $state.go ('BigLotto-2', {
+                                        'flag2': 1
+                                    });
+                                };
+                                /*$scope.goToExchangeBigLotto3 = function (status) {
+                                 $rootScope.newStatus = status;
+                                 $state.go ('BigLotto-2');
+                                 };*/
+                            }
                         }
-
                         //console.log (response.data);
                     }, function (error) {
                         console.log ('加载失败，请检查网络')
@@ -101,15 +104,15 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     .then (function (response) {
                         $ionicLoading.hide ();
                         PayType = 1;
-                        if(response.error != '0'){
-                            alert(response.info);
+                        /* 获取初始化数据 */
+                        var datas = $util.setUserInfo (response);
+                        var userInfo = $util.getUserInfo ();
+                        console.log (userInfo);
+    
+                        if(userInfo.error != '0'){
+                            alert(userInfo.info);
                         }
                         else {
-                            /* 获取初始化数据 */
-                            var datas = $util.setUserInfo (response);
-                            var userInfo = $util.getUserInfo ();
-                            console.log (userInfo);
-    
                             if (!userInfo.data.user.realName) {
                                 modal ();
                             }
@@ -136,7 +139,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                 $state.go ('BigLotto-2');
                             };
                         }
-
                     }, function (response) {
                         console.log ("初始化数据失败");
                     });
