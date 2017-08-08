@@ -2,7 +2,7 @@
  * Created by admin on 2017/6/14.
  */
 
-var ipUrl = 'http://121.42.253.149:18820/service';
+var ipUrl = 'http://lottery.zhenlong.wang/service';
 
 angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
 //兑换 排列 3 详情

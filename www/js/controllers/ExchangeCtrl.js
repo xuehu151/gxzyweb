@@ -1,7 +1,7 @@
 /**
  * Created by admin on 2017/6/14.
  */
-var ipUrl = 'http://121.42.253.149:18820/service';
+var ipUrl = 'http://lottery.zhenlong.wang/service';
 //兑换
 angular.module ('starter.ExchangeCtrl', ['starter.services'])
 
@@ -17,20 +17,20 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
             if (type == 0) {
                 //初始化用户接口
                 /*$http ({
-                 method: "POST",
-                 url: initUrlNew,
-                 data: {
-                 token: sign
-                 },
-                 transformRequest: function (obj) {
-                 var str = [];
-                 for (var s in obj) {
-                 str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
-                 }
-                 return str.join ("&");
-                 },
-                 timeout: 3000
-                 })*/
+                    method : "POST",
+                    url : initUrlNew,
+                    data : {
+                        token : sign
+                    },
+                    transformRequest : function (obj) {
+                        var str = [];
+                        for (var s in obj) {
+                            str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
+                        }
+                        return str.join ("&");
+                    },
+                    timeout : 3000
+                })*/
 
                 var userToken = {
                     token: sign
@@ -79,20 +79,20 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
             }
             else if (type == 1) {
                 /*$http ({
-                 method: "POST",
-                 url: initUrl,
-                 data: {
-                 token: sign
-                 },
-                 transformRequest: function (obj) {
-                 var str = [];
-                 for (var s in obj) {
-                 str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
-                 }
-                 return str.join ("&");
-                 },
-                 timeout: 3000
-                 })*/
+                    method : "POST",
+                    url : initUrl,
+                    data : {
+                        token : sign
+                    },
+                    transformRequest : function (obj) {
+                        var str = [];
+                        for (var s in obj) {
+                            str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
+                        }
+                        return str.join ("&");
+                    },
+                    timeout : 3000
+                })*/
 
                 var data = {
                     token: sign
@@ -101,36 +101,41 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     .then (function (response) {
                         $ionicLoading.hide ();
                         PayType = 1;
-                        /* 获取初始化数据 */
-                        var datas = $util.setUserInfo (response);
-                        var userInfo = $util.getUserInfo ();
-                        console.log (userInfo);
-
-                        if (!userInfo.data.user.realName) {
-                            modal ();
+                        if(response.error != '0'){
+                            alert(response.info);
                         }
                         else {
-                            if($location.search ().sign && $location.search ().type){
-                                $state.go ('tab.account');
+                            /* 获取初始化数据 */
+                            var datas = $util.setUserInfo (response);
+                            var userInfo = $util.getUserInfo ();
+                            console.log (userInfo);
+    
+                            if (!userInfo.data.user.realName) {
+                                modal ();
                             }
+                            else {
+                                if($location.search ().sign && $location.search ().type){
+                                    $state.go ('tab.account');
+                                }
+                            }
+    
+                            $scope.goToExchange3D = function () {
+                                $state.go ('exchange-3');
+                            };
+                            $scope.goToExchange5D = function () {
+                                $state.go ('exchange-5');
+                            };
+                            $scope.goToExchangeBigLotto2 = function (status) {
+                                $rootScope.newStatus = status;
+                                $state.go ('BigLotto-2', {
+                                    'flag2': 1
+                                });
+                            };
+                            $scope.goToExchangeBigLotto3 = function (status) {
+                                $rootScope.newStatus = status;
+                                $state.go ('BigLotto-2');
+                            };
                         }
-
-                        $scope.goToExchange3D = function () {
-                            $state.go ('exchange-3');
-                        };
-                        $scope.goToExchange5D = function () {
-                            $state.go ('exchange-5');
-                        };
-                        $scope.goToExchangeBigLotto2 = function (status) {
-                            $rootScope.newStatus = status;
-                            $state.go ('BigLotto-2', {
-                                'flag2': 1
-                            });
-                        };
-                        $scope.goToExchangeBigLotto3 = function (status) {
-                            $rootScope.newStatus = status;
-                            $state.go ('BigLotto-2');
-                        };
 
                     }, function (response) {
                         console.log ("初始化数据失败");
