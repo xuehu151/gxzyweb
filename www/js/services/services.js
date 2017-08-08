@@ -315,5 +315,6 @@ angular.module('starter.services', [])
         return orders;
     }])
     .constant('$ionicLoadingConfig', {
-        hideOnStateChange: true
+        hideOnStateChange: true,
+        template:  '<p class="spinner-icon"><ion-spinner icon="bubbles" class="spinner-balanced"></ion-spinner><span>加载中...'
     });

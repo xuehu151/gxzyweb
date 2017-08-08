@@ -33,12 +33,14 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
                 else
                 {
                     $scope.error=response.info;
-                    $scope.modalError.show();
+                    $timeout(function() {
+                        $scope.modalError.show();
+                    }, 100);
                 }
                 $ionicLoading.hide ();
             }, function (error) {
-                $scope.error=error;
-                $scope.modalError.show();
+                alert(error);
+                $ionicLoading.hide ();
             });
 
         $scope.toOrderDetail = function (order) {
