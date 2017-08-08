@@ -5,6 +5,8 @@ angular.module('starter.needExchangeCtrl', [])
 
     .controller('needExchangeCtrl', function($scope, $state, $rootScope) {
         $scope.needExchanges = $rootScope.needExchangeItems;
+        $scope.lessThen3 = true;            //小于3天显示小时
+        $scope.whetherLongBi = true;      //龙币显示有效期
         console.log($scope.needExchanges);
         if ($scope.needExchanges.length) {
             $scope.needExchangeAmount = $scope.needExchanges.length;

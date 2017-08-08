@@ -16,8 +16,12 @@
                         立即兑换
                     </p>
                     <br />
-                    <p class="font-style11" ng-cloak>
-                        距离有效期结束还剩{{expiredDays}}
+                    <p class="font-style11" ng-cloak ng-if="whetherLongBi">
+                        <span style="font-size: 10px;">距离有效期结束还剩</span>
+                        <span ng-class="lessThen3?'less3':''" style="font-size: 10px;">2</span><span style="font-size: 10px;">天</span>
+                        <span style="font-size: 0;" ng-if="lessThen3">
+                            <span style="color: #c01919;font-size: 10px;">04</span><span style="font-size: 10px;">小时</span>
+                        </span>
                     </p>
                 </div>
                 <img class="expired-img" src="./img/haveExpired.png" alt="已过期" />

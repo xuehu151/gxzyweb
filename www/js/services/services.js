@@ -77,7 +77,7 @@ angular.module('starter.services', [])
 
         };
     })
-    
+
     .directive('slideScroll', function($window, $timeout) {
         return {
             restrict : 'AE',
@@ -95,7 +95,7 @@ angular.module('starter.services', [])
                         }
                         var topscorll = -(i * 25);
                         var widthself = element[0].children[i].children[0].offsetWidth;  //widthself：292
-                    
+
                         feeltoTop (topscorll);
                         i++;
                     }, 3000);
@@ -114,7 +114,7 @@ angular.module('starter.services', [])
             }
         }
     })
-    
+
     //获取信息的http请求
     .factory('getUser', ['$http', '$q', function ($http, $q) {
         var info = {};
@@ -245,12 +245,15 @@ angular.module('starter.services', [])
                     obj[i].whetherRed = true;
                     obj[i].status = '待开奖';
                     obj[i].whetherDate = true;
-                    obj[i].LT = '开奖时间: ' + obj[i].lotteryList[0].drawTime;
+                    obj[i].LT = '开奖时间: ' + obj[i].drawTime;
                     if (obj[i].payType == 0) {
                         obj[i].RT = '扫码兑换';
                     }
                     else if (obj[i].payType == 1) {
                         obj[i].RT = '¥' + obj[i].money;
+                    }
+                    else if (obj[i].payType == 2) {
+                        obj[i].RT = '***';
                     }
                     // console.log(obj[i])
                     arr2.push(obj[i]);
@@ -267,6 +270,9 @@ angular.module('starter.services', [])
                     else if (obj[i].payType == 1) {
                         obj[i].RT = '¥' + obj[i].money;
                     }
+                    else if (obj[i].payType == 2) {
+                        obj[i].RT = '***';
+                    }
                     // console.log(obj[i])
                     arr3.push(obj[i]);
                 }
@@ -281,6 +287,9 @@ angular.module('starter.services', [])
                     else if (obj[i].payType == 1) {
                         obj[i].RT = '¥' + obj[i].money;
                     }
+                    else if (obj[i].payType == 2) {
+                        obj[i].RT = '***';
+                    }
                 }
                 else if (obj[i].status == 3) {
 
@@ -293,6 +302,9 @@ angular.module('starter.services', [])
                     }
                     else if (obj[i].payType == 1) {
                         obj[i].RT = ' ¥' + obj[i].money;
+                    }
+                    else if (obj[i].payType == 2) {
+                        obj[i].RT = '***';
                     }
                     // console.log(obj[i])
                     arr4.push(obj[i]);

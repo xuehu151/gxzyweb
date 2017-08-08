@@ -51,15 +51,18 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
             else if (order.payType == 1) {
                 payType = '¥' + order.money;
             }
+            else if (order.payType == 2) {
+                payType = '***';
+            }
 
             $rootScope.orderDetail = {
                 lotteryID: order.lotteryID,
-                openTime: $scope.allOrders[i].lotteryList[0].drawTime,  //
+                openTime: order.drawTime,  //
                 status: order.status,
                 investCode: investCode,    //
                 payType: payType,
                 // pay: $scope.allOrders[i].money,
-                // ticketID: ticketID,
+                ticketID: order.orderNo,
                 orderTime: order.createDate,
                 winMoney: winMoney
             };
