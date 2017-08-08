@@ -1,183 +1,169 @@
-<ion-view >
-  <ion-content scroll="false" class="all-orders" has-bouncing="true">
-    <div class="tab-toselect">
-      <a class="tab_default" ng-class="selectIndex==$index ? 'tab_select' : '' " ng-click="activeTab($index)" ng-repeat="d in tabNames" >
+<ion-view>
+    <ion-content scroll="false" class="all-orders" has-bouncing="true">
+        <div class="tab-toselect">
+            <a class="tab_default" ng-class="selectIndex==$index ? 'tab_select' : '' " ng-click="activeTab($index)" ng-repeat="d in tabNames">
         {{d}}
       </a>
-    </div>
-    <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==0" >
-
-      <ion-list class="all-orders-list" >
-        <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in allOrders">
-          <ion-item class="f13 padding-h8">
-            <span ng-cloak>
+        </div>
+        <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==0">
+            <ion-list class="all-orders-list">
+                <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in allOrders">
+                    <ion-item class="f13 padding-h8">
+                        <span ng-cloak>
               {{order.lotteryID}}
             </span>
-            <span class="fr" ng-class="order.whetherRed?'font-style1':'font-style7'" ng-cloak>
+                        <span class="fr" ng-class="order.whetherRed?'font-style1':'font-style7'" ng-cloak>
               {{order.status}}
             </span>
-          </ion-item>
-          <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png"/>
-          <ion-item >
-            <div class="fl">
-              <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'" >
-                <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
-                <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
-
-              </div>
-              <div class="font-style2" ng-cloak>
-                订单编号:{{order.orderNo}}
-              </div>
-            </div>
-            <div class="fr">
-              <div >
-                <span ng-if="order.payType==1" class="font-style3">奖金支付: </span>
-                <span ng-if="order.payType==2" class="font-style3">龙币支付: </span>
-                <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
-              </div>
-              <div class="font-style2 fr" style="font-size: 10px;">
-                查看订单
-              </div>
-            </div>
-          </ion-item>
-        </div>
-      </ion-list>
-   </ion-scroll>
-
-
-
-     <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==1" >
-     <ion-list class="all-orders-list">
-       <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[0]">
-         <ion-item class="f13 padding-h8">
-                     <span ng-cloak>
-                       {{order.lotteryID}}
-                     </span>
-                     <span class="fr" ng-class="order.whetherRed?'font-style1':'font-style7'" ng-cloak>
-                       {{order.status}}
-                     </span>
-                   </ion-item>
-                   <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png"/>
-                   <ion-item >
-                     <div class="fl">
-                       <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'" >
-                         <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
-                         <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
-
-                       </div>
-                       <div class="font-style2" ng-cloak>
-                         订单编号:{{order.lotteryList[0].ticketID}}
-                       </div>
-                     </div>
-                     <div class="fr">
-                       <div>
-                         <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
-                         <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
-                       </div>
-                       <div class="font-style4 fr" >
-                         查看订单
-                       </div>
-                     </div>
-                   </ion-item>
-       </div>
-     </ion-list>
-     <div class="prize-records-all">
-       <img src="./img/completeInfoSucceed.png"/>
-       <p style="margin-bottom: 50px;">
-         兑换多多才会中奖多多哦~~
-       </p>
-     </div>
-   </ion-scroll>
-
-    <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==2" >
-     <ion-list class="all-orders-list">
-       <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[1]">
-         <ion-item class="f13 padding-h8">
-                     <span ng-cloak>
-                       {{order.lotteryID}}
-                     </span>
-                     <span class="fr" ng-class="order.whetherRed?'font-style1':'font-style7'" ng-cloak>
-                       {{order.status}}
-                     </span>
-                   </ion-item>
-                   <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png"/>
-                   <ion-item >
-                     <div class="fl">
-                       <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'" >
-                         <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
-                         <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
-
-                       </div>
-                       <div class="font-style2" ng-cloak>
-                         订单编号:{{order.lotteryList[0].ticketID}}
-                       </div>
-                     </div>
-                     <div class="fr">
-                        <div>
-                          <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
-                          <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
+                    </ion-item>
+                    <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png" />
+                    <ion-item>
+                        <div class="fl">
+                            <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'">
+                                <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
+                                <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
+                            </div>
+                            <div class="font-style2" ng-cloak>
+                                订单编号:{{order.orderNo}}
+                            </div>
                         </div>
-                       <div class="font-style4 fr" >
-                         查看订单
-                       </div>
-                     </div>
-                   </ion-item>
-       </div>
-     </ion-list>
-     <div class="prize-records-all">
-       <img src="./img/completeInfoSucceed.png"/>
-       <p style="margin-bottom: 50px;">
-         兑换多多才会中奖多多哦~~
-       </p>
-     </div>
-   </ion-scroll>
-
-    <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==3" >
-     <ion-list class="all-orders-list">
-       <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[2]">
-         <ion-item class="f13 padding-h8">
-           <span ng-cloak>
+                        <div class="fr">
+                            <div>
+                                <span ng-if="order.payType==1" class="font-style3">奖金支付: </span>
+                                <span ng-if="order.payType==2" class="font-style3">龙币支付: </span>
+                                <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
+                            </div>
+                            <div class="font-style2 fr" style="font-size: 10px;">
+                                查看订单
+                            </div>
+                        </div>
+                    </ion-item>
+                </div>
+            </ion-list>
+        </ion-scroll>
+        <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==1">
+            <ion-list class="all-orders-list">
+                <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[0]">
+                    <ion-item class="f13 padding-h8">
+                        <span ng-cloak>
+                       {{order.lotteryID}}
+                     </span>
+                        <span class="fr" ng-class="order.whetherRed?'font-style1':'font-style7'" ng-cloak>
+                       {{order.status}}
+                     </span>
+                    </ion-item>
+                    <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png" />
+                    <ion-item>
+                        <div class="fl">
+                            <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'">
+                                <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
+                                <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
+                            </div>
+                            <div class="font-style2" ng-cloak>
+                                订单编号:{{order.lotteryList[0].ticketID}}
+                            </div>
+                        </div>
+                        <div class="fr">
+                            <div>
+                                <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
+                                <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
+                            </div>
+                            <div class="font-style4 fr">
+                                查看订单
+                            </div>
+                        </div>
+                    </ion-item>
+                </div>
+            </ion-list>
+            <div class="prize-records-all">
+                <img src="./img/completeInfoSucceed.png" />
+                <p style="margin-bottom: 50px;">
+                    兑换多多才会中奖多多哦~~
+                </p>
+            </div>
+        </ion-scroll>
+        <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==2">
+            <ion-list class="all-orders-list">
+                <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[1]">
+                    <ion-item class="f13 padding-h8">
+                        <span ng-cloak>
+                       {{order.lotteryID}}
+                     </span>
+                        <span class="fr" ng-class="order.whetherRed?'font-style1':'font-style7'" ng-cloak>
+                       {{order.status}}
+                     </span>
+                    </ion-item>
+                    <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png" />
+                    <ion-item>
+                        <div class="fl">
+                            <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'">
+                                <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
+                                <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
+                            </div>
+                            <div class="font-style2" ng-cloak>
+                                订单编号:{{order.lotteryList[0].ticketID}}
+                            </div>
+                        </div>
+                        <div class="fr">
+                            <div>
+                                <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
+                                <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
+                            </div>
+                            <div class="font-style4 fr">
+                                查看订单
+                            </div>
+                        </div>
+                    </ion-item>
+                </div>
+            </ion-list>
+            <div class="prize-records-all">
+                <img src="./img/completeInfoSucceed.png" />
+                <p style="margin-bottom: 50px;">
+                    兑换多多才会中奖多多哦~~
+                </p>
+            </div>
+        </ion-scroll>
+        <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==3">
+            <ion-list class="all-orders-list">
+                <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[2]">
+                    <ion-item class="f13 padding-h8">
+                        <span ng-cloak>
              {{order.lotteryID}}
            </span>
-           <span class="fr" ng-class="order.whetherRed?'font-style1':'font-style7'" ng-cloak>
+                        <span class="fr" ng-class="order.whetherRed?'font-style1':'font-style7'" ng-cloak>
              {{order.status}}
            </span>
-         </ion-item>
-         <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png"/>
-         <ion-item >
-           <div class="fl">
-             <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'" >
-               <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
-               <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
-
-             </div>
-             <div class="font-style2" ng-cloak>
-               订单编号:{{order.lotteryList[0].ticketID}}
-             </div>
-           </div>
-           <div class="fr">
-              <div>
-                <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
-                <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
-              </div>
-             <div class="font-style4 fr">
-               查看订单
-             </div>
-           </div>
-         </ion-item>
-       </div>
-     </ion-list>
-     <div class="prize-records-all">
-       <img src="./img/completeInfoSucceed.png"/>
-       <p style="margin-bottom: 50px;">
-         兑换多多才会中奖多多哦~~
-       </p>
-     </div>
-   </div>
-
-  </ion-scroll>
-
-
-
-  </ion-content>
+                    </ion-item>
+                    <img class="prize-img" ng-show="order.status=='已中奖'?true:false" src="./img/getPrize.png" />
+                    <ion-item>
+                        <div class="fl">
+                            <div class="lt-style f11" ng-class="order.whetherRed?'font-style6':'font-style3'">
+                                <span ng-show="order.status=='已中奖'?true:false" style="color: #333;font-size: 11px">奖金: </span>
+                                <span ng-cloak ng-class="order.status=='已中奖'?'font-style1':order.whetherRed?'font-style6':'font-style3'">{{order.LT}}</span>
+                            </div>
+                            <div class="font-style2" ng-cloak>
+                                订单编号:{{order.lotteryList[0].ticketID}}
+                            </div>
+                        </div>
+                        <div class="fr">
+                            <div>
+                                <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
+                                <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
+                            </div>
+                            <div class="font-style4 fr">
+                                查看订单
+                            </div>
+                        </div>
+                    </ion-item>
+                </div>
+            </ion-list>
+            <div class="prize-records-all">
+                <img src="./img/completeInfoSucceed.png" />
+                <p style="margin-bottom: 50px;">
+                    兑换多多才会中奖多多哦~~
+                </p>
+            </div>
+            </div>
+        </ion-scroll>
+    </ion-content>
 </ion-view>

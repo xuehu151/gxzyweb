@@ -314,9 +314,6 @@ angular.module('starter.services', [])
         }
         return orders;
     }])
-
-
-
     .constant('$ionicLoadingConfig', {
         hideOnStateChange: true
     });

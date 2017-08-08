@@ -6,31 +6,39 @@
 var url = "http://lottery.zhenlong.wang";
 angular.module ('starter.allOrdersCtrl', ['starter.services'])
 
-    .controller ('allOrdersCtrl', function ($scope, $rootScope, $state, getUser, locals, $ionicLoading, splitCode, $util,$ionicSlideBoxDelegate,difOrders) {
+    .controller ('allOrdersCtrl', ['$scope','$rootScope','$state','getUser','locals','$ionicLoading','splitCode','$util','difOrders','$ionicModal','$timeout',function ($scope, $rootScope, $state, getUser, locals, $ionicLoading, splitCode, $util,difOrders,$ionicModal,$timeout) {
         $scope.tabNames = ['全部订单', '待开奖', '已中奖','未中奖'];
         $scope.selectIndex = 0;
+        // $scope.thisErrorModal=errorModal
         $scope.activeTab=function (index) {
             $scope.selectIndex=index;
-        }
-
+        };
 
         $ionicLoading.show ({
             hideOnStateChange: true
         });
         var userInfo = $util.getUserInfo ();
         var token = userInfo.data.token;
+
         getUser.getInfo (url + '/service/lottery/getList?token=' + token)
             .then (function (response) {
                 console.log (response);
-                $scope.allOrders = response.data;
+                if (response.error=='0')
+                {
+                    $scope.allOrders = response.data;
 
-                $scope.variOrders=difOrders.diff($scope.allOrders)  //全部订单
-                 console.log($scope.variOrders)
-
-
+                    $scope.variOrders=difOrders.diff($scope.allOrders)  //全部订单
+                     console.log($scope.variOrders)
+                }
+                else
+                {
+                    $scope.error=response.info;
+                    $scope.modalError.show();
+                }
                 $ionicLoading.hide ();
-            }, function () {
-                alert ('网络异常,未能获取到全部订单');
+            }, function (error) {
+                $scope.error=error;
+                $scope.modalError.show();
             });
 
         $scope.toOrderDetail = function (order) {
@@ -92,6 +100,16 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
                 }
             }*/
             $state.go ('orderDetail');
-        }
+        };
 
-    });
+        //错误码窗口配置
+        $ionicModal.fromTemplateUrl('templates/errorPop.html', {
+            scope: $scope,
+            backdropClickToClose: true
+        }).then(function(modal) {
+            $scope.modalError = modal;
+        });
+        $scope.cancelPopError = function() {
+            $scope.modalError.hide();
+        };
+    }]);
