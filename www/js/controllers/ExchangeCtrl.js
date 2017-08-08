@@ -7,7 +7,9 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
 
     .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService) {
         $rootScope.newStatus = true;
-        $ionicLoading.show ();
+        $ionicLoading.show ({
+            template: 'Loading...'
+        });
         if ($location.search ().sign && $location.search ().type) {
             sign = $location.search ().sign;
             type = $location.search ().type;
@@ -43,18 +45,20 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         var datas = $util.setUserInfo (response);
                         var userInfo = $util.getUserInfo ();
                         console.log (userInfo);
-                        if(userInfo.error != '0'){
-                            alert(userInfo.info);
+                        if (userInfo.error != '0') {
+                            //alert (userInfo.info);
+                            $scope.errorInfo = userInfo.info;
+                            $rootScope.errorInfo();
                         }
                         else {
                             if (!userInfo.data.user.realName) {
                                 modal ();
                             }
-    
+        
                             //初始化
                             if (userInfo.error == '2301') {
-                                alert ('二维码已失效');
-                                return
+                                $scope.errorInfo = userInfo.info;
+                                $scope.errorInfo();
                             }
                             else {
                                 $scope.goToExchange3D = function () {
@@ -110,7 +114,8 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         console.log (userInfo);
     
                         if(userInfo.error != '0'){
-                            alert(userInfo.info);
+                            $scope.errorInfo = userInfo.info;
+                            $rootScope.errorInfo();
                         }
                         else {
                             if (!userInfo.data.user.realName) {
@@ -140,7 +145,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             };
                         }
                     }, function (response) {
-                        console.log ("初始化数据失败");
+                        alert("初始化数据失败");
                     });
             }
             else {
@@ -239,6 +244,20 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         }
                     });
             }
+    
+            //错误码窗口配置
+            $rootScope.errorInfo = function () {
+                $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
+                    scope: $scope,
+                    backdropClickToClose: true
+                }).then(function(modal) {
+                    $scope.modalError = modal;
+                    modal.show ();
+                });
+                $scope.cancelPopError = function() {
+                    $scope.modalError.hide();
+                };
+            };
         }
         else {
             if (type == 0) {

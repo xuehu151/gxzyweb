@@ -36,7 +36,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                 }
             }
             
-            if ($scope.totalMoney >= PayType5D) {
+            if ($scope.totalMoney > PayType5D) {
                 $scope.isDisabled = true;
                 var alertPopup = $ionicPopup.alert ({
                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
@@ -139,8 +139,8 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
         //排列五确认提交
         $scope.submitCms5D = function () {
             $ionicLoading.show ();
-            if ($scope.multiple == 0) { //投注倍数限制
-                alert ('投注倍数不能为0');
+            if ($scope.multiple <= 0) { //投注倍数限制
+                alert ('投注倍数错误');
                 return
             }
             //获取5D期号
@@ -241,7 +241,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                             $state.go ('tab.account');
                         });*/
                         //提交成功窗口配置
-                        $ionicModal.fromTemplateUrl ('submission.html', {
+                        $ionicModal.fromTemplateUrl ('templates/submission.html', {
                             scope: $scope,
                             backdropClickToClose:true
                         })
@@ -251,7 +251,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                                 $scope.realName = userInfo.data.user.realName;
                                 $scope.phones = userInfo.data.user.phone;
                                 $scope.receives = userInfo.data.user.updateDate; //获赠时间
-                                $scope.draw_time = reques.draw_time;    //开奖时间
+                                $scope.draw_time = reques.drawTime;    //开奖时间
             
                                 $scope.receiveNumArr = data.data;//获赠号码
                                 $scope.receiveNum = [];

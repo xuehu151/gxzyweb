@@ -57,37 +57,3 @@
 
     </ion-footer-bar>
 </ion-view>
-
-<!-- modal提交成功 -->
-<script id="submission.html" type="text/ng-template">
-    <ion-modal-view id="modalAccount3">
-        <div class="sure-modal3">
-            <div class="sure-modal3-win">
-               {{info}}
-            </div>
-            <div class="sure-modal3-style2">
-                <span class="fl">姓 &nbsp;名:</span><span ng-cloak>{{realName}}</span>
-            </div>
-            <div class="sure-modal3-style2">
-                <span class="fl">电 &nbsp;话:</span><span ng-cloak>{{phones}}</span>
-            </div>
-            <div class="sure-modal3-style2">
-                <span class="fl">获赠时间:</span><span ng-cloak>{{receives}}</span>
-            </div>
-            <div class="sure-modal3-style2">
-                <span class="fl">开奖时间:</span><span ng-cloak>{{draw_time}}</span>
-            </div>
-            <div class="sure-modal3-style2">
-                <span class="fl">获赠号码:</span>
-                <span ng-repeat="codeRed in receiveNum track by $index" style="display: flex; margin-top: 3px;">
-                    <i ng-cloak  ng-repeat="codeNum in codeRed track by $index">{{codeNum}}</i>
-                       <!-- <i ng-cloak
-                           ng-repeat="codeBlue in investCode[1] track by $index"
-                           ng-if="investCode[1]" class="blue">{{codeBlue}}
-                        </i>-->
-                </span>
-            </div>
-            <div class="sure-modal3-style4" ng-click="makeSure()">确 定</div>
-        </div>
-    </ion-modal-view>
-</script>

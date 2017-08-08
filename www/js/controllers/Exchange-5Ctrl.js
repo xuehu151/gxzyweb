@@ -380,7 +380,12 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     $ionicLoading.hide ();
                     reques = response.data;
                     console.log (reques);
-                    getPl5add ();
+                    if(response.data.error != '0'){
+                        $scope.errorInfo = userInfo.info;
+                        $scope.errorInfo();
+                    }else {
+                        getPl5add ();
+                    }
                 }, function (response) {
                     console.log ("获取列表失败");
                 });
@@ -450,45 +455,50 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                         $ionicLoading.hide ();
                         console.info (response);
                         console.dir (data);
-                        /*var alertPopup = $ionicPopup.alert ({
-                         title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
-                         template: '<div class="alert-left">' + '<p style="text-align: center">' + response.data.info + '</p>' + '</div>',
-                         okText: '确 定',
-                         okType: 'button-light'
-                         }).then (function () {
-                         $state.go ('tab.account');
-                         });*/
-                        //提交成功窗口配置
-                        $ionicModal.fromTemplateUrl ('submission.html', {
-                            scope: $scope,
-                            backdropClickToClose:true
-                        })
-                            .then (function (modal) {
-                                modal.show ();
-                                $scope.info = response.data.info;
-                                $scope.realName = userInfo.data.user.realName;
-                                $scope.phones = userInfo.data.user.phone;
-                                $scope.receives = userInfo.data.user.updateDate; //获赠时间
-                                $scope.draw_time = reques.drawTime;    //开奖时间
-                        
-                                $scope.receiveNumArr = data.data;//获赠号码
-                                $scope.receiveNum = [];
-                                for(var i in $scope.receiveNumArr){
-                                    var receiveNum = $scope.receiveNumArr[i].investCode;
-                                    var receiveNumStr = receiveNum.split('*');
-                            
-                                    $scope.receiveNum.push(receiveNumStr);
-                                }
-                                console.info($scope.receiveNumArr);
-                                console.info($scope.receiveNum);
+                        if(response.data.error != '0'){
+                            $scope.errorInfo = userInfo.info;
+                            $scope.errorInfo();
+                        }else {
+                            /*var alertPopup = $ionicPopup.alert ({
+                             title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
+                             template: '<div class="alert-left">' + '<p style="text-align: center">' + response.data.info + '</p>' + '</div>',
+                             okText: '确 定',
+                             okType: 'button-light'
+                             }).then (function () {
+                             $state.go ('tab.account');
+                             });*/
+                            //提交成功窗口配置
+                            $ionicModal.fromTemplateUrl ('templates/submission.html', {
+                                scope: $scope,
+                                backdropClickToClose:true
+                            })
+                                .then (function (modal) {
+                                    modal.show ();
+                                    $scope.info = response.data.info;
+                                    $scope.realName = userInfo.data.user.realName;
+                                    $scope.phones = userInfo.data.user.phone;
+                                    $scope.receives = userInfo.data.user.updateDate; //获赠时间
+                                    $scope.draw_time = reques.drawTime;    //开奖时间
+            
+                                    $scope.receiveNumArr = data.data;//获赠号码
+                                    $scope.receiveNum = [];
+                                    for(var i in $scope.receiveNumArr){
+                                        var receiveNum = $scope.receiveNumArr[i].investCode;
+                                        var receiveNumStr = receiveNum.split('*');
+                
+                                        $scope.receiveNum.push(receiveNumStr);
+                                    }
+                                    console.info($scope.receiveNumArr);
+                                    console.info($scope.receiveNum);
 //                            $scope.modal3 = modal;
-                                $scope.makeSure = function () {
-                                    modal.hide ();
-                                    $state.go ('tab.account');
-                                    jsonWrapBit5D = [];
-                                    sessionStorage.jsonWrap5D = '';
-                                }
-                            });
+                                    $scope.makeSure = function () {
+                                        modal.hide ();
+                                        $state.go ('tab.account');
+                                        jsonWrapBit5D = [];
+                                        sessionStorage.jsonWrap5D = '';
+                                    }
+                                });
+                        }
                         //console.log (response.data.info);
                     }, function (response) {
                         var confirmPopup = $ionicPopup.confirm ({
@@ -502,6 +512,20 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                         });
                     });
             }
+    
+            //错误码窗口配置
+            $rootScope.errorInfo = function () {
+                $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
+                    scope: $scope,
+                    backdropClickToClose: true
+                }).then(function(modal) {
+                    $scope.modalError = modal;
+                    modal.show ();
+                });
+                $scope.cancelPopError = function() {
+                    $scope.modalError.hide();
+                };
+            };
         }
         
         //玩法说明时间

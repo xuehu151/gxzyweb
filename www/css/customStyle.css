@@ -366,6 +366,13 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     padding-left: 10px
 }
 
+.sure-modal3 .sure-modal3-style2 .betting{
+    display: grid;
+    height: 75px;
+    width: 74%;
+    overflow: auto;
+}
+
 .sure-modal3 .sure-modal3-style2 .betting i{
     margin-left: 5px;
 }
@@ -1270,7 +1277,43 @@ input.bigLotto-input2:checked:before {
     color: #000;
 }
 
+/*服务器返回错误信息模态框*/
+#modalError {
+    position: absolute;
+    background: rgba(0, 0, 0, .6);
+}
 
+.modalError {
+    position: absolute;
+    top: 45%;
+    width: 70%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 50%);
+    -moz-transform: translate(-50%, 50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    color: #132d8e;
+}
+
+.modalError > .top {
+    padding-top: 16px;
+    padding-bottom: 8px;
+}
+
+.modalError > .text {
+    font-size: 13px;
+}
+
+.modalError > .close {
+    width: 43%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    margin: 16px auto 10px;
+}
 
 
 

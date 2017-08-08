@@ -4,7 +4,7 @@
 angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
 
 //兑换  大乐透不追加
-    .controller ('BigLotto-2Ctrl', function ($scope, $state, $ionicPopover, $interval, $ionicPopup, $stateParams, $ionicModal, $http, $ionicLoading, $util, getWareIssueService) {
+    .controller ('BigLotto-2Ctrl', function ($scope, $state, $ionicPopover, $interval, $ionicPopup, $stateParams, $ionicModal, $http, $ionicLoading, $rootScope, $util, getWareIssueService) {
         var flag2 = $stateParams.flag2;
         //设置红球和篮球号码
         $scope.numDataRed = [];
@@ -233,7 +233,9 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
     
         //PayType =0 用抵用券扫码
         function joinMenuBig () {
-            $ionicLoading.show ();
+            $ionicLoading.show ({
+                template: 'Loading...'
+            });
             if ($scope.multiple == 0) { //投注倍数限制
                 alert ('请重新设置投注倍数');
                 return
@@ -259,8 +261,13 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 .then (function (response) {
                     $ionicLoading.hide ();
                     reques = response.data;
-//             console.log (reques);
-                    getdltadd ();
+                    //console.log (reques);
+                    if(response.error !='0'){
+                        $scope.errorInfo = userInfo.info;
+                        $rootScope.errorInfo();
+                    }else {
+                        getdltadd ();
+                    }
                 }, function (response) {
                     console.log ("获取列表失败");
                 });
@@ -343,44 +350,49 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         $ionicLoading.hide ();
                         console.info (response);
                         console.dir (data);
-                        //提交成功窗口配置
-                        $ionicModal.fromTemplateUrl ('submission.html', {
-                            scope: $scope,
-                            backdropClickToClose:true
-                        })
-                            .then (function (modal) {
-                                modal.show ();
-                                $scope.info = response.data.info;
-                                $scope.realName = userInfo.data.user.realName;
-                                $scope.phones = userInfo.data.user.phone;
-                                $scope.receives = userInfo.data.user.updateDate; //获赠时间
-                                $scope.draw_time = reques.drawTime;    //开奖时间
-                            
-                                $scope.receiveNumArr = data.data;//获赠号码
-                                $scope.receiveNum = [];
-                                $scope.receiveNumRed = [];
-                                $scope.receiveNumBlue = [];
-                                for(var i in $scope.receiveNumArr){
-                                    var receiveNum = $scope.receiveNumArr[i].investCode;
-                                    var receiveNumRedBlue = receiveNum.split('*');
-                                    var receiveNumArrRed = receiveNumRedBlue[0].split(',');
-                                    var receiveNumArrBlue = receiveNumRedBlue[1].split(',');
-                                    
-                                    $scope.receiveNumRed.push(receiveNumArrRed);
-                                    $scope.receiveNumBlue.push(receiveNumArrBlue);
-                                }
-                                $scope.receiveNum.push($scope.receiveNumRed.concat($scope.receiveNumBlue));
-                                
-                                //console.info($scope.receiveNumArr);
+                        if(response.error){
+                            $scope.errorInfo = userInfo.info;
+                            $rootScope.errorInfo();
+                        }else {
+                            //提交成功窗口配置
+                            $ionicModal.fromTemplateUrl ('templates/bigSubmission.html', {
+                                scope: $scope,
+                                backdropClickToClose:true
+                            })
+                                .then (function (modal) {
+                                    modal.show ();
+                                    $scope.info = response.data.info;
+                                    $scope.realName = userInfo.data.user.realName;
+                                    $scope.phones = userInfo.data.user.phone;
+                                    $scope.receives = userInfo.data.user.updateDate; //获赠时间
+                                    $scope.draw_time = reques.drawTime;    //开奖时间
+            
+                                    $scope.receiveNumArr = data.data;//获赠号码
+                                    $scope.receiveNum = [];
+                                    $scope.receiveNumRed = [];
+                                    $scope.receiveNumBlue = [];
+                                    for(var i in $scope.receiveNumArr){
+                                        var receiveNum = $scope.receiveNumArr[i].investCode;
+                                        var receiveNumRedBlue = receiveNum.split('*');
+                                        var receiveNumArrRed = receiveNumRedBlue[0].split(',');
+                                        var receiveNumArrBlue = receiveNumRedBlue[1].split(',');
+                
+                                        $scope.receiveNumRed.push(receiveNumArrRed);
+                                        $scope.receiveNumBlue.push(receiveNumArrBlue);
+                                    }
+                                    $scope.receiveNum.push($scope.receiveNumRed.concat($scope.receiveNumBlue));
+            
+                                    //console.info($scope.receiveNumArr);
 //                                console.info($scope.receiveNum);
-                                //$scope.modal3 = modal;
-                                $scope.makeSure = function () {
-                                    modal.hide ();
-                                    $state.go ('tab.account');
-                                    jsonWrapBit5D = [];
-                                    sessionStorage.jsonWrap5D = '';
-                                }
-                            });
+                                    //$scope.modal3 = modal;
+                                    $scope.makeSure = function () {
+                                        modal.hide ();
+                                        $state.go ('tab.account');
+                                        jsonWrapBit5D = [];
+                                        sessionStorage.jsonWrap5D = '';
+                                    }
+                                });
+                        }
                         //console.log (response.data.info);
                     }, function (response) {
                         var confirmPopup = $ionicPopup.confirm ({
@@ -394,6 +406,20 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         });
                     });
             }
+    
+            //错误码窗口配置
+            $rootScope.errorInfo = function () {
+                $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
+                    scope: $scope,
+                    backdropClickToClose: true
+                }).then(function(modal) {
+                    $scope.modalError = modal;
+                    modal.show ();
+                });
+                $scope.cancelPopError = function() {
+                    $scope.modalError.hide();
+                };
+            };
         }
  
         //玩法说明时间

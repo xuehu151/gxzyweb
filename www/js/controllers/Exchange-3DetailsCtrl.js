@@ -222,7 +222,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                                 $state.go('tab.account');
                             });*/
                         //提交成功窗口配置
-                        $ionicModal.fromTemplateUrl ('submission.html', {
+                        $ionicModal.fromTemplateUrl ('templates/submission.html', {
                             scope: $scope,
                             backdropClickToClose:true
                         })
@@ -232,7 +232,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                                 $scope.realName = userInfo.data.user.realName;
                                 $scope.phones = userInfo.data.user.phone;
                                 $scope.receives = userInfo.data.user.updateDate; //获赠时间
-                                $scope.draw_time = reques.draw_time;    //开奖时间
+                                $scope.draw_time = reques.drawTime;    //开奖时间
                                 
                                 $scope.receiveNumArr = data.data;//获赠号码
                                 $scope.receiveNum = [];
