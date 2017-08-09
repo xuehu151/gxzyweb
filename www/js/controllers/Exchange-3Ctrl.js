@@ -420,7 +420,6 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
             };
         }
         
-        
         //玩法说明时间
         var userInfo = $util.getUserInfo ();
         var data = {
@@ -429,12 +428,12 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         getWareIssueService.getWareIssue (data, userInfo.data.token)
             .then (function (response) {
                 var timer = $interval (countTime, 1000);
-//                $ionicLoading.hide();
+                //$ionicLoading.hide();
                 $scope.reques = response.data;
                 console.log ($scope.reques);
                 
                 var end_sale_time = $scope.reques.end_sale_time;
-                
+    
                 function countTime () {
                     var date = new Date ();//获取当前时间
                     var now = date.getTime ();

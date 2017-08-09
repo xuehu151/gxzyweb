@@ -275,6 +275,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                         })
                             .then (function (modal) {
                                 modal.show ();
+                                sessionStorage.editThisOrderData = '';
                                 $rootScope.makeSureText = '继续兑换';
                                 $scope.info = response.data.info;
                                 $scope.realName = userInfo.data.user.realName;

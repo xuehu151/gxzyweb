@@ -228,6 +228,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                         })
                             .then (function (modal) {
                                 modal.show ();
+                                sessionStorage.editThisOrderData3D = '';
                                 $rootScope.makeSureText = '继续兑换';
                                 $scope.info = response.data.info;
                                 $scope.realName = userInfo.data.user.realName;

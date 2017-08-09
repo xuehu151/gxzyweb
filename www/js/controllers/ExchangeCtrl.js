@@ -73,9 +73,9 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                         'flag2': 1
                                     });
                                 };
-                                $scope.goToExchangeBigLotto3 = function (status) {
-                                    $rootScope.newStatus = status;
-                                    $state.go ('BigLotto-2');
+                                $scope.goToExchangeBigLotto3 = function (status) {//用户扫码进来 抵用券投注type=0
+                                    $scope.errorInfo = '大乐透只能选择2元的进行投注哦!';
+                                    $rootScope.errorInfo();
                                 };
                             }
                         }
