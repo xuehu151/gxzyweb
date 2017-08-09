@@ -4,7 +4,7 @@
 //排列5 走势图
 angular.module ('starter.5DTrendChart', ['starter.services'])
     
-    .controller ('5DTrendChart', function ($scope, $ionicScrollDelegate, $ionicLoading,  $util, historyPastService) {
+    .controller ('5DTrendChart', function ($scope, $ionicScrollDelegate, $ionicLoading, $rootScope, $util, historyPastService) {
         $scope.h = Math.min (document.documentElement.clientHeight, window.innerHeight) - 44 - 88;
         $scope.scrollRightHorizon = function () {
             var rightHandle = $ionicScrollDelegate.$getByHandle ("rightContainerHandle");
@@ -38,23 +38,30 @@ angular.module ('starter.5DTrendChart', ['starter.services'])
             pageNum: pageNum
         };
         console.log(data);
-      /*  $http ({
-            method: "POST",
-            url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
-            params: data,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })*/
-        historyPastService.PastLottery (data, userInfo.data.token)
-            .then (function (response) {
-                $ionicLoading.hide ();
-                $scope.historyPast5 = response.data;
-          
-                console.log (response.data);
-            }, function (response) {
-                console.log ("获取列表失败");
-            });
+      
+        if(userInfo.data){
+            /*  $http ({
+             method: "POST",
+             url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
+             params: data,
+             headers: {
+             "Content-Type": "application/json"
+             }
+             })*/
+            historyPastService.PastLottery (data, userInfo.data.token)
+                .then (function (response) {
+                    $ionicLoading.hide ();
+                    $scope.historyPast5 = response.data;
+            
+                    console.log (response.data);
+                }, function (response) {
+                    console.log ("获取列表失败");
+                });
+        }else {
+            $ionicLoading.hide ();
+            $rootScope.errorInfo ();
+        }
+        
         $scope.toArray = function (string2, num) {
             var array = string2.split (",");
             return array[num];

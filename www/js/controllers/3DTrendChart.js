@@ -4,7 +4,7 @@
 //排列3 走势图
 angular.module ('starter.3DTrendChart', [])
 
-    .controller ('3DTrendChart', function ($scope, $ionicScrollDelegate, $ionicLoading, $util, historyPastService) {
+    .controller ('3DTrendChart', function ($scope, $ionicScrollDelegate, $ionicLoading, $rootScope, $util, historyPastService) {
         $scope.h = Math.min (document.documentElement.clientHeight, window.innerHeight) - 44 - 88;
         $scope.scrollRightHorizon = function () {
             var rightHandle = $ionicScrollDelegate.$getByHandle ("rightContainerHandle");
@@ -38,23 +38,30 @@ angular.module ('starter.3DTrendChart', [])
             pageSize: pageSize,
             pageNum: pageNum
         };
-        /*$http ({
-            method: "POST",
-            url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
-            params: data,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })*/
-        historyPastService.PastLottery (data, userInfo.data.token)
-            .then (function (response) {
-                $ionicLoading.hide ();
-                $scope.historyPast3 = response.data;
-
-
-            }, function (error) {
-                console.log ("获取列表失败");
-            });
+        
+        if(userInfo.data){
+            /*$http ({
+             method: "POST",
+             url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
+             params: data,
+             headers: {
+             "Content-Type": "application/json"
+             }
+             })*/
+            historyPastService.PastLottery (data, userInfo.data.token)
+                .then (function (response) {
+                    $ionicLoading.hide ();
+                    $scope.historyPast3 = response.data;
+            
+            
+                }, function (error) {
+                    console.log ("获取列表失败");
+                });
+        }else {
+            $ionicLoading.hide ();
+            $rootScope.errorInfo ();
+        }
+        
         $scope.toArray = function (string2, num) {
             var array = string2.split (",");
             return array[num];

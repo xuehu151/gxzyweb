@@ -361,6 +361,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                             })
                                 .then (function (modal) {
                                     modal.show ();
+                                    $rootScope.makeSureText = '确 定';
                                     $scope.info = response.data.info;
                                     $scope.realName = userInfo.data.user.realName;
                                     $scope.phones = userInfo.data.user.phone;

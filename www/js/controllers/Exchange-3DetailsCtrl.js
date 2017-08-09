@@ -228,6 +228,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                         })
                             .then (function (modal) {
                                 modal.show ();
+                                $rootScope.makeSureText = '继续兑换';
                                 $scope.info = response.data.info;
                                 $scope.realName = userInfo.data.user.realName;
                                 $scope.phones = userInfo.data.user.phone;
@@ -247,7 +248,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
 //                            $scope.modal3 = modal;
                                 $scope.makeSure = function () {
                                     modal.hide ();
-                                    $state.go ('tab.account');
+                                    $state.go ('exchange-3');
                                     jsonWrapBit3D = [];
                                     sessionStorage.jsonWrap3D = '';
                                 }

@@ -5,7 +5,7 @@ var ipUrl = 'http://lottery.zhenlong.wang/service';
 
 angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
 //兑换 排列3
-    .controller ('Exchange-3Ctrl', function ($scope, $state, $rootScope, $interval, getWareIssueService, $util, $ionicLoading, $http, $ionicModal) {
+    .controller ('Exchange-3Ctrl', function ($scope, $state, $rootScope, $interval, getWareIssueService, $util, $ionicLoading, $http, $ionicModal, $ionicPopup) {
         //设置排列3球百位号码
         $scope.numDataBit100 = [];
         var filterBit100 = [];
@@ -280,6 +280,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
             // 排列三投注信息接口
             function getPl3add () {
                 var userInfo = $util.getUserInfo ();
+                $rootScope.makeSureText = '';
         
                 var dataArray = [];
                 var dataObj = {
@@ -348,7 +349,8 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                         if(response.data.error != '0'){
                             $scope.errorInfo = userInfo.info;
                             $scope.errorInfo();
-                        }else {
+                        }
+                        else {
                             /*var alertPopup = $ionicPopup.alert({
                              title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
                              template: '<div class="alert-left"><p style="text-align: center">' + response.data.info + '</p></div>',
@@ -365,6 +367,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                             })
                                 .then (function (modal) {
                                     modal.show ();
+                                    $rootScope.makeSureText = '确 定';
                                     $scope.info = response.data.info;
                                     $scope.realName = userInfo.data.user.realName;
                                     $scope.phones = userInfo.data.user.phone;

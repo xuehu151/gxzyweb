@@ -17,10 +17,12 @@
         </div>
         <div class="sure-modal3-style2">
             <span class="fl">获赠号码:</span>
-            <span ng-repeat="codeRed in receiveNum track by $index" style="display: flex; margin-top: 3px;">
-                <i ng-cloak  ng-repeat="codeNum in codeRed track by $index">{{codeNum}}</i>
+            <div class="betting">
+                <span ng-repeat="codeRed in receiveNum track by $index" style="display: flex; margin-top: 3px;">
+                <i ng-cloak  ng-repeat="codeNum in codeRed track by $index" style="margin-left: 10px">{{codeNum}}</i>
             </span>
+            </div>
         </div>
-        <div class="sure-modal3-style4" ng-click="makeSure()">确 定</div>
+        <div class="sure-modal3-style4" ng-click="makeSure()" ng-cloak>{{makeSureText}}</div>
     </div>
 </ion-modal-view>

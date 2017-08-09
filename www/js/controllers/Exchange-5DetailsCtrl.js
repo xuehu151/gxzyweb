@@ -6,7 +6,7 @@ var ipUrl = 'http://lottery.zhenlong.wang/service';
 angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
 //兑换 排列 5 详情
     
-    .controller ('Exchange-5DetailsCtrl', function ($scope, $state, $http, $ionicPopup, $ionicLoading, $ionicModal, $util, getWareIssueService) {
+    .controller ('Exchange-5DetailsCtrl', function ($scope, $state, $http, $ionicPopup, $ionicLoading, $ionicModal, $rootScope, $util, getWareIssueService) {
         $scope.sessionJsonWarp5D = JSON.parse (sessionStorage.jsonWrap5D); //反解析
         //console.log ($scope.sessionJsonWarp5D);
         //设置表单初始值
@@ -247,6 +247,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                         })
                             .then (function (modal) {
                                 modal.show ();
+                                $rootScope.makeSureText = '继续兑换';
                                 $scope.info = response.data.info;
                                 $scope.realName = userInfo.data.user.realName;
                                 $scope.phones = userInfo.data.user.phone;
@@ -266,7 +267,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
 //                            $scope.modal3 = modal;
                                 $scope.makeSure = function () {
                                     modal.hide ();
-                                    $state.go ('tab.account');
+                                    $state.go ('exchange-5');
                                     jsonWrapBit5D = [];
                                     sessionStorage.jsonWrap5D = '';
                                 }

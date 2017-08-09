@@ -275,6 +275,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                         })
                             .then (function (modal) {
                                 modal.show ();
+                                $rootScope.makeSureText = '继续兑换';
                                 $scope.info = response.data.info;
                                 $scope.realName = userInfo.data.user.realName;
                                 $scope.phones = userInfo.data.user.phone;
@@ -297,7 +298,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
 //                            $scope.modal3 = modal;
                                 $scope.makeSure = function () {
                                     modal.hide ();
-                                    $state.go ('tab.account');
+                                    $state.go ('BigLotto-2');
                                     jsonWrap = [];
                                     sessionStorage.jsonWrap = '';
                                 }

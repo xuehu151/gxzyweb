@@ -4,7 +4,7 @@
 //大乐透走势图
 angular.module ('starter.bigTrendChart', ['starter.services'])
 
-    .controller ('bigTrendChart', function ($scope, $ionicScrollDelegate, $util, $ionicLoading, historyPastService) {
+    .controller ('bigTrendChart', function ($scope, $ionicScrollDelegate, $util, $ionicLoading, $rootScope, historyPastService) {
         $scope.h = Math.min (document.documentElement.clientHeight, window.innerHeight) - 44 - 88;
         $scope.scrollRightHorizon = function () {
             var rightHandle = $ionicScrollDelegate.$getByHandle ("rightContainerHandle");
@@ -40,8 +40,10 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
         for (var j = 1; j < 8; j++) {
             $scope.drawCount.push (j);
         }
-
-        $ionicLoading.show ();
+    
+        $ionicLoading.show ({
+            template : 'Loading...'
+        });
         //获取历史投注记录............
         var userInfo = $util.getUserInfo ();
         var pageSize = 8;
@@ -51,23 +53,30 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
             pageSize: pageSize,
             pageNum: pageNum
         };
-        /*$http ({
-         method: "POST",
-         url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
-         params: data,
-         headers: {
-         "Content-Type": "application/json"
-         }
-         })*/
-        $scope.blueBallData = [];
-        historyPastService.PastLottery (data, userInfo.data.token)
-            .then (function (response) {
-                $ionicLoading.hide ();
-                $scope.bitLotto = response.data;
-
-            }, function (response) {
-                console.log ("获取列表失败");
-            });
+    
+        if (userInfo.data) {
+            /*$http ({
+             method: "POST",
+             url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
+             params: data,
+             headers: {
+             "Content-Type": "application/json"
+             }
+             })*/
+            $scope.blueBallData = [];
+            historyPastService.PastLottery (data, userInfo.data.token)
+                .then (function (response) {
+                    $ionicLoading.hide ();
+                    $scope.bitLotto = response.data;
+                
+                }, function (response) {
+                    console.log ("获取列表失败");
+                });
+        }
+        else {
+            $ionicLoading.hide ();
+            $rootScope.errorInfo ();
+        }
         
         $scope.toArray = function (string2, num) {
             var array1 = string2.split ("*");

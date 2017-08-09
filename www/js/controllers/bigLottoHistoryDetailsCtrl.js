@@ -4,7 +4,7 @@
 //大乐透往期详情
 angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
 
-    .controller ('bigLottoHistoryDetailsCtrl', function ($scope, $http, $ionicLoading, $ionicPopup, $rootScope, $ionicModal, $util, historyPastService) {
+    .controller ('bigLottoHistoryDetailsCtrl', function ($scope, $http, $ionicLoading, $ionicPopup, $rootScope, $ionicModal, $timeout, $util, historyPastService) {
         $ionicLoading.show ({
             template: 'Loading...'
         });
@@ -47,24 +47,11 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
                 }, function (response) {
                     console.log ("获取列表失败");
                 });
-        }else {
-            $scope.errorInfo = userInfo.info;
-            $rootScope.errorInfo();
         }
-    
-        //错误码窗口配置
-        $rootScope.errorInfo = function () {
-            $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
-                scope: $scope,
-                backdropClickToClose: true
-            }).then(function(modal) {
-                $scope.modalError = modal;
-                modal.show ();
-            });
-            $scope.cancelPopError = function() {
-                $scope.modalError.hide();
-            };
-        };
+        else {
+            $ionicLoading.hide ();
+            $rootScope.errorInfo ();
+        }
         
         $scope.toArray = function (string2, num) {
             var array1 = string2.split ("*");

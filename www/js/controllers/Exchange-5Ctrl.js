@@ -4,7 +4,7 @@
 //兑换 排列5
 angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
     
-    .controller ('Exchange-5Ctrl', function ($scope, $state, $interval, $ionicModal, $ionicLoading, $http, $util, getWareIssueService) {
+    .controller ('Exchange-5Ctrl', function ($scope, $state, $interval, $ionicModal, $ionicLoading, $http, $rootScope, $util, $ionicPopup, getWareIssueService) {
         //设置排列3球万位号码
         $scope.numDataBit10000 = [];
         var filterBit10000 = [];
@@ -380,9 +380,9 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     $ionicLoading.hide ();
                     reques = response.data;
                     console.log (reques);
-                    if(response.data.error != '0'){
+                    if(response.error != '0'){
                         $scope.errorInfo = userInfo.info;
-                        $scope.errorInfo();
+                        $rootScope.errorInfo();
                     }else {
                         getPl5add ();
                     }
@@ -392,6 +392,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
             // 排列五投注信息
             function getPl5add () {
                 var userInfo = $util.getUserInfo ();
+//                $rootScope.makeSureText = '';
         
                 var dataArray = [];
                 var dataObj = {
@@ -457,7 +458,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                         console.dir (data);
                         if(response.data.error != '0'){
                             $scope.errorInfo = userInfo.info;
-                            $scope.errorInfo();
+                            $rootScope.errorInfo();
                         }else {
                             /*var alertPopup = $ionicPopup.alert ({
                              title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
@@ -474,6 +475,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                             })
                                 .then (function (modal) {
                                     modal.show ();
+                                    $rootScope.makeSureText = '确 定';
                                     $scope.info = response.data.info;
                                     $scope.realName = userInfo.data.user.realName;
                                     $scope.phones = userInfo.data.user.phone;
@@ -537,7 +539,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
             .then(function (response) {
 //                $ionicLoading.hide();
                 $scope.reques = response.data;
-                console.log ($scope.reques);
+//                console.log ($scope.reques);
     
                 var end_sale_time = $scope.reques.end_sale_time;
     
