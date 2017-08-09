@@ -71,36 +71,11 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
                 status: order.status,
                 investCode: investCode,    //
                 payType: payType,
-                // pay: $scope.allOrders[i].money,
+                pay: order.money,
                 ticketID: order.orderNo,
                 orderTime: order.createDate,
                 winMoney: winMoney
             };
-
-            /*for (var i = 0; i < $scope.allOrders.length; i++) {
-                //找到当前点击的订单,保存
-                if (ticketID == $scope.allOrders[i].lotteryList[0].ticketID) {
-                    var investCode = splitCode.split ($scope.allOrders[i].lotteryList[0].investCode);
-                    console.log (investCode);
-                    if ($scope.allOrders[i].payType == 0) {
-                        payType = '扫码兑换';
-                    }
-                    else if ($scope.allOrders[i].payType == 1) {
-                        payType = '¥' + $scope.allOrders[i].money;
-                    }
-                    $rootScope.orderDetail = {
-                        lotteryID: $scope.allOrders[i].lotteryID,
-                        openTime: $scope.allOrders[i].lotteryList[0].drawTime,
-                        status: $scope.allOrders[i].status,
-                        investCode: investCode,
-                        payType: payType,
-                        // pay: $scope.allOrders[i].money,
-                        ticketID: ticketID,
-                        orderTime: $scope.allOrders[i].createDate,
-                        winMoney: $scope.allOrders[i].winamt
-                    }
-                }
-            }*/
             $state.go ('orderDetail');
         };
 

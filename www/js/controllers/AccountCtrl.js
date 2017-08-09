@@ -13,22 +13,33 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         getUser.getInfo(url + "/service/customer/getUser?token=" + token)
             .then(function(response) {
                 console.log(response.data);
-                $scope.useableMoney = response.data.money;
-                // $scope.phone = response.data.phone;
-                $scope.frozedMoney = response.data.freeze;
-                $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
-                //提现时候的账户号码
-                $rootScope.accountNum = [{
-                    chanel: 2,
-                    num: '(' + response.data.wechat + ')'
-                    // disable: false
-                }, {
-                    chanel: 3,
-                    num: '(' + response.data.bankNo + ')'
-                    // disable: false
-                }];
-            }, function() {
-                alert('网络异常, 未能获取到您的余额')
+                if (response.error=='0')
+                {
+                    $scope.useableMoney = response.data.money;
+                    // $scope.phone = response.data.phone;
+                    $scope.frozedMoney = response.data.freeze;
+                    $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
+                    //提现时候的账户号码
+                    $rootScope.accountNum = [{
+                        chanel: 2,
+                        num: '(' + response.data.wechat + ')'
+                        // disable: false
+                    }, {
+                        chanel: 3,
+                        num: '(' + response.data.bankNo + ')'
+                        // disable: false
+                    }];
+                }
+                else
+                {
+                    $scope.error=response.info;
+                    $timeout(function() {
+                        $scope.modalError.show();
+                    }, 400);
+                }
+            }, function(eror) {
+                alert(error);
+                $ionicLoading.hide ();
             });
         var winItems = [];
         var winAlertStatus = { first: false, second: false, third: false, forth: false } //最多四次弹窗
@@ -40,35 +51,57 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         getUser.getInfo(url + "/service/lottery/getWinList?token=" + token)
             .then(function(response) {
                 console.log(response);
-                winItems = response.data;
+                if (response.error=='0')
+                {
+                    winItems = response.data;
 
-                if (winItems[0]) {
-                    $scope.winamt = winItems[0].winamt;
-                    $scope.wareIssue = winItems[0].wareIssue;
-                    $scope.drawTime = winItems[0].drawTime;
-                    $scope.investCode = splitCode.split(winItems[0].investCode);
-                    console.log($scope.investCode);
-                    winAlertStatus.first = true;
-                    $scope.modal3.show();
-                } else if (!winItems[0]) {
-                    $timeout.cancel(nextShow);
+                    if (winItems[0]) {
+                        $scope.winamt = winItems[0].winamt;
+                        $scope.wareIssue = winItems[0].wareIssue;
+                        $scope.drawTime = winItems[0].drawTime;
+                        $scope.investCode = splitCode.split(winItems[0].investCode);
+                        console.log($scope.investCode);
+                        winAlertStatus.first = true;
+                        $scope.modal3.show();
+                    } else if (!winItems[0]) {
+                        $timeout.cancel(nextShow);
 
-                    //更新待兑换
-                    getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token)
-                        .then(function(response) {
-                            $scope.needExchangeAmount.amount = response.data.length;
-                            console.log($scope.needExchangeAmount.amount);
+                        //更新待兑换
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token)
+                            .then(function(response) {
+                                if (response.error=='0')
+                                {
+                                    $scope.needExchangeAmount.amount = response.data.length;
+                                    console.log($scope.needExchangeAmount.amount);
 
 
-                                $rootScope.needExchangeItems = response.data;
-                                // $scope.modal2.show();
+                                    $rootScope.needExchangeItems = response.data;
+                                    // $scope.modal2.show();
+                                }
+                                else
+                                {
+                                    $scope.error=response.info;
+                                    $timeout(function() {
+                                        $scope.modalError.show();
+                                    }, 300);
+                                }
 
-                        }, function() {
-                            alert('网络异常,未获取到用户信息')
-                        });
+                            }, function(error) {
+                                alert(error);
+                                $ionicLoading.hide ();
+                            });
+                    }
                 }
-            }, function() {
-                alert('网络异常,未获取到用户信息')
+                else
+                {
+                    $scope.error=response.info;
+                    $timeout(function() {
+                        $scope.modalError.show();
+                    }, 400);
+                }
+            }, function(error) {
+                alert(error);
+                $ionicLoading.hide ();
             });
         $scope.withdrawConfirm = function() {
             var userData = userInfo.data.user;
@@ -162,22 +195,31 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         $scope.modal3.show();
                     } else if (!winItems[1]) {
                         $timeout.cancel(nextShow);
-
                         //更新待兑换
                         getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token)
                             .then(function(response) {
-                                $scope.needExchangeAmount.amount = response.data.length;
-                                console.log($scope.needExchangeAmount.amount);
+                                if (response.error=='0')
+                                {
+                                    $scope.needExchangeAmount.amount = response.data.length;
+                                    console.log($scope.needExchangeAmount.amount);
 
-                                if ($scope.needExchangeAmount.amount) {
-                                    $rootScope.needExchangeItems = response.data;
-                                    $scope.modal2.show();
+                                    if ($scope.needExchangeAmount.amount) {
+                                        $rootScope.needExchangeItems = response.data;
+                                        $scope.modal2.show();
+                                    }
+                                }
+                                else
+                                {
+                                    $scope.error=response.info;
+                                    $timeout(function() {
+                                        $scope.modalError.show();
+                                    }, 300);
                                 }
 
-                            }, function() {
-                                alert('网络异常,未获取到用户信息')
+                            }, function(error) {
+                                alert(error);
+                                $ionicLoading.hide ();
                             });
-
                     }
                 } else if (winAlertStatus.first == true && winAlertStatus.second == true && winAlertStatus.third == false && winAlertStatus.forth == false && winItems[2]) {
                     $scope.winamt = winItems[2].winamt;
@@ -190,23 +232,29 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         $scope.modal3.show();
                     } else if (!winItems[2]) {
                         $timeout.cancel(nextShow);
-
                         //更新待兑换
                         getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token)
                             .then(function(response) {
-                                $scope.needExchangeAmount.amount = response.data.length;
-                                console.log($scope.needExchangeAmount.amount);
+                                if (response.error=='0')
+                                {
+                                    $scope.needExchangeAmount.amount = response.data.length;
+                                    console.log($scope.needExchangeAmount.amount);
 
-                                if ($scope.needExchangeAmount.amount) {
-                                    $rootScope.needExchangeItems = response.data;
-                                    $scope.modal2.show();
+                                    if ($scope.needExchangeAmount.amount) {
+                                        $rootScope.needExchangeItems = response.data;
+                                        $scope.modal2.show();
+                                    }
                                 }
-
+                                else
+                                {
+                                    $scope.error=response.info;
+                                    $timeout(function() {
+                                        $scope.modalError.show();
+                                    }, 300);
+                                }
                             }, function() {
                                 alert('网络异常,未获取到用户信息')
                             });
-
-
                     }
                 } else if (winAlertStatus.first == true && winAlertStatus.second == true && winAlertStatus.third == true && winAlertStatus.forth == false && winItems[3]) {
                     $scope.winamt = winItems[3].winamt;
@@ -222,27 +270,32 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         //更新待兑换
                         getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token)
                             .then(function(response) {
-                                $scope.needExchangeAmount.amount = response.data.length;
-                                console.log($scope.needExchangeAmount.amount);
+                                if (response.error=='0')
+                                {
+                                    $scope.needExchangeAmount.amount = response.data.length;
+                                    console.log($scope.needExchangeAmount.amount);
 
-                                if ($scope.needExchangeAmount.amount) {
-                                    $rootScope.needExchangeItems = response.data;
-                                    $scope.modal2.show();
+                                    if ($scope.needExchangeAmount.amount) {
+                                        $rootScope.needExchangeItems = response.data;
+                                        $scope.modal2.show();
+                                    }
                                 }
-
-                            }, function() {
-                                alert('网络异常,未获取到用户信息')
+                                else
+                                {
+                                    $scope.error=response.info;
+                                    $timeout(function() {
+                                        $scope.modalError.show();
+                                    }, 300);
+                                }
+                            }, function(error) {
+                                alert(error);
+                                $ionicLoading.hide ();
                             });
-
                     }
                     console.log($scope.investCode);
-
                 }
-
             }, 1000)
-
         };
-
         //提现完善资料的mordal窗口配置
         $ionicModal.fromTemplateUrl('widthdrawCompleteInfo.html', {
             scope: $scope,
@@ -250,9 +303,6 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         }).then(function(modal) {
             $scope.modal4 = modal;
         });
-        /* $scope.openPop4 = function () {
-             $scope.modal4.show ();
-         };*/
         $scope.cancelPop4 = function() {
             $scope.modal4.hide();
         };
@@ -261,27 +311,14 @@ angular.module('starter.AccountCtrl', ['starter.services'])
             $scope.modal4.hide();
         };
 
-/*
-        $scope.chooseExchangeType = function() {
-            $scope.modal5.show();
-        }
-
-        //选择兑换方式的mordal窗口配置
-        $ionicModal.fromTemplateUrl('chooseExchangeTypeModal.html', {
+        //错误码窗口配置
+        $ionicModal.fromTemplateUrl('templates/errorPop.html', {
             scope: $scope,
             backdropClickToClose: true
         }).then(function(modal) {
-            $scope.modal5 = modal;
+            $scope.modalError = modal;
         });
-         $scope.openPop5 = function () {
-             $scope.modal5.show ();
-         };
-        $scope.cancelPop5 = function() {
-            $scope.modal5.hide();
+        $scope.cancelPopError = function() {
+            $scope.modalError.hide();
         };
-        $scope.toExchangeWithBalance = function() {
-            $scope.modal5.hide();
-            $state.go('tab.exchange');
-        };*/
-
     });
