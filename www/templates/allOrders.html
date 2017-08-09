@@ -31,7 +31,7 @@
                             <div>
                                 <span ng-if="order.payType==1" class="font-style3">奖金支付: </span>
                                 <span ng-if="order.payType==2" class="font-style3">龙币支付: </span>
-                                <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
+                                <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'" >{{order.RT}}</span>
                             </div>
                             <div class="font-style2 fr" style="font-size: 10px;">
                                 查看订单
@@ -65,10 +65,11 @@
                         </div>
                         <div class="fr">
                             <div>
-                                <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
+                                <span ng-if="order.payType==1" class="font-style3">奖金支付: </span>
+                                <span ng-if="order.payType==2" class="font-style3">龙币支付: </span>
                                 <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
                             </div>
-                            <div class="font-style4 fr">
+                            <div class="font-style2 fr" style="font-size: 10px;">
                                 查看订单
                             </div>
                         </div>
@@ -106,10 +107,11 @@
                         </div>
                         <div class="fr">
                             <div>
-                                <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
+                                <span ng-if="order.payType==1" class="font-style3">奖金支付: </span>
+                                <span ng-if="order.payType==2" class="font-style3">龙币支付: </span>
                                 <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
                             </div>
-                            <div class="font-style4 fr">
+                            <div class="font-style2 fr" style="font-size: 10px;">
                                 查看订单
                             </div>
                         </div>
@@ -147,10 +149,11 @@
                         </div>
                         <div class="fr">
                             <div>
-                                <span ng-show="order.payType==1?true:false" class="font-style3">奖金支付: </span>
+                                <span ng-if="order.payType==1" class="font-style3">奖金支付: </span>
+                                <span ng-if="order.payType==2" class="font-style3">龙币支付: </span>
                                 <span ng-cloak ng-class="order.payType?'font-style1':'font-style3'">{{order.RT}}</span>
                             </div>
-                            <div class="font-style4 fr">
+                            <div class="font-style2 fr" style="font-size: 10px;">
                                 查看订单
                             </div>
                         </div>

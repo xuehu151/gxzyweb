@@ -5,7 +5,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
     //账户页面
     .controller('AccountCtrl', function($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading, $util, splitCode, $timeout) {
         //验证是否资料完善
-        //        $ionicLoading.show ();
+       $ionicLoading.show ();
         PayType = 1;
         var userInfo = $util.getUserInfo();
         var token = userInfo.data.token;
@@ -29,6 +29,8 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         num: '(' + response.data.bankNo + ')'
                         // disable: false
                     }];
+
+                    $ionicLoading.hide ();
                 }
                 else
                 {

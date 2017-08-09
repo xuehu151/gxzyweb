@@ -106,7 +106,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
             $scope.totalMoney -= 1;
             disabledBtn3D();
         };
-  
+
         //点击返回选择号码页面
         $scope.editThisOrder3D = function ($index) {
             var thisIndexOrder3D = $scope.sessionJsonWarp3D[$index];
@@ -136,7 +136,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                     "Content-Type": "application/json"
                 }
             })*/
-           
+
             var data = {
                 lotteryID: 31
             };
@@ -152,7 +152,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
             // 排列三投注信息接口
             function getPl3add() {
                 var userInfo = $util.getUserInfo();
-                
+
                 var dataArray = [];
                 for (var i in $scope.sessionJsonWarp3D) {
                     var dataObj = {
@@ -234,13 +234,13 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                                 $scope.phones = userInfo.data.user.phone;
                                 $scope.receives = userInfo.data.user.updateDate; //获赠时间
                                 $scope.draw_time = reques.drawTime;    //开奖时间
-                                
+
                                 $scope.receiveNumArr = data.data;//获赠号码
                                 $scope.receiveNum = [];
                                 for(var i in $scope.receiveNumArr){
                                     var receiveNum = $scope.receiveNumArr[i].investCode;
                                     var receiveNumStr = receiveNum.split('*');
-                                    
+
                                     $scope.receiveNum.push(receiveNumStr);
                                 }
                                 console.info($scope.receiveNumArr);

@@ -168,35 +168,6 @@ angular.module('starter.services', [])
         return info;
     }])
 
-    /*.factory('postWidthdraw', ['$http', '$q', function ($http, $q) {
-    var info = {};
-    info.postMoney = function (url, postData) {
-        console.log(postData)
-        var d = $q.defer();
-        $http({
-            method: "POST",
-            url: url + '?token=' + addData.toke,
-            data: {
-                "realName": addData.user.realName,
-                "phone": addData.user.phone,
-                "idcard": addData.user.idcard,
-                "wechat": addData.user.wechat,
-                "alipay": addData.user.alipay,
-                "bankNo": addData.user.bankNo
-            },
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            }
-        }).success(function (response) {
-            d.resolve(response);
-        }).error(function () {
-            d.reject('error')
-        });
-        return d.promise
-    };
-    return info;
-}])*/
 
     //分割字符串
     .factory('splitCode',['$http',function ($http) {

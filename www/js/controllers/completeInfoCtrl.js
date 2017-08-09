@@ -40,7 +40,7 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
             /**
              * 功能:把提交的值上传到后台
              */
-            if (true) {}
+
             postData.getInfo(url + "/service/customer/add", userInfo)
                 .then(function(response) {
                     console.log(response);
