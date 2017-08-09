@@ -298,7 +298,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
 //                            $scope.modal3 = modal;
                                 $scope.makeSure = function () {
                                     modal.hide ();
-                                    $state.go ('BigLotto-2');
+                                    $state.go ('tab.exchange');
                                     jsonWrap = [];
                                     sessionStorage.jsonWrap = '';
                                 }

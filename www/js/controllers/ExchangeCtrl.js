@@ -73,10 +73,10 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                         'flag2': 1
                                     });
                                 };
-                                /*$scope.goToExchangeBigLotto3 = function (status) {
-                                 $rootScope.newStatus = status;
-                                 $state.go ('BigLotto-2');
-                                 };*/
+                                $scope.goToExchangeBigLotto3 = function (status) {
+                                    $rootScope.newStatus = status;
+                                    $state.go ('BigLotto-2');
+                                };
                             }
                         }
                         //console.log (response.data);

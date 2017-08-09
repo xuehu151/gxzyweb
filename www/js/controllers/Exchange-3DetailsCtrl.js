@@ -248,7 +248,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
 //                            $scope.modal3 = modal;
                                 $scope.makeSure = function () {
                                     modal.hide ();
-                                    $state.go ('exchange-3');
+                                    $state.go ('tab.exchange');
                                     jsonWrapBit3D = [];
                                     sessionStorage.jsonWrap3D = '';
                                 }
