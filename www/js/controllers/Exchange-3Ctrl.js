@@ -6,9 +6,6 @@ var ipUrl = 'http://lottery.zhenlong.wang/service';
 angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
 //兑换 排列3
     .controller ('Exchange-3Ctrl', function ($scope, $state, $rootScope, $interval, getWareIssueService, $util, $ionicLoading, $http, $ionicModal, $ionicPopup) {
-    
-        countTime ();
-        
         //设置排列3球百位号码
         $scope.numDataBit100 = [];
         var filterBit100 = [];
@@ -437,8 +434,6 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 console.log ($scope.reques);
                 
                 var end_sale_time = $scope.reques.end_sale_time;
-                
-//                var timer = $interval (countTime, 1000);
                 
                 function countTime () {
                     var date = new Date ();//获取当前时间
