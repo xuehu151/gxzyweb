@@ -5,26 +5,26 @@
                 <div class="fl">
                     <p class="font-style9">
                         兑换彩票<span>1</span>注
-                        <span style="font-size: 10px;" ng-cloak>(扫码兑换)</span>
+                        <span style="font-size: 10px;" ng-cloak>{{'('+ item.channelName +')'}}</span>
                     </p>
                     <p class="font-style10" ng-cloak>
                         {{item.updateDate}}
                     </p>
                 </div>
                 <div class="fr">
-                    <p class="font-style8 " ng-click="toScanExchange($index)" ng-cloak>
-                        立即兑换
+                    <p  ng-cloak>
+                       <button class="font-style8 " ng-class="item.d==0 && item.h==0?'grey':'margin10'" ng-disabled="item.d==0 && item.h==0" ng-click="toScanExchange($index)" > 立即兑换</button>
                     </p>
-                    <br />
-                    <p class="font-style11" ng-cloak ng-if="whetherLongBi">
+                    <p class="font-style11" ng-cloak ng-if="item.endDate">
                         <span style="font-size: 10px;">距离有效期结束还剩</span>
-                        <span ng-class="lessThen3?'less3':''" style="font-size: 10px;">2</span><span style="font-size: 10px;">天</span>
-                        <span style="font-size: 0;" ng-if="lessThen3">
-                            <span style="color: #c01919;font-size: 10px;">04</span><span style="font-size: 10px;">小时</span>
+                        <span ng-class="item.d<3 && item.h>0?'less3':''" style="font-size: 10px;" ng-cloak>{{item.d}}</span>
+                        <span style="font-size: 10px;">天</span>
+                        <span style="font-size: 0;" ng-if="item.d<3">
+                            <span ng-class="item.d<3 && item.h>0?'less3':''" style="font-size: 10px;" ng-cloak>{{item.h}}</span><span style="font-size: 10px;">小时</span>
                         </span>
                     </p>
                 </div>
-                <img class="expired-img" src="./img/haveExpired.png" alt="已过期" />
+                <img class="expired-img" src="./img/haveExpired.png" alt="已过期" ng-if="item.endDate&&item.d==0&&item.h==0" />
             </ion-item>
             <div class="prize-records-all">
                 <img src="./img/prizeRecords.png" />

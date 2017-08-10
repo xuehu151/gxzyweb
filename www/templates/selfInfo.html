@@ -21,6 +21,16 @@
           </span>
         </div>
       </div>
+      <div class="row-wrap">
+        <div>
+          <span>
+            身份证号
+          </span>
+          <span class="fr" ng-cloak>
+            {{userInfo.idcard}}
+          </span>
+        </div>
+      </div>
       <div class="row-wrap" style="margin-top: 4px;">
         <div>
           <span>
@@ -28,6 +38,16 @@
           </span>
           <span class="fr" ng-cloak>
             {{userInfo.wechat}}
+          </span>
+        </div>
+      </div>
+      <div class="row-wrap" style="padding-bottom: 15px;">
+        <div>
+          <span>
+            开户行
+          </span>
+          <span class="fr" ng-cloak>
+            {{userInfo.bank}}
           </span>
         </div>
       </div>
@@ -42,7 +62,7 @@
         </div>
       </div>
     </ion-list>
-    
+
   </ion-content>
 <!--   <div class="save">
   保存

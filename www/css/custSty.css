@@ -796,15 +796,27 @@ ion-item.f15
 .need-exchange-list .font-style8
 {
   width: 47px;
-  height: 19px;
-  line-height: 21px;
-  font-size: 9px;
-  color: #fff;
-  border-radius: 4px;
-  text-align: center;
-  background-color: #c01919;
-  margin-bottom:8px;
-  float: right;
+    height: 19px;
+    line-height: 21px;
+    font-size: 9px;
+    color: #fff;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #c01919;
+    margin-bottom: 4px;
+    float: right;
+    padding: 0;
+    border:none;
+}
+
+.need-exchange-list .font-style8.margin10
+{
+  margin-top:10px;
+}
+
+.need-exchange-list .font-style8.grey
+{
+  background-color:#999;
 }
 
 .need-exchange-list .font-style9

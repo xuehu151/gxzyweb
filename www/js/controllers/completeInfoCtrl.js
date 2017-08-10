@@ -34,8 +34,7 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
             $rootScope.addData.data.user.bank = $scope.users.bank;
             $rootScope.addData.data.user.bankNo = $scope.users.bankNo;
             //            locals.setObject ($rootScope.user, $rootScope.addData);
-            var datas = $util.setUserInfo($rootScope.addData);
-            var userInfo = $util.getUserInfo();
+
             console.log(userInfo);
             /**
              * 功能:把提交的值上传到后台
@@ -45,6 +44,7 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
                 .then(function(response) {
                     console.log(response);
                     if (response.error == '0') {
+                        $util.setUserInfo($rootScope.addData);
                         $state.go('completeInfoSucceed');
                     } else {
                         $scope.error = response.info;
