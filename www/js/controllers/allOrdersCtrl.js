@@ -20,7 +20,7 @@ angular.module ('starter.allOrdersCtrl', ['starter.services'])
         var userInfo = $util.getUserInfo ();
         var token = userInfo.data.token;
 
-        getUser.getInfo (url + '/service/lottery/getList?token=' + token)
+        getUser.getInfo (url + '/service/lottery/getList?token=' + token+'&pageNum=1&pageSize=8')
             .then (function (response) {
                 console.log (response);
                 if (response.error=='0')

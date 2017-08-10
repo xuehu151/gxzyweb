@@ -17,7 +17,7 @@ angular.module('starter.prizeRecordsCtrl', ['starter.services'])
             $scope.selectIndex = which;
         }
         //        console.log(tokden);
-        getUser.getInfo(url + '/service/bonus/getList?token=' + token)
+        getUser.getInfo(url + '/service/bonus/getList?token=' + token+'&pageNum=1&pageSize=15')
             .then(function(response) {
                 if (response.error == '0') {
                     $scope.prizeItems = response.data;
@@ -50,7 +50,7 @@ angular.module('starter.prizeRecordsCtrl', ['starter.services'])
                 $ionicLoading.hide();
             });
 
-        getUser.getInfo(url + '/service/cash/getList?token=' + token)
+        getUser.getInfo(url + '/service/cash/getList?token=' + token+'&pageNum=1&pageSize=15')
             .then(function(response) {
                 console.log(response);
                 if (response.error == '0') {

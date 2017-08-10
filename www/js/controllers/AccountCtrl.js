@@ -50,7 +50,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
 
         $scope.needExchangeAmount = { amount: 0 };
         //检测有无中奖
-        getUser.getInfo(url + "/service/lottery/getWinList?token=" + token)
+        getUser.getInfo(url + "/service/lottery/getWinList?token=" + token+'&pageNum=1&pageSize=8')
             .then(function(response) {
                 console.log(response);
                 if (response.error=='0')
@@ -69,7 +69,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         $timeout.cancel(nextShow);
 
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token)
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
                             .then(function(response) {
                                 console.log(response);
                                 if (response.error=='0')
@@ -199,7 +199,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     } else if (!winItems[1]) {
                         $timeout.cancel(nextShow);
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token)
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
                             .then(function(response) {
                                 if (response.error=='0')
                                 {
@@ -236,7 +236,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     } else if (!winItems[2]) {
                         $timeout.cancel(nextShow);
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token)
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
                             .then(function(response) {
                                 if (response.error=='0')
                                 {
@@ -271,7 +271,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         $timeout.cancel(nextShow);
 
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token)
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
                             .then(function(response) {
                                 if (response.error=='0')
                                 {
