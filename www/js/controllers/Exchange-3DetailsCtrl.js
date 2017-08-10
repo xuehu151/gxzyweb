@@ -170,13 +170,6 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
 //                console.log(userInfo.data.voucher);
                 var vid = '';
                 if(type == 0){
-                    if (userInfo.data.voucher == undefined) {
-                        vid = '';
-                    }
-                    else {
-                        vid = userInfo.data.voucher.vid;
-                    }
-                }else if(type == 1) {
                     if(userInfo.data.vouchers){
                         for (var k = 0; k < userInfo.data.vouchers.length; k++) {
                             if (userInfo.data.vouchers == undefined) {
@@ -188,6 +181,13 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                         }
                     }else {
                         vid = '';
+                    }
+                }else if(type == 1) {
+                    if (userInfo.data.voucher == undefined) {
+                        vid = '';
+                    }
+                    else {
+                        vid = userInfo.data.voucher.vid;
                     }
                 }
 

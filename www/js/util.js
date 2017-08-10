@@ -10,8 +10,8 @@ angular.module ('starter.util', [])
 
         /* 接口地址  */
         var httpURL = {
-            initUrl: ipUrl + '/service/common/index1',   //初始化
-            initUrlNew: ipUrl + '/service/common/index',    //新用户
+            initUrl: ipUrl + '/service/common/index',   //初始化
+            initUrlNew: ipUrl + '/service/common/index1',    //新用户
             getUserNameUrl: ipUrl + '/service/customer/add',    //注册框
             pl3AddUrl: ipUrl + '/service/lottery/pl3add', //排列3投注
             pl5AddUrl: ipUrl + '/service/lottery/pl5add', //排列5投注

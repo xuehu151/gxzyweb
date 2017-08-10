@@ -81,7 +81,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         }
                         //console.log (response.data);
                     }, function (error) {
-                        console.log ('加载失败，请检查网络')
+                        alert ('加载失败，请检查网络')
                     });
             }
             else if (type == 1) {
@@ -113,7 +113,13 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         var userInfo = $util.getUserInfo ();
                         console.log (userInfo);
     
-                        if(userInfo.error != '0'){
+                        if(userInfo.error == '2301'){
+                            $scope.errorInfo = userInfo.info;
+                            $rootScope.errorInfo();
+                        }else {
+                            $state.go ('scanCodeIndex');
+                        }
+                        /*if(userInfo.error != '0'){
                             $scope.errorInfo = userInfo.info;
                             $rootScope.errorInfo();
                         }
@@ -122,8 +128,12 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                 modal ();
                             }
                             else {
-                                if($location.search ().sign && $location.search ().type){
-                                    $state.go ('tab.account');
+                                if(userInfo.data.error == '2301'){
+                                    $state.go ('scanCodeIndex');
+                                }else {
+                                    if($location.search ().sign && $location.search ().type){
+                                        $state.go ('tab.account');
+                                    }
                                 }
                             }
     
@@ -141,9 +151,14 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             };
                             $scope.goToExchangeBigLotto3 = function (status) {
                                 $rootScope.newStatus = status;
-                                $state.go ('BigLotto-2');
+                                if(response.data.user.money >= 2){
+                                    $state.go ('BigLotto-2');
+                                }else {
+                                    $scope.errorInfo = '大乐透只能选择2元的进行投注哦!';
+                                    $rootScope.errorInfo();
+                                }
                             };
-                        }
+                        }*/
                     }, function (response) {
                         alert("初始化数据失败");
                     });
@@ -256,6 +271,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 });
                 $scope.cancelPopError = function() {
                     $scope.modalError.hide();
+                    $state.go ('tab.account');
                 };
             };
         }

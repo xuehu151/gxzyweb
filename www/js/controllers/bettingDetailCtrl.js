@@ -154,7 +154,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
         // 确认提交按钮
         $scope.showOrderAlertCms = function () {
             $ionicLoading.show ();
-            if ($scope.multiple == 0) { //投注倍数限制
+            if ($scope.multiple <= 0) { //投注倍数限制
                 alert ('请重新设置投注倍数');
                 return
             }
@@ -217,14 +217,6 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                 
                 var vid = '';
                 if (type == 0) {
-                    if (userInfo.data.voucher == undefined) {
-                        vid = '';
-                    }
-                    else {
-                        vid = userInfo.data.voucher.vid;
-                    }
-                }
-                else if (type == 1) {
                     if(userInfo.data.vouchers){
                         for (var k = 0; k < userInfo.data.vouchers.length; k++) {
                             if (userInfo.data.vouchers == undefined) {
@@ -236,6 +228,14 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                         }
                     }else {
                         vid = '';
+                    }
+                }
+                else if (type == 1) {
+                    if (userInfo.data.voucher == undefined) {
+                        vid = '';
+                    }
+                    else {
+                        vid = userInfo.data.voucher.vid;
                     }
                 }
                 

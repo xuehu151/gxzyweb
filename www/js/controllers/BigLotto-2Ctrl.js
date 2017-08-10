@@ -309,13 +309,6 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 $ionicLoading.show ();
                 var vid = '';
                 if(type == 0){
-                    if (userInfo.data.voucher == undefined) {
-                        vid = '';
-                    }
-                    else {
-                        vid = userInfo.data.voucher.vid;
-                    }
-                }else if(type == 1) {
                     if (userInfo.data.vouchers){
                         for(var k = 0; k < userInfo.data.vouchers.length; k++ ){
                             if (userInfo.data.vouchers == undefined) {
@@ -327,6 +320,13 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         }
                     }else {
                         vid = ''
+                    }
+                }else if(type == 1) {
+                    if (userInfo.data.voucher == undefined) {
+                        vid = '';
+                    }
+                    else {
+                        vid = userInfo.data.voucher.vid;
                     }
                 }
     
@@ -350,7 +350,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         $ionicLoading.hide ();
                         console.info (response);
                         console.dir (data);
-                        if(response.error){
+                        if(response.data.error != '0'){
                             $scope.errorInfo = userInfo.info;
                             $rootScope.errorInfo();
                         }else {
