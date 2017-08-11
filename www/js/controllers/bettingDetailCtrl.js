@@ -45,7 +45,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                     PayTypeBig = userInfo.data.user.money
                 }
             }
-            if ($scope.totalMoney >= PayTypeBig) {
+            if ($scope.totalMoney > PayTypeBig) {
                 $scope.isDisabled = true;
                 var alertPopup = $ionicPopup.alert ({
                     title : '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
