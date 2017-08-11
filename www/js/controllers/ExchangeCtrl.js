@@ -108,17 +108,64 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     .then (function (response) {
                         $ionicLoading.hide ();
                         PayType = 0;
-      
-                        if(response.error == '2301'){
-                            $scope.errorInfo = response.info;
+                       /* if(response.error == '2301'){
+                            $scope.errorInfo = response.info+'16165165';
                             $rootScope.errorInfo();
-                        }else if (response.error == '0') {
+                        }else*/
+                       if (response.error == '0') {
                             /* 获取初始化数据 */
                             var datas = $util.setUserInfo (response);
                             var userInfo = $util.getUserInfo ();
                             console.log (userInfo);
                             $state.go ('scanCodeIndex');
-                        }
+                       }
+                       else {
+                           var userToken = {
+                               token : sign
+                           };
+                           initDataService.initDataNew (userToken)  //index1
+                               .then (function (response) {
+                                   $ionicLoading.hide ();
+                                   PayType = 1;
+                                   /* 获取初始化数据 */
+                                   var datas = $util.setUserInfo (response);
+                                   var userInfo = $util.getUserInfo ();
+                                   console.log (userInfo);
+                                   if (userInfo.error != '0') {
+                                       $scope.errorInfo = userInfo.info;
+                                       $rootScope.errorInfo ();
+                                   }
+                                   else {
+                                       //初始化
+                                       if (userInfo.error == '2301') {
+                                           $scope.errorInfo = userInfo.info;
+                                           $scope.errorInfo ();
+                                       }
+                                       else {
+                                           $scope.goToExchange3D = function () {
+                                               $state.go ('exchange-3');
+                                           };
+                                           $scope.goToExchange5D = function () {
+                                               $state.go ('exchange-5');
+                                           };
+                                           $scope.goToExchangeBigLotto2 = function (status) {
+                                               $rootScope.newStatus = status;
+                                               $state.go ('BigLotto-2', {
+                                                   'flag2' : 1
+                                               });
+                                           };
+                                           $scope.goToExchangeBigLotto3 = function (status) {//用户扫码进来 抵用券投注type=0
+                                               $rootScope.newStatus = status;
+                                               $state.go ('BigLotto-2');
+                                           };
+                                       }
+                                   }
+                                   //console.log (response.data);
+                               }, function (error) {
+                                   alert ('加载失败，请检查网络')
+                               });
+                           //$state.go ('tab.account');
+                       }
                         /*if(userInfo.error != '0'){
                             $scope.errorInfo = userInfo.info;
                             $rootScope.errorInfo();
@@ -260,7 +307,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     });
             }
     
-            //错误码窗口配置
+            /*//错误码窗口配置
             $rootScope.errorInfo = function () {
                 $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
                     scope: $scope,
@@ -279,12 +326,11 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         .then (function (response) {
                             $ionicLoading.hide ();
                             PayType = 1;
-                            /* 获取初始化数据 */
+                            /!* 获取初始化数据 *!/
                             var datas = $util.setUserInfo (response);
                             var userInfo = $util.getUserInfo ();
                             console.log (userInfo);
                             if (userInfo.error != '0') {
-                                //alert (userInfo.info);
                                 $scope.errorInfo = userInfo.info;
                                 $rootScope.errorInfo();
                             }
@@ -319,7 +365,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         });
                     //$state.go ('tab.account');
                 };
-            };
+            };*/
         }
         else {
             if (type == 0) {

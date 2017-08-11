@@ -22,31 +22,34 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
                 StatusBar.styleDefault ();
             }
         });
-
-        $ionicPlatform.registerBackButtonAction(function(e) {
-          e.preventDefault();
-            function showConfirm() {
-                var confirmPopup = $ionicPopup.confirm({
-                    title: '<strong>退出应用?</strong>',
-                    template: '你确定要退出应用吗?',
-                    okText: '退出',
-                    cancelText: '取消'
+    
+        $ionicPlatform.registerBackButtonAction (function (e) {
+            e.preventDefault ();
+            function showConfirm () {
+                var confirmPopup = $ionicPopup.confirm ({
+                    title : '<strong>退出应用?</strong>',
+                    template : '你确定要退出应用吗?',
+                    okText : '退出',
+                    cancelText : '取消'
                 });
-                confirmPopup.then(function (res) {
+                confirmPopup.then (function (res) {
                     if (res) {
-                        ionic.Platform.exitApp();
-                    } else {
-                
+                        ionic.Platform.exitApp ();
+                    }
+                    else {
+                    //..........
                     }
                 });
             }
-    
-            if ($location.path() == '/home/homeInfo') {
-                showConfirm();
-            } else if ($ionicHistory.backView()) {
-                $ionicHistory.goBack();
-            } else {
-                showConfirm();
+        
+            if ($location.path () == '/home/homeInfo') {
+                showConfirm ();
+            }
+            else if ($ionicHistory.backView ()) {
+                $ionicHistory.goBack ();
+            }
+            else {
+                showConfirm ();
             }
             return false;
         }, 101);
