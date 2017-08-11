@@ -6,13 +6,10 @@ var url = "http://lottery.zhenlong.wang";
 angular.module('starter.orderDetailCtrl', ['starter.services']).controller('orderDetailCtrl', function($scope, $rootScope, $state) {
   $scope.orderDetail = $rootScope.orderDetail;
   console.log($scope.orderDetail);
-  if ($scope.orderDetail.payType == '扫码兑换') {
+  if ($scope.orderDetail.payType.indexOf('¥') == -1) {
     $scope.explainInfo = '*兑换资格已返还至待兑换';
   }
-  else if ($scope.orderDetail.payType == '***')
-  {
-    $scope.orderDetail.payType='龙币支付';
-  }
+
   else {
     $scope.explainInfo = '*资金已返还至奖金余额';
   }

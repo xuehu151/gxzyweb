@@ -63,7 +63,6 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                         alert(error);
                         $ionicLoading.hide();
                     });
-
             }
         }
 
@@ -78,13 +77,12 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                 winMoney += order.lotteryList[i].winamt;
                 console.log(OneCode);
             }
+            console.log(order.channelName);
             console.log(investCode);
-            if (order.payType == 0 && order.channelName == 'undefined') {
-                payType = '扫码兑换';
+            if (order.payType == 0 ) {
+                payType = order.channelName;
             } else if (order.payType == 1) {
                 payType = '¥' + order.money;
-            } else if (order.payType == 0 && order.channelName == '测试' ) {
-                payType = order.channelName;
             }
 
             $rootScope.orderDetail = {

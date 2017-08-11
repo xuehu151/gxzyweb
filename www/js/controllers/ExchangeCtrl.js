@@ -54,7 +54,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             if (!userInfo.data.user.realName) {
                                 modal ();
                             }
-        
+
                             //初始化
                             if (userInfo.error == '2301') {
                                 $scope.errorInfo = userInfo.info;
@@ -183,7 +183,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     }
                                 }
                             }
-    
+
                             $scope.goToExchange3D = function () {
                                 $state.go ('exchange-3');
                             };
@@ -306,7 +306,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         }
                     });
             }
-    
+
             /*//错误码窗口配置
             $rootScope.errorInfo = function () {
                 $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
@@ -318,7 +318,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 });
                 $scope.cancelPopError = function() {
                     $scope.modalError.hide();
-    
+
                     var userToken = {
                         token: sign
                     };

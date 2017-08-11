@@ -5,16 +5,17 @@ angular.module('starter.AccountCtrl', ['starter.services'])
     //账户页面
     .controller('AccountCtrl', function($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading, $util, splitCode, $timeout) {
         //验证是否资料完善
-       $ionicLoading.show ();
+        $ionicLoading.show();
         PayType = 1;
+        type=1;
         var userInfo = $util.getUserInfo();
+        console.log(userInfo)
         var token = userInfo.data.token;
         //更新余额
         getUser.getInfo(url + "/service/customer/getUser?token=" + token)
             .then(function(response) {
                 console.log(response.data);
-                if (response.error=='0')
-                {
+                if (response.error == '0') {
                     $scope.useableMoney = response.data.money;
                     // $scope.phone = response.data.phone;
                     $scope.frozedMoney = response.data.freeze;
@@ -30,18 +31,16 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         // disable: false
                     }];
 
-                    $ionicLoading.hide ();
-                }
-                else
-                {
-                    $scope.error=response.info;
+                    $ionicLoading.hide();
+                } else {
+                    $scope.error = response.info;
                     $timeout(function() {
                         $scope.modalError.show();
                     }, 400);
                 }
             }, function(eror) {
                 alert(error);
-                $ionicLoading.hide ();
+                $ionicLoading.hide();
             });
         var winItems = [];
         var winAlertStatus = { first: false, second: false, third: false, forth: false } //最多四次弹窗
@@ -50,11 +49,10 @@ angular.module('starter.AccountCtrl', ['starter.services'])
 
         $scope.needExchangeAmount = { amount: 0 };
         //检测有无中奖
-        getUser.getInfo(url + "/service/lottery/getWinList?token=" + token+'&pageNum=1&pageSize=8')
+        getUser.getInfo(url + "/service/lottery/getWinList?token=" + token + '&pageNum=1&pageSize=8')
             .then(function(response) {
                 console.log(response);
-                if (response.error=='0')
-                {
+                if (response.error == '0') {
                     winItems = response.data;
 
                     if (winItems[0]) {
@@ -69,21 +67,16 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         $timeout.cancel(nextShow);
 
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
                             .then(function(response) {
                                 console.log(response);
-                                if (response.error=='0')
-                                {
+                                if (response.error == '0') {
                                     $scope.needExchangeAmount.amount = response.data.length;
                                     console.log($scope.needExchangeAmount.amount);
-
-
                                     $rootScope.needExchangeItems = response.data;
                                     // $scope.modal2.show();
-                                }
-                                else
-                                {
-                                    $scope.error=response.info;
+                                } else {
+                                    $scope.error = response.info;
                                     $timeout(function() {
                                         $scope.modalError.show();
                                     }, 300);
@@ -91,20 +84,18 @@ angular.module('starter.AccountCtrl', ['starter.services'])
 
                             }, function(error) {
                                 alert(error);
-                                $ionicLoading.hide ();
+                                $ionicLoading.hide();
                             });
                     }
-                }
-                else
-                {
-                    $scope.error=response.info;
+                } else {
+                    $scope.error = response.info;
                     $timeout(function() {
                         $scope.modalError.show();
                     }, 400);
                 }
             }, function(error) {
                 alert(error);
-                $ionicLoading.hide ();
+                $ionicLoading.hide();
             });
         $scope.withdrawConfirm = function() {
             var userData = userInfo.data.user;
@@ -199,10 +190,9 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     } else if (!winItems[1]) {
                         $timeout.cancel(nextShow);
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
                             .then(function(response) {
-                                if (response.error=='0')
-                                {
+                                if (response.error == '0') {
                                     $scope.needExchangeAmount.amount = response.data.length;
                                     console.log($scope.needExchangeAmount.amount);
 
@@ -210,10 +200,8 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         $rootScope.needExchangeItems = response.data;
                                         $scope.modal2.show();
                                     }
-                                }
-                                else
-                                {
-                                    $scope.error=response.info;
+                                } else {
+                                    $scope.error = response.info;
                                     $timeout(function() {
                                         $scope.modalError.show();
                                     }, 300);
@@ -221,7 +209,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
 
                             }, function(error) {
                                 alert(error);
-                                $ionicLoading.hide ();
+                                $ionicLoading.hide();
                             });
                     }
                 } else if (winAlertStatus.first == true && winAlertStatus.second == true && winAlertStatus.third == false && winAlertStatus.forth == false && winItems[2]) {
@@ -236,10 +224,9 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     } else if (!winItems[2]) {
                         $timeout.cancel(nextShow);
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
                             .then(function(response) {
-                                if (response.error=='0')
-                                {
+                                if (response.error == '0') {
                                     $scope.needExchangeAmount.amount = response.data.length;
                                     console.log($scope.needExchangeAmount.amount);
 
@@ -247,10 +234,8 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         $rootScope.needExchangeItems = response.data;
                                         $scope.modal2.show();
                                     }
-                                }
-                                else
-                                {
-                                    $scope.error=response.info;
+                                } else {
+                                    $scope.error = response.info;
                                     $timeout(function() {
                                         $scope.modalError.show();
                                     }, 300);
@@ -271,10 +256,9 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         $timeout.cancel(nextShow);
 
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
                             .then(function(response) {
-                                if (response.error=='0')
-                                {
+                                if (response.error == '0') {
                                     $scope.needExchangeAmount.amount = response.data.length;
                                     console.log($scope.needExchangeAmount.amount);
 
@@ -282,17 +266,15 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         $rootScope.needExchangeItems = response.data;
                                         $scope.modal2.show();
                                     }
-                                }
-                                else
-                                {
-                                    $scope.error=response.info;
+                                } else {
+                                    $scope.error = response.info;
                                     $timeout(function() {
                                         $scope.modalError.show();
                                     }, 300);
                                 }
                             }, function(error) {
                                 alert(error);
-                                $ionicLoading.hide ();
+                                $ionicLoading.hide();
                             });
                     }
                     console.log($scope.investCode);

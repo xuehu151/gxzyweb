@@ -213,12 +213,10 @@ angular.module('starter.services', [])
                     obj[i].status = '待开奖';
                     obj[i].whetherDate = true;
                     obj[i].LT = '开奖时间: ' + obj[i].drawTime;
-                    if (obj[i].payType == 0) {
-                        obj[i].RT = '扫码兑换';
+                    if (obj[i].payType == 0 ) {
+                        obj[i].RT = obj[i].channelName;
                     } else if (obj[i].payType == 1) {
                         obj[i].RT = '¥' + obj[i].money;
-                    } else if (obj[i].payType == 2) {
-                        obj[i].RT = '***';
                     }
                     // console.log(obj[i])
                     arr2.push(obj[i]);
@@ -229,11 +227,9 @@ angular.module('starter.services', [])
                     obj[i].whetherDate = false;
                     obj[i].LT = '¥' + obj[i].lotteryList[0].winamt;
                     if (obj[i].payType == 0) {
-                        obj[i].RT = '扫码兑换';
+                        obj[i].RT = obj[i].channelName;
                     } else if (obj[i].payType == 1) {
                         obj[i].RT = '¥' + obj[i].money;
-                    } else if (obj[i].payType == 2) {
-                        obj[i].RT = '***';
                     }
                     // console.log(obj[i])
                     arr3.push(obj[i]);
@@ -243,11 +239,9 @@ angular.module('starter.services', [])
                     obj[i].whetherDate = false;
                     obj[i].LT = '  ';
                     if (obj[i].payType == 0) {
-                        obj[i].RT = '扫码兑换';
+                        obj[i].RT = obj[i].channelName;
                     } else if (obj[i].payType == 1) {
                         obj[i].RT = '¥' + obj[i].money;
-                    } else if (obj[i].payType == 2) {
-                        obj[i].RT = '***';
                     }
                 } else if (obj[i].status == 3) {
 
@@ -256,11 +250,9 @@ angular.module('starter.services', [])
                     obj[i].whetherDate = false;
                     obj[i].LT = '再接再厉哦~~~';
                     if (obj[i].payType == 0) {
-                        obj[i].RT = '扫码兑换';
+                        obj[i].RT = obj[i].channelName;
                     } else if (obj[i].payType == 1) {
                         obj[i].RT = ' ¥' + obj[i].money;
-                    } else if (obj[i].payType == 2) {
-                        obj[i].RT = '***';
                     }
                     // console.log(obj[i])
                     arr4.push(obj[i]);
