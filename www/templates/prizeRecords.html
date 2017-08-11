@@ -1,61 +1,52 @@
-<ion-view view-title="奖金纪录">
-    <ion-content class="account-records" scroll="false" style="background: #eee;" has-bouncing="true">
-      <div class="tab-toselect">
-        <a class="tab_default" ng-class="selectIndex==0 ? 'tab_select' : '' " ng-click="activeTab(0)" >
-          奖金记录
-        </a>
-        <a class="tab_default" ng-class="selectIndex==1 ? 'tab_select' : '' " ng-click="activeTab(1)" >
-          提现记录
-        </a>
-      </div>
-
-
-      <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==0" >
-        <ion-list class="prize-records-list">
-          <ion-item ng-repeat="prizeItem in prizeItems">
-            <div class="fl">
-              <p style="font-size: 13px;" ng-class="prizeItem.isIncome?'font-style5':'font-style1'" ng-bind="prizeItem.exchangeClass"></p>
-              <p class="font-style2" ng-bind="prizeItem.updateDate"></p>
+<ion-view view-title="奖金纪录" style="background: #eee;">
+    <div id="tab-toselect2">
+        <a class="tab_default" ng-class="selectIndex==0 ? 'tab_select' : '' " ng-click="activeTab(0)">
+      奖金记录
+    </a>
+        <a class="tab_default" ng-class="selectIndex==1 ? 'tab_select' : '' " ng-click="activeTab(1)">
+      提现记录
+    </a>
+    </div>
+    <ion-content class="account-records" scroll="true" has-bouncing="true" delegate-handle="mainScroll">
+        <ion-list class="prize-records-list" ng-if="selectIndex==0">
+            <ion-item ng-repeat="prizeItem in prizeItems">
+                <div class="fl">
+                    <p style="font-size: 13px;" ng-class="prizeItem.isIncome?'font-style5':'font-style1'" ng-bind="prizeItem.exchangeClass"></p>
+                    <p class="font-style2" ng-bind="prizeItem.updateDate"></p>
+                </div>
+                <div class="fr">
+                    <p ng-class="prizeItem.isIncome?'font-style6':'font-style3'" ng-cloak>
+                        {{prizeItem.isIncome?'+':'-'}}{{prizeItem.money | number:2}}
+                    </p>
+                    <p class="font-style4 fr" ng-bind="prizeItem.exchangeType"></p>
+                </div>
+            </ion-item>
+            <div class="prize-records-all" ng-if="!prizeRecords.moredata">
+                <img src="./img/prizeRecords.png" />
+                <p style="margin-bottom: 20px;">就这么多咯~快快购彩中奖金吧~~</p>
             </div>
-            <div class="fr">
-              <p
-              ng-class="prizeItem.isIncome?'font-style6':'font-style3'"
-              ng-cloak>
-                {{prizeItem.isIncome?'+':'-'}}{{prizeItem.money | number:2}}
-              </p>
-              <p class="font-style4 fr" ng-bind="prizeItem.exchangeType"></p>
-            </div>
-          </ion-item>
-
-          <div class="prize-records-all">
-            <img src="./img/prizeRecords.png" />
-            <p style="margin-bottom: 20px;">就这么多咯~快快购彩中奖金吧~~</p>
-          </div>
-
+            <ion-infinite-scroll ng-if="prizeRecords.moredata" on-infinite="prizeRecords.loadMore()" distance="1%"></ion-infinite-scroll>
         </ion-list>
-      </ion-scroll>
-      <ion-scroll zooming="false" direction="y" class="allorders-scroll" ng-if="selectIndex==1" >
-        <ion-list class="widthdraw-records-list">
-          <ion-item ng-repeat="widthdrawItem in widthdrawItems" >
-            <div class="fl" ng-switch="widthdrawItem.status">
-              <p class="font-style3" ng-switch-when="0">未处理</p>
-              <p class="font-style3" ng-switch-when="1">审核成功</p>
-              <p class="font-style3" ng-switch-when="-1">审核失败</p>
-              <p class="font-style3" ng-switch-when="2">已完成</p>
-              <p class="font-style4" ng-cloak>{{widthdrawItem.updateDate}}</p>
+        <ion-list class="widthdraw-records-list" ng-if="selectIndex==1">
+            <ion-item ng-repeat="widthdrawItem in widthdrawItems">
+                <div class="fl" ng-switch="widthdrawItem.status">
+                    <p class="font-style3" ng-switch-when="0">未处理</p>
+                    <p class="font-style3" ng-switch-when="1">审核成功</p>
+                    <p class="font-style3" ng-switch-when="-1">审核失败</p>
+                    <p class="font-style3" ng-switch-when="2">已完成</p>
+                    <p class="font-style4" ng-cloak>{{widthdrawItem.updateDate}}</p>
+                </div>
+                <div class="fr">
+                    <p class="font-style7" ng-cloak>
+                        <span class="f13">提现：</span> {{widthdrawItem.money}}元
+                    </p>
+                </div>
+            </ion-item>
+            <div class="prize-records-all" ng-if="!widthdrawRecords.moredata">
+                <img src="./img/prizeRecords.png" />
+                <p>就这么多咯~快快购彩中奖金吧~~</p>
             </div>
-            <div class="fr">
-              <p class="font-style7" ng-cloak>
-                <span class="f13">提现：</span> {{widthdrawItem.money}}元
-              </p>
-            </div>
-          </ion-item>
-          <!--   <div class="prize-records-all">
-              <img src="./img/prizeRecords.png" />
-              <p>就这么多咯~快快购彩中奖金吧~~</p>
-          </div> -->
-
+            <ion-infinite-scroll ng-if="widthdrawRecords.moredata" on-infinite="widthdrawRecords.loadMore()" distance="1%"></ion-infinite-scroll>
         </ion-list>
-      </ion-scroll>
     </ion-content>
 </ion-view>

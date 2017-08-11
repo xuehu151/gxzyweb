@@ -1092,20 +1092,14 @@ ion-item.f15
   margin-left: 20px;
 }
 
-.allorders-scroll
-{
-  top: 10px;
-  width: 100%;
-  height: 90%;
-}
 .all-orders,
 .account-records
 {
-  background-color: #eee;
+  top: 50px;
 }
 
-.all-orders .tab-toselect,
-.account-records .tab-toselect
+#tab-toselect,
+#tab-toselect2
 {
   display:flex;
   width:100%;
@@ -1114,8 +1108,8 @@ ion-item.f15
 }
 
 
-.all-orders .tab_default,
-.account-records .tab_default
+#tab-toselect .tab_default,
+#tab-toselect2 .tab_default
 {
   border:none;
   height: 24px;
@@ -1129,16 +1123,16 @@ ion-item.f15
   flex: 1;
 }
 
-.all-orders .tab_select,
-.account-records .tab_select
+#tab-toselect .tab_select,
+#tab-toselect2 .tab_select
 {
   color:#0e3bad;
   font-size: 15px;
 
 }
 
-.all-orders .tab_default:last-child,
-.account-records .tab_default:last-child
+#tab-toselect .tab_default:last-child,
+#tab-toselect2 .tab_default:last-child
 {
   border-right: none;
 }

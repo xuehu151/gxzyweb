@@ -22,7 +22,7 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
                 StatusBar.styleDefault ();
             }
         });
-    
+
         $ionicPlatform.registerBackButtonAction (function (e) {
             e.preventDefault ();
             function showConfirm () {
@@ -41,7 +41,7 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
                     }
                 });
             }
-        
+
             if ($location.path () == '/home/homeInfo') {
                 showConfirm ();
             }
