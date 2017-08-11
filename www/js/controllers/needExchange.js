@@ -29,7 +29,8 @@ angular.module('starter.needExchangeCtrl', [])
         $scope.toScanExchange = function($index, convert) {
             // $scope.needExchanges.splice($index, 1);
             $rootScope.needExchangeItems = $scope.needExchanges;
-
+            $rootScope.nowVid = $scope.needExchanges[$index].vid;
+            console.info($rootScope.nowVid);
             console.log($rootScope.needExchangeItems);
 
             $state.go('scanCodeIndex')

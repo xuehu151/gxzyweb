@@ -9,7 +9,7 @@ var PayType = '';//判断是否为老用户扫码进来 0 新用户 1 老用户�
 
 angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl', 'starter.widthdrawRecordsCtrl', 'starter.widthdrawCtrl', 'starter.DrawCtrl', 'starter.TrendCtrl', 'starter.3DTrendChart', 'starter.5DTrendChart', 'starter.bigTrendChart', 'starter.selfInfoCtrl'])
 
-    .run (function ($ionicPlatform,$ionicPopup,$rootScope) {
+    .run (function ($ionicPlatform,$ionicPopup,$rootScope, $ionicHistory) {
         $ionicPlatform.ready (function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -25,7 +25,30 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
 
         $ionicPlatform.registerBackButtonAction(function(e) {
           e.preventDefault();
-          $rootScope.modalError.hide();
+            function showConfirm() {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: '<strong>退出应用?</strong>',
+                    template: '你确定要退出应用吗?',
+                    okText: '退出',
+                    cancelText: '取消'
+                });
+                confirmPopup.then(function (res) {
+                    if (res) {
+                        ionic.Platform.exitApp();
+                    } else {
+                
+                    }
+                });
+            }
+    
+            if ($location.path() == '/home/homeInfo') {
+                showConfirm();
+            } else if ($ionicHistory.backView()) {
+                $ionicHistory.goBack();
+            } else {
+                showConfirm();
+            }
+            return false;
         }, 101);
     })
 

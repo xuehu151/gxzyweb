@@ -299,7 +299,6 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         
                 dataObj.investCode = investCode;
                 dataArray.push (dataObj);
-                console.log (dataArray);
                 //console.log(userInfo.data.voucher);
                 var vid = '';
                 if (type == 0) {
@@ -316,9 +315,9 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                         vid = ''
                     }
                 }
-                else if (type == 1) {
+                else if (type == 1){
                     if (userInfo.data.voucher == undefined) {
-                        vid = '';
+                        vid = $rootScope.nowVid;
                     }
                     else {
                         vid = userInfo.data.voucher.vid;
@@ -332,7 +331,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     vid : vid,
                     data : dataArray
                 };
-                 console.log(dataArray);
+                 console.log(data);
                 $http ({
                     method : "POST",
                     url : ipUrl + '/lottery/pl3add?token=' + userInfo.data.token,

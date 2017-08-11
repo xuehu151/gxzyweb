@@ -323,7 +323,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                     }
                 }else if(type == 1) {
                     if (userInfo.data.voucher == undefined) {
-                        vid = '';
+                        vid = $rootScope.nowVid;
                     }
                     else {
                         vid = userInfo.data.voucher.vid;

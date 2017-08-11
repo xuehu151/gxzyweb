@@ -430,7 +430,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     }
                 }else if(type == 1) {
                     if (userInfo.data.voucher == undefined) {
-                        vid = '';
+                        vid = $rootScope.nowVid;
                     }
                     else {
                         vid = userInfo.data.voucher.vid;

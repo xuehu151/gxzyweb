@@ -104,19 +104,19 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 var data = {
                     token: sign
                 };
-                initDataService.initData (data)
+                initDataService.initData (data)   //index
                     .then (function (response) {
                         $ionicLoading.hide ();
-                        PayType = 1;
-                        /* 获取初始化数据 */
-                        var datas = $util.setUserInfo (response);
-                        var userInfo = $util.getUserInfo ();
-                        console.log (userInfo);
-    
-                        if(userInfo.error == '2301'){
-                            $scope.errorInfo = userInfo.info;
+                        PayType = 0;
+      
+                        if(response.error == '2301'){
+                            $scope.errorInfo = response.info;
                             $rootScope.errorInfo();
-                        }else {
+                        }else if (response.error == '0') {
+                            /* 获取初始化数据 */
+                            var datas = $util.setUserInfo (response);
+                            var userInfo = $util.getUserInfo ();
+                            console.log (userInfo);
                             $state.go ('scanCodeIndex');
                         }
                         /*if(userInfo.error != '0'){
@@ -271,7 +271,53 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 });
                 $scope.cancelPopError = function() {
                     $scope.modalError.hide();
-                    $state.go ('tab.account');
+    
+                    var userToken = {
+                        token: sign
+                    };
+                    initDataService.initDataNew (userToken)  //index1
+                        .then (function (response) {
+                            $ionicLoading.hide ();
+                            PayType = 1;
+                            /* 获取初始化数据 */
+                            var datas = $util.setUserInfo (response);
+                            var userInfo = $util.getUserInfo ();
+                            console.log (userInfo);
+                            if (userInfo.error != '0') {
+                                //alert (userInfo.info);
+                                $scope.errorInfo = userInfo.info;
+                                $rootScope.errorInfo();
+                            }
+                            else {
+                                //初始化
+                                if (userInfo.error == '2301') {
+                                    $scope.errorInfo = userInfo.info;
+                                    $scope.errorInfo();
+                                }
+                                else {
+                                    $scope.goToExchange3D = function () {
+                                        $state.go ('exchange-3');
+                                    };
+                                    $scope.goToExchange5D = function () {
+                                        $state.go ('exchange-5');
+                                    };
+                                    $scope.goToExchangeBigLotto2 = function (status) {
+                                        $rootScope.newStatus = status;
+                                        $state.go ('BigLotto-2', {
+                                            'flag2': 1
+                                        });
+                                    };
+                                    $scope.goToExchangeBigLotto3 = function (status) {//用户扫码进来 抵用券投注type=0
+                                        $rootScope.newStatus = status;
+                                        $state.go ('BigLotto-2');
+                                    };
+                                }
+                            }
+                            //console.log (response.data);
+                        }, function (error) {
+                            alert ('加载失败，请检查网络')
+                        });
+                    //$state.go ('tab.account');
                 };
             };
         }
