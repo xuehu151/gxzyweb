@@ -26,19 +26,13 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
                     .then (function (response) {
                         console.log (response);
-//                if (response.error == '0') {
                         $scope.needExchangeAmount.amount = response.data.length;
                         console.log ($scope.needExchangeAmount.amount);
                         $rootScope.needExchangeItems = response.data;
-                        $scope.modal2.show ();
-//                }
-//                else {
-//                    $scope.error = response.info;
-//                    $timeout (function () {
-//                        $scope.modalError.show ();
-//                    }, 300);
-//                }
-            
+                        if (userInfo.data.voucher) {
+                            $scope.modal2.show ();
+                        }
+                        
                     }, function (error) {
                         alert (error);
                         $ionicLoading.hide ();
@@ -58,17 +52,12 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 'flag2' : 1
             });
         };
-    
-       /* //更新待兑换
-        var userInfo = $util.getUserInfo ();
         
-        */
-    
         $scope.goToExchange = function () {
 //            $state.go('scanCodeIndex');
             $scope.modal2.hide ();
         };
-    
+        
         //老用户获得彩票的mordal窗口配置
         $ionicModal.fromTemplateUrl ('templates/getOneBetModal.html', {
             scope : $scope,
@@ -82,7 +71,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
         $scope.cancelPop2 = function () {
             $scope.modal2.hide ();
         };
-    
+        
         //错误码窗口配置
         $ionicModal.fromTemplateUrl ('templates/errorPop.html', {
             scope : $scope,
