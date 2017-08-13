@@ -2,19 +2,21 @@
  * Created by admin on 2017/6/15.
  */
 angular.module('starter.AccountCtrl', ['starter.services'])
-    //账户页面
-    .controller('AccountCtrl', function($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading, $util, splitCode, $timeout) {
+//账户页面
+    .controller('AccountCtrl', function ($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading, $util, splitCode, $timeout, $location) {
         //验证是否资料完善
-       $ionicLoading.show ();
+        $ionicLoading.show();
         PayType = 1;
         var userInfo = $util.getUserInfo();
         var token = userInfo.data.token;
+        type = 1;
+        // console.info(type);
+        // console.info(sign);
         //更新余额
         getUser.getInfo(url + "/service/customer/getUser?token=" + token)
-            .then(function(response) {
+            .then(function (response) {
                 console.log(response.data);
-                if (response.error=='0')
-                {
+                if (response.error == '0') {
                     $scope.useableMoney = response.data.money;
                     // $scope.phone = response.data.phone;
                     $scope.frozedMoney = response.data.freeze;
@@ -30,31 +32,29 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         // disable: false
                     }];
 
-                    $ionicLoading.hide ();
+                    $ionicLoading.hide();
                 }
-                else
-                {
-                    $scope.error=response.info;
-                    $timeout(function() {
+                else {
+                    $scope.error = response.info;
+                    $timeout(function () {
                         $scope.modalError.show();
                     }, 400);
                 }
-            }, function(eror) {
+            }, function (eror) {
                 alert(error);
-                $ionicLoading.hide ();
+                $ionicLoading.hide();
             });
         var winItems = [];
-        var winAlertStatus = { first: false, second: false, third: false, forth: false } //最多四次弹窗
+        var winAlertStatus = {first: false, second: false, third: false, forth: false} //最多四次弹窗
         var haveShowAllWin = false;
         var nextShow = null; //定时器
 
-        $scope.needExchangeAmount = { amount: 0 };
+        $scope.needExchangeAmount = {amount: 0};
         //检测有无中奖
-        getUser.getInfo(url + "/service/lottery/getWinList?token=" + token+'&pageNum=1&pageSize=8')
-            .then(function(response) {
+        getUser.getInfo(url + "/service/lottery/getWinList?token=" + token + '&pageNum=1&pageSize=8')
+            .then(function (response) {
                 console.log(response);
-                if (response.error=='0')
-                {
+                if (response.error == '0') {
                     winItems = response.data;
 
                     if (winItems[0]) {
@@ -69,11 +69,10 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         $timeout.cancel(nextShow);
 
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
-                            .then(function(response) {
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
+                            .then(function (response) {
                                 console.log(response);
-                                if (response.error=='0')
-                                {
+                                if (response.error == '0') {
                                     $scope.needExchangeAmount.amount = response.data.length;
                                     console.log($scope.needExchangeAmount.amount);
 
@@ -81,32 +80,30 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                     $rootScope.needExchangeItems = response.data;
                                     // $scope.modal2.show();
                                 }
-                                else
-                                {
-                                    $scope.error=response.info;
-                                    $timeout(function() {
+                                else {
+                                    $scope.error = response.info;
+                                    $timeout(function () {
                                         $scope.modalError.show();
                                     }, 300);
                                 }
 
-                            }, function(error) {
+                            }, function (error) {
                                 alert(error);
-                                $ionicLoading.hide ();
+                                $ionicLoading.hide();
                             });
                     }
                 }
-                else
-                {
-                    $scope.error=response.info;
-                    $timeout(function() {
+                else {
+                    $scope.error = response.info;
+                    $timeout(function () {
                         $scope.modalError.show();
                     }, 400);
                 }
-            }, function(error) {
+            }, function (error) {
                 alert(error);
-                $ionicLoading.hide ();
+                $ionicLoading.hide();
             });
-        $scope.withdrawConfirm = function() {
+        $scope.withdrawConfirm = function () {
             var userData = userInfo.data.user;
             if (userData.wechat || userData.alipay || userData.bankNo) {
                 $scope.modal.show();
@@ -115,43 +112,43 @@ angular.module('starter.AccountCtrl', ['starter.services'])
             }
         };
         //冻结金额的解释
-        $scope.toggleShowAnswer = function() {
+        $scope.toggleShowAnswer = function () {
             $scope.showAnswer = !$scope.showAnswer;
         };
         $scope.showAnswer = false;
         //未兑换
         $scope.haventExchange = true;
-        $scope.toNeedExchange = function() {
+        $scope.toNeedExchange = function () {
             PayType = 1;
             $state.go('needExchange')
         };
         //转到奖金纪录页面
-        $scope.toPrizeRecords = function() {
+        $scope.toPrizeRecords = function () {
             $state.go('prizeRecords')
         };
         //转到全部订单页面
-        $scope.toAllOrders = function() {
+        $scope.toAllOrders = function () {
             $state.go('allOrders')
         };
         //转到提现明细页面
-        $scope.toWidthdrawRecords = function() {
+        $scope.toWidthdrawRecords = function () {
             $state.go('widthdrawRecords')
         };
         //提现框的mordal窗口配置
         $ionicModal.fromTemplateUrl('accountModal.html', {
             scope: $scope,
             backdropClickToClose: true
-        }).then(function(modal) {
+        }).then(function (modal) {
             $scope.modal = modal;
         });
-        $scope.openModal = function() {
+        $scope.openModal = function () {
             $scope.modal.show();
         };
-        $scope.closeModal = function() {
+        $scope.closeModal = function () {
             $scope.modal.hide();
         };
         //转到提现页面
-        $scope.toWidthdraw = function(channel) {
+        $scope.toWidthdraw = function (channel) {
             $rootScope.channel = channel;
             $scope.modal.hide();
             $state.go('widthdraw')
@@ -160,16 +157,16 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         $ionicModal.fromTemplateUrl('templates/getOneBetModal.html', {
             scope: $scope,
             backdropClickToClose: true
-        }).then(function(modal) {
+        }).then(function (modal) {
             $scope.modal2 = modal;
         });
-        $scope.openPop2 = function() {
+        $scope.openPop2 = function () {
             $scope.modal2.show();
         };
-        $scope.cancelPop2 = function() {
+        $scope.cancelPop2 = function () {
             $scope.modal2.hide();
         };
-        $scope.goToExchange = function() {
+        $scope.goToExchange = function () {
             $state.go('scanCodeIndex');
             $scope.modal2.hide();
         };
@@ -177,15 +174,15 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         $ionicModal.fromTemplateUrl('accountModalGetPrize.html', {
             scope: $scope,
             backdropClickToClose: true
-        }).then(function(modal) {
+        }).then(function (modal) {
             $scope.modal3 = modal;
         });
-        $scope.openPop3 = function() {
+        $scope.openPop3 = function () {
             $scope.modal3.show();
         };
-        $scope.cancelPop3 = function() {
+        $scope.cancelPop3 = function () {
             $scope.modal3.hide();
-            nextShow = $timeout(function() {
+            nextShow = $timeout(function () {
                 if (winAlertStatus.first == true && winAlertStatus.second == false && winAlertStatus.third == false && winAlertStatus.forth == false && winItems[1]) {
                     $scope.winamt = winItems[1].winamt;
                     $scope.wareIssue = winItems[1].wareIssue;
@@ -199,10 +196,9 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     } else if (!winItems[1]) {
                         $timeout.cancel(nextShow);
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
-                            .then(function(response) {
-                                if (response.error=='0')
-                                {
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
+                            .then(function (response) {
+                                if (response.error == '0') {
                                     $scope.needExchangeAmount.amount = response.data.length;
                                     console.log($scope.needExchangeAmount.amount);
 
@@ -211,17 +207,16 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         $scope.modal2.show();
                                     }
                                 }
-                                else
-                                {
-                                    $scope.error=response.info;
-                                    $timeout(function() {
+                                else {
+                                    $scope.error = response.info;
+                                    $timeout(function () {
                                         $scope.modalError.show();
                                     }, 300);
                                 }
 
-                            }, function(error) {
+                            }, function (error) {
                                 alert(error);
-                                $ionicLoading.hide ();
+                                $ionicLoading.hide();
                             });
                     }
                 } else if (winAlertStatus.first == true && winAlertStatus.second == true && winAlertStatus.third == false && winAlertStatus.forth == false && winItems[2]) {
@@ -236,10 +231,9 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     } else if (!winItems[2]) {
                         $timeout.cancel(nextShow);
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
-                            .then(function(response) {
-                                if (response.error=='0')
-                                {
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
+                            .then(function (response) {
+                                if (response.error == '0') {
                                     $scope.needExchangeAmount.amount = response.data.length;
                                     console.log($scope.needExchangeAmount.amount);
 
@@ -248,14 +242,13 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         $scope.modal2.show();
                                     }
                                 }
-                                else
-                                {
-                                    $scope.error=response.info;
-                                    $timeout(function() {
+                                else {
+                                    $scope.error = response.info;
+                                    $timeout(function () {
                                         $scope.modalError.show();
                                     }, 300);
                                 }
-                            }, function() {
+                            }, function () {
                                 alert('网络异常,未获取到用户信息')
                             });
                     }
@@ -271,10 +264,9 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         $timeout.cancel(nextShow);
 
                         //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token+'&pageNum=1&pageSize=8')
-                            .then(function(response) {
-                                if (response.error=='0')
-                                {
+                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
+                            .then(function (response) {
+                                if (response.error == '0') {
                                     $scope.needExchangeAmount.amount = response.data.length;
                                     console.log($scope.needExchangeAmount.amount);
 
@@ -283,16 +275,15 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         $scope.modal2.show();
                                     }
                                 }
-                                else
-                                {
-                                    $scope.error=response.info;
-                                    $timeout(function() {
+                                else {
+                                    $scope.error = response.info;
+                                    $timeout(function () {
                                         $scope.modalError.show();
                                     }, 300);
                                 }
-                            }, function(error) {
+                            }, function (error) {
                                 alert(error);
-                                $ionicLoading.hide ();
+                                $ionicLoading.hide();
                             });
                     }
                     console.log($scope.investCode);
@@ -303,13 +294,13 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         $ionicModal.fromTemplateUrl('widthdrawCompleteInfo.html', {
             scope: $scope,
             backdropClickToClose: true
-        }).then(function(modal) {
+        }).then(function (modal) {
             $scope.modal4 = modal;
         });
-        $scope.cancelPop4 = function() {
+        $scope.cancelPop4 = function () {
             $scope.modal4.hide();
         };
-        $scope.toCompeleteInfo = function() {
+        $scope.toCompeleteInfo = function () {
             $state.go('completeInfo');
             $scope.modal4.hide();
         };
@@ -318,10 +309,10 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         $ionicModal.fromTemplateUrl('templates/errorPop.html', {
             scope: $scope,
             backdropClickToClose: true
-        }).then(function(modal) {
+        }).then(function (modal) {
             $scope.modalError = modal;
         });
-        $scope.cancelPopError = function() {
+        $scope.cancelPopError = function () {
             $scope.modalError.hide();
         };
     });

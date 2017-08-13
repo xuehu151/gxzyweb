@@ -64,6 +64,9 @@ angular.module('starter.services', [])
         return {
             getWareIssue: function(data, token) {
                 return $util.httpPostRequest($util.getHttpURL().getWareIssueUrl + '?token=' + token, data);
+            },
+            getWinamt: function(data, token) {
+                return $util.httpPostRequest($util.getHttpURL().getWinamtUrl + '?token=' + token, data);
             }
         };
     })
@@ -87,13 +90,13 @@ angular.module('starter.services', [])
                     var i = 1; //element是ul
                     var length = element[0].children.length;
                     var widthwindow = $window.innerWidth - 20;
-                    var firstwidth = element[0].children[0].children[0].offsetWidth;
-                    setInterval(function() {
+                    // var firstwidth = element[0].children[0].children[0].offsetWidth;
+                    var timer = setInterval(function() {
                         if (i == length) {
                             i = 0; //初始位置
                             element[0].style.top = "0px";
                         }
-                        var topscorll = -(i * 25);
+                        var topscorll = -(i * 23);
                         var widthself = element[0].children[i].children[0].offsetWidth; //widthself：292
 
                         feeltoTop(topscorll);
