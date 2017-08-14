@@ -128,7 +128,7 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                                         .then(function (response) {
                                             // console.info(response.data);
                                             $scope.winningShow = response.data;
-                                            
+                                            console.info( $scope.winningShow);
                                             //上下滚动效果
                                             slide (document.getElementsByTagName ('ul')[0]);
                                             function slide (parent) {
