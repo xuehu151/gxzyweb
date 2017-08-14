@@ -129,25 +129,6 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                                             // console.info(response.data);
                                             $scope.winningShow = response.data;
                                             
-                                            var iphone = null;
-                                            for (var i = 0; i < $scope.winningShow.length; i++) {
-                                                for(var j=0; j < $scope.winningShow[i].length; j++){
-                                                  /*  if($scope.winningShow[i][0] == 2){
-                                                        $scope.LottoId = '大乐透65555';
-                                                    }
-                                                    else if($scope.winningShow[i][0] == 40){
-                                                        $scope.LottoId = '排列5';
-                                                    }
-                                                    else if($scope.winningShow[i][0] == 31){
-                                                        $scope.LottoId = '排列3';
-                                                    }*/
-                                                    $scope.winnerMoney = $scope.winningShow[i][1];
-                                                    $scope.iphoneId = $scope.winningShow[i][2];
-                                                    
-                                                    //console.info($scope.winningShow[i][j]);
-                                                }
-                                                //console.info ($scope.winningShow[i]);
-                                            }
                                             //上下滚动效果
                                             slide (document.getElementsByTagName ('ul')[0]);
                                             function slide (parent) {

@@ -111,7 +111,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 }
 
 .notice-text .icon-notice{
-    width: 10%;
+    width: 7%;
     height: 50px;
     line-height: 50px;
     text-align: center;
@@ -135,8 +135,8 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 
 .notice-text i{
     color: white;
-    margin-left: 10px;
-    font-size: x-large;
+    margin-left: 5px;
+    font-size: large;
 }
 
 .tips-img{

@@ -28,13 +28,6 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                         // console.info(response.data);
                         $scope.winningShow = response.data;
             
-                        var iphone = null;
-                        for (var i = 0; i < $scope.winningShow.length; i++) {
-                            for(var j=0; j < $scope.winningShow[i].length; j++){
-                                $scope.winnerMoney = $scope.winningShow[i][1];
-                                $scope.iphoneId = $scope.winningShow[i][2];
-                            }
-                        }
                         //上下滚动效果
                         slide (document.getElementsByTagName ('ul')[0]);
                         function slide (parent) {
