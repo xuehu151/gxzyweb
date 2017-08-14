@@ -5,29 +5,18 @@
             <div class="icon-notice">
                 <i class="ion-volume-high"></i>
             </div>
-            <div class="notice-warp">
-                <ul class="slideTopbox " slide-scroll  style="top: 0"><!-- ng-repeat="winning in winningShow"-->
-                    <li class="row">
-                        <div class="col col-50"><span>135****4647</span>中<span>排列3</span><span>3,173</span>元</div>
-                        <div class="col col-50"><span>159****4559</span>中<span>大乐透</span>,<span>200</span>元</div>
-                    </li>
-                    <li class="row">
-                        <div class="col col-50"><span>135****4647</span>中<span>排列3</span><span>3,173</span>元</div>
-                        <div class="col col-50"><span>159****4559</span>中<span>大乐透</span>,<span>200</span>元</div>
-                    </li>
-                    <li class="row">
-                        <div class="col col-50"><span>135****4647</span>中<span>排列3</span><span>3,173</span>元</div>
-                        <div class="col col-50"><span>159****4559</span>中<span>大乐透</span>,<span>200</span>元</div>
-                    </li>
-                    <li class="row">
-                        <div class="col col-50"><span>135****4647</span>中<span>排列3</span><span>3,173</span>元</div>
-                        <div class="col col-50"><span>159****4559</span>中<span>大乐透</span>,<span>200</span>元</div>
-                    </li>
-                    <li class="row">
-                        <div class="col col-50"><span>135****4647</span>中<span>排列3</span><span>3,173</span>元</div>
-                        <div class="col col-50"><span>159****4559</span>中<span>大乐透</span>,<span>200</span>元</div>
-                    </li>
-                </ul>
+            <div style="float: left;padding-left:5px;width: 90%; margin-left: 10%; height: 50px;overflow: hidden">
+                <div class="slide">
+                    <ul class="slideUl">
+                        <!-- 指令 -->
+                        <li ng-repeat="winning in winningShow track by $index" ng-show="winning[0] == 2?LottoId='大乐透':winning[0] == 31?LottoId='排列3':LottoId='排列5'">
+                            <div class="row">
+                                <div class="col col-50"><span >{{iphoneId}}</span>中<span>{{LottoId}}</span>,<span>{{winning[1]}}</span>元</div>
+                                <div class="col col-50"><span >{{iphoneId}}</span>中<span>{{LottoId}}</span>,<span>{{winning[1]}}</span>元</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 

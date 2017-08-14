@@ -120,31 +120,14 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     /*background: #ff5642;*/
 }
 
-.notice-text .notice-warp{
-    width: 90%;
-    height: 50px;
-    line-height: 23px;
-    padding: 0 5px;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 10%;
-    /*background: #ff53ed;*/
-}
-
-.notice-warp .slideTopbox {
-    width: 100%;
-    z-index: 99;
-    position: absolute;
-    top: 0;
-    color: #000;
-}
-
 .notice-warp .row{
-    /*padding: 2px 0 2px 0 ;*/
+    padding: 2px 0 2px 0 ;
 }
 
-.notice-warp .col-50{
+.slide li{
+    height: 23px;
+}
+.slide .col-50{
     padding: 0;
     font-size: 12px;
     color: white;

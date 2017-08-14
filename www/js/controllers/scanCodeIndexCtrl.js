@@ -6,7 +6,7 @@ var url = "http://lottery.zhenlong.wang";
 //扫码兑换首页
 angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
     
-    .controller ('scanCodeIndexCtrl', function ($scope, $state, getUser, $util, $ionicModal, $rootScope, initDataService, $ionicLoading, $timeout) {
+    .controller ('scanCodeIndexCtrl', function ($scope, $state, getUser, $util, $ionicModal, $rootScope, initDataService, $ionicLoading, $timeout, getWareIssueService) {
         PayType = 0;
         
         var data = {
@@ -22,8 +22,75 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 console.log (userInfo);
                 var token = userInfo.data.token;
                 $scope.needExchangeAmount = { amount : 0 };
-                console.info (userInfo);
-                getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
+    
+                getWareIssueService.getWinamt(data, userInfo.data.token)
+                    .then(function (response) {
+                        // console.info(response.data);
+                        $scope.winningShow = response.data;
+            
+                        var iphone = null;
+                        for (var i = 0; i < $scope.winningShow.length; i++) {
+                            for(var j=0; j < $scope.winningShow[i].length; j++){
+                                $scope.winnerMoney = $scope.winningShow[i][1];
+                                $scope.iphoneId = $scope.winningShow[i][2];
+                            }
+                        }
+                        //上下滚动效果
+                        slide (document.getElementsByTagName ('ul')[0]);
+                        function slide (parent) {
+                            setTimeout (function () {
+                                var className = $ ("." + parent.className);
+                    
+                                var i = 0, sh;
+                                var liLength = className.children ("li").length;
+                                var liHeight = className.children ("li").height () + parseInt (className.children ("li").css ('border-bottom-width'));
+                                className.html (className.html () + className.html ());
+                    
+                                // 开启定时器
+                                sh = setInterval (slide, 3000);
+                                function slide () {
+                                    if (parseInt (className.css ("margin-top")) > (-liLength * liHeight)) {
+                                        i++;
+                                        className.animate ({
+                                            marginTop : -liHeight * i + "px"
+                                        }, "slow");
+                                    }
+                                    else {
+                                        i = 0;
+                                        className.css ("margin-top", "0px");
+                                    }
+                                }
+                                // 清除定时器
+                                className.hover (function () {
+                                    clearInterval (sh);
+                                }, function () {
+                                    clearInterval (sh);
+                                    sh = setInterval (slide, 3000);
+                                });
+                            }, 0);
+                        }
+    
+                        getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
+                            .then (function (response) {
+                                console.log (response);
+                                $scope.needExchangeAmount.amount = response.data.length;
+                                console.log ($scope.needExchangeAmount.amount);
+                                $rootScope.needExchangeItems = response.data;
+                                if (userInfo.data.voucher) {
+                                    $scope.modal2.show ();
+                                }
+            
+                            }, function (error) {
+                                alert (error);
+                                $ionicLoading.hide ();
+                            });
+                        
+                        
+                    }, function (error) {
+                        alert('数据获取失败!');
+                    });
+                
+                /*getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
                     .then (function (response) {
                         console.log (response);
                         $scope.needExchangeAmount.amount = response.data.length;
@@ -36,7 +103,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                     }, function (error) {
                         alert (error);
                         $ionicLoading.hide ();
-                    });
+                    });*/
             }, function (response) {
                 alert ("初始化数据失败");
             });

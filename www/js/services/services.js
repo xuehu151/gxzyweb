@@ -81,43 +81,6 @@ angular.module('starter.services', [])
         };
     })
 
-    .directive('slideScroll', function($window, $timeout) {
-        return {
-            restrict: 'AE',
-            link: function(scope, element, attr) {
-                var itsWatch = scope.$watch("its", function(newvalue, oldvalue) {
-                    itsWatch();
-                    var i = 1; //element是ul
-                    var length = element[0].children.length;
-                    var widthwindow = $window.innerWidth - 20;
-                    // var firstwidth = element[0].children[0].children[0].offsetWidth;
-                    var timer = setInterval(function() {
-                        if (i == length) {
-                            i = 0; //初始位置
-                            element[0].style.top = "0px";
-                        }
-                        var topscorll = -(i * 23);
-                        var widthself = element[0].children[i].children[0].offsetWidth; //widthself：292
-
-                        feeltoTop(topscorll);
-                        i++;
-                    }, 3000);
-                    //向上滚动
-                    function feeltoTop(topscorll) { //console.log(topscorll):topscorll是top值
-                        var buchang = -10;
-                        var feelTimer = setInterval(function() {
-                            element[0].style.top = parseInt(element[0].style.top) + buchang + "px";
-                            if (parseInt(element[0].style.top) <= topscorll) {
-                                element[0].style.top = topscorll + "px";
-                                window.clearInterval(feelTimer);
-                            }
-                        }, 100);
-                    }
-                })
-            }
-        }
-    })
-
     //获取信息的http请求
     .factory('getUser', ['$http', '$q', function($http, $q) {
         var info = {};

@@ -32,7 +32,6 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                  },
                  timeout : 3000
                  })*/
-                alert(31335345);
                 var userToken = {
                     token: sign
                 };
@@ -45,7 +44,6 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                         var userInfo = $util.getUserInfo();
                         console.log(userInfo);
                         if (userInfo.error != '0') {
-                            //alert (userInfo.info);
                             $scope.errorInfo = userInfo.info;
                             $rootScope.errorInfo();
                         }
@@ -130,11 +128,62 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                                         .then(function (response) {
                                             // console.info(response.data);
                                             $scope.winningShow = response.data;
-
-
-
+                                            
+                                            var iphone = null;
+                                            for (var i = 0; i < $scope.winningShow.length; i++) {
+                                                for(var j=0; j < $scope.winningShow[i].length; j++){
+                                                  /*  if($scope.winningShow[i][0] == 2){
+                                                        $scope.LottoId = '大乐透65555';
+                                                    }
+                                                    else if($scope.winningShow[i][0] == 40){
+                                                        $scope.LottoId = '排列5';
+                                                    }
+                                                    else if($scope.winningShow[i][0] == 31){
+                                                        $scope.LottoId = '排列3';
+                                                    }*/
+                                                    $scope.winnerMoney = $scope.winningShow[i][1];
+                                                    $scope.iphoneId = $scope.winningShow[i][2];
+                                                    
+                                                    //console.info($scope.winningShow[i][j]);
+                                                }
+                                                //console.info ($scope.winningShow[i]);
+                                            }
+                                            //上下滚动效果
+                                            slide (document.getElementsByTagName ('ul')[0]);
+                                            function slide (parent) {
+                                                setTimeout (function () {
+                                                    var className = $ ("." + parent.className);
+            
+                                                    var i = 0, sh;
+                                                    var liLength = className.children ("li").length;
+                                                    var liHeight = className.children ("li").height () + parseInt (className.children ("li").css ('border-bottom-width'));
+                                                    className.html (className.html () + className.html ());
+            
+                                                    // 开启定时器
+                                                    sh = setInterval (slide, 3000);
+                                                    function slide () {
+                                                        if (parseInt (className.css ("margin-top")) > (-liLength * liHeight)) {
+                                                            i++;
+                                                            className.animate ({
+                                                                marginTop : -liHeight * i + "px"
+                                                            }, "slow");
+                                                        }
+                                                        else {
+                                                            i = 0;
+                                                            className.css ("margin-top", "0px");
+                                                        }
+                                                    }
+                                                    // 清除定时器
+                                                    className.hover (function () {
+                                                        clearInterval (sh);
+                                                    }, function () {
+                                                        clearInterval (sh);
+                                                        sh = setInterval (slide, 3000);
+                                                    });
+                                                }, 0);
+                                            }
                                         }, function (error) {
-
+                                            alert('数据获取失败!');
                                         });
 
                                     if (userInfo.error != '0') {

@@ -4,34 +4,26 @@
             <a href="#/tab/exchange" class="button button-icon ion-ios-arrow-left" style="font-size: 1.5em;line-height: 31px;"></a>
         </ion-nav-buttons>
     </ion-nav-bar>-->
-    <div class="bar notice-text">
+    <div class="bar notice-text" style="padding: 0;">
         <div class="icon-notice">
             <i class="ion-volume-high"></i>
         </div>
-        <div class="notice-warp">
-            <div class="slideTopbox " slide-scroll style="top: 0">
-                <div class="row">
-                    <div class="col col-50">135****4647中排列3,173元</div>
-                    <div class="col col-50">159****4559中大乐透,200元</div>
-                </div>
-                <div class="row">
-                    <div class="col col-50">135****4647中排列3,173元</div>
-                    <div class="col col-50">159****4559中大乐透,200元</div>
-                </div>
-                <div class="row">
-                    <div class="col col-50">135****4647中排列3,173元</div>
-                    <div class="col col-50">159****4559中大乐透,200元</div>
-                </div>
-                <div class="row">
-                    <div class="col col-50">135****4647中排列3,173元</div>
-                    <div class="col col-50">159****4559中大乐透,200元</div>
-                </div>
+        <div style="float: left;padding-left:5px;width: 90%; margin-left: 10%; height: 50px;overflow: hidden">
+            <div class="slide">
+                <ul class="slideUl">
+                    <!-- 指令 -->
+                    <li ng-repeat="winning in winningShow track by $index" ng-show="winning[0] == 2?LottoId='大乐透':winning[0] == 31?LottoId='排列3':LottoId='排列5'">
+                        <div class="row">
+                            <div class="col col-50"><span >{{iphoneId}}</span>中<span>{{LottoId}}</span>,<span>{{winning[1]}}</span>元</div>
+                            <div class="col col-50"><span >{{iphoneId}}</span>中<span>{{LottoId}}</span>,<span>{{winning[1]}}</span>元</div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+
     <ion-content class="warp-bg padding paddingTop">
-
-
         <div class="list list-marginTop">
             <a class="item item-thumbnail-left" href="" ng-click="goToExchange3D()">
                 <img src="./img/exchange3.png" alt="">
