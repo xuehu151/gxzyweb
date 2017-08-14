@@ -16,8 +16,14 @@
                         ng-repeat="winning in winningShow track by $index"
                         ng-show="winning.lotteryID == 2?LottoId='大乐透':winning.lotteryID == 31?LottoId='排列3':LottoId='排列5'">
                         <div class="row">
-                            <div class="col col-50"><span >{{winning.phone}}</span>中<span>{{LottoId}}</span>,<span>{{winning.winamt}}</span>元</div>
-                            <div class="col col-50"><span >{{winning.phone}}</span>中<span>{{LottoId}}</span>,<span>{{winning.winamt}}</span>元</div>
+                            <div class="col"><span >{{winning.phone}}</span>中<span>{{LottoId}}</span>,<span>{{winning.winamt }}</span>元</div>
+                        </div>
+                    </li>
+                    <li
+                        ng-repeat="winning in winningShow track by $index"
+                        ng-show="winning.lotteryID == 2?LottoId='大乐透':winning.lotteryID == 31?LottoId='排列3':LottoId='排列5'">
+                        <div class="row">
+                            <div class="col"><span >{{winning.phone}}</span>中<span>{{LottoId}}</span>,<span>{{winning.winamt }}</span>元</div>
                         </div>
                     </li>
                 </ul>
