@@ -7,7 +7,7 @@
     </div>
     <ion-content scroll="true" class="all-orders" has-bouncing="true" delegate-handle="mainScroll">
     <ion-list class="all-orders-list" ng-if="selectIndex==0">
-      <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in allOrders">
+      <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in vm.allOrders">
         <ion-item class="f13 padding-h8">
           <span ng-cloak>
               {{order.lotteryID}}
@@ -42,7 +42,7 @@
       <ion-infinite-scroll ng-if="vm.moredata" on-infinite="vm.loadMore()" distance="1%"></ion-infinite-scroll>
     </ion-list>
     <ion-list class="all-orders-list" ng-if="selectIndex==1">
-      <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[0]">
+      <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in havenot.allOrders">
         <ion-item class="f13 padding-h8">
           <span ng-cloak>
                        {{order.lotteryID}}
@@ -80,10 +80,10 @@
           兑换多多才会中奖多多哦~~
         </p>
       </div>
-      <ion-infinite-scroll ng-if="vm.moredata" on-infinite="vm.loadMore()" distance="1%"></ion-infinite-scroll>
+      <ion-infinite-scroll ng-if="havenot.moredata" on-infinite="havenot.loadMore()" distance="1%"></ion-infinite-scroll>
     </ion-list>
     <ion-list class="all-orders-list" ng-if="selectIndex==2">
-      <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[1]">
+      <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in havewin.allOrders">
         <ion-item class="f13 padding-h8">
           <span ng-cloak>
                        {{order.lotteryID}}
@@ -121,10 +121,10 @@
           兑换多多才会中奖多多哦~~
         </p>
       </div>
-      <ion-infinite-scroll ng-if="vm.moredata" on-infinite="vm.loadMore()" distance="1%"></ion-infinite-scroll>
+      <ion-infinite-scroll ng-if="havewin.moredata" on-infinite="havewin.loadMore()" distance="1%"></ion-infinite-scroll>
     </ion-list>
     <ion-list class="all-orders-list" ng-if="selectIndex==3">
-      <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in variOrders[2]">
+      <div class="each-order" ng-click="toOrderDetail(order)" ng-repeat="order in havefail.allOrders">
         <ion-item class="f13 padding-h8">
           <span ng-cloak>
              {{order.lotteryID}}
@@ -162,7 +162,7 @@
           兑换多多才会中奖多多哦~~
         </p>
       </div>
-      <ion-infinite-scroll ng-if="vm.moredata" on-infinite="vm.loadMore()" distance="1%"></ion-infinite-scroll>
+      <ion-infinite-scroll ng-if="havefail.moredata" on-infinite="havefail.loadMore()" distance="1%"></ion-infinite-scroll>
     </ion-list>
 
   </ion-content>

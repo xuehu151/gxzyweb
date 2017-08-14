@@ -185,7 +185,7 @@ angular.module('starter.services', [])
                         obj[i].RT = '¥' + obj[i].money;
                     }
                     // console.log(obj[i])
-                    arr2.push(obj[i]);
+                    // arr2.push(obj[i]);
                 } else if (obj[i].status == 4) {
 
                     obj[i].whetherRed = true;
@@ -198,7 +198,7 @@ angular.module('starter.services', [])
                         obj[i].RT = '¥' + obj[i].money;
                     }
                     // console.log(obj[i])
-                    arr3.push(obj[i]);
+                    // arr3.push(obj[i]);
                 } else if (obj[i].status == -1) {
                     obj[i].whetherRed = false;
                     obj[i].status = '兑换超时';
@@ -221,10 +221,11 @@ angular.module('starter.services', [])
                         obj[i].RT = ' ¥' + obj[i].money;
                     }
                     // console.log(obj[i])
-                    arr4.push(obj[i]);
+                    // arr4.push(obj[i]);
                 }
             }
-            return [arr2, arr3, arr4]
+            // return [arr2, arr3, arr4]
+            return obj;
         }
         return orders;
     }])

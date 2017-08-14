@@ -111,7 +111,11 @@
                     </div>
                     <div class="account-modal3-style2">
                         <span class="fl">获赠号码:</span>
-                        <i ng-cloak ng-repeat="codeRed in investCode[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in investCode[1] track by $index" ng-if="investCode[1]" class="blue">{{codeBlue}}</i>
+                        <div class="fl">
+                            <span style="display: flex;" ng-repeat="eachBet in bettingTotal track by $index">
+                              <i ng-cloak ng-repeat="codeRed in eachBet[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in eachBet[1] track by $index" ng-if="eachBet[1]" class="blue">{{codeBlue}}</i>
+                            </span>
+                        </div>
                     </div>
                     <div class="account-modal3-style2">
                         <span class="fl">开奖号码:</span>

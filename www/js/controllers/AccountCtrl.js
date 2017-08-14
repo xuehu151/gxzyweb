@@ -33,9 +33,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         num: '(' + response.data.bankNo + ')'
                         // disable: false
                     }];
-
                     $ionicLoading.hide();
-
                 }
                 else {
                     $scope.error = response.info;
@@ -54,6 +52,8 @@ angular.module('starter.AccountCtrl', ['starter.services'])
 
         $scope.needExchangeAmount = {amount: 0};
         //检测有无中奖
+        var totalWinamt = 0;
+        var bettingEach = [];
         getUser.getInfo(url + "/service/lottery/getWinList?token=" + token + '&pageNum=1&pageSize=8')
 
             .then(function (response) {
@@ -61,40 +61,33 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                 if (response.error == '0') {
                     winItems = response.data;
 
-                    if (winItems[0]) {
-                        $scope.winamt = winItems[0].winamt;
+                    if (winItems[0] && !winItems[1]) {
+                        /*getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue='+winItems[0].wareIssue)
+                        .then(function (response) {
+                            console.log(response);
+                        },function (error) {
+                            console.log(error);
+                        });*/
+                        for (var i = 0; i < winItems[0].lotteryList.length; i++) {
+                            totalWinamt += winItems[0].lotteryList[i].winamt;
+                            console.log(winItems[0].lotteryList[i].winamt);
+
+                            bettingEach.push(splitCode.split(winItems[0].lotteryList[i].investCode))
+                            console.log(splitCode.split(winItems[0].lotteryList[i].investCode));
+                        }
+                        console.log(bettingEach);
+                        $scope.bettingTotal=bettingEach.concat();
+                        console.log($scope.bettingTotal);
+                        $scope.winamt = totalWinamt;
+                        console.log($scope.winamt);
                         $scope.wareIssue = winItems[0].wareIssue;
                         $scope.drawTime = winItems[0].drawTime;
-                        $scope.investCode = splitCode.split(winItems[0].investCode);
+                        $scope.investCode = splitCode.split(winItems[0].lotteryList[0].investCode) ;
                         console.log($scope.investCode);
                         winAlertStatus.first = true;
                         $scope.modal3.show();
-                    } else if (!winItems[0]) {
+                    } else if (!winItems[0] && !winItems[1]) {
                         $timeout.cancel(nextShow);
-
-                        //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
-
-                            .then(function (response) {
-                                console.log(response);
-                                if (response.error == '0') {
-                                    $scope.needExchangeAmount.amount = response.data.length;
-                                    console.log($scope.needExchangeAmount.amount);
-                                    $rootScope.needExchangeItems = response.data;
-                                    // $scope.modal2.show();
-
-                                }
-                                else {
-                                    $scope.error = response.info;
-                                    $timeout(function () {
-                                        $scope.modalError.show();
-                                    }, 300);
-                                }
-
-                            }, function (error) {
-                                alert(error);
-                                $ionicLoading.hide();
-                            });
                     }
                 }
                 else {
@@ -107,6 +100,32 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                 alert(error);
                 $ionicLoading.hide();
             });
+
+        //更新待兑换
+        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
+
+            .then(function (response) {
+                console.log(response);
+                if (response.error == '0') {
+                    $scope.needExchangeAmount.amount = response.data.length;
+                    console.log($scope.needExchangeAmount.amount);
+                    $rootScope.needExchangeItems = response.data;
+                    // $scope.modal2.show();
+
+                }
+                else {
+                    $scope.error = response.info;
+                    $timeout(function () {
+                        $scope.modalError.show();
+                    }, 300);
+                }
+
+            }, function (error) {
+                alert(error);
+                $ionicLoading.hide();
+            });
+
+
         $scope.withdrawConfirm = function () {
             var userData = userInfo.data.user;
             if (userData.wechat || userData.alipay || userData.bankNo) {
