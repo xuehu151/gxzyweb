@@ -62,29 +62,26 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     winItems = response.data;
 
                     if (winItems[0] && !winItems[1]) {
-                        /*getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue='+winItems[0].wareIssue)
+
+                        for (var i = 0; i < winItems[0].lotteryList.length; i++) {
+                            totalWinamt += winItems[0].lotteryList[i].winamt;
+                            bettingEach.push(splitCode.split(winItems[0].lotteryList[i].investCode))
+                        }
+                        $scope.bettingTotal=bettingEach.concat();
+                        $scope.winamt = totalWinamt;
+                        $scope.wareIssue = winItems[0].wareIssue;
+                        $scope.drawTime = winItems[0].drawTime;
+                        $scope.investCode = splitCode.split(winItems[0].lotteryList[0].investCode) ;
+                        winAlertStatus.first = true;
+
+                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue='+winItems[0].wareIssue)
                         .then(function (response) {
                             console.log(response);
                         },function (error) {
                             console.log(error);
-                        });*/
-                        for (var i = 0; i < winItems[0].lotteryList.length; i++) {
-                            totalWinamt += winItems[0].lotteryList[i].winamt;
-                            console.log(winItems[0].lotteryList[i].winamt);
+                        });
 
-                            bettingEach.push(splitCode.split(winItems[0].lotteryList[i].investCode))
-                            console.log(splitCode.split(winItems[0].lotteryList[i].investCode));
-                        }
-                        console.log(bettingEach);
-                        $scope.bettingTotal=bettingEach.concat();
-                        console.log($scope.bettingTotal);
-                        $scope.winamt = totalWinamt;
-                        console.log($scope.winamt);
-                        $scope.wareIssue = winItems[0].wareIssue;
-                        $scope.drawTime = winItems[0].drawTime;
-                        $scope.investCode = splitCode.split(winItems[0].lotteryList[0].investCode) ;
-                        console.log($scope.investCode);
-                        winAlertStatus.first = true;
+
                         $scope.modal3.show();
                     } else if (!winItems[0] && !winItems[1]) {
                         $timeout.cancel(nextShow);

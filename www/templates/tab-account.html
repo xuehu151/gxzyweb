@@ -103,16 +103,16 @@
                     <div class="account-modal3-style1">
                         奖金 <span ng-cloak>{{winamt | number:2}}元</span>
                     </div>
-                    <div class="account-modal3-style2" style="margin-top: 18px">
+                    <div class="account-modal3-style2" style="margin-top: 6px">
                         <span class="fl">期 数:</span><span ng-cloak>{{wareIssue}}</span>
                     </div>
                     <div class="account-modal3-style2">
                         <span class="fl">时 间:</span><span ng-cloak>{{drawTime}}</span>
                     </div>
-                    <div class="account-modal3-style2">
+                    <div class="account-modal3-style2 clearfix">
                         <span class="fl">获赠号码:</span>
-                        <div class="fl">
-                            <span style="display: flex;" ng-repeat="eachBet in bettingTotal track by $index">
+                        <div class="fl rowball-wrap">
+                            <span class="rowball" ng-repeat="eachBet in bettingTotal track by $index">
                               <i ng-cloak ng-repeat="codeRed in eachBet[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in eachBet[1] track by $index" ng-if="eachBet[1]" class="blue">{{codeBlue}}</i>
                             </span>
                         </div>
