@@ -17,7 +17,8 @@ angular.module ('starter.util', [])
             pl5AddUrl: ipUrl + '/service/lottery/pl5add', //排列5投注
             dltAddUrl: ipUrl + '/service/lottery/dltadd', //大乐透投注
             getWareIssueUrl: ipUrl + '/service/lottery/getWareIssue',   //获取期号
-            getHistoryUrl: ipUrl + '/service/lottery/getHistoryList'      //往期开奖
+            getHistoryUrl: ipUrl + '/service/lottery/getHistoryList' ,     //往期开奖
+            getWinamtUrl: ipUrl + '/service/lottery/getWinamt'   //用户中奖金额及手机号显示
         };
         return {
             /* 返回httpURL  */

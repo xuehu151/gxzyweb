@@ -3,48 +3,47 @@
  */
 var ipUrl = 'http://lottery.zhenlong.wang/service';
 //兑换
-angular.module ('starter.ExchangeCtrl', ['starter.services'])
+angular.module('starter.ExchangeCtrl', ['starter.services'])
 
-    .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService) {
+    .controller('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService, getWareIssueService) {
         $rootScope.newStatus = true;
-        $ionicLoading.show ({
+        $ionicLoading.show({
             template: 'Loading...'
         });
-        if ($location.search ().sign && $location.search ().type) {
-            sign = $location.search ().sign;
-            type = $location.search ().type;
+        if ($location.search().sign && $location.search().type) {
+            sign = $location.search().sign;
+            type = $location.search().type;
         }
-
         if (sign != undefined) {
             if (type == 0) {
                 //初始化用户接口
                 /*$http ({
-                    method : "POST",
-                    url : initUrlNew,
-                    data : {
-                        token : sign
-                    },
-                    transformRequest : function (obj) {
-                        var str = [];
-                        for (var s in obj) {
-                            str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
-                        }
-                        return str.join ("&");
-                    },
-                    timeout : 3000
-                })*/
-
+                 method : "POST",
+                 url : initUrlNew,
+                 data : {
+                 token : sign
+                 },
+                 transformRequest : function (obj) {
+                 var str = [];
+                 for (var s in obj) {
+                 str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
+                 }
+                 return str.join ("&");
+                 },
+                 timeout : 3000
+                 })*/
+                alert(31335345);
                 var userToken = {
                     token: sign
                 };
-                initDataService.initDataNew (userToken)
-                    .then (function (response) {
-                        $ionicLoading.hide ();
+                initDataService.initDataNew(userToken)
+                    .then(function (response) {
+                        $ionicLoading.hide();
                         PayType = 0;
                         /* 获取初始化数据 */
-                        var datas = $util.setUserInfo (response);
-                        var userInfo = $util.getUserInfo ();
-                        console.log (userInfo);
+                        var datas = $util.setUserInfo(response);
+                        var userInfo = $util.getUserInfo();
+                        console.log(userInfo);
                         if (userInfo.error != '0') {
                             //alert (userInfo.info);
                             $scope.errorInfo = userInfo.info;
@@ -52,7 +51,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         }
                         else {
                             if (!userInfo.data.user.realName) {
-                                modal ();
+                                modal();
                             }
 
                             //初始化
@@ -62,14 +61,14 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             }
                             else {
                                 $scope.goToExchange3D = function () {
-                                    $state.go ('exchange-3');
+                                    $state.go('exchange-3');
                                 };
                                 $scope.goToExchange5D = function () {
-                                    $state.go ('exchange-5');
+                                    $state.go('exchange-5');
                                 };
                                 $scope.goToExchangeBigLotto2 = function (status) {
                                     $rootScope.newStatus = status;
-                                    $state.go ('BigLotto-2', {
+                                    $state.go('BigLotto-2', {
                                         'flag2': 1
                                     });
                                 };
@@ -81,131 +80,138 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         }
                         //console.log (response.data);
                     }, function (error) {
-                        alert ('加载失败，请检查网络')
+                        alert('加载失败，请检查网络')
                     });
             }
             else if (type == 1) {
                 /*$http ({
-                    method : "POST",
-                    url : initUrl,
-                    data : {
-                        token : sign
-                    },
-                    transformRequest : function (obj) {
-                        var str = [];
-                        for (var s in obj) {
-                            str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
-                        }
-                        return str.join ("&");
-                    },
-                    timeout : 3000
-                })*/
+                 method : "POST",
+                 url : initUrl,
+                 data : {
+                 token : sign
+                 },
+                 transformRequest : function (obj) {
+                 var str = [];
+                 for (var s in obj) {
+                 str.push (encodeURIComponent (s) + "=" + encodeURIComponent (obj[s]));
+                 }
+                 return str.join ("&");
+                 },
+                 timeout : 3000
+                 })*/
 
                 var data = {
                     token: sign
                 };
-                initDataService.initData (data)   //index
-                    .then (function (response) {
-                        $ionicLoading.hide ();
+                initDataService.initData(data)   //index
+                    .then(function (response) {
+                        $ionicLoading.hide();
                         PayType = 0;
-                       /* if(response.error == '2301'){
-                            $scope.errorInfo = response.info+'16165165';
-                            $rootScope.errorInfo();
-                        }else*/
-                       if (response.error == '0') {
+                        if (response.error == '0') {
                             /* 获取初始化数据 */
-                            var datas = $util.setUserInfo (response);
-                            var userInfo = $util.getUserInfo ();
-                            console.log (userInfo);
-                            $state.go ('scanCodeIndex');
-                       }
-                       else {
-                           var userToken = {
-                               token : sign
-                           };
-                           initDataService.initDataNew (userToken)  //index1
-                               .then (function (response) {
-                                   $ionicLoading.hide ();
-                                   PayType = 1;
-                                   /* 获取初始化数据 */
-                                   var datas = $util.setUserInfo (response);
-                                   var userInfo = $util.getUserInfo ();
-                                   console.log (userInfo);
-                                   if (userInfo.error != '0') {
-                                       $scope.errorInfo = userInfo.info;
-                                       $rootScope.errorInfo ();
-                                   }
-                                   else {
-                                       //初始化
-                                       if (userInfo.error == '2301') {
-                                           $scope.errorInfo = userInfo.info;
-                                           $scope.errorInfo ();
-                                       }
-                                       else {
-                                           $scope.goToExchange3D = function () {
-                                               $state.go ('exchange-3');
-                                           };
-                                           $scope.goToExchange5D = function () {
-                                               $state.go ('exchange-5');
-                                           };
-                                           $scope.goToExchangeBigLotto2 = function (status) {
-                                               $rootScope.newStatus = status;
-                                               $state.go ('BigLotto-2', {
-                                                   'flag2' : 1
-                                               });
-                                           };
-                                           $scope.goToExchangeBigLotto3 = function (status) {//用户扫码进来 抵用券投注type=0
-                                               $rootScope.newStatus = status;
-                                               $state.go ('BigLotto-2');
-                                           };
-                                       }
-                                   }
-                                   //console.log (response.data);
-                               }, function (error) {
-                                   alert ('加载失败，请检查网络')
-                               });
-                           //$state.go ('tab.account');
-                       }
-                        /*if(userInfo.error != '0'){
-                            $scope.errorInfo = userInfo.info;
-                            $rootScope.errorInfo();
+                            var datas = $util.setUserInfo(response);
+                            var userInfo = $util.getUserInfo();
+                            console.log(userInfo);
+                            $state.go('scanCodeIndex');
                         }
                         else {
-                            if (!userInfo.data.user.realName) {
-                                modal ();
-                            }
-                            else {
-                                if(userInfo.data.error == '2301'){
-                                    $state.go ('scanCodeIndex');
-                                }else {
-                                    if($location.search ().sign && $location.search ().type){
-                                        $state.go ('tab.account');
-                                    }
-                                }
-                            }
+                            var userToken = {
+                                token: sign
+                            };
+                            initDataService.initDataNew(userToken)  //index1
+                                .then(function (response) {
+                                    $ionicLoading.hide();
+                                    PayType = 1;
+                                    /* 获取初始化数据 */
+                                    var datas = $util.setUserInfo(response);
+                                    var userInfo = $util.getUserInfo();
+                                    console.log(userInfo);
+                                    getWareIssueService.getWinamt(data, userInfo.data.token)
+                                        .then(function (response) {
+                                            // console.info(response.data);
+                                            $scope.winningShow = response.data;
 
-                            $scope.goToExchange3D = function () {
-                                $state.go ('exchange-3');
-                            };
-                            $scope.goToExchange5D = function () {
-                                $state.go ('exchange-5');
-                            };
-                            $scope.goToExchangeBigLotto2 = function (status) {
-                                $rootScope.newStatus = status;
-                                $state.go ('BigLotto-2', {
-                                    'flag2': 1
+
+
+                                        }, function (error) {
+
+                                        });
+
+                                    if (userInfo.error != '0') {
+                                        $scope.errorInfo = userInfo.info;
+                                        $rootScope.errorInfo();
+                                    }
+                                    else {
+                                        //初始化
+                                        if (userInfo.error == '2301') {
+                                            $scope.errorInfo = userInfo.info;
+                                            $scope.errorInfo();
+                                        }
+                                        else {
+                                            $scope.goToExchange3D = function () {
+                                                $state.go('exchange-3');
+                                            };
+                                            $scope.goToExchange5D = function () {
+                                                $state.go('exchange-5');
+                                            };
+                                            $scope.goToExchangeBigLotto2 = function (status) {
+                                                $rootScope.newStatus = status;
+                                                $state.go('BigLotto-2', {
+                                                    'flag2': 1
+                                                });
+                                            };
+                                            $scope.goToExchangeBigLotto3 = function (status) {//用户扫码进来 抵用券投注type=0
+                                                $rootScope.newStatus = status;
+                                                $state.go('BigLotto-2');
+                                            };
+                                        }
+                                    }
+                                    //console.log (response.data);
+                                }, function (error) {
+                                    alert('加载失败，请检查网络')
                                 });
-                            };
-                            $scope.goToExchangeBigLotto3 = function (status) {
-                                $rootScope.newStatus = status;
-                                if(response.data.user.money >= 2){
-                                    $state.go ('BigLotto-2');
-                                }else {
-                                    $scope.errorInfo = '大乐透只能选择2元的进行投注哦!';
-                                    $rootScope.errorInfo();
-                                }
-                            };
-                        }*/
+                            //$state.go ('tab.account');
+                        }
+                        /*if(userInfo.error != '0'){
+                         $scope.errorInfo = userInfo.info;
+                         $rootScope.errorInfo();
+                         }
+                         else {
+                         if (!userInfo.data.user.realName) {
+                         modal ();
+                         }
+                         else {
+                         if(userInfo.data.error == '2301'){
+                         $state.go ('scanCodeIndex');
+                         }else {
+                         if($location.search ().sign && $location.search ().type){
+                         $state.go ('tab.account');
+                         }
+                         }
+                         }
+
+                         $scope.goToExchange3D = function () {
+                         $state.go ('exchange-3');
+                         };
+                         $scope.goToExchange5D = function () {
+                         $state.go ('exchange-5');
+                         };
+                         $scope.goToExchangeBigLotto2 = function (status) {
+                         $rootScope.newStatus = status;
+                         $state.go ('BigLotto-2', {
+                         'flag2': 1
+                         });
+                         };
+                         $scope.goToExchangeBigLotto3 = function (status) {
+                         $rootScope.newStatus = status;
+                         if(response.data.user.money >= 2){
+                         $state.go ('BigLotto-2');
+                         }else {
+                         $scope.errorInfo = '大乐透只能选择2元的进行投注哦!';
+                         $rootScope.errorInfo();
+                         }
+                         };
+                         }*/
                     }, function (response) {
                         alert("初始化数据失败");
                     });
@@ -214,14 +220,14 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 return
             }
             //模态注册窗口
-            function modal () {
+            function modal() {
                 //注册信息模态窗口
-                $ionicModal.fromTemplateUrl ('templates/modal.html', {
+                $ionicModal.fromTemplateUrl('templates/modal.html', {
                     scope: $scope,
                     animation: '0'
                 })
-                    .then (function (modal) {
-                        modal.show ();
+                    .then(function (modal) {
+                        modal.show();
                         //$scope.modal = modal;
 
                         $scope.userInfo = {
@@ -231,24 +237,24 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         };
                         $scope.GetTickets = function () {  //领取彩票按钮
                             if ($scope.userInfo.newUserName == '') {
-                                var alertPopup = $ionicPopup.alert ({
+                                var alertPopup = $ionicPopup.alert({
                                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
                                     template: '<div class="alert-left"><p style="text-align: center">请填写个人真实姓名</p></div>',
                                     okText: '确 定',
                                     okType: 'button-light'
                                 });
                                 /*$cordovaToast
-                                    .show('ionic中文网', 'long', 'center')
-                                    .then(function(success) {
-                                        // success
-                                    }, function (error) {
-                                        // error
-                                    });*/
+                                 .show('ionic中文网', 'long', 'center')
+                                 .then(function(success) {
+                                 // success
+                                 }, function (error) {
+                                 // error
+                                 });*/
                                 //ionicToast.show('请填写个人真实姓名!', 'middle', false, 1000);
                                 return;
                             }
                             else if ($scope.userInfo.newUserIphone == '') {
-                                var alertPopup = $ionicPopup.alert ({
+                                var alertPopup = $ionicPopup.alert({
                                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
                                     template: '<div class="alert-left"><p style="text-align: center">请填写电话号码</p></div>',
                                     okText: '确 定',
@@ -257,8 +263,8 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                 //ionicToast.show('请填写电话号码!', 'middle', false, 1000);
                                 return;
                             }
-                            else if (parseInt ($scope.userInfo.newUserIphone) != parseInt ($scope.userInfo.newUserSure)) {
-                                var alertPopup = $ionicPopup.alert ({
+                            else if (parseInt($scope.userInfo.newUserIphone) != parseInt($scope.userInfo.newUserSure)) {
+                                var alertPopup = $ionicPopup.alert({
                                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
                                     template: '<div class="alert-left"><p style="text-align: center">电话号码不一致</p></div>',
                                     okText: '确 定',
@@ -268,13 +274,13 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                 return;
                             }
                             else {
-                                timePromise = $interval (function () {
-                                    modal.hide ();
+                                timePromise = $interval(function () {
+                                    modal.hide();
                                 }, 1000, 100);
                             }
 
-                            $ionicLoading.show ();
-                            $http ({
+                            $ionicLoading.show();
+                            $http({
                                 method: "POST",
                                 url: ipUrl + '/customer/add?token=' + userInfo.data.token,
                                 data: {
@@ -290,82 +296,82 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                              phone: $scope.userInfo.newUserIphone
                              };
                              getUserNameService.loginModal (data, userInfo.data.token)*/
-                                .then (function (response) {
-                                    $ionicLoading.hide ();
-                                    var userInfo = $util.getUserInfo ();
+                                .then(function (response) {
+                                    $ionicLoading.hide();
+                                    var userInfo = $util.getUserInfo();
                                     //数据更新
                                     userInfo.data.user.realName = $scope.userInfo.newUserName;
                                     userInfo.data.user.phone = $scope.userInfo.newUserIphone;
-                                    var datas = $util.setUserInfo (userInfo);
-                                    console.log (userInfo);
+                                    var datas = $util.setUserInfo(userInfo);
+                                    console.log(userInfo);
 
-                                    $state.go ("scanCodeIndex", {}, {reload: true});
+                                    $state.go("scanCodeIndex", {}, {reload: true});
                                 }, function (response) {
-                                    alert ('加载失败，请检查网络')
+                                    alert('加载失败，请检查网络')
                                 });
                         }
                     });
             }
 
             /*//错误码窗口配置
-            $rootScope.errorInfo = function () {
-                $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
-                    scope: $scope,
-                    backdropClickToClose: true
-                }).then(function(modal) {
-                    $scope.modalError = modal;
-                    modal.show ();
-                });
-                $scope.cancelPopError = function() {
-                    $scope.modalError.hide();
+             $rootScope.errorInfo = function () {
+             $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
+             scope: $scope,
+             backdropClickToClose: true
+             }).then(function(modal) {
+             $scope.modalError = modal;
+             modal.show ();
+             });
+             $scope.cancelPopError = function() {
+             $scope.modalError.hide();
 
-                    var userToken = {
-                        token: sign
-                    };
-                    initDataService.initDataNew (userToken)  //index1
-                        .then (function (response) {
-                            $ionicLoading.hide ();
-                            PayType = 1;
-                            /!* 获取初始化数据 *!/
-                            var datas = $util.setUserInfo (response);
-                            var userInfo = $util.getUserInfo ();
-                            console.log (userInfo);
-                            if (userInfo.error != '0') {
-                                $scope.errorInfo = userInfo.info;
-                                $rootScope.errorInfo();
-                            }
-                            else {
-                                //初始化
-                                if (userInfo.error == '2301') {
-                                    $scope.errorInfo = userInfo.info;
-                                    $scope.errorInfo();
-                                }
-                                else {
-                                    $scope.goToExchange3D = function () {
-                                        $state.go ('exchange-3');
-                                    };
-                                    $scope.goToExchange5D = function () {
-                                        $state.go ('exchange-5');
-                                    };
-                                    $scope.goToExchangeBigLotto2 = function (status) {
-                                        $rootScope.newStatus = status;
-                                        $state.go ('BigLotto-2', {
-                                            'flag2': 1
-                                        });
-                                    };
-                                    $scope.goToExchangeBigLotto3 = function (status) {//用户扫码进来 抵用券投注type=0
-                                        $rootScope.newStatus = status;
-                                        $state.go ('BigLotto-2');
-                                    };
-                                }
-                            }
-                            //console.log (response.data);
-                        }, function (error) {
-                            alert ('加载失败，请检查网络')
-                        });
-                    //$state.go ('tab.account');
-                };
-            };*/
+             var userToken = {
+             token: sign
+             };
+             initDataService.initDataNew (userToken)  //index1
+             .then (function (response) {
+             $ionicLoading.hide ();
+             PayType = 1;
+             /!* 获取初始化数据 *!/
+             var datas = $util.setUserInfo (response);
+             var userInfo = $util.getUserInfo ();
+             console.log (userInfo);
+             if (userInfo.error != '0') {
+             $scope.errorInfo = userInfo.info;
+             $rootScope.errorInfo();
+             }
+             else {
+             //初始化
+             if (userInfo.error == '2301') {
+             $scope.errorInfo = userInfo.info;
+             $scope.errorInfo();
+             }
+             else {
+             $scope.goToExchange3D = function () {
+             $state.go ('exchange-3');
+             };
+             $scope.goToExchange5D = function () {
+             $state.go ('exchange-5');
+             };
+             $scope.goToExchangeBigLotto2 = function (status) {
+             $rootScope.newStatus = status;
+             $state.go ('BigLotto-2', {
+             'flag2': 1
+             });
+             };
+             $scope.goToExchangeBigLotto3 = function (status) {//用户扫码进来 抵用券投注type=0
+             $rootScope.newStatus = status;
+             $state.go ('BigLotto-2');
+             };
+             }
+             }
+             //console.log (response.data);
+             }, function (error) {
+             alert ('加载失败，请检查网络')
+             });
+             //$state.go ('tab.account');
+             };
+             };*/
         }
         else {
             if (type == 0) {

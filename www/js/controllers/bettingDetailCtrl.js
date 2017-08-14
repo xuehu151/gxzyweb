@@ -14,6 +14,27 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
         $scope.totalMoney = $scope.sessionJsonWarp.length; //设置倍数及金额
         $scope.isDisabled = true;
         $scope.multiple = '1';
+        //是否追加  0未追加false   1 追加true
+        $scope.isSelected = {
+            checked: true
+        };
+        var addFlag = '1';
+        $scope.onchange = function () {
+            if ($scope.isSelected.checked == true) {
+                $scope.isSelected.checked = false;
+            }
+            else {
+                $scope.isSelected.checked = true;
+            }
+            // console.info($scope.isSelected.checked);
+            if($scope.isSelected.checked == false){
+                addFlag = '0';
+            }else {
+                addFlag = '1';
+            }
+            // console.info(addFlag);
+        };
+
         if ($rootScope.newStatus == '1') {
             $scope.countMoney = '2';
         }
@@ -21,9 +42,8 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
             $scope.countMoney = '3';
         }
         disabledBtnBigBitting ();
-        
+
         var PayTypeBig = null;
-        
         function disabledBtnBigBitting () {
             //判断用户要用什么来兑换彩票    余额 || 抵用券
             if (type == 0) {
@@ -53,14 +73,14 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                     okText : '确 定',
                     okType : 'button-light'
                 }).then (function () {
-                
+
                 });
             }
             else {
                 $scope.isDisabled = false;
             }
         }
-        
+
         //手动添加一组，返回大乐透选中页面
         $scope.manualAdd = function () {
             $state.go ('BigLotto-2');
@@ -198,9 +218,9 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                     for (var j in $scope.sessionJsonWarp[i]) {
                         for (var k in $scope.sessionJsonWarp[i][j]) {
                             if (typeof $scope.sessionJsonWarp[i][j][k] === 'object') {
-                                
+
                                 investCode += ',' + $scope.sessionJsonWarp[i][j][k].num;
-                                
+
                                 if (investCode.substr (0, 1) == ',') investCode = investCode.substr (1); //截取第一位逗号
                                 investCode = (investCode.substring (investCode.length - 1) == ',') ? investCode.substring (0, investCode.length - 1) : investCode; //截取最后一位逗号
                                 var get_array = investCode.split ('');
@@ -214,7 +234,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                     dataArrayBig.push (dataObj);
                     // console.log (dataArrayBig);
                 }
-                
+
                 var vid = '';
                 if (type == 0) {
                     if(userInfo.data.vouchers){
@@ -238,15 +258,16 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                         vid = userInfo.data.voucher.vid;
                     }
                 }
-                
+
                 var data = {
 //              "lotteryID": "2",
                     wareIssue : reques.wareIssue,
                     payType : PayType,
                     vid : vid,
-                    addFlag : "0",
+                    addFlag : addFlag,
                     data : dataArrayBig
                 };
+                console.log(data);
                 $http ({
                     method : "POST",
                     url : ipUrl + '/lottery/dltadd?token=' + userInfo.data.token,
@@ -257,7 +278,6 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                 })
                     .then (function (response) {
                         $ionicLoading.hide ();
-//                        console.log(data);
                         /*var alertPopup = $ionicPopup.alert ({
                          title : '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
                          template : '<div class="alert-left">' + '<p style="text-align: center;">' + response.data.info + '</p>' + '</div>',
@@ -267,7 +287,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                          .then (function () {
                          $state.go ('tab.account');
                          });*/
-                        
+
                         //提交成功窗口配置
                         $ionicModal.fromTemplateUrl ('templates/bigSubmission.html', {
                             scope : $scope,
@@ -282,7 +302,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                                 $scope.phones = userInfo.data.user.phone;
                                 $scope.receives = userInfo.data.user.updateDate; //获赠时间
                                 $scope.draw_time = reques.drawTime;//开奖时间
-                                
+
                                 $scope.receiveNum = [];
                                 var receiveNumArr = data.data;//获赠号码
                                 for (var i in receiveNumArr) {
@@ -291,7 +311,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                                     var receiveNumArray = receiveNum.split ('*');
                                     var receiveStr1 = receiveNumArray[0].split (',');
                                     var receiveStr2 = receiveNumArray[1].split (',');
-                                    
+
                                     receiveNumWarp.push (receiveStr1, receiveStr2);
                                     $scope.receiveNum.push (receiveNumWarp);
                                     // console.info($scope.receiveNum);
