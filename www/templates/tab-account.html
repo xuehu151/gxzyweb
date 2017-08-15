@@ -111,16 +111,18 @@
                     </div>
                     <div class="account-modal3-style2 clearfix">
                         <span class="fl">获赠号码:</span>
-                        <div class="fl rowball-wrap">
+                        <ion-scroll class="fl rowball-wrap" zooming="true" direction="y" overflow-scroll="true" scrollbar-y="true" >
+
                             <span class="rowball" ng-repeat="eachBet in bettingTotal track by $index">
                               <i ng-cloak ng-repeat="codeRed in eachBet[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in eachBet[1] track by $index" ng-if="eachBet[1]" class="blue">{{codeBlue}}</i>
                             </span>
-                        </div>
+                        </ion-scroll>
                     </div>
-                    <div class="account-modal3-style2">
+
+                    <div class="account-modal3-style2" style="margin-top: 0;">
                         <span class="fl">开奖号码:</span>
                         <span>
-                          <i ng-cloak ng-repeat="codeRed in investCode[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in investCode[1] track by $index" ng-if="investCode[1]" class="blue">{{codeBlue}}</i>
+                          <i ng-cloak ng-repeat="codeRed in result[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in result[1] track by $index" ng-if="result[1]" class="blue">{{codeBlue}}</i>
                         </span>
                     </div>
                     <div class="account-modal3-style3">*奖金已发送至奖金余额,请查收!</div>

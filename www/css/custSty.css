@@ -405,7 +405,7 @@ ion-item.f15 {
 
 .account-modal3 .modal3-title-img-wrap {
     position: absolute;
-    top: 20px;
+    top: 26px;
     left: 50%;
     -webkit-transform: translate(-50%, 0);
     -moz-transform: translate(-50%, 0);
@@ -438,7 +438,7 @@ ion-item.f15 {
 } */
 
 .account-modal3 .account-modal3-style1 {
-    /*width: 260px;*/
+    margin-top:10px;
     font-size: 13px;
     color: #666;
 }
@@ -458,7 +458,6 @@ ion-item.f15 {
 .account-modal3 .account-modal3-style2>.rowball-wrap {
     width: 170px;
     height: 70px;
-    overflow: auto;
 }
 
 .account-modal3 .account-modal3-style2>.rowball-wrap span.rowball {

@@ -145,16 +145,26 @@ angular.module('starter.services', [])
             if (investCode.length == 2) {
                 investCodeFormat[0] = investCode[0].split(',');
                 investCodeFormat[1] = investCode[1].split(',');
-            } else if (investCode.length == 3 || investCode.length == 5) {
+            } else if (investCode.length == 3 || investCode.length == 5 ) {
 
                 for (var i = 0; i < investCode.length; i++) {
                     investCode[i] = '0' + investCode[i]
                 }
                 investCodeFormat[0] = investCode;
             }
+            else if (investCode.length == 1)
+            {
+                var noUse = [];
+                noUse = investCode[0].split(',');
+                for (var i = 0; i < noUse.length; i++) {
+                    investCode[i] = '0' + noUse[i]
+                }
+                investCodeFormat[0] = investCode.concat();
+            }
             console.log(investCodeFormat);
             return investCodeFormat;
         };
+
         return code;
     }])
 

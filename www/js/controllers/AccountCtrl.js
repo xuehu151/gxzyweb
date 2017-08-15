@@ -52,8 +52,8 @@ angular.module('starter.AccountCtrl', ['starter.services'])
 
         $scope.needExchangeAmount = {amount: 0};
         //检测有无中奖
-        var totalWinamt = 0;
-        var bettingEach = [];
+        var totalWinamt = {first:0,second:0,third:0,forth:0};
+        var bettingEach = {first:[],second:[],third:[],forth:[]};   //每次弹框获得的奖金
         getUser.getInfo(url + "/service/lottery/getWinList?token=" + token + '&pageNum=1&pageSize=8')
 
             .then(function (response) {
@@ -61,29 +61,43 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                 if (response.error == '0') {
                     winItems = response.data;
 
-                    if (winItems[0] && !winItems[1]) {
+                    if (winItems[0]) {
 
                         for (var i = 0; i < winItems[0].lotteryList.length; i++) {
-                            totalWinamt += winItems[0].lotteryList[i].winamt;
-                            bettingEach.push(splitCode.split(winItems[0].lotteryList[i].investCode))
+                            totalWinamt.first += winItems[0].lotteryList[i].winamt;
+                            bettingEach.first.push(splitCode.split(winItems[0].lotteryList[i].investCode))
                         }
-                        $scope.bettingTotal=bettingEach.concat();
-                        $scope.winamt = totalWinamt;
+                        $scope.bettingTotal=bettingEach.first.concat();
+                        $scope.winamt = totalWinamt.first;
                         $scope.wareIssue = winItems[0].wareIssue;
                         $scope.drawTime = winItems[0].drawTime;
                         $scope.investCode = splitCode.split(winItems[0].lotteryList[0].investCode) ;
                         winAlertStatus.first = true;
 
-                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue='+winItems[0].wareIssue)
+                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue='+(winItems[0].wareIssue*1-1))
+                        // getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue=2017094')
                         .then(function (response) {
                             console.log(response);
+                            if (response.error == '0')
+                            {
+                                $scope.result=splitCode.split(response.data.result);
+                                console.log($scope.result);
+                            }
+                            else
+                            {
+                                $scope.error = response.info;
+                                $timeout(function () {
+                                    $scope.modalError.show();
+                                }, 400);
+                            }
                         },function (error) {
-                            console.log(error);
+                            alert(error);
+                            $ionicLoading.hide();
                         });
 
 
                         $scope.modal3.show();
-                    } else if (!winItems[0] && !winItems[1]) {
+                    } else if (!winItems[0]) {
                         $timeout.cancel(nextShow);
                     }
                 }
@@ -128,7 +142,8 @@ angular.module('starter.AccountCtrl', ['starter.services'])
             if (userData.wechat || userData.alipay || userData.bankNo) {
                 $scope.modal.show();
             } else {
-                $scope.modal4.show();
+                // $scope.modal4.show();
+                $scope.modal3.show();
             }
         };
         //冻结金额的解释
@@ -204,115 +219,102 @@ angular.module('starter.AccountCtrl', ['starter.services'])
             $scope.modal3.hide();
             nextShow = $timeout(function () {
                 if (winAlertStatus.first == true && winAlertStatus.second == false && winAlertStatus.third == false && winAlertStatus.forth == false && winItems[1]) {
-                    $scope.winamt = winItems[1].winamt;
-                    $scope.wareIssue = winItems[1].wareIssue;
-                    $scope.drawTime = winItems[1].drawTime;
-                    $scope.investCode = splitCode.split(winItems[1].investCode);
-                    winAlertStatus.second = true;
-                    console.log($scope.investCode);
-                    // $scope.modal3.show ();
-                    if (winItems[1]) {
+                    for (var i = 0; i < winItems[1].lotteryList.length; i++) {
+                            totalWinamt.second += winItems[1].lotteryList[i].winamt;
+                            bettingEach.second.push(splitCode.split(winItems[1].lotteryList[i].investCode))
+                        }
+                        $scope.bettingTotal=bettingEach.second.concat();
+                        $scope.winamt = totalWinamt.second;
+                        $scope.wareIssue = winItems[1].wareIssue;
+                        $scope.drawTime = winItems[1].drawTime;
+                        winAlertStatus.second = true;
+
+                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[1].lotteryID + '&wareIssue='+(winItems[1].wareIssue*1-1))
+                        // getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue=2017219')
+                        .then(function (response) {
+                            console.log(response);
+                            if (response.error == '0')
+                            {
+                                $scope.result=splitCode.split(response.data.result);
+                                console.log($scope.result);
+                            }
+                            else
+                            {
+                                $scope.error = response.info;
+                                $timeout(function () {
+                                    $scope.modalError.show();
+                                }, 400);
+                            }
+                        },function (error) {
+                            alert(error);
+                            $ionicLoading.hide();
+                        });
                         $scope.modal3.show();
-                    } else if (!winItems[1]) {
-                        $timeout.cancel(nextShow);
-                        //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
 
-                            .then(function (response) {
-                                if (response.error == '0') {
-                                    $scope.needExchangeAmount.amount = response.data.length;
-                                    console.log($scope.needExchangeAmount.amount);
-
-                                    if ($scope.needExchangeAmount.amount) {
-                                        $rootScope.needExchangeItems = response.data;
-                                        $scope.modal2.show();
-                                    }
-
-                                }
-                                else {
-                                    $scope.error = response.info;
-                                    $timeout(function () {
-                                        $scope.modalError.show();
-                                    }, 300);
-                                }
-
-                            }, function (error) {
-                                alert(error);
-                                $ionicLoading.hide();
-                            });
-                    }
                 } else if (winAlertStatus.first == true && winAlertStatus.second == true && winAlertStatus.third == false && winAlertStatus.forth == false && winItems[2]) {
-                    $scope.winamt = winItems[2].winamt;
-                    $scope.wareIssue = winItems[2].wareIssue;
-                    $scope.drawTime = winItems[2].drawTime;
-                    $scope.investCode = splitCode.split(winItems[2].investCode);
-                    winAlertStatus.third = true;
-                    console.log($scope.investCode);
-                    if (winItems[2]) {
+                    for (var i = 0; i < winItems[2].lotteryList.length; i++) {
+                            totalWinamt.third += winItems[2].lotteryList[i].winamt;
+                            bettingEach.third.push(splitCode.split(winItems[2].lotteryList[i].investCode))
+                        }
+                        $scope.bettingTotal=bettingEach.third.concat();
+                        $scope.winamt = totalWinamt.third;
+                        $scope.wareIssue = winItems[2].wareIssue;
+                        $scope.drawTime = winItems[2].drawTime;
+                        winAlertStatus.third = true;
+
+                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[2].lotteryID + '&wareIssue='+(winItems[2].wareIssue*1-1))
+                        // getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue=2017219')
+                        .then(function (response) {
+                            console.log(response);
+                            if (response.error == '0')
+                            {
+                                $scope.result=splitCode.split(response.data.result);
+                                console.log($scope.result);
+                            }
+                            else
+                            {
+                                $scope.error = response.info;
+                                $timeout(function () {
+                                    $scope.modalError.show();
+                                }, 400);
+                            }
+                        },function (error) {
+                            alert(error);
+                            $ionicLoading.hide();
+                        });
                         $scope.modal3.show();
-                    } else if (!winItems[2]) {
-                        $timeout.cancel(nextShow);
-                        //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
-
-                            .then(function (response) {
-                                if (response.error == '0') {
-                                    $scope.needExchangeAmount.amount = response.data.length;
-                                    console.log($scope.needExchangeAmount.amount);
-
-                                    if ($scope.needExchangeAmount.amount) {
-                                        $rootScope.needExchangeItems = response.data;
-                                        $scope.modal2.show();
-                                    }
-
-                                }
-                                else {
-                                    $scope.error = response.info;
-                                    $timeout(function () {
-                                        $scope.modalError.show();
-                                    }, 300);
-                                }
-                            }, function () {
-                                alert('网络异常,未获取到用户信息')
-                            });
-                    }
                 } else if (winAlertStatus.first == true && winAlertStatus.second == true && winAlertStatus.third == true && winAlertStatus.forth == false && winItems[3]) {
-                    $scope.winamt = winItems[3].winamt;
-                    $scope.wareIssue = winItems[3].wareIssue;
-                    $scope.drawTime = winItems[3].drawTime;
-                    $scope.investCode = splitCode.split(winItems[3].investCode);
-                    winAlertStatus.forth = true;
-                    if (winItems[3]) {
+                    for (var i = 0; i < winItems[3].lotteryList.length; i++) {
+                            totalWinamt.forth += winItems[3].lotteryList[i].winamt;
+                            bettingEach.forth.push(splitCode.split(winItems[3].lotteryList[i].investCode))
+                        }
+                        $scope.bettingTotal=bettingEach.forth.concat();
+                        $scope.winamt = totalWinamt.forth;
+                        $scope.wareIssue = winItems[3].wareIssue;
+                        $scope.drawTime = winItems[3].drawTime;
+                        winAlertStatus.forth = true;
+
+                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[3].lotteryID + '&wareIssue='+(winItems[3].wareIssue*1-1))
+                        // getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue=2017219')
+                        .then(function (response) {
+                            console.log(response);
+                            if (response.error == '0')
+                            {
+                                $scope.result=splitCode.split(response.data.result);
+                                console.log($scope.result);
+                            }
+                            else
+                            {
+                                $scope.error = response.info;
+                                $timeout(function () {
+                                    $scope.modalError.show();
+                                }, 400);
+                            }
+                        },function (error) {
+                            alert(error);
+                            $ionicLoading.hide();
+                        });
                         $scope.modal3.show();
-                    } else if (!winItems[3]) {
-                        $timeout.cancel(nextShow);
-
-                        //更新待兑换
-                        getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
-
-                            .then(function (response) {
-                                if (response.error == '0') {
-                                    $scope.needExchangeAmount.amount = response.data.length;
-                                    console.log($scope.needExchangeAmount.amount);
-
-                                    if ($scope.needExchangeAmount.amount) {
-                                        $rootScope.needExchangeItems = response.data;
-                                        $scope.modal2.show();
-                                    }
-
-                                }
-                                else {
-                                    $scope.error = response.info;
-                                    $timeout(function () {
-                                        $scope.modalError.show();
-                                    }, 300);
-                                }
-                            }, function (error) {
-                                alert(error);
-                                $ionicLoading.hide();
-                            });
-                    }
-                    console.log($scope.investCode);
                 }
             }, 1000)
         };
