@@ -3,7 +3,7 @@
         <div class="sure-modal3-win">
             {{info}}
         </div>
-        <div class="sure-modal3-style2">
+        <div class="sure-modal3-style2" style="margin-top: 35px;">
             <span class="fl">姓 &nbsp;名:</span><span ng-cloak>{{realName}}</span>
         </div>
         <div class="sure-modal3-style2">
@@ -17,11 +17,11 @@
         </div>
         <div class="sure-modal3-style2">
             <span class="fl">获赠号码:</span>
-            <div class="betting">
+            <ion-scroll class="fl betting" zooming="true" direction="y" overflow-scroll="true" scrollbar-y="true" >
                 <span ng-repeat="codeRed in receiveNum track by $index" style="display: flex; margin-top: 3px;">
-                <i ng-cloak  ng-repeat="codeNum in codeRed track by $index" style="margin-left: 10px">{{codeNum}}</i>
-            </span>
-            </div>
+                    <i ng-cloak  ng-repeat="codeNum in codeRed track by $index" style="margin-left: 10px">{{codeNum}}</i>
+                </span>
+            </ion-scroll>
         </div>
         <div class="sure-modal3-style4" ng-click="makeSure()" ng-cloak>{{makeSureText}}</div>
     </div>

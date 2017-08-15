@@ -348,14 +348,12 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     width: 65px;
     text-align: left;
     display: inline-block;
-    padding-left: 10px
+    padding-left: 10px;
 }
 
 .sure-modal3 .sure-modal3-style2 .betting{
-    display: grid;
-    height: 75px;
+    height: 90px;
     width: 74%;
-    overflow: auto;
 }
 
 .sure-modal3 .sure-modal3-style2 .betting i{
@@ -388,7 +386,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 
 .sure-modal3 .sure-modal3-style4 {
     position: absolute;
-    bottom: 25px;
+    bottom: 75px;
     left: 50%;
     -webkit-transform: translate(-50%, 0);
     -moz-transform: translate(-50%, 0);
@@ -401,7 +399,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 
 .sure-modal3-win{
     position: absolute;
-    top: 27%;
+    top: 32%;
     left: 50%;
     color: #fffefb;
     transform: translate(-50%, 0);
