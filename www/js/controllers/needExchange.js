@@ -7,14 +7,29 @@ angular.module('starter.needExchangeCtrl', [])
         $scope.needExchanges = $rootScope.needExchangeItems;
         $scope.lessThen3 = true;            //小于3天显示小时
         $scope.whetherLongBi = true;      //龙币显示有效期
-
+        // $scope.class = {blank:true,margin10:false,grey:false};
         for (var i = 0; i < $scope.needExchanges.length; i++) {
+
             if ($scope.needExchanges[i].endDate)
             {
                 var leftTime=timeRemain.stillHave($scope.needExchanges[i].endDate);
                 console.log(leftTime);
                 $scope.needExchanges[i].d=leftTime.d;
                 $scope.needExchanges[i].h=leftTime.h;
+                console.log($scope.needExchanges[i].d === 0)
+                if ($scope.needExchanges[i].d === 0 && $scope.needExchanges[i].h === 0 )
+                {
+
+                    $scope.needExchanges[i].class = 'grey'
+                }
+                else if ($scope.needExchanges[i].d || $scope.needExchanges[i].h)
+                {
+                    $scope.needExchanges[i].class = ''
+                }
+            }
+            else
+            {
+                $scope.needExchanges[i].class = 'margin10'
             }
         }
 

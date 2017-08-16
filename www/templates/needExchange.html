@@ -13,7 +13,7 @@
                 </div>
                 <div class="fr">
                     <p  ng-cloak>
-                       <button class="font-style8 " ng-class="item.d==0 && item.h==0?'grey':'margin10'" ng-disabled="item.d==0 && item.h==0" ng-click="toScanExchange($index)" > 立即兑换</button>
+                       <button class="font-style8 "  ng-class="{'grey': item.class=='grey','margin10': item.class=='margin10','':item.class==''}" ng-disabled="item.d==0 && item.h==0" ng-click="toScanExchange($index)" > 立即兑换</button>
                     </p>
                     <p class="font-style11" ng-cloak ng-if="item.endDate">
                         <span style="font-size: 10px;">距离有效期结束还剩</span>
