@@ -1,4 +1,4 @@
-<ion-view view-title="排列5往期开奖">
+<ion-view view-title="排列5往期开奖" >
     <!--<ion-nav-bar class="bar bar-header bar-linerBlue ">
         <ion-nav-back-button class="icon ion-ios-arrow-left button-clear" style="color: white;"></ion-nav-back-button>
     </ion-nav-bar>-->
@@ -12,8 +12,8 @@
 
     <ion-content class="h40">
         <ion-list>
-            <ion-item class="history-time"  ng-repeat="past in historyPast5">
-                <p><span ng-cloak>{{past.wareIssue}} 期 </span><ins ng-cloak> {{past.createDate | date: 'MM-dd'}} 周三</ins></p>
+            <ion-item class="history-time"  ng-repeat="past in historyPast5 track by $index">
+                <p><span ng-cloak>{{past.wareIssue}} 期 </span><ins ng-cloak> {{past.createDate }} 周三</ins></p>
                 <div class="row">
                     <div class="col col-67 show-red-ball">
                         <i ng-cloak>{{toArray(past.result,0)}}</i>

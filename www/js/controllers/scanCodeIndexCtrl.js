@@ -77,26 +77,9 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                                 alert (error);
                                 $ionicLoading.hide ();
                             });
-                        
-                        
                     }, function (error) {
                         alert('数据获取失败!');
                     });
-                
-                /*getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
-                    .then (function (response) {
-                        console.log (response);
-                        $scope.needExchangeAmount.amount = response.data.length;
-                        console.log ($scope.needExchangeAmount.amount);
-                        $rootScope.needExchangeItems = response.data;
-                        if (userInfo.data.voucher) {
-                            $scope.modal2.show ();
-                        }
-                        
-                    }, function (error) {
-                        alert (error);
-                        $ionicLoading.hide ();
-                    });*/
             }, function (response) {
                 alert ("初始化数据失败");
             });

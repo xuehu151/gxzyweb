@@ -4,17 +4,17 @@
 angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
 
 //兑换 排列 3 网期开奖详情
-    .controller ('Exchangehistory3DCtrl', function ($scope, $http, $interval, $ionicPopup, $ionicLoading, $rootScope, $util, historyPastService) {
+    .controller ('Exchangehistory3DCtrl', function ($scope, $http, $interval, $ionicPopup, $ionicLoading, $rootScope, $util, historyPastService, $filter) {
         $ionicLoading.show ();
         var userInfo = $util.getUserInfo ();
         var pageSize = 8;
         var pageNum = 1;
         var data = {
-            lotteryID: '31',
-            pageSize: pageSize,
-            pageNum: pageNum
+            lotteryID : '31',
+            pageSize : pageSize,
+            pageNum : pageNum
         };
-        if(userInfo.data){
+        if (userInfo.data) {
             /*$http ({
              method: "POST",
              url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
@@ -27,13 +27,22 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
                 .then (function (response) {
                     $ionicLoading.hide ();
                     $scope.historyPast3 = response.data;
-            
+                    for (var i = 0; i < $scope.historyPast3.length; i++) {
+                        var createDate = $scope.historyPast3[i].createDate;
+                        
+                        var colon_createDate = createDate.split (':')[0];
+                        var blank_createDate = colon_createDate.split (' ')[0];
+                        var _createDate = blank_createDate.split ('-');
+                        $scope.createDate = _createDate.splice (-2, 4).join ('-');
+                        
+                        $scope.historyPast3[i].createDate = $scope.createDate;
+                    }
                     if ($scope.historyPast3.length === 0) {
                         var alertPopup = $ionicPopup.alert ({
-                            title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
-                            template: '<div class="alert-left"><p style="text-align: center">暂无数据</p></div>',
-                            okText: '确 定',
-                            okType: 'button-light'
+                            title : '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
+                            template : '<div class="alert-left"><p style="text-align: center">暂无数据</p></div>',
+                            okText : '确 定',
+                            okType : 'button-light'
                         })
                             .then (function () {
                                 ///////
@@ -43,9 +52,10 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
                 }, function (response) {
                     console.log ("获取列表失败");
                 });
-        }else {
+        }
+        else {
             $ionicLoading.hide ();
-            $rootScope.errorInfo();
+            $rootScope.errorInfo ();
         }
         
         $scope.toArray = function (string2, num) {

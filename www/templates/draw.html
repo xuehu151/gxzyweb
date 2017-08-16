@@ -3,19 +3,28 @@
         <ion-nav-back-button class="button button-icon icon ion-ios-arrow-left"></ion-nav-back-button>
     </ion-nav-bar>-->
 
+
     <div class="bar bar-header tab_draw">
         <div class="button">
-            <a class=" button " ui-sref="tab.draw.bigLottoHistoryDetails" ng-init="isActive =1"  ng-click="isActive=1" ng-class="{current: isActive == 1}">大乐透</a>
+           <!-- <a class=" button " ui-sref="tab.draw.bigLottoHistoryDetails" ng-init="isActive =1"  ng-click="isActive=1" ng-class="{current: isActive == 1}" >大乐透</a>
             <a class=" button " ui-sref="tab.draw.exchangehistory3D" ng-click="isActive=2" ng-class="{current: isActive == 2}">排列3</a>
-            <a class=" button " ui-sref="tab.draw.exchangehistory5D" ng-click="isActive=3" ng-class="{current: isActive == 3}">排列5</a>
+            <a class=" button " ui-sref="tab.draw.exchangehistory5D" ng-click="isActive=3" ng-class="{current: isActive == 3}">排列5</a>-->
+            <a class=" button " ui-sref="tab.draw.bigLottoHistoryDetails"  ng-click="activeSlide(0)" ng-class="slectIndex == 0?'current':''">大乐透</a>
+            <a class=" button " ui-sref="tab.draw.exchangehistory3D" ng-click="activeSlide(1)"   ng-class="slectIndex == 1?'current':''" >排列3</a>
+            <a class=" button " ui-sref="tab.draw.exchangehistory5D" ng-click="activeSlide(2)"   ng-class="slectIndex == 2?'current':''" >排列5</a>
         </div>
     </div>
-
+    <div class="bar " style="padding: 0;margin-top: 45px;">
+        <div class="row notice">
+            <i class="icon ion-volume-medium"></i>
+            <div class="noticeText">恭喜185****6868排列3中奖1040元</div>
+        </div>
+    </div>
     <ion-nav-view></ion-nav-view>
 
     <!--<ion-content has-bouncing="false" class="draw-slide">
         <div style="display:flex;width:100%;">
-            <div style="flex:1;text-align: center;"
+            <div style="flex:1;text-align: center; "isActive == '1' ? $scope.drawButtonUrl = 'tab.draw.bigLottoHistoryDetails' : $scope.drawButtonUrl = 'slectIndex';
                  class="tab_default"
                  ng-repeat="d in tabNames"
                  ng-click="activeSlide($index)"

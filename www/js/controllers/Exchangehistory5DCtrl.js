@@ -29,7 +29,18 @@ angular.module ('starter.Exchangehistory5DCtrl', ['starter.services'])
                 .then (function (response) {
                     $ionicLoading.hide ();
                     $scope.historyPast5 = response.data;
-            
+    
+                    for (var i = 0; i < $scope.historyPast5.length; i++) {
+                        var createDate = $scope.historyPast5[i].createDate;
+        
+                        var colon_createDate = createDate.split (':')[0];
+                        var blank_createDate = colon_createDate.split (' ')[0];
+                        var _createDate = blank_createDate.split ('-');
+                        $scope.createDate = _createDate.splice (-2, 4).join ('-');
+        
+                        $scope.historyPast5[i].createDate = $scope.createDate;
+                    }
+                    
                     if ($scope.historyPast5.length === 0) {
                         var alertPopup = $ionicPopup.alert ({
                             title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',

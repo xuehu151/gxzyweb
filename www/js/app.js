@@ -86,7 +86,8 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
             .state ('tab', {
                 url: '/tab',
                 abstract: true,
-                templateUrl: 'templates/tabs.html'
+                templateUrl: 'templates/tabs.html',
+                controller:'tabsCtrl'
             })
 
             //兑换

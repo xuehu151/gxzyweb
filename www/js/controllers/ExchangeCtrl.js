@@ -101,7 +101,7 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                 var data = {
                     token: sign
                 };
-                initDataService.initData(data)   //index
+                initDataService.initData(data)   //index==扫码
                     .then(function (response) {
                         $ionicLoading.hide();
                         PayType = 0;
@@ -116,7 +116,7 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                             var userToken = {
                                 token: sign
                             };
-                            initDataService.initDataNew(userToken)  //index1
+                            initDataService.initDataNew(userToken)  //index1==余额
                                 .then(function (response) {
                                     $ionicLoading.hide();
                                     PayType = 1;
@@ -202,46 +202,48 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                                 });
                             //$state.go ('tab.account');
                         }
-                        /*if(userInfo.error != '0'){
-                         $scope.errorInfo = userInfo.info;
-                         $rootScope.errorInfo();
-                         }
-                         else {
-                         if (!userInfo.data.user.realName) {
-                         modal ();
-                         }
-                         else {
-                         if(userInfo.data.error == '2301'){
-                         $state.go ('scanCodeIndex');
-                         }else {
-                         if($location.search ().sign && $location.search ().type){
-                         $state.go ('tab.account');
-                         }
-                         }
-                         }
-
-                         $scope.goToExchange3D = function () {
-                         $state.go ('exchange-3');
-                         };
-                         $scope.goToExchange5D = function () {
-                         $state.go ('exchange-5');
-                         };
-                         $scope.goToExchangeBigLotto2 = function (status) {
-                         $rootScope.newStatus = status;
-                         $state.go ('BigLotto-2', {
-                         'flag2': 1
-                         });
-                         };
-                         $scope.goToExchangeBigLotto3 = function (status) {
-                         $rootScope.newStatus = status;
-                         if(response.data.user.money >= 2){
-                         $state.go ('BigLotto-2');
-                         }else {
-                         $scope.errorInfo = '大乐透只能选择2元的进行投注哦!';
-                         $rootScope.errorInfo();
-                         }
-                         };
-                         }*/
+                        /*if (userInfo.error != '0') {
+                            $scope.errorInfo = userInfo.info;
+                            $rootScope.errorInfo ();
+                        }
+                        else {
+                            if (!userInfo.data.user.realName) {
+                                modal ();
+                            }
+                            else {
+                                if (userInfo.data.error == '2301') {
+                                    $state.go ('scanCodeIndex');
+                                }
+                                else {
+                                    if ($location.search ().sign && $location.search ().type) {
+                                        $state.go ('tab.account');
+                                    }
+                                }
+                            }
+        
+                            $scope.goToExchange3D = function () {
+                                $state.go ('exchange-3');
+                            };
+                            $scope.goToExchange5D = function () {
+                                $state.go ('exchange-5');
+                            };
+                            $scope.goToExchangeBigLotto2 = function (status) {
+                                $rootScope.newStatus = status;
+                                $state.go ('BigLotto-2', {
+                                    'flag2' : 1
+                                });
+                            };
+                            $scope.goToExchangeBigLotto3 = function (status) {
+                                $rootScope.newStatus = status;
+                                if (response.data.user.money >= 2) {
+                                    $state.go ('BigLotto-2');
+                                }
+                                else {
+                                    $scope.errorInfo = '大乐透只能选择2元的进行投注哦!';
+                                    $rootScope.errorInfo ();
+                                }
+                            };
+                        }*/
                     }, function (response) {
                         alert("初始化数据失败");
                     });
@@ -389,7 +391,7 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
              'flag2': 1
              });
              };
-             $scope.goToExchangeBigLotto3 = function (status) {//用户扫码进来 抵用券投注type=0
+             $scope.goToExchangeBigLotto3 = function (status) {
              $rootScope.newStatus = status;
              $state.go ('BigLotto-2');
              };

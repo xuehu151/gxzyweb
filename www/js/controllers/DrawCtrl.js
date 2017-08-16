@@ -4,17 +4,13 @@
 //开奖
 angular.module ('starter.DrawCtrl', ['starter.services'])
     
-    .controller ('DrawCtrl', function ($scope, $rootScope, $ionicModal, $ionicSlideBoxDelegate) {
-        /*$scope.tabNames = ['大乐透', '排列 3', '排列 5'];
-         $scope.slectIndex = 0;
-         $scope.activeSlide = function (index) {//点击时候触发
-         $scope.slectIndex = index;
-         $ionicSlideBoxDelegate.slide (index);
-         };
-         $scope.slideChanged = function (index) {//滑动时候触发
-         $scope.slectIndex = index;
-         };
-         $scope.pages = ["templates/bigLottoHistoryDetails.html", "templates/exchangehistory3D.html", "templates/exchangehistory5D.html"];*/
+    .controller ('DrawCtrl', function ($scope, $rootScope, $ionicModal) {
+        $scope.slectIndex = 0;
+        $scope.activeSlide = function (index) {//点击时候触发
+            $scope.slectIndex = index;
+            console.info($scope.slectIndex);
+        };
+        
         //错误码窗口配置
         $rootScope.errorInfo = function () {
             $ionicModal.fromTemplateUrl ('templates/errorInfo.html', {
@@ -30,4 +26,9 @@ angular.module ('starter.DrawCtrl', ['starter.services'])
             };
         };
         
+    })
+    
+    .controller('tabsCtrl', function ($scope,$rootScope) {
+    
     });
+

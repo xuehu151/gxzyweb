@@ -627,13 +627,13 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 
 .show-red-ball i,
 .show-blue-ball i {
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
     color: #fff4fb;
     border-radius: 50%;
     text-align: center;
-    line-height: 2em;
-    margin: 4px 3px;
+    line-height: 1.5em;
+    margin: 4px 0;
     display: inline-block;
 }
 
@@ -836,17 +836,17 @@ input.bigLotto-input2:checked:before {
 }
 
 .h40 {
-    top: 44px !important;
+    top: 89px !important;
 }
 
 .notice {
     padding: 8px;
     background: #e5e5e5;
     border-color: transparent;
-    background: -o-linear-gradient(top, #d3d3d3, #f6f6f6);
-    background: -ms-linear-gradient(top, #d3d3d3, #f6f6f6);
-    background: -moz-linear-gradient(top, #d3d3d3, #f6f6f6);
-    background: -webkit-linear-gradient(top, #d3d3d3, #f6f6f6);
+    background: -o-linear-gradient(top, #ececec, #fdfdfd);
+    background: -ms-linear-gradient(top, #ececec, #fdfdfd);
+    background: -moz-linear-gradient(top, #ececec, #fdfdfd);
+    background: -webkit-linear-gradient(top, #ececec, #fdfdfd);
 }
 
 .notice .noticeText {
@@ -875,6 +875,7 @@ input.bigLotto-input2:checked:before {
 .history-time p {
     font-size: .6em;
     color: #a2a2a2;
+    padding-left: 10px;
 }
 
 .history-time ins {
@@ -1030,6 +1031,12 @@ input.bigLotto-input2:checked:before {
     width: 31%;
     color: #989898;
     margin-top: 0;
+    border-left: 1px solid #c9c9c9;
+    border-radius: 0;
+}
+
+.tab_draw a.button:first-child{
+    border-left: none;
 }
 
 .tab_trend a.button {

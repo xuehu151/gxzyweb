@@ -31,7 +31,18 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
                 .then (function (response) {
                     $ionicLoading.hide ();
                     $scope.bitLotto = response.data;
-                    console.info($scope.bitLotto);
+    
+                    for (var i = 0; i < $scope.bitLotto.length; i++) {
+                        var createDate = $scope.bitLotto[i].createDate;
+        
+                        var colon_createDate = createDate.split (':')[0];
+                        var blank_createDate = colon_createDate.split (' ')[0];
+                        var _createDate = blank_createDate.split ('-');
+                        $scope.createDate = _createDate.splice (-2, 4).join ('-');
+        
+                        $scope.bitLotto[i].createDate = $scope.createDate;
+                    }
+                    
                     if ($scope.bitLotto.length === 0) {
                         var alertPopup = $ionicPopup.alert ({
                             title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
