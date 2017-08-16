@@ -142,8 +142,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
             if (userData.wechat || userData.alipay || userData.bankNo) {
                 $scope.modal.show();
             } else {
-                // $scope.modal4.show();
-                $scope.modal3.show();
+                $scope.modal4.show();
             }
         };
         //冻结金额的解释
