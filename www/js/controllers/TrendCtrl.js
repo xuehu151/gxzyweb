@@ -4,8 +4,8 @@
 //开奖
 angular.module ('starter.TrendCtrl', ['starter.services'])
     
-    .controller ('TrendCtrl', function ($scope, $ionicModal, $rootScope) {
-    
+    .controller ('TrendCtrl', function ($scope, $state, $ionicModal, $rootScope) {
+        $state.go('tab.trend.bigTrendChart');
         $scope.isActive = true;
        
         /*$scope.tabNames = ['大乐透', '排列 3', '排列 5'];

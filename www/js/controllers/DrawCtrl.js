@@ -4,11 +4,11 @@
 //开奖
 angular.module ('starter.DrawCtrl', ['starter.services'])
     
-    .controller ('DrawCtrl', function ($scope, $rootScope, $ionicModal) {
+    .controller ('DrawCtrl', function ($scope, $state, $rootScope, $ionicModal) {
+        $state.go('tab.draw.bigLottoHistoryDetails');
         $scope.slectIndex = 0;
         $scope.activeSlide = function (index) {//点击时候触发
             $scope.slectIndex = index;
-            console.info($scope.slectIndex);
         };
         
         //错误码窗口配置
@@ -29,6 +29,7 @@ angular.module ('starter.DrawCtrl', ['starter.services'])
     })
     
     .controller('tabsCtrl', function ($scope,$rootScope) {
+    
     
     });
 
