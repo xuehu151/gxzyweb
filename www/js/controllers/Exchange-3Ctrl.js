@@ -19,6 +19,11 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         $scope.generate100 = '';
         $scope.generate10 = '';
         $scope.generate1 = '';
+        //二维码投注时的数据存放
+        var redBall_100 = [];
+        var redBall_10 = [];
+        var redBall_0 = [];
+        
         // Create the ball items   百位
         for (var j = 0; j < 10; j++) {
             var itemsBit = {
@@ -30,6 +35,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         //给百位添加点击事件
         filterBit100 = [];
         $scope.addBit100Click = function (item) {
+            redBall_100 = [];
             $scope.numDataBit100 = [];
             for (var j = 0; j < 10; j++) {
                 if (item.num == j) {
@@ -39,6 +45,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     };
                     filterBit100[0] = item;
                     $scope.numDataBit100.push (itemsBit);
+                    redBall_100.push(itemsBit);
                 }
                 else {
                     var itemsBit1 = {
@@ -62,6 +69,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         //给十位添加点击事件
         filterBit10 = [];
         $scope.addBit10Click = function (item) {
+            redBall_10 = [];
             $scope.numDataBit10 = [];
             for (var i = 0; i < 10; i++) {
                 if (item.num == i) {
@@ -71,6 +79,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     };
                     filterBit10[0] = item;
                     $scope.numDataBit10.push (itemsBit10);
+                    redBall_10.push(itemsBit10);
                 }
                 else {
                     var itemsBit10 = {
@@ -94,6 +103,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         //给个位添加点击事件
         filterBit1 = [];
         $scope.addBit1Click = function (item) {
+            redBall_0 = [];
             $scope.numDataBit1 = [];
             for (var j = 0; j < 10; j++) {
                 if (item.num == j) {
@@ -103,6 +113,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     };
                     filterBit1[0] = item;
                     $scope.numDataBit1.push (itemsBit1);
+                    redBall_0.push(itemsBit1);
                 }
                 else {
                     var itemsBit1 = {
@@ -112,6 +123,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     $scope.numDataBit1.push (itemsBit1);
                 }
             }
+            console.info(redBall_0[0].num);
             //判断filterBit100的长度确定generate100值
             filterBit1Data ();
         };
@@ -288,17 +300,25 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     multiple : 1
                 };
                 var investCode = null;
-                if($scope.numDataBit100[randomBall[2]] && $scope.numDataBit10[randomBall[1]] && $scope.numDataBit1[randomBall[0]]){
+                if($scope.numDataBit100[randomBall[2]] && $scope.numDataBit10[randomBall[1]] && $scope.numDataBit1[randomBall[0]]) {
                     investCode = $scope.numDataBit100[randomBall[2]].num + '*';
                     investCode += $scope.numDataBit10[randomBall[1]].num + '*';
-                    investCode += $scope.numDataBit1[randomBall[0]].num ;
+                    investCode += $scope.numDataBit1[randomBall[0]].num;
+                }else if(redBall_100[0].num && redBall_10[0].num && redBall_0[0].num){
+                    console.info(redBall_0[0].num);
+                    investCode = redBall_100[0].num + '*';
+                    investCode += redBall_10[0].num + '*';
+                    investCode += redBall_0[0].num;
                 }else {
-                    alert('请先选择号码！');
+                    alert('请先选择号码!');
                     return
                 }
-        
+                
                 dataObj.investCode = investCode;
                 dataArray.push (dataObj);
+    
+                console.info(dataObj);
+                
                 //console.log(userInfo.data.voucher);
                 var vid = '';
                 if (type == 0) {

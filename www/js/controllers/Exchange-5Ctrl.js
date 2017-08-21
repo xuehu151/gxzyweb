@@ -26,6 +26,12 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
         $scope.generate100 = '';
         $scope.generate10 = '';
         $scope.generate1 = '';
+        //二维码投注时的数据存放
+        var redBall_10000 = [];
+        var redBall_1000 = [];
+        var redBall_100 = [];
+        var redBall_10 = [];
+        var redBall_0 = [];
         // Create the ball items   万位
         for (var j = 0; j < 10; j++) {
             var itemsBit10000 = {
@@ -36,6 +42,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
         }
         //给万位添加点击事件
         $scope.addBit10000Click = function (item) {
+            redBall_10000 = [];
             $scope.numDataBit10000 = [];
             for (var j = 0; j < 10; j++) {
                 if (item.num == j) {
@@ -45,6 +52,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     };
                     filterBit10000[0] = item;
                     $scope.numDataBit10000.push (itemsBit10000);
+                    redBall_10000.push(itemsBit10000);
                 }
                 else {
                     var itemsBit10000 = {
@@ -67,6 +75,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
         }
         //给千位添加点击事件
         $scope.addBit1000Click = function (item) {
+            redBall_1000 = [];
             $scope.numDataBit1000 = [];
             for (var j = 0; j < 10; j++) {
                 if (item.num == j) {
@@ -76,6 +85,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     };
                     filterBit1000[0] = item;
                     $scope.numDataBit1000.push (itemsBit1000);
+                    redBall_1000.push(itemsBit1000);
                 }
                 else {
                     var itemsBit1000 = {
@@ -98,6 +108,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
         }
         //给百位添加点击事件
         $scope.addBit100Click = function (item) {
+            redBall_100 = [];
             $scope.numDataBit100 = [];
             for (var j = 0; j < 10; j++) {
                 if (item.num == j) {
@@ -107,6 +118,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     };
                     filterBit100[0] = item;
                     $scope.numDataBit100.push (itemsBit100);
+                    redBall_100.push(itemsBit100);
                 }
                 else {
                     var itemsBit100 = {
@@ -129,6 +141,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
         }
         //给十位添加点击事件
         $scope.addBit10Click = function (item) {
+            redBall_10 = [];
             $scope.numDataBit10 = [];
             for (var j = 0; j < 10; j++) {
                 if (item.num == j) {
@@ -138,6 +151,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     };
                     filterBit10[0] = item;
                     $scope.numDataBit10.push (itemsBit10);
+                    redBall_10.push(itemsBit10);
                 }
                 else {
                     var itemsBit10 = {
@@ -160,6 +174,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
         }
         //给个位添加点击事件
         $scope.addBit1Click = function (item) {
+            redBall_0 = [];
             $scope.numDataBit1 = [];
             for (var j = 0; j < 10; j++) {
                 if (item.num == j) {
@@ -169,6 +184,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     };
                     filterBit1[0] = item;
                     $scope.numDataBit1.push (itemsBit1);
+                    redBall_0.push(itemsBit1);
                 }
                 else {
                     var itemsBit1 = {
@@ -406,8 +422,14 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     investCode += $scope.numDataBit100[randomBall[2]].num + '*';
                     investCode += $scope.numDataBit10[randomBall[1]].num + '*';
                     investCode += $scope.numDataBit1[randomBall[0]].num ;
+                }else if(redBall_10000[0].num &&  redBall_1000[0].num && redBall_100[0].num && redBall_10[0].num && redBall_0[0].num){
+                    investCode = redBall_10000[0].num + '*';
+                    investCode += redBall_1000[0].num + '*';
+                    investCode += redBall_100[0].num + '*';
+                    investCode += redBall_10[0].num + '*';
+                    investCode += redBall_0[0].num;
                 }else {
-                    alert('请先选择号码！');
+                    alert('请先选择号码!');
                     return
                 }
                 dataObj.investCode = investCode;

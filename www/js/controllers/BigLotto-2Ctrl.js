@@ -26,18 +26,22 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
             $scope.numDataRed.push (itemsRed);
         }
         //给红色球添加点击事件
+        var redBall = [];
         $scope.addRedClick = function (item) {
+            redBall = [];
             $scope.filterDataRed = [];
             //先看选中了几个
             for (var i = 0; i < $scope.numDataRed.length; i++) {
                 if ($scope.numDataRed[i].check == true) {
                     $scope.filterDataRed.push ($scope.numDataRed[i]);
+                    redBall.push($scope.numDataRed[i]);
                 }
             }
             /*判断原来的状态*/
             if (item.check != true) {
                 if ($scope.filterDataRed.length >= 5) {
                     alert ("选择的红球号码不能大于五个");
+                    return
                 }
                 else {
                     selectedRedBallNum ();
@@ -46,7 +50,9 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
             else {
                 selectedRedBallNum ();
             }
-            console.log ($scope.filterDataRed);
+            
+            console.log ($scope.filterDataRed[0].num);
+            console.info(redBall);
             /*封装选择后的红色号码数*/
             function selectedRedBallNum () {
                 item.check = !item.check;
@@ -54,12 +60,12 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 for (var i = 0; i < $scope.numDataRed.length; i++) {
                     if ($scope.numDataRed[i].check == true) {
                         $scope.filterDataRed.push ($scope.numDataRed[i]);
-                        //                        $scope.filterDataRed.push($scope.numDataRed[i]);
+                        // $scope.filterDataRed.push($scope.numDataRed[i]);
                     }
                 }
             }
         };
-        // Create the blue items  篮球
+        // Create the blue items  蓝球
         for (var i = 1; i <= 12; i++) {
             var itemsBlue = {
                 num: i + 1,
@@ -286,6 +292,8 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 for (var i = 0; i < 5; i++) {
                     if($scope.numDataRed[randomRed[i] - 1]){
                         investCodeRed.push($scope.numDataRed[randomRed[i] - 1].num);
+                    }else if($scope.filterDataRed[i].num){
+                        investCodeRed.push($scope.filterDataRed[i].num);
                     }
                     else {
                         alert('请正确选择红色号码!!!');
@@ -295,6 +303,8 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 for (var i = 0; i < 2; i++) {
                     if($scope.numDataBlue[randomBlue[i] - 1]){
                         investCodeBlue.push($scope.numDataBlue[randomBlue[i] - 1].num);
+                    }else if($scope.filterDataBlue[i].num){
+                        investCodeBlue.push($scope.filterDataBlue[i].num);
                     }
                     else{
                         alert('请正确选择蓝色号码!!!');
@@ -428,9 +438,11 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
         var data = {
             lotteryID: 2
         };
+        console.info(userInfo);
         getWareIssueService.getWareIssue(data, userInfo.data.token)
             .then(function (response) {
 //                $ionicLoading.hide();
+                console.info(response);
                 $scope.reques = response.data;
                 console.log ($scope.reques);
     
