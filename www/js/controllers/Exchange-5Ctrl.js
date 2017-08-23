@@ -517,7 +517,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
 //                            $scope.modal3 = modal;
                                     $scope.makeSure = function () {
                                         modal.hide ();
-                                        $state.go ('tab.account');
+                                        $state.go ('allOrders');
                                         jsonWrapBit5D = [];
                                         sessionStorage.jsonWrap5D = '';
                                     }

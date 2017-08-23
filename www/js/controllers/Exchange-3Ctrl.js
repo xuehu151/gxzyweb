@@ -395,7 +395,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                                     //$scope.modal3 = modal;
                                     $scope.makeSure = function () {
                                         modal.hide ();
-                                        $state.go ('tab.account');
+                                        $state.go ('allOrders');
                                         jsonWrapBit3D = [];
                                         sessionStorage.jsonWrap3D = '';
                                     }
