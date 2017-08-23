@@ -397,7 +397,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     reques = response.data;
                     console.log (reques);
                     if(response.error != '0'){
-                        $scope.errorInfo = userInfo.info;
+                        $scope.errorInfo = reques.info;
                         $rootScope.errorInfo();
                     }else {
                         getPl5add ();
@@ -479,7 +479,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                         console.info (response);
                         console.dir (data);
                         if(response.data.error != '0'){
-                            $scope.errorInfo = userInfo.info;
+                            $scope.errorInfo = response.data.info;
                             $rootScope.errorInfo();
                         }else {
                             /*var alertPopup = $ionicPopup.alert ({

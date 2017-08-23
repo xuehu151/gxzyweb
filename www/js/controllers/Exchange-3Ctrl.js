@@ -281,7 +281,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     reques = response.data;
                     console.log (reques);
                     if(response.error != '0'){
-                        $scope.errorInfo = userInfo.info;
+                        $scope.errorInfo = reques.info;
                         $rootScope.errorInfo();
                     }else {
                         getPl3add ();
@@ -313,10 +313,8 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     alert('请先选择号码!');
                     return
                 }
-                
                 dataObj.investCode = investCode;
                 dataArray.push (dataObj);
-    
                 console.info(dataObj);
                 
                 //console.log(userInfo.data.voucher);
@@ -351,7 +349,6 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     vid : vid,
                     data : dataArray
                 };
-                 console.log(data);
                 $http ({
                     method : "POST",
                     url : ipUrl + '/lottery/pl3add?token=' + userInfo.data.token,
@@ -366,19 +363,11 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                         console.info (data);
                         console.log (response.data);
                         if(response.data.error != '0'){
-                            $scope.errorInfo = userInfo.info;
+                            $scope.errorInfo = response.data.info;
+                            console.info($scope.errorInfo);
                             $rootScope.errorInfo();
                         }
                         else {
-                            /*var alertPopup = $ionicPopup.alert({
-                             title: '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
-                             template: '<div class="alert-left"><p style="text-align: center">' + response.data.info + '</p></div>',
-                             okText: '确 定',
-                             okType: 'button-light'
-                             })
-                             .then(function (response) {
-                             $state.go('tab.account');
-                             });*/
                             //提交成功窗口配置
                             $ionicModal.fromTemplateUrl ('templates/submission.html', {
                                 scope : $scope,
