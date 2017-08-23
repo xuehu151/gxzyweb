@@ -112,10 +112,19 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                             console.log(userInfo);
                             $state.go('scanCodeIndex');
                         }
-                        else {
+                        else if (response.error == '2301') {
+                            /* 获取初始化数据 */
+                            var datas = $util.setUserInfo(response);
+                            var userInfo = $util.getUserInfo();
+                            console.log(userInfo);
+                            $state.go ('tab.account');
+                        }
+                        else
+                            {
                             var userToken = {
                                 token: sign
                             };
+                            console.info(response.info);
                             initDataService.initDataNew(userToken)  //index1==余额
                                 .then(function (response) {
                                     $ionicLoading.hide();
@@ -202,48 +211,7 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                                 });
                             //$state.go ('tab.account');
                         }
-                        /*if (userInfo.error != '0') {
-                            $scope.errorInfo = userInfo.info;
-                            $rootScope.errorInfo ();
-                        }
-                        else {
-                            if (!userInfo.data.user.realName) {
-                                modal ();
-                            }
-                            else {
-                                if (userInfo.data.error == '2301') {
-                                    $state.go ('scanCodeIndex');
-                                }
-                                else {
-                                    if ($location.search ().sign && $location.search ().type) {
-                                        $state.go ('tab.account');
-                                    }
-                                }
-                            }
-        
-                            $scope.goToExchange3D = function () {
-                                $state.go ('exchange-3');
-                            };
-                            $scope.goToExchange5D = function () {
-                                $state.go ('exchange-5');
-                            };
-                            $scope.goToExchangeBigLotto2 = function (status) {
-                                $rootScope.newStatus = status;
-                                $state.go ('BigLotto-2', {
-                                    'flag2' : 1
-                                });
-                            };
-                            $scope.goToExchangeBigLotto3 = function (status) {
-                                $rootScope.newStatus = status;
-                                if (response.data.user.money >= 2) {
-                                    $state.go ('BigLotto-2');
-                                }
-                                else {
-                                    $scope.errorInfo = '大乐透只能选择2元的进行投注哦!';
-                                    $rootScope.errorInfo ();
-                                }
-                            };
-                        }*/
+                        
                     }, function (response) {
                         alert("初始化数据失败");
                     });
@@ -344,66 +312,6 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                         }
                     });
             }
-
-            /*//错误码窗口配置
-             $rootScope.errorInfo = function () {
-             $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
-             scope: $scope,
-             backdropClickToClose: true
-             }).then(function(modal) {
-             $scope.modalError = modal;
-             modal.show ();
-             });
-             $scope.cancelPopError = function() {
-             $scope.modalError.hide();
-
-             var userToken = {
-             token: sign
-             };
-             initDataService.initDataNew (userToken)  //index1
-             .then (function (response) {
-             $ionicLoading.hide ();
-             PayType = 1;
-             /!* 获取初始化数据 *!/
-             var datas = $util.setUserInfo (response);
-             var userInfo = $util.getUserInfo ();
-             console.log (userInfo);
-             if (userInfo.error != '0') {
-             $scope.errorInfo = userInfo.info;
-             $rootScope.errorInfo();
-             }
-             else {
-             //初始化
-             if (userInfo.error == '2301') {
-             $scope.errorInfo = userInfo.info;
-             $scope.errorInfo();
-             }
-             else {
-             $scope.goToExchange3D = function () {
-             $state.go ('exchange-3');
-             };
-             $scope.goToExchange5D = function () {
-             $state.go ('exchange-5');
-             };
-             $scope.goToExchangeBigLotto2 = function (status) {
-             $rootScope.newStatus = status;
-             $state.go ('BigLotto-2', {
-             'flag2': 1
-             });
-             };
-             $scope.goToExchangeBigLotto3 = function (status) {
-             $rootScope.newStatus = status;
-             $state.go ('BigLotto-2');
-             };
-             }
-             }
-             //console.log (response.data);
-             }, function (error) {
-             alert ('加载失败，请检查网络')
-             });
-             //$state.go ('tab.account');
-             };
-             };*/
         }
         else {
             if (type == 0) {

@@ -9,7 +9,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         PayType = 1;
         type=1;
         var userInfo = $util.getUserInfo();
-        console.log(userInfo)
+        console.log(userInfo);
         var token = userInfo.data.token;
         type = 1;
         // console.info(type);
@@ -17,6 +17,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         //更新余额
         getUser.getInfo(url + "/service/customer/getUser?token=" + token)
             .then(function (response) {
+                $ionicLoading.hide ();
                 console.log(response.data);
                 if (response.error == '0') {
                     $scope.useableMoney = response.data.money;
@@ -33,9 +34,9 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         num: '(' + response.data.bankNo + ')'
                         // disable: false
                     }];
-                    $ionicLoading.hide();
                 }
                 else {
+                    $ionicLoading.hide();
                     $scope.error = response.info;
                     $timeout(function () {
                         $scope.modalError.show();
@@ -46,7 +47,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                 $ionicLoading.hide();
             });
         var winItems = [];
-        var winAlertStatus = {first: false, second: false, third: false, forth: false} //最多四次弹窗
+        var winAlertStatus = {first: false, second: false, third: false, forth: false};//最多四次弹窗
         var haveShowAllWin = false;
         var nextShow = null; //定时器
 
@@ -145,6 +146,18 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                 $scope.modal4.show();
             }
         };
+        
+        //判断二维码已使用
+        /*$scope.toConvert = function () {
+            if(userInfo.error == '2301'){
+                if(userInfo.data.vouchers == ''){
+                    $state.go('tab.exchange');
+                }else {
+                    alert(userInfo.info + '，不可兑换');
+                    return
+                }
+            }
+        };*/
         //冻结金额的解释
         $scope.toggleShowAnswer = function () {
             $scope.showAnswer = !$scope.showAnswer;
