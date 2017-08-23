@@ -77,8 +77,8 @@
     样式重置
 */
 * {
-    /*font-family: 'PingFangSC', 'Microsoft YaHei';*/
-    font-family: '新宋体';
+    font-family: 'PingFangSC', 'Microsoft YaHei';
+    // font-family: '新宋体';
 }
 
 a {

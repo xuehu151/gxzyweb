@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/customStyle.css">
     <link rel="stylesheet" type="text/css" href="css/custSty.css">
 
+    <!-- 有字库提供的苹方字体服务 -->
+    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>
     <!-- ionic/angularjs js -->
     <!--<script src="lib/ionic/js/ionic.bundle.min.js"></script>-->
     <script src="https://cdn.bootcss.com/ionic/1.3.2/js/ionic.bundle.min.js"></script>
@@ -67,5 +69,11 @@
 -->
 <ion-nav-view></ion-nav-view>
 
+    <script type="text/javascript">
+       $youziku.load("body,html", "79e4b5481d124e219e4ae0a5d3ac1d68", "PingFangSC_R");
+       /*$youziku.load("#id1,.class1,h1", "79e4b5481d124e219e4ae0a5d3ac1d68", "PingFangSC_R");*/
+       /*．．．*/
+       $youziku.draw();
+    </script>
 </body>
 </html>
