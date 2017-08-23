@@ -111,14 +111,14 @@ angular.module('starter.ExchangeCtrl', ['starter.services'])
                             var userInfo = $util.getUserInfo();
                             console.log(userInfo);
                             $state.go('scanCodeIndex');
-                        }
+                        }/*
                         else if (response.error == '2301') {
-                            /* 获取初始化数据 */
+                            /!* 获取初始化数据 *!/
                             var datas = $util.setUserInfo(response);
                             var userInfo = $util.getUserInfo();
                             console.log(userInfo);
                             $state.go ('tab.account');
-                        }
+                        }*/
                         else
                             {
                             var userToken = {
