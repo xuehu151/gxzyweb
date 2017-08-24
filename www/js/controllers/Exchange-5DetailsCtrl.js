@@ -18,7 +18,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
         var PayType5D = null;
         function disabledBtn5D () {
             //判断用户要用什么来兑换彩票    余额 || 抵用券
-            if (type == 0) {
+            if (type == 0 || type == undefined) {
                 if (PayType == 0) {
                     PayType5D = userInfo.data.voucher.money
                 }else if(PayType == 1){
@@ -146,16 +146,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
             //获取5D期号
             var reques = {};
             var userInfo = $util.getUserInfo ();
-            /*$http({
-             method: "POST",
-             url: ipUrl + '/lottery/getWareIssue?token=' + userInfo.data.token,
-             params: {
-             lotteryID: 53
-             },
-             headers: {
-             "Content-Type": "application/json"
-             }
-             })*/
+           
             var data = {
                 lotteryID: 40
             };
@@ -191,7 +182,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                 }
                 
                 var vid = '';
-                if(type == 0){
+                if(type == 0 || type == undefined){
                     if(userInfo.data.vouchers){
                         for (var k = 0; k < userInfo.data.vouchers.length; k++) {
                             if (userInfo.data.vouchers == undefined) {
@@ -232,48 +223,57 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                         $ionicLoading.hide ();
                         console.info (response);
                         console.dir (data);
-                        /*var alertPopup = $ionicPopup.alert ({
-                            title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
-                            template: '<div class="alert-left">' + '<p style="text-align: center">' + response.data.info + '</p>' + '</div>',
-                            okText: '确 定',
-                            okType: 'button-light'
-                        }).then (function () {
-                            $state.go ('tab.account');
-                        });*/
-                        //提交成功窗口配置
-                        $ionicModal.fromTemplateUrl ('templates/submission.html', {
-                            scope: $scope,
-                            backdropClickToClose:true
-                        })
-                            .then (function (modal) {
-                                modal.show ();
-                                sessionStorage.editThisOrderData5D = '';
-                                $rootScope.makeSureText = '继续兑换';
-                                $scope.info = response.data.info;
-                                $scope.realName = userInfo.data.user.realName;
-                                $scope.phones = userInfo.data.user.phone;
-                                $scope.receives = userInfo.data.user.updateDate; //获赠时间
-                                $scope.draw_time = reques.drawTime;    //开奖时间
+                        if(response.data.error == '0'){
+                            //提交成功窗口配置
+                            $ionicModal.fromTemplateUrl ('templates/submission.html', {
+                                scope: $scope,
+                                backdropClickToClose:true
+                            })
+                                .then (function (modal) {
+                                    modal.show ();
+                                    sessionStorage.editThisOrderData5D = '';
+                                    $rootScope.makeSureText = '继续兑换';
+                                    $scope.info = response.data.info;
+                                    $scope.realName = userInfo.data.user.realName;
+                                    $scope.phones = userInfo.data.user.phone;
+                                    $scope.receives = userInfo.data.user.updateDate; //获赠时间
+                                    $scope.draw_time = reques.drawTime;    //开奖时间
             
-                                $scope.receiveNumArr = data.data;//获赠号码
-                                $scope.receiveNum = [];
-                                for(var i in $scope.receiveNumArr){
-                                    var receiveNum = $scope.receiveNumArr[i].investCode;
-                                    var receiveNumStr = receiveNum.split('*');
+                                    $scope.receiveNumArr = data.data;//获赠号码
+                                    $scope.receiveNum = [];
+                                    for(var i in $scope.receiveNumArr){
+                                        var receiveNum = $scope.receiveNumArr[i].investCode;
+                                        var receiveNumStr = receiveNum.split('*');
                 
-                                    $scope.receiveNum.push(receiveNumStr);
-                                }
-                                console.info($scope.receiveNumArr);
-                                console.info($scope.receiveNum);
+                                        $scope.receiveNum.push(receiveNumStr);
+                                    }
+                                    console.info($scope.receiveNumArr);
+                                    console.info($scope.receiveNum);
 //                            $scope.modal3 = modal;
-                                $scope.makeSure = function () {
-                                    modal.hide ();
-                                    $state.go ('tab.exchange');
-                                    jsonWrapBit5D = [];
-                                    sessionStorage.jsonWrap5D = '';
-                                }
+                                    $scope.makeSure = function () {
+                                        modal.hide ();
+                                        $state.go ('tab.exchange');
+                                        jsonWrapBit5D = [];
+                                        sessionStorage.jsonWrap5D = '';
+                                    }
+                                });
+                            //console.log (response.data.info);
+                        }else {
+                            //错误码窗口配置
+                            $ionicModal.fromTemplateUrl('templates/mistake.html', {
+                                scope: $scope,
+                                backdropClickToClose: true
+                            }).then(function (modal) {
+                                $scope.modalError = modal;
+                                $scope.modalError.show ();
+        
+                                $scope.errorInfo = response.data.info;
                             });
-                        //console.log (response.data.info);
+                            $scope.cancelPopError = function () {
+                                $scope.modalError.hide();
+                                $state.go ('tab.account');
+                            };
+                        }
                     }, function (response) {
                         var confirmPopup = $ionicPopup.confirm ({
                             title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',

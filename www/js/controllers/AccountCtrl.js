@@ -7,13 +7,10 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         //验证是否资料完善
         $ionicLoading.show();
         PayType = 1;
-        type=1;
         var userInfo = $util.getUserInfo();
         console.log(userInfo);
         var token = userInfo.data.token;
-        type = 1;
         // console.info(type);
-        // console.info(sign);
         //更新余额
         getUser.getInfo(url + "/service/customer/getUser?token=" + token)
             .then(function (response) {

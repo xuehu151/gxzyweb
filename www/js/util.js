@@ -10,8 +10,8 @@ angular.module ('starter.util', [])
 
         /* 接口地址  */
         var httpURL = {
-            initUrl: ipUrl + '/service/common/index',   //初始化
-            initUrlNew: ipUrl + '/service/common/index1',    //新用户
+            initUrl: ipUrl + '/service/common/index',   //初始化首页   带二维码
+            initUrlNew: ipUrl + '/service/common/index1',    //不带二维码
             getUserNameUrl: ipUrl + '/service/customer/add',    //注册框
             pl3AddUrl: ipUrl + '/service/lottery/pl3add', //排列3投注
             pl5AddUrl: ipUrl + '/service/lottery/pl5add', //排列5投注
@@ -25,7 +25,13 @@ angular.module ('starter.util', [])
             getHttpURL: function () {
                 return httpURL;
             },
-
+    
+            /* 清除用户信息  */
+            removeUserInfo: function () {
+                userInfo = null;
+                window.localStorage.removeItem ("userInfo");
+            },
+            
             /* 保存用户信息  */
             setUserInfo: function (userInfo) {
                 window.localStorage.setItem ("userInfo", JSON.stringify (userInfo));
