@@ -4,7 +4,7 @@
 //兑换 排列5
 angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
     
-    .controller ('Exchange-5Ctrl', function ($scope, $state, $interval, $ionicModal, $ionicLoading, $http, $rootScope, $util, $ionicPopup, getWareIssueService) {
+    .controller ('Exchange-5Ctrl', function ($scope, $state, $interval, $ionicModal, $ionicLoading, $http, $rootScope, $util, $ionicPopup, getWareIssueService, $timeout) {
         //设置排列3球万位号码
         $scope.numDataBit10000 = [];
         var filterBit10000 = [];
@@ -593,11 +593,12 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
         };
         getWareIssueService.getWareIssue(data, userInfo.data.token)
             .then(function (response) {
+                $timeout(countTime,1);
 //                $ionicLoading.hide();
                 $scope.reques = response.data;
 //                console.log ($scope.reques);
     
-                var end_sale_time = $scope.reques.end_sale_time;
+                var end_sale_time = $scope.reques.end_sale_time.replace(/-/g,'/');
     
                 var timer = $interval (countTime, 1000);
     

@@ -4,7 +4,7 @@
 angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
 
 //兑换  大乐透不追加
-    .controller ('BigLotto-2Ctrl', function ($scope, $state, $ionicPopover, $interval, $ionicPopup, $stateParams, $ionicModal, $http, $ionicLoading, $rootScope, $util, getWareIssueService) {
+    .controller ('BigLotto-2Ctrl', function ($scope, $state, $ionicPopover, $interval, $ionicPopup, $stateParams, $ionicModal, $http, $ionicLoading, $rootScope, $util, getWareIssueService, $timeout) {
         var flag2 = $stateParams.flag2;
         //设置红球和篮球号码
         $scope.numDataRed = [];
@@ -477,15 +477,15 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
         console.info(userInfo);
         getWareIssueService.getWareIssue(data, userInfo.data.token)
             .then(function (response) {
-//                $ionicLoading.hide();
-                console.info(response);
+               $timeout(countTime,1);
+                //$ionicLoading.hide();
+                //console.info(response);
                 $scope.reques = response.data;
-                console.log ($scope.reques);
+                //console.log ($scope.reques);
     
-                var end_sale_time = $scope.reques.end_sale_time;
-
+                var end_sale_time = $scope.reques.end_sale_time.replace(/-/g,'/');
                 var timer = $interval (countTime, 1000);
-    
+                
                 function countTime () {
                     var date = new Date ();//获取当前时间
                     var now = date.getTime ();
