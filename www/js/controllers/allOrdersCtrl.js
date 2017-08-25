@@ -6,7 +6,7 @@
 var url = "http://lottery.zhenlong.wang";
 angular.module('starter.allOrdersCtrl', ['starter.services'])
 
-    .controller('allOrdersCtrl', ['$scope', '$rootScope', '$state', 'getUser', 'locals', '$ionicLoading', 'splitCode', '$util', 'difOrders', '$ionicModal', '$timeout','$ionicScrollDelegate', function($scope, $rootScope, $state, getUser, locals, $ionicLoading, splitCode, $util, difOrders, $ionicModal, $timeout,$ionicScrollDelegate) {
+    .controller('allOrdersCtrl', ['$scope', '$rootScope', '$state', 'getUser', 'locals', '$ionicLoading', 'splitCode', '$util', 'difOrders', '$ionicModal', '$timeout', '$ionicScrollDelegate', function($scope, $rootScope, $state, getUser, locals, $ionicLoading, splitCode, $util, difOrders, $ionicModal, $timeout, $ionicScrollDelegate) {
         $scope.tabNames = ['全部订单', '待开奖', '已中奖', '未中奖'];
         $scope.selectIndex = 0;
         // $scope.thisErrorModal=errorModal
@@ -21,7 +21,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
         var token = userInfo.data.token;
         var vm = $scope.vm = {
             moredata: true,
-            orderEach:[],
+            orderEach: [],
             pagination: {
                 pageSize: 8,
                 pageNum: 1
@@ -31,16 +31,14 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                     .then(function(response) {
                         console.log(response);
                         if (response.error == '0' && response.data.length != 0) {
-                            vm.orderEach =vm.orderEach.concat(response.data) ;
+                            vm.orderEach = vm.orderEach.concat(response.data);
 
                             $scope.vm.allOrders = difOrders.diff(vm.orderEach) //全部订单
                             console.log($scope.vm.allOrders);
                             vm.pagination.pageNum += 1;
-                        }
-                        else if (response.error == '0' && response.data.length == 0) {
+                        } else if (response.error == '0' && response.data.length == 0) {
                             vm.moredata = false;
-                        }
-                        else {
+                        } else {
                             $scope.error = response.info;
                             $timeout(function() {
                                 $scope.modalError.show();
@@ -57,7 +55,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
 
         var havenot = $scope.havenot = {
             moredata: true,
-            orderEach:[],
+            orderEach: [],
             pagination: {
                 pageSize: 8,
                 pageNum: 1
@@ -67,16 +65,14 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                     .then(function(response) {
                         console.log(response);
                         if (response.error == '0' && response.data.length != 0) {
-                            havenot.orderEach =havenot.orderEach.concat(response.data) ;
+                            havenot.orderEach = havenot.orderEach.concat(response.data);
 
                             $scope.havenot.allOrders = difOrders.diff(havenot.orderEach) //全部订单
                             console.log($scope.havenot.allOrders);
                             havenot.pagination.pageNum += 1;
-                        }
-                        else if (response.error == '0' && response.data.length == 0) {
+                        } else if (response.error == '0' && response.data.length == 0) {
                             havenot.moredata = false;
-                        }
-                        else {
+                        } else {
                             $scope.error = response.info;
                             $timeout(function() {
                                 $scope.modalError.show();
@@ -93,7 +89,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
 
         var havewin = $scope.havewin = {
             moredata: true,
-            orderEach:[],
+            orderEach: [],
             pagination: {
                 pageSize: 8,
                 pageNum: 1
@@ -103,16 +99,14 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                     .then(function(response) {
                         console.log(response);
                         if (response.error == '0' && response.data.length != 0) {
-                            havewin.orderEach =havewin.orderEach.concat(response.data) ;
+                            havewin.orderEach = havewin.orderEach.concat(response.data);
 
                             $scope.havewin.allOrders = difOrders.diff(havewin.orderEach) //全部订单
                             console.log($scope.havewin.allOrders);
                             havewin.pagination.pageNum += 1;
-                        }
-                        else if (response.error == '0' && response.data.length == 0) {
+                        } else if (response.error == '0' && response.data.length == 0) {
                             havewin.moredata = false;
-                        }
-                        else {
+                        } else {
                             $scope.error = response.info;
                             $timeout(function() {
                                 $scope.modalError.show();
@@ -129,7 +123,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
 
         var havefail = $scope.havefail = {
             moredata: true,
-            orderEach:[],
+            orderEach: [],
             pagination: {
                 pageSize: 8,
                 pageNum: 1
@@ -139,16 +133,14 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                     .then(function(response) {
                         console.log(response);
                         if (response.error == '0' && response.data.length != 0) {
-                            havefail.orderEach =havefail.orderEach.concat(response.data) ;
+                            havefail.orderEach = havefail.orderEach.concat(response.data);
 
                             $scope.havefail.allOrders = difOrders.diff(havefail.orderEach) //全部订单
                             console.log($scope.havefail.allOrders);
                             havefail.pagination.pageNum += 1;
-                        }
-                        else if (response.error == '0' && response.data.length == 0) {
+                        } else if (response.error == '0' && response.data.length == 0) {
                             havefail.moredata = false;
-                        }
-                        else {
+                        } else {
                             $scope.error = response.info;
                             $timeout(function() {
                                 $scope.modalError.show();
@@ -176,7 +168,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
             }
             console.log(order.channelName);
             console.log(investCode);
-            if (order.payType == 0 ) {
+            if (order.payType == 0) {
                 payType = order.channelName;
             } else if (order.payType == 1) {
                 payType = '¥' + order.money;
