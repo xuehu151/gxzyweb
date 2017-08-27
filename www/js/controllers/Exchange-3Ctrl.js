@@ -23,7 +23,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         var redBall_100 = [];
         var redBall_10 = [];
         var redBall_0 = [];
-        
+
         // Create the ball items   百位
         for (var j = 0; j < 10; j++) {
             var itemsBit = {
@@ -127,7 +127,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
             //判断filterBit100的长度确定generate100值
             filterBit1Data ();
         };
-        
+
         function filterBit100Data () {
             if (filterBit100.length == 0) {
                 $scope.generate100 = '';
@@ -136,7 +136,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 $scope.generate100 = filterBit100[0].num;
             }
         }
-        
+
         function filterBit10Data () {
             if (filterBit10.length == 0) {
                 $scope.generate10 = '';
@@ -145,7 +145,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 $scope.generate10 = filterBit10[0].num;
             }
         }
-        
+
         function filterBit1Data () {
             if (filterBit1.length == 0) {
                 $scope.generate1 = '';
@@ -154,7 +154,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 $scope.generate1 = filterBit1[0].num;
             }
         }
-        
+
         //随机选取号码
         var randomBall = []; //原数组
         $scope.randomBallExchage = function () {
@@ -204,7 +204,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
             $scope.generate10 = changeToArray3D.S_Bit[0].num;
             $scope.generate1 = changeToArray3D.G_Bit[0].num;
         }
-    
+
         if(type == 0 || type == undefined){
             if (PayType == 0) {
                 $scope.saveBallSelect3D = function () {
@@ -320,30 +320,35 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
             function getPl3add () {
                 var userInfo = $util.getUserInfo ();
                 $rootScope.makeSureText = '';
-        
+
                 var dataArray = [];
                 var dataObj = {
                     investCode : "",
                     multiple : 1
                 };
                 var investCode = null;
-                if($scope.numDataBit100[randomBall[2]] && $scope.numDataBit10[randomBall[1]] && $scope.numDataBit1[randomBall[0]]) {
-                    investCode = $scope.numDataBit100[randomBall[2]].num + '*';
-                    investCode += $scope.numDataBit10[randomBall[1]].num + '*';
-                    investCode += $scope.numDataBit1[randomBall[0]].num;
-                }else if(redBall_100[0].num && redBall_10[0].num && redBall_0[0].num){
-                    console.info(redBall_0[0].num);
-                    investCode = redBall_100[0].num + '*';
-                    investCode += redBall_10[0].num + '*';
-                    investCode += redBall_0[0].num;
+                if(redBall_100[0] != undefined && redBall_10[0] != undefined && redBall_0[0] != undefined){
+                    if($scope.numDataBit100[randomBall[2]] && $scope.numDataBit10[randomBall[1]] && $scope.numDataBit1[randomBall[0]]) {
+                        investCode = $scope.numDataBit100[randomBall[2]].num + '*';
+                        investCode += $scope.numDataBit10[randomBall[1]].num + '*';
+                        investCode += $scope.numDataBit1[randomBall[0]].num;
+                    }else if(redBall_100[0].num && redBall_10[0].num && redBall_0[0].num){
+                        console.info(redBall_0[0].num);
+                        investCode = redBall_100[0].num + '*';
+                        investCode += redBall_10[0].num + '*';
+                        investCode += redBall_0[0].num;
+                    }else {
+                        alert('请先选择号码!');
+                        return;
+                    }
                 }else {
                     alert('请先选择号码!');
-                    return
+                    return;
                 }
                 dataObj.investCode = investCode;
                 dataArray.push (dataObj);
                 console.info(dataObj);
-                
+
                 //console.log(userInfo.data.voucher);
                 var vid = '';
                 if (type == 0) {
@@ -368,7 +373,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                         vid = userInfo.data.voucher.vid;
                     }
                 }
-        
+
                 var data = {
                     //lotteryID: 31,
                     wareIssue : reques.wareIssue,
@@ -408,13 +413,13 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                                     $scope.phones = userInfo.data.user.phone;
                                     $scope.receives = userInfo.data.user.updateDate; //获赠时间
                                     $scope.draw_time = reques.drawTime;    //开奖时间
-            
+
                                     $scope.receiveNumArr = data.data;//获赠号码
                                     $scope.receiveNum = [];
                                     for (var i in $scope.receiveNumArr) {
                                         var receiveNum = $scope.receiveNumArr[i].investCode;
                                         var receiveNumStr = receiveNum.split ('*');
-                
+
                                         $scope.receiveNum.push (receiveNumStr);
                                     }
                                     console.info ($scope.receiveNumArr);
@@ -454,7 +459,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 };
             };
         }
-        
+
         //玩法说明时间
         var userInfo = $util.getUserInfo ();
         var data = {
@@ -463,22 +468,22 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         getWareIssueService.getWareIssue (data, userInfo.data.token)
             .then (function (response) {
                 $timeout(countTime,1);
-                
+
                 //$ionicLoading.hide();
                 $scope.reques = response.data;
                 console.log ($scope.reques);
                 var timer = $interval (countTime, 1000);
                 var end_sale_time = $scope.reques.end_sale_time.replace(/-/g,'/');
-    
+
                 function countTime () {
                     var date = new Date ();//获取当前时间
                     var now = date.getTime ();
-                    
+
                     var endDate = new Date (end_sale_time); //设置截止时间
                     var end = endDate.getTime ();
-                    
+
                     var leftTime = end - now;//计算时间差
-                    
+
                     var d, h, m, s;
                     if (leftTime >= 0) {//定义变量 d,h,m,s保存倒计时的时间
                         d = Math.floor (leftTime / 1000 / 60 / 60 / 24);
@@ -489,7 +494,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     $scope.hours = checkTime ((d * 24) + h);
                     $scope.minute = checkTime (m);
                     $scope.second = checkTime (s);
-                    
+
                     function checkTime (i) { //将0-9的数字前面加上0，例1变为01
                         if (i < 10) {
                             i = "0" + i;
@@ -500,7 +505,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
             }, function (response) {
                alert ("获取列表失败");
             });
-        
+
         //网期开奖
         $scope.history3D = function () {
             $state.go ('exchangehistory3D');

@@ -50,7 +50,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
             else {
                 selectedRedBallNum ();
             }
-            
+
             console.log ($scope.filterDataRed[0].num);
             console.info(redBall);
             /*封装选择后的红色号码数*/
@@ -123,7 +123,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 $scope.numDataRed[i].check = false;
                 $scope.filterDataRed = [];
             }
-            
+
             //给原数组randomBlue赋值
             for (var i = 1; i <= 35; i++) {
                 randomRed[i] = i;
@@ -142,7 +142,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 $scope.numDataBlue[i].check = false;
                 $scope.filterDataBlue = [];
             }
-           
+
             //给原数组randomBlue赋值
             for (var i = 1; i <= 12; i++) {
                 randomBlue[i] = i;
@@ -175,7 +175,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 $scope.numDataBlue[changeToArray1.blue[i].num - 1].check = true;
             }
         }
-    
+
         if(type == 0 || type == undefined){
             if (PayType == 0) {
                 $scope.saveBallSelect = function () {
@@ -282,7 +282,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 };
             }
         }
-    
+
         //PayType =0 用抵用券扫码
         function joinMenuBig () {
             $ionicLoading.show ({
@@ -316,7 +316,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
             // 大乐透投注接口信息
             function getdltadd () {
                 var userInfo = $util.getUserInfo ();
-            
+
                 var dataArrayBig = [];
                 var dataObj = {
                     investCode : "", //"investCode":"01,03,05,07,09*06,08"
@@ -326,23 +326,34 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 var investCodeBlue = [];
                 var investCodeStr;
                 for (var i = 0; i < 5; i++) {
-                    if($scope.numDataRed[randomRed[i] - 1]){
-                        investCodeRed.push($scope.numDataRed[randomRed[i] - 1].num);
-                    }else if($scope.filterDataRed[i].num){
-                        investCodeRed.push($scope.filterDataRed[i].num);
-                    }
-                    else {
+
+                    if($scope.filterDataRed[i] != undefined){
+                        if($scope.numDataRed[randomRed[i] - 1]){
+                            investCodeRed.push($scope.numDataRed[randomRed[i] - 1].num);
+                        }else if($scope.filterDataRed[i].num){
+                            investCodeRed.push($scope.filterDataRed[i].num);
+                        }
+                        else {
+                            alert('请正确选择红色号码!!!');
+                            return;
+                        }
+                    }else {
                         alert('请正确选择红色号码!!!');
-                        return
+                        return;
                     }
                 }
                 for (var i = 0; i < 2; i++) {
-                    if($scope.numDataBlue[randomBlue[i] - 1]){
-                        investCodeBlue.push($scope.numDataBlue[randomBlue[i] - 1].num);
-                    }else if($scope.filterDataBlue[i].num){
-                        investCodeBlue.push($scope.filterDataBlue[i].num);
-                    }
-                    else{
+                    if($scope.filterDataBlue[i] != undefined){
+                        if($scope.numDataBlue[randomBlue[i] - 1]){
+                            investCodeBlue.push($scope.numDataBlue[randomBlue[i] - 1].num);
+                        }else if($scope.filterDataBlue[i].num){
+                            investCodeBlue.push($scope.filterDataBlue[i].num);
+                        }
+                        else{
+                            alert('请正确选择蓝色号码!!!');
+                            return
+                        }
+                    }else {
                         alert('请正确选择蓝色号码!!!');
                         return
                     }
@@ -351,7 +362,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 dataObj.investCode = investCodeStr;
                 dataArrayBig.push (dataObj);
                 console.log (dataArrayBig);
-    
+
                 $ionicLoading.show ();
                 var vid = '';
                 if(type == 0){
@@ -375,7 +386,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         vid = userInfo.data.voucher.vid;
                     }
                 }
-    
+
                 var data = {
 //              "lotteryID": "2",
                     wareIssue : reques.wareIssue,
@@ -413,7 +424,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                                     $scope.phones = userInfo.data.user.phone;
                                     $scope.receives = userInfo.data.user.updateDate; //获赠时间
                                     $scope.draw_time = reques.drawTime;    //开奖时间
-            
+
                                     $scope.receiveNumArr = data.data;//获赠号码
                                     $scope.receiveNum = [];
                                     $scope.receiveNumRed = [];
@@ -423,12 +434,12 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                                         var receiveNumRedBlue = receiveNum.split('*');
                                         var receiveNumArrRed = receiveNumRedBlue[0].split(',');
                                         var receiveNumArrBlue = receiveNumRedBlue[1].split(',');
-                
+
                                         $scope.receiveNumRed.push(receiveNumArrRed);
                                         $scope.receiveNumBlue.push(receiveNumArrBlue);
                                     }
                                     $scope.receiveNum.push($scope.receiveNumRed.concat($scope.receiveNumBlue));
-            
+
                                     //console.info($scope.receiveNumArr);
 //                                console.info($scope.receiveNum);
                                     //$scope.modal3 = modal;
@@ -453,7 +464,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         });
                     });
             }
-    
+
             //错误码窗口配置
             $rootScope.errorInfo = function () {
                 $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
@@ -468,7 +479,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 };
             };
         }
- 
+
         //玩法说明时间
         var userInfo = $util.getUserInfo ();
         var data = {
@@ -482,19 +493,19 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 //console.info(response);
                 $scope.reques = response.data;
                 //console.log ($scope.reques);
-    
+
                 var end_sale_time = $scope.reques.end_sale_time.replace(/-/g,'/');
                 var timer = $interval (countTime, 1000);
-                
+
                 function countTime () {
                     var date = new Date ();//获取当前时间
                     var now = date.getTime ();
-        
+
                     var endDate = new Date (end_sale_time); //设置截止时间
                     var end = endDate.getTime ();
-        
+
                     var leftTime = end - now;//计算时间差
-        
+
                     var d, h, m, s;
                     if (leftTime >= 0) {//定义变量 d,h,m,s保存倒计时的时间
                         d = Math.floor (leftTime / 1000 / 60 / 60 / 24);
@@ -505,7 +516,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                     $scope.hours = checkTime ((d * 24) + h);
                     $scope.minute = checkTime (m);
                     $scope.second = checkTime (s);
-        
+
                     function checkTime (i) { //将0-9的数字前面加上0，例1变为01
                         if (i < 10) {
                             i = "0" + i;
@@ -516,7 +527,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
             }, function (response) {
                 console.log("获取列表失败");
             });
-        
+
         //网期开奖
         $scope.historyBiglotto = function () {
             $state.go ('bigLottoHistoryDetails');

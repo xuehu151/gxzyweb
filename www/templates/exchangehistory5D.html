@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <ion-content class="h40">
+    <ion-content ng-class="h80 == true?'h88':'h40' ">
         <ion-list>
             <ion-item class="history-time"  ng-repeat="past in historyPast5 track by $index">
                 <p><span ng-cloak>{{past.wareIssue}} 期 </span><ins ng-cloak> {{past.createDate }} 周三</ins></p>

@@ -13,28 +13,20 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
             lotteryID : '31',
             pageSize : pageSize,
             pageNum : pageNum
-        };
+        };console.info($rootScope.h80);
         if (userInfo.data) {
-            /*$http ({
-             method: "POST",
-             url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
-             params: data,
-             headers: {
-             "Content-Type": "application/json"
-             }
-             })*/
             historyPastService.PastLottery (data, userInfo.data.token)
                 .then (function (response) {
                     $ionicLoading.hide ();
                     $scope.historyPast3 = response.data;
                     for (var i = 0; i < $scope.historyPast3.length; i++) {
                         var createDate = $scope.historyPast3[i].createDate;
-                        
+
                         var colon_createDate = createDate.split (':')[0];
                         var blank_createDate = colon_createDate.split (' ')[0];
                         var _createDate = blank_createDate.split ('-');
                         $scope.createDate = _createDate.splice (-2, 4).join ('-');
-                        
+
                         $scope.historyPast3[i].createDate = $scope.createDate;
                     }
                     if ($scope.historyPast3.length === 0) {
@@ -57,7 +49,7 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
             $ionicLoading.hide ();
             $rootScope.errorInfo ();
         }
-        
+
         $scope.toArray = function (string2, num) {
             var array = string2.split (",");
             return array[num];

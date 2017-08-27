@@ -632,13 +632,13 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 
 .show-red-ball i,
 .show-blue-ball i {
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.6em;
+    height: 1.6em;
     color: #fff4fb;
     border-radius: 50%;
     text-align: center;
     line-height: 1.5em;
-    margin: 4px 0;
+    margin: 4px 2px;
     display: inline-block;
 }
 
@@ -841,6 +841,10 @@ input.bigLotto-input2:checked:before {
 }
 
 .h40 {
+    top: 44px !important;
+}
+
+.h88 {
     top: 89px !important;
 }
 
@@ -866,7 +870,7 @@ input.bigLotto-input2:checked:before {
 }
 
 .history-time {
-    padding: 6px 16px;
+    padding: 2px 16px;
 }
 
 .history-time .row {
