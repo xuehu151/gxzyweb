@@ -74,9 +74,6 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                     alert ('数据获取失败!');
                 });
             return;
-        }else {
-            $timeout(alert('签名认证失败!'), 3000);
-            return
         }
         
         
@@ -156,7 +153,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 alert ("初始化数据失败");
             });
         
-       /* $scope.goToExchange3D = function () {
+        $scope.goToExchange3D = function () {
             $state.go ('exchange-3');
         };
         $scope.goToExchange5D = function () {
@@ -166,7 +163,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
             $state.go ('BigLotto-2', {
                 'flag2' : 1
             });
-        };*/
+        };
         
         $scope.goToExchange = function () {
 //            $state.go('scanCodeIndex');
