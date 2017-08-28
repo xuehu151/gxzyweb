@@ -108,7 +108,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             $state.go ('tab.account');
                         }
                     }, function (error) {
-                        alert ('加载失败，请检查网络')
+                        alert ('加载失败，请检查网络******************')
                     });
             }
             else if (type == 1) {
@@ -298,5 +298,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
         }
         else {
             alert ("初始化数据失败");
+            $ionicLoading.hide ();
         }
     });

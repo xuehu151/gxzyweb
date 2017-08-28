@@ -8,6 +8,76 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
     
     .controller ('scanCodeIndexCtrl', function ($scope, $state, getUser, $util, $ionicModal, $rootScope, initDataService, $ionicLoading, $timeout, getWareIssueService) {
         PayType = 0;
+    
+        var data = {};
+        var userInfo = $util.getUserInfo ();
+//        console.info(userInfo);
+//        console.info("aaa"+typeof type);
+//        console.info("aaa" + type);
+        if (userInfo != undefined && type == '0'){
+            PayType = 0;
+            console.info("PayType*************"+PayType);
+            $ionicLoading.hide ();
+            $scope.goToExchange3D = function () {
+                $state.go ('exchange-3');
+            };
+            $scope.goToExchange5D = function () {
+                $state.go ('exchange-5');
+            };
+            $scope.goToExchangeBigLotto2 = function (status) {
+                $rootScope.newStatus = status;
+                $state.go ('BigLotto-2', {
+                    'flag2' : 1
+                });
+            };
+            getWareIssueService.getWinamt (data, userInfo.data.token)
+                .then (function (response) {
+                    // console.info(response.data);
+                    $scope.winningShow = response.data;
+                    console.info ($scope.winningShow);
+                    //上下滚动效果
+                    slide (document.getElementsByTagName ('ul')[0]);
+                    function slide (parent) {
+                        setTimeout (function () {
+                            var className = $ ("." + parent.className);
+                        
+                            var i = 0, sh;
+                            var liLength = className.children ("li").length;
+                            var liHeight = className.children ("li").height () + parseInt (className.children ("li").css ('border-bottom-width'));
+                            className.html (className.html () + className.html ());
+                        
+                            // 开启定时器
+                            sh = setInterval (slide, 3000);
+                            function slide () {
+                                if (parseInt (className.css ("margin-top")) > (-liLength * liHeight)) {
+                                    i++;
+                                    className.animate ({
+                                        marginTop : -liHeight * i + "px"
+                                    }, "slow");
+                                }
+                                else {
+                                    i = 0;
+                                    className.css ("margin-top", "0px");
+                                }
+                            }
+                        
+                            // 清除定时器
+                            className.hover (function () {
+                                clearInterval (sh);
+                            }, function () {
+                                clearInterval (sh);
+                                sh = setInterval (slide, 3000);
+                            });
+                        }, 0);
+                    }
+                }, function (error) {
+                    alert ('数据获取失败!');
+                });
+            return;
+        }else {
+            $timeout(alert('签名认证失败!'), 1000);
+            return
+        }
         
         var data = {
             token : sign
@@ -20,6 +90,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 var datas = $util.setUserInfo (response);
                 var userInfo = $util.getUserInfo ();
                 console.log (userInfo);
+                
                 var token = userInfo.data.token;
                 $scope.needExchangeAmount = { amount : 0 };
     
@@ -84,7 +155,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 alert ("初始化数据失败");
             });
         
-        $scope.goToExchange3D = function () {
+       /* $scope.goToExchange3D = function () {
             $state.go ('exchange-3');
         };
         $scope.goToExchange5D = function () {
@@ -94,7 +165,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
             $state.go ('BigLotto-2', {
                 'flag2' : 1
             });
-        };
+        };*/
         
         $scope.goToExchange = function () {
 //            $state.go('scanCodeIndex');
@@ -114,8 +185,8 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
         $scope.cancelPop2 = function () {
             $scope.modal2.hide ();
         };
-        
-        //错误码窗口配置
+  
+        //错误码窗口配置2
         $ionicModal.fromTemplateUrl ('templates/errorPop.html', {
             scope : $scope,
             backdropClickToClose : true
@@ -125,8 +196,4 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
         $scope.cancelPopError = function () {
             $scope.modalError.hide ();
         };
-        
-        
-        
-        
     });
