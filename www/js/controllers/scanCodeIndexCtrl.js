@@ -75,7 +75,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 });
             return;
         }else {
-            $timeout(alert('签名认证失败!'), 1000);
+            $timeout(alert('签名认证失败!'), 3000);
             return
         }
         
