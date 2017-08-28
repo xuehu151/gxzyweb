@@ -141,7 +141,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     }, 400);
                 }
             }, function (error) {
-                alert('您的网络异常,未能成功获取您的账户信息');
+                alert('您的网络异常,未能成功获取您的账户信息,请重新进入');
                 $ionicLoading.hide();
             });
 
