@@ -182,7 +182,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
 //             console.log (reques);
                     getdltadd ();
                 }, function (response) {
-                    console.log ("获取列表失败");
+                   alert ("获取期号失败");
                 });
             // 大乐透投注接口信息
             function getdltadd () {
@@ -255,7 +255,8 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                     data : data,
                     headers : {
                         "Content-Type" : "application/json"
-                    }
+                    },
+                    timeout: 1000 * 10
                 })
                     .then (function (response) {
                         $ionicLoading.hide ();
@@ -316,7 +317,8 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                         }
                     }, function (response) {
                         //扫码后，所获赠注数的限制提示。
-                        var confirmPopup = $ionicPopup.confirm ({
+                        alert('获取投注信息失败，请检查网络');
+                        /*var confirmPopup = $ionicPopup.confirm ({
                             title : '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
                             template : '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
                             okText : '确认',
@@ -324,7 +326,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                         })
                             .then (function () {
                                 $state.go ('tab.account');
-                            });
+                            });*/
                     });
             }
         }

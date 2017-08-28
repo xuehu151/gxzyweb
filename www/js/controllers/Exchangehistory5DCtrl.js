@@ -17,14 +17,6 @@ angular.module ('starter.Exchangehistory5DCtrl', ['starter.services'])
         console.log(data);
         
         if(userInfo.data){
-            /*$http ({
-             method: "POST",
-             url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
-             params: data,
-             headers: {
-             "Content-Type": "application/json"
-             }
-             })*/
             historyPastService.PastLottery (data, userInfo.data.token)
                 .then (function (response) {
                     $ionicLoading.hide ();
