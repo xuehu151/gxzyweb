@@ -19,14 +19,6 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
         };
         
         if(userInfo.data){
-            /*$http ({
-             method: "POST",
-             url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
-             params: data,
-             headers: {
-             "Content-Type": "application/json"
-             }
-             })*/
             historyPastService.PastLottery (data, userInfo.data.token)
                 .then (function (response) {
                     $ionicLoading.hide ();

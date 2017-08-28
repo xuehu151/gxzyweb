@@ -79,6 +79,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
             return
         }
         
+        
         var data = {
             token : sign
         };

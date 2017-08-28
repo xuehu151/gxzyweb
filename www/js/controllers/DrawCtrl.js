@@ -31,6 +31,7 @@ angular.module ('starter.DrawCtrl', ['starter.services'])
 
     .controller('tabsCtrl', function ($scope,$rootScope) {
 
+    
 
     });
 
