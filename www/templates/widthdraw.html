@@ -13,7 +13,7 @@
                 </p>
                     <i class="ion-social-yen loc1">
                     </i>
-                    <input type="number" name="" class="widthdraw-amount" placeholder="|"  ng-model="widthdrawMoney.money" ng-change="whetherOK()" />
+                    <input type="tel" name="" class="widthdraw-amount" autofocus="autofocus" placeholder=""  ng-model="widthdrawMoney.money" ng-change="whetherOK()" />
             </ion-item>
             <ion-item class="padding0">
                 <p ng-cloak ng-show="whetherShow1">
@@ -25,7 +25,7 @@
                 <p class="cant-widthdraw">{{cantWidthdraw}}</p>
             </ion-item>
             <p ng-class="{true:'widthdraw-btn-grey',false:'widthdraw-btn-blue'}[whetherShow2]" ng-click="whetherShow2 || confirmWidthdraw(widthdrawMoney)" ng-disable="whetherShow2">
-                确认 
+                确认
             </p>
             <div class="widthdraw-descri">
                 提现说明

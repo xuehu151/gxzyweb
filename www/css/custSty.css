@@ -923,8 +923,9 @@ ion-item.f15 {
 .widthdraw-list .widthdraw-amount {
     font-size: 45px;
     display: inline-block;
-    height: 47px;
+    height: 54px;
     background: transparent;
+    width:300px;
 }
 
 .widthdraw-list ion-item:first-child {
