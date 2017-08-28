@@ -246,8 +246,13 @@ angular.module('starter.services', [])
     .factory('timeRemain', ['$http', function($http) {
         return {
             stillHave: function(endDate) {
+                var newEndDate = endDate.toString().split('');
+                newEndDate.splice(10,1,'T')
+                newEndDate.join('');
+                newEndDate = newEndDate.join('');
                 var nowTime = new Date().getTime();
-                var endTime = new Date(endDate).getTime();
+                var endTime = new Date(newEndDate).getTime();
+                console.log(endTime);
                 var leftTime = endTime - nowTime;
 
                 var d, h, m, s;

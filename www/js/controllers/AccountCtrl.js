@@ -105,7 +105,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
 
 
                     //更新待兑换
-                    getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
+                    getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=100')
 
                         .then(function(response) {
                             console.log(response);
