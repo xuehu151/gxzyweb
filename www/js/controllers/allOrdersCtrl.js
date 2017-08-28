@@ -47,7 +47,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                         $ionicLoading.hide();
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                     }, function(error) {
-                        alert(error);
+                        alert('您的网络异常,未能成功获取兑换记录');
                         $ionicLoading.hide();
                     });
             }
@@ -81,7 +81,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                         $ionicLoading.hide();
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                     }, function(error) {
-                        alert(error);
+                        alert('您的网络异常,未能成功获取兑换记录');
                         $ionicLoading.hide();
                     });
             }
@@ -115,7 +115,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                         $ionicLoading.hide();
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                     }, function(error) {
-                        alert(error);
+                        alert('您的网络异常,未能成功获取兑换记录');
                         $ionicLoading.hide();
                     });
             }
@@ -149,7 +149,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                         $ionicLoading.hide();
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                     }, function(error) {
-                        alert(error);
+                        alert('您的网络异常,未能成功获取兑换记录');
                         $ionicLoading.hide();
                     });
             }

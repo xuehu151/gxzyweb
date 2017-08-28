@@ -56,6 +56,33 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
     })
 
     .config (function ($stateProvider, $urlRouterProvider, $ionicConfigProvider,$httpProvider, $locationProvider) {
+      /*  $httpProvider.defaults.timeout = 5000;
+
+        $httpProvider.interceptors.push(function($rootScope) {
+            return {
+                request: function(config) {
+                    $rootScope.$broadcast('loading:show');
+                    return config
+                },
+                response: function(response) {
+                    $rootScope.$broadcast('loading:hide')
+                    return response
+                },
+                responseError: function(response) {
+                    $rootScope.$broadcast('loading:hide')
+                    return response
+
+                },
+                requestError: function(response) {
+                    $rootScope.$broadcast('loading:hide');
+                    $rootScope.$broadcast('request:error')
+                    return response
+                }
+            }
+        })*/
+
+
+
         //解决tabs在Android顶部的方法
         $ionicConfigProvider.platform.ios.tabs.style('standard');
         $ionicConfigProvider.platform.ios.tabs.position('bottom');

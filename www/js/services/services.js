@@ -92,7 +92,8 @@ angular.module('starter.services', [])
                 headers: {
                     // "Accept": "application/json",
                     "Content-Type": "application/json"
-                }
+                },
+                timeout :10000
             }).success(function(response) {
                 d.resolve(response);
             }).error(function() {
@@ -123,7 +124,8 @@ angular.module('starter.services', [])
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json"
-                }
+                },
+                timeout :10000
             }).success(function(response) {
                 d.resolve(response);
             }).error(function() {
@@ -264,5 +266,6 @@ angular.module('starter.services', [])
 
     .constant('$ionicLoadingConfig', {
         hideOnStateChange: true,
+        duration:10000,
         template: '<p class="spinner-icon"><ion-spinner icon="bubbles" class="spinner-balanced"></ion-spinner><span>加载中...'
     });

@@ -24,7 +24,7 @@ angular.module('starter.widthdrawCtrl', ['starter.services'])
                 }
                 $ionicLoading.hide();
             }, function(error) {
-                alert(error);
+                alert('您的网络异常,未能成功获取您的可用余额');
                 $ionicLoading.hide();
             });
         $scope.widthdrawMoney = { money: '' }; //提现金额
@@ -84,7 +84,7 @@ angular.module('starter.widthdrawCtrl', ['starter.services'])
                     }
                     $ionicLoading.hide();
                 }, function(error) {
-                    alert(error);
+                    alert('您的网络异常,未能成功提交你的提现请求');
                     $ionicLoading.hide();
                 })
         };

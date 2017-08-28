@@ -54,7 +54,7 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
                     };
                     $ionicLoading.hide();
                 }, function(error) {
-                    alert(error);
+                    alert('您的网络异常,未能成功完善您的信息');
                     $ionicLoading.hide ();
                 })
         }
