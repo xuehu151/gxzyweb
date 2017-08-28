@@ -157,7 +157,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                      console.log (reques);
                     getPl5add ();
                 }, function (response) {
-                    console.log ("获取列表失败");
+                    alert ("获取期号失败");
                 });
             // 排列五投注信息
             function getPl5add () {
@@ -217,7 +217,8 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                     data: data,
                     headers: {
                         "Content-Type": "application/json"
-                    }
+                    },
+                    timeout: 1000 * 10
                 })
                     .then (function (response) {
                         $ionicLoading.hide ();
@@ -275,7 +276,8 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                             };
                         }
                     }, function (response) {
-                        var confirmPopup = $ionicPopup.confirm ({
+                        alert('获取投注信息失败，请检查网络');
+                        /*var confirmPopup = $ionicPopup.confirm ({
                             title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
                             template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
                             okText: '确认',
@@ -283,7 +285,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                             okType: 'button-darkBlue'
                         }).then (function () {
                             $state.go ('tab.account');
-                        });
+                        });*/
                     });
             }
         }

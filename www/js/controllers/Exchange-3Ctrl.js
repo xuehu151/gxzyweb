@@ -314,7 +314,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                         getPl3add ();
                     }
                 }, function (response) {
-                    console.log ("获取列表失败");
+                    alert ("获取期号失败");
                 });
             // 排列三投注信息接口
             function getPl3add () {
@@ -387,7 +387,8 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     data : data,
                     headers : {
                         "Content-Type" : "application/json"
-                    }
+                    },
+                    timeout: 1000 * 10
                 })
                 //BettingService.pl3Add(data, userInfo.data.token)
                     .then (function (response) {
@@ -434,7 +435,8 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                                 });
                         }
                     }, function (response) {
-                        var confirmPopup = $ionicPopup.confirm ({
+                        alert('获取投注信息失败，请检查网络');
+                        /*var confirmPopup = $ionicPopup.confirm ({
                             title : '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
                             template : '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
                             okText : '确认',
@@ -442,7 +444,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                             okType : 'button-darkBlue'
                         }).then (function () {
                             $state.go ('tab.account');
-                        });
+                        });*/
                     });
             }
             //错误码窗口配置
