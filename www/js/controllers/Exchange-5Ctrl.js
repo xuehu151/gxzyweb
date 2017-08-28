@@ -450,7 +450,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     multiple: 1
                 };
                 var investCode = null;
-                if(redBall_10000[0] != undefined &&  redBall_1000[0] != undefined && redBall_100[0] != undefined && redBall_10[0] != undefined && redBall_0[0] != undefined){
+                if(redBall_10000[0] != undefined &&  redBall_1000[0] != undefined && redBall_100[0] != undefined && redBall_10[0] != undefined && redBall_0[0] != undefined || $scope.numDataBit10000[randomBall[4]] && $scope.numDataBit1000[randomBall[3]] && $scope.numDataBit100[randomBall[2]] && $scope.numDataBit10[randomBall[1]] && $scope.numDataBit1[randomBall[0]]){
                     if($scope.numDataBit10000[randomBall[4]] && $scope.numDataBit1000[randomBall[3]] && $scope.numDataBit100[randomBall[2]] && $scope.numDataBit10[randomBall[1]] && $scope.numDataBit1[randomBall[0]]){
                         investCode = $scope.numDataBit10000[randomBall[4]].num + '*';
                         investCode += $scope.numDataBit1000[randomBall[3]].num + '*';

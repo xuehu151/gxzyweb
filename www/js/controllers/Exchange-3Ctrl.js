@@ -327,7 +327,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     multiple : 1
                 };
                 var investCode = null;
-                if(redBall_100[0] != undefined && redBall_10[0] != undefined && redBall_0[0] != undefined){
+                if(redBall_100[0] != undefined && redBall_10[0] != undefined && redBall_0[0] != undefined || $scope.numDataBit100[randomBall[2]] && $scope.numDataBit10[randomBall[1]] && $scope.numDataBit1[randomBall[0]]){
                     if($scope.numDataBit100[randomBall[2]] && $scope.numDataBit10[randomBall[1]] && $scope.numDataBit1[randomBall[0]]) {
                         investCode = $scope.numDataBit100[randomBall[2]].num + '*';
                         investCode += $scope.numDataBit10[randomBall[1]].num + '*';
