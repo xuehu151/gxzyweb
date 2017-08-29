@@ -61,9 +61,10 @@
             <p class="account-common account-bg-blue" ng-click="withdrawConfirm()">
                 提现
             </p>
-            <a class="account-common account-bg-none" ui-sref="tab.exchange"><!-- ng-click="toConvert"-->
-        兑换
-      </a>
+            <a class="account-common account-bg-none" ui-sref="tab.exchange">
+                <!-- ng-click="toConvert"-->
+                兑换
+            </a>
         </ion-list>
         <!-- modal弹窗选择提现方式 -->
         <script id="accountModal.html" type="text/ng-template">
@@ -111,14 +112,12 @@
                     </div>
                     <div class="account-modal3-style2 clearfix">
                         <span class="fl">获赠号码:</span>
-                        <ion-scroll class="fl rowball-wrap" zooming="true" direction="y" overflow-scroll="true" scrollbar-y="true" >
-
+                        <ion-scroll class="fl rowball-wrap" zooming="true" direction="y" overflow-scroll="true" scrollbar-y="true">
                             <span class="rowball" ng-repeat="eachBet in bettingTotal track by $index">
                               <i ng-cloak ng-repeat="codeRed in eachBet[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in eachBet[1] track by $index" ng-if="eachBet[1]" class="blue">{{codeBlue}}</i>
                             </span>
                         </ion-scroll>
                     </div>
-
                     <div class="account-modal3-style2" style="margin-top: 0;">
                         <span class="fl">开奖号码:</span>
                         <span>
@@ -127,6 +126,61 @@
                     </div>
                     <div class="account-modal3-style3">*奖金已发送至奖金余额,请查收!</div>
                     <div class="account-modal3-style4" ng-click="cancelPop3()"></div>
+                </div>
+            </ion-modal-view>
+        </script>
+        <!-- modal弹窗 出票失败 -->
+        <script id="accountModalFailed.html" type="text/ng-template">
+            <ion-modal-view id="modalFailed">
+                <div class="modal-failed">
+                    <div class="top">
+                        <img style="width: 58px;" src="./img/completeInf.png" alt="" />
+                    </div>
+                    <div class="print-failed" ng-cloak>
+                        <h4>出票失败</h4>
+                        <div class="row-style clearfix">
+                            <div class="fl style1">
+                                <span class="fr">期数:</span>
+                            </div>
+                            <div class="fl style2">
+                                <span class="fl" ng-cloak>
+                                    {{wareIssueFailed}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row-style clearfix">
+                            <div class="fl style1">
+                                <span class="fr">订单提交日期:</span>
+                            </div>
+                            <div class="fl style2">
+                                <span class="fl" ng-cloak>{{failedDate}}</span>
+                            </div>
+                        </div>
+                        <div class="row-style clearfix">
+                            <div class="fl style1">
+                                <span class="fr">
+                                    <span class="fr">投注号码:</span>
+                                    <br>
+                                    <span style="font-size: 8px;color: #999;line-height: 12px;display: inline-block;">(多于三注可拖动号码查看未显示号码)</span>
+                                </span>
+                            </div>
+                            <div class="fl style2">
+                                <ion-scroll class="fl rowball-wrap" zooming="true" direction="y" overflow-scroll="true" scrollbar-y="true">
+                                    <span class="rowball" ng-repeat="eachBet in investCodeFailed track by $index">
+                                        <i ng-cloak ng-repeat="codeRed in eachBet[0] track by $index" >{{codeRed}}</i>
+                                        <i ng-cloak ng-repeat="codeBlue in eachBet[1] track by $index" ng-if="eachBet[1]" class="blue" >{{codeBlue}}</i>
+                                    </span>
+                                </ion-scroll>
+                            </div>
+                        </div>
+                        <div class="row-style2">
+                            *兑换资格或支付款已返还至待兑换或账户余额,请重新投注
+                        </div>
+
+                    </div>
+                    <div class="close" ng-click="cancelPrintFailed()">
+                        关闭
+                    </div>
                 </div>
             </ion-modal-view>
         </script>

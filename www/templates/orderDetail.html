@@ -31,7 +31,7 @@
                     <span class="font-style2" ng-cloak>{{orderDetail.orderTime}}</span></div>
                 <div ng-show="orderDetail.winMoney">
                     <span class="purchase-code">中奖奖金：</span>
-                    <span class="font-style6" ng-cloak>¥ {{orderDetail.winMoney | number:2 }}</span>
+                    <span class="font-style6" ng-cloak>¥ {{orderDetail.winMoney | number:0 }}</span>
                 </div>
             </div>
         </ion-list>

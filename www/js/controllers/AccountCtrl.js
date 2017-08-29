@@ -19,11 +19,23 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         var winAlertStatus = { first: false, second: false, third: false, forth: false }; //最多四次弹窗
         var haveShowAllWin = false;
         var nextShow = null; //定时器
-
-        $scope.needExchangeAmount = { amount: 0 };
         //检测有无中奖
         var totalWinamt = { first: 0, second: 0, third: 0, forth: 0 };
         var bettingEach = { first: [], second: [], third: [], forth: [] }; //每次弹框获得的奖金
+
+        /**
+         * [兑换失败相关参数]
+         * @type {Array}
+         */
+        var winFailItems = [];
+        var winFailAlertStatus = { first: false, second: false, third: false, forth: false }; //最多四次弹窗
+        var haveShowAllFail = false;
+        var nextFailShow = null; //定时器
+        //检测有无兑换失败
+        var bettingEachFailed = { first: [], second: [], third: [], forth: [] }; //每次弹框获得的奖金
+
+
+        $scope.needExchangeAmount = { amount: 0 };
 
 
         //更新余额
@@ -64,8 +76,6 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         ];
                     }
 
-
-
                     //中奖弹框
                     getUser.getInfo(url + "/service/lottery/getWinList?token=" + token + '&pageNum=1&pageSize=8')
                         .then(function(response) {
@@ -93,6 +103,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                             if (response.error == '0') {
                                                 $scope.result = splitCode.split(response.data.result);
                                                 console.log($scope.result);
+                                                $scope.modal3.show();
                                             } else {
                                                 $scope.error = response.info;
                                                 $timeout(function() {
@@ -105,7 +116,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         });
 
 
-                                    $scope.modal3.show();
+
                                 } else if (!winItems[0]) {
                                     $timeout.cancel(nextShow);
                                 }
@@ -122,9 +133,46 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         });
 
 
+                    //检测出票失败
+                    getUser.getInfo(url + "/service/lottery/getPrintFailList?token=" + token + '&pageNum=1&pageSize=100')
+                        .then(function(response) {
+                            console.log(response);
+                            if (response.error == '0') {
+
+                                    winFailItems = response.data;
+
+                                    if (winFailItems[0]) {
+                                        for (var j = 0; j < winFailItems[0].lotteryList.length; j++) {
+                                            bettingEachFailed.first.push(splitCode.split(winFailItems[0].lotteryList[j].investCode))
+                                        }
+                                        console.log(bettingEachFailed);
+                                        $scope.wareIssueFailed = winFailItems[0].wareIssue;
+                                        $scope.failedDate = winFailItems[0].updateDate;
+                                        $scope.investCodeFailed = bettingEachFailed.first.concat();
+                                        console.log($scope.investCodeFailed);
+                                        winFailAlertStatus.first = true;
+                                        $scope.modalPrintFailed.show();
+                                    }
+                                    else if (!winFailItems[0]) {
+                                    $timeout.cancel(nextFailShow);
+                                }
+
+
+                            } else {
+                                $scope.error = response.info;
+                                $timeout(function() {
+                                    $scope.modalError.show();
+                                }, 300);
+                            }
+                            $ionicLoading.hide();
+                        }, function(error) {
+                            alert('您的网络异常,未能成功获取到是否有出票失败');
+                            $ionicLoading.hide();
+                        });
+
+
                     //更新待兑换
                     getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=100')
-
                         .then(function(response) {
                             console.log(response);
                             if (response.error == '0') {
@@ -161,23 +209,13 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         $scope.withdrawConfirm = function() {
             var userData = userInfo.data.user;
             if (userData.wechat || userData.alipay || userData.bankNo) {
-                $scope.modal.show();
+                // $scope.modal.show();
+                $scope.modalPrintFailed.show();
             } else {
                 $scope.modal4.show();
             }
         };
 
-        //判断二维码已使用
-        /*$scope.toConvert = function () {
-            if(userInfo.error == '2301'){
-                if(userInfo.data.vouchers == ''){
-                    $state.go('tab.exchange');
-                }else {
-                    alert(userInfo.info + '，不可兑换');
-                    return
-                }
-            }
-        };*/
         //冻结金额的解释
         $scope.toggleShowAnswer = function() {
             $scope.showAnswer = !$scope.showAnswer;
@@ -354,6 +392,51 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         $scope.toCompeleteInfo = function() {
             $state.go('completeInfo');
             $scope.modal4.hide();
+        };
+
+
+        //出票失败窗口配置
+        $ionicModal.fromTemplateUrl('accountModalFailed.html', {
+            scope: $scope,
+            backdropClickToClose: true
+        }).then(function(modal) {
+            $scope.modalPrintFailed = modal;
+        });
+        $scope.cancelPrintFailed = function() {
+            $scope.modalPrintFailed.hide();
+            nextFailShow = $timeout(function() {
+                if (winFailAlertStatus.first == true && winFailAlertStatus.second == false && winFailAlertStatus.third == false && winFailAlertStatus.forth == false && winFailItems[1]) {
+                    for (var i = 0; i < winFailItems[1].lotteryList.length; i++) {
+                        bettingEachFailed.second.push(splitCode.split(winFailItems[1].lotteryList[i].investCode))
+                    }
+                    $scope.investCodeFailed = bettingEachFailed.second.concat();
+                    $scope.wareIssueFailed = winFailItems[1].wareIssue;
+                    $scope.failedDate = winFailItems[1].updateDate;
+                    winFailAlertStatus.second = true;
+                    $scope.modalPrintFailed.show();
+
+                } else if (winFailAlertStatus.first == true && winFailAlertStatus.second == true && winFailAlertStatus.third == false && winFailAlertStatus.forth == false && winFailItems[2]) {
+
+                    for (var i = 0; i < winFailItems[2].lotteryList.length; i++) {
+                        bettingEachFailed.third.push(splitCode.split(winFailItems[2].lotteryList[i].investCode))
+                    }
+                    $scope.investCodeFailed = bettingEachFailed.third.concat();
+                    $scope.wareIssueFailed = winFailItems[2].wareIssue;
+                    $scope.failedDate = winFailItems[2].updateDate;
+                    winFailAlertStatus.third = true;
+                    $scope.modalPrintFailed.show();
+
+                } else if (winFailAlertStatus.first == true && winFailAlertStatus.second == true && winFailAlertStatus.third == true && winFailAlertStatus.forth == false && winFailItems[3]) {
+                    for (var i = 0; i < winFailItems[3].lotteryList.length; i++) {
+                        bettingEachFailed.forth.push(splitCode.split(winFailItems[3].lotteryList[i].investCode))
+                    }
+                    $scope.investCodeFailed = bettingEachFailed.forth.concat();
+                    $scope.wareIssueFailed = winFailItems[3].wareIssue;
+                    $scope.failedDate = winFailItems[3].updateDate;
+                    winFailAlertStatus.forth = true;
+                    $scope.modalPrintFailed.show();
+                }
+            }, 1000)
         };
 
         //错误码窗口配置

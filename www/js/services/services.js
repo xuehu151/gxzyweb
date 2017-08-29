@@ -203,7 +203,15 @@ angular.module('starter.services', [])
                     obj[i].whetherRed = true;
                     obj[i].status = '已中奖';
                     obj[i].whetherDate = false;
-                    obj[i].LT = '¥' + obj[i].lotteryList[0].winamt;
+
+                    var winMoney2 = 0;
+                    for (var j = 0; j < obj[i].lotteryList.length; j++) {
+                        winMoney2 += obj[i].lotteryList[j].winamt;
+                        console.log(winMoney2);
+                    }
+
+
+                    obj[i].LT = '¥' + winMoney2;
                     if (obj[i].payType == 0) {
                         obj[i].RT = obj[i].channelName;
                     } else if (obj[i].payType == 1) {
