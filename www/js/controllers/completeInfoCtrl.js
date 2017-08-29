@@ -84,8 +84,8 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
 
 
         /*var idcardInput = document.getElementsById('idCard');
-        var weChatInput = document.getElementsById('wechat');*/
-        var bankInput = document.getElementById('bank');
+        var weChatInput = document.getElementsById('wechat');
+        var bankInput = document.getElementById('bank');*/
         var bankNoInput = document.getElementById('bankNo');
 
 
