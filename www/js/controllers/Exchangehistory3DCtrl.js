@@ -42,7 +42,7 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
                     }
                     console.log (response);
                 }, function (response) {
-                    console.log ("获取列表失败");
+                    alert ("获取列表失败");
                 });
         }
         else {

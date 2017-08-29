@@ -752,14 +752,14 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 
 .betting-detail-footer .bigLotto-input1 {
     width: 3rem;
-    height: 1.5rem;
+    height: 2rem;
     border: 1px solid #ccc;
     display: inline-block;
     background: transparent;
     text-align: center;
     border-radius: 6px;
     font-size: 16px;
-    line-height: 30px;
+    line-height: 10px;
 }
 
 .betting-detail-footer .bigLotto-input2 {
