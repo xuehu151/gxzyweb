@@ -3,21 +3,32 @@
       <ion-list class="complete-info-list">
         <form role="form" name="inputInfoForm" ng-submit="submitInfo()">
           <label class="item item-input">
+           <img class="img-style" src="img/name.png" alt="姓名" />
+            <div ng-cloak style="margin-left: 18px;">{{userInfo.data.user.realName}}</div>
+
+          </label>
+          <label class="item item-input">
+           <img class="img-style" src="img/phone.png" alt="电话" />
+            <div ng-cloak style="margin-left: 18px;">{{userInfo.data.user.phone}}</div>
+
+          </label>
+
+          <label class="item item-input">
            <!-- <div class="img_003"></div> -->
            <i class="icon-id f22"></i>
-            <input type="text"
+            <input id="idCard" type="text"
                 name="idcard"
                 placeholder="请输入身份证号" ng-model="users.idcard"
                 required
                 ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/"
                 class="completeInfo-style" />
             <span class="icon ion-close-round error"
-                ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid">15位或18位身份证号码</span>
+                ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid">15位或18位身份证号</span>
             <span class="fr" style="color: #d21e1e;margin-top: 4px;">*</span>
           </label>
-          <label class="item item-input">
+          <!-- <label class="item item-input">
             <i class="icon-wechat f22"></i>
-            <input type="text"
+            <input id="wechat" type="text"
                 name="wechat"
                 ng-pattern="/^[a-z0-9]{6,16}$/"
                 placeholder="请输入微信账号"
@@ -26,10 +37,10 @@
             <span class="icon ion-close-round error"
                 ng-show="inputInfoForm.wechat.$dirty && inputInfoForm.wechat.$invalid">6-16个字符</span>
             <span class="fr" style="color: #d21e1e;margin-top: 4px;">*</span>
-          </label>
+          </label> -->
           <label class="item item-input">
             <i class="icon-bank f22"></i>
-            <input type="text"
+            <input id="bank" type="text"
                 name="bank"
                 placeholder="请输入开户行名称" ng-model="users.bank"
                 ng-pattern="/[\u4E00-\u9FA5\uF900-\uFA2D]/"
@@ -40,7 +51,7 @@
           </label>
           <label class="item item-input">
             <img class="icon-style1" src="./img/bankNo.png" alt="bankNo" />
-            <input type="number"
+            <input id="bankNo" type="number"
                 name="bankNo"
                 placeholder="请输入银行卡号"
                 ng-model="users.bankNo"

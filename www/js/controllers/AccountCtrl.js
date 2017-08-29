@@ -37,15 +37,33 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     $scope.frozedMoney = response.data.freeze;
                     $scope.totalMoney = $scope.useableMoney + $scope.frozedMoney;
                     //提现时候的账户号码
-                    $rootScope.accountNum = [{
-                        chanel: 2,
-                        num: '(' + response.data.wechat + ')'
-                        // disable: false
-                    }, {
-                        chanel: 3,
-                        num: '(' + response.data.bankNo + ')'
-                        // disable: false
-                    }];
+                    //把2-6位改为'****'
+                    if (response.data.bankNo) {
+                        // var newWechat = response.data.wechat.split('');
+                        var newBankNo = response.data.bankNo.split('');
+                        // newWechat.splice(4,4,'****');
+                        newBankNo.splice(4, 4, '****');
+
+
+                        $rootScope.accountNum = [
+                            /*{
+                                chanel: 2,
+                                num: '(' + newWechat.join('') + ')'
+                                // disable: false
+                            },*/
+                            {
+                                chanel: 2,
+                                num: ''
+                                // disable: false
+                            },
+                            {
+                                chanel: 3,
+                                num: '(' + newBankNo.join('') + ')'
+                                // disable: false
+                            }
+                        ];
+                    }
+
 
 
                     //中奖弹框

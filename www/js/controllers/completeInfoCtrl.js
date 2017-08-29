@@ -5,7 +5,7 @@ var url = "http://lottery.zhenlong.wang";
 //完善个人资料
 angular.module('starter.completeInfoCtrl', ['starter.services'])
 
-    .controller('completeInfoCtrl', function($scope, $rootScope, $state, locals, postData, $ionicLoading,$ionicModal, $util,$timeout) {
+    .controller('completeInfoCtrl', function($scope, $rootScope, $state, locals, postData, $ionicLoading,$ionicModal, $util,$timeout,$interval) {
         $scope.users = {
             // realName: '',
             // phone: '',
@@ -20,7 +20,7 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
          *     2.再把ng-model值赋进来
          *     3.再把这个对象赋给localstorage
          */
-        var userInfo = $util.getUserInfo();
+        var userInfo = $scope.userInfo = $util.getUserInfo();
         console.log(userInfo);
         $rootScope.addData = userInfo;
         //        console.log ($rootScope.addData);
@@ -69,4 +69,36 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
         $scope.cancelPopError = function() {
             $scope.modalError.hide();
         };
+
+        var scrollTimer = null; //控制延时0.6s后scrollIntoViewIfNeeded
+        /**
+         * [输入时调整视图位置,使键盘不遮挡input框]
+         * @param  {[object]} obj [input框元素]
+         * @return {[type]}     [description]
+         */
+        function scrollInput(obj) {
+          scrollTimer = $interval(function() {
+            obj.scrollIntoViewIfNeeded(true);
+          }, 300)
+        }
+
+
+        /*var idcardInput = document.getElementsById('idCard');
+        var weChatInput = document.getElementsById('wechat');*/
+        var bankInput = document.getElementById('bank');
+        var bankNoInput = document.getElementById('bankNo');
+
+
+        /*idcardInput.onfocus = function() {
+          scrollInput(idcardInput);
+        }
+        weChatInput.onfocus = function() {
+          scrollInput(idcardInput);
+        }*/
+        /*bankInput.onfocus = function() {
+          scrollInput(bankInput);
+        }*/
+        bankNoInput.onfocus = function() {
+          scrollInput(bankNoInput);
+        }
     });
