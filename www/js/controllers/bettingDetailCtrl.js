@@ -163,12 +163,12 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
         };
         // 确认提交按钮
         $scope.showOrderAlertCms = function () {
-            $ionicLoading.show ();
             if ($scope.multiple <= 0) { //投注倍数限制
                 alert ('请重新设置投注倍数');
                 return
             }
             //获取大乐透期号
+            $ionicLoading.show ();
             var reques = {};
             var userInfo = $util.getUserInfo ();
 //            console.log(userInfo);

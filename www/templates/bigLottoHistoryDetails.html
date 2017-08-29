@@ -1,4 +1,4 @@
-<ion-view view-title="大乐透往期开奖">
+<ion-view view-title="">
     <div class="bar " style="padding: 0"   >
         <div class="row notice">
             <i class="icon ion-volume-medium"></i>
@@ -25,7 +25,7 @@
                 </div>
             </ion-item>
         </ion-list>
-
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
     </ion-content>
 
 </ion-view>

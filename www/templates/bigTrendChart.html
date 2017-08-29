@@ -5,35 +5,35 @@
             <div style="overflow: hidden;white-space: nowrap;width:100%;">
                 <ion-scroll direction="x" scrollbar-x="false" overflow-scroll="false" has-bouncing="false" delegate-handle="headContainerHandle" on-scroll="noScroll()" style="margin-top:0;">
                     <div style="display:flex;width:800px;">
-                        <div class="head5DBig" style="width: 181px;font-size: 9px;overflow: hidden">开奖号</div>
-                        <div class="head5DBig" style="width: 215px">前一区</div>
-                        <div class="head5DBig" style="width: 310px">前二区</div>
-                        <div class="head5DBig" style="width: 290px">前三区</div>
+                        <div class="head5DBig" style="width: 15%;font-size: 9px;overflow: hidden">开奖号</div>
+                        <div class="head5DBig" style="width: 20%">前一区</div>
+                        <div class="head5DBig" style="width: 20.5%">前二区</div>
+                        <div class="head5DBig" style="width: 19.5%">前三区</div>
                         <div class="head5DBig" style="border-right:0;">后区</div>
                     </div>
                     <div style="display:flex;width:800px;" class="titleTd">
-                        <div class="head5DBig" style="width: 180px;font-size: 9px;">
+                        <div class="head5DBig" style="width: 16%;font-size: 9px;">
                             <table>
                                 <tr>
                                     <td ng-repeat="drawItem in drawCount">{{drawItem}}</td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="head5DBig">
+                        <div class="head5DBig" style="width: 21%;">
                             <table>
                                 <tr>
                                     <td ng-repeat="item in formerAreaOne">{{item}}</td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="head5DBig">
+                        <div class="head5DBig" style="width: 22%;">
                             <table>
                                 <tr>
-                                    <td ng-repeat="item in formerAreaTwo">{{item}}</td>
+                                    <td  ng-repeat="item in formerAreaTwo">{{item}}</td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="head5DBig">
+                        <div class="head5DBig" style="width: 21%;">
                             <table>
                                 <tr>
                                     <td ng-repeat="item in formerAreaThree">{{item}}</td>
