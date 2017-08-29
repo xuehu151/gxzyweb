@@ -5,14 +5,14 @@
           <label class="item item-input">
            <!-- <div class="img_003"></div> -->
            <i class="icon-id f22"></i>
-            <input type="number"
+            <input type="text"
                 name="idcard"
                 placeholder="请输入身份证号" ng-model="users.idcard"
                 required
-                ng-pattern="/^\d{15}|\d{18}$/"
+                ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/"
                 class="completeInfo-style" />
             <span class="icon ion-close-round error"
-                ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid">15位或18位数字</span>
+                ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid">15位或18位身份证号码</span>
             <span class="fr" style="color: #d21e1e;margin-top: 4px;">*</span>
           </label>
           <label class="item item-input">
