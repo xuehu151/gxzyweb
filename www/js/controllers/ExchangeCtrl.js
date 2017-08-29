@@ -14,9 +14,9 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
         type = $location.search ().type;
         var data = {};
         var userInfo = $util.getUserInfo ();
-//        console.info(userInfo);
-//        console.info("aaa"+typeof type);
-//        console.info("aaa" + type);
+        console.info(userInfo);
+        console.info("aaa"+typeof type);
+        console.info("aaa" + type);
         if (userInfo != undefined && type == undefined){
             PayType = 1;
             console.info("PayType*************"+PayType);
@@ -39,7 +39,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
             };
             getWareIssueService.getWinamt (data, userInfo.data.token)
                 .then (function (response) {
-                    // console.info(response.data);
+                     console.info(response);
                     $scope.winningShow = response.data;
                     console.info ($scope.winningShow);
                     //上下滚动效果
@@ -82,6 +82,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 });
             return;
         }
+        
         if (sign != undefined) {
             if (type == 0) {//初始化不带二维码    index1
                 
@@ -108,7 +109,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             $state.go ('tab.account');
                         }
                     }, function (error) {
-                        alert ('加载失败，请检查网络******************')
+                        alert ('加载失败，请检查网络')
                     });
             }
             else if (type == 1) {

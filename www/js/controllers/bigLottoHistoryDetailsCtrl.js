@@ -48,7 +48,7 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
                     }
                     console.log (response);
                 }, function (response) {
-                    console.log ("获取列表失败");
+                    alert ("获取列表失败");
                 });
         }
         else {
