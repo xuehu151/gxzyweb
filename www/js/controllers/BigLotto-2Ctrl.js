@@ -220,11 +220,8 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         });
                     }
                     else {
-                        var alertPopup = $ionicPopup.alert ({
-                            template: '<p style="text-align: center; letter-spacing: 2px;">你还未选择号码，请正确选择号码！</p>',
-                            okText: "确定"
-                        });
-                        return
+                        alert('请正确选择号码!!!');
+                        return;
                     }
                 };
             }
@@ -273,11 +270,8 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         });
                     }
                     else {
-                        var alertPopup = $ionicPopup.alert ({
-                            template: '<p style="text-align: center; letter-spacing: 2px;">你还未选择号码，请正确选择号码！</p>',
-                            okText: "确定"
-                        });
-                        return
+                        alert('请正确选择号码!!!');
+                        return;
                     }
                 };
             }
@@ -423,7 +417,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                                     $scope.info = response.data.info;
                                     $scope.realName = userInfo.data.user.realName;
                                     $scope.phones = userInfo.data.user.phone;
-                                    $scope.receives = userInfo.data.user.updateDate; //获赠时间
+                                    $scope.receives =  reques.createDate; //投注时间
                                     $scope.draw_time = reques.drawTime;    //开奖时间
 
                                     $scope.receiveNumArr = data.data;//获赠号码

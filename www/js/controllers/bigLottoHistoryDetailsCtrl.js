@@ -17,6 +17,8 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
             pageSize : pageSize,
             pageNum : pageNum
         };
+    
+        loadajax();
         /*
          * 上拉加载，分批加载服务端剩余的数据
          */
@@ -32,7 +34,7 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
                     .then (function (response) {
                         $ionicLoading.hide ();
                         $scope.bitLotto = response.data;
-                        $scope.$broadcast ('scroll.refreshComplete');
+                        /*$scope.$broadcast ('scroll.refreshComplete');
                         $scope.$broadcast ('scroll.infiniteScrollComplete');
                         if (response.data.length <= data.pageNum * data.pageSize) {
                             $scope.hasMore = false;      //这里判断是否还能获取到数据，如果没有获取数据，则不再触发加载事件
@@ -44,9 +46,9 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
     
                         if (data.pageNum == 1) {
                             $scope.items = [];
-                        }
+                        }*/
                         
-                        $scope.items = $scope.items.concat (response.data);
+                        //$scope.items = $scope.items.concat (response.data);
                         
                         for (var i = 0; i < $scope.bitLotto.length; i++) {
                             var createDate = $scope.bitLotto[i].createDate;
@@ -57,6 +59,14 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
                             $scope.createDate = _createDate.splice (-2, 4).join ('-');
                     
                             $scope.bitLotto[i].createDate = $scope.createDate;
+                            $scope.bitLotto[i].getDayDate = getWeekByDay(blank_createDate);
+                        }
+    
+                        //根据日期 得到是星期几
+                        function getWeekByDay(blank_createDate){ //dayValue=“2014-01-01”
+                            var day = new Date(Date.parse(blank_createDate)); //将日期值格式化
+                            var today = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"]; //创建星期数组
+                            return today[day.getDay()];  //返一个星期中的某一天，其中0为星期日
                         }
                 
                         if ($scope.bitLotto.length === 0) {

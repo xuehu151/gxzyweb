@@ -306,7 +306,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 .then (function (response) {
                     // console.log(response);
                     reques = response.data;
-                    console.log (reques);
+                    console.log (response);
                     if(response.error != '0'){
                         $scope.errorInfo = reques.info;
                         $rootScope.errorInfo();
@@ -318,7 +318,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 });
             // 排列三投注信息接口
             function getPl3add () {
-                var userInfo = $util.getUserInfo ();
+//                var userInfo = $util.getUserInfo ();
                 $rootScope.makeSureText = '';
 
                 var dataArray = [];
@@ -393,7 +393,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 //BettingService.pl3Add(data, userInfo.data.token)
                     .then (function (response) {
                         $ionicLoading.hide ();
-                        console.info (data);
+                        console.log (reques);
                         console.log (response.data);
                         if(response.data.error != '0'){
                             $scope.errorInfo = response.data.info;
@@ -412,7 +412,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                                     $scope.info = response.data.info;
                                     $scope.realName = userInfo.data.user.realName;
                                     $scope.phones = userInfo.data.user.phone;
-                                    $scope.receives = userInfo.data.user.updateDate; //获赠时间
+                                    $scope.receives = reques.createDate; //投注时间
                                     $scope.draw_time = reques.drawTime;    //开奖时间
 
                                     $scope.receiveNumArr = data.data;//获赠号码

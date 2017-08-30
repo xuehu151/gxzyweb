@@ -56,7 +56,17 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
                             $scope.createDate = _createDate.splice (-2, 4).join ('-');
                     
                             $scope.historyPast3[i].createDate = $scope.createDate;
+                            $scope.historyPast3[i].getDayDate = getWeekByDay(blank_createDate);
                         }
+                        
+                        //根据日期 得到是星期几
+                        function getWeekByDay(blank_createDate){ //dayValue=“2014-01-01”
+                            var day = new Date(Date.parse(blank_createDate)); //将日期值格式化
+                            var today = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"]; //创建星期数组
+                            return today[day.getDay()];  //返一个星期中的某一天，其中0为星期日
+                        }
+                        
+                        
                         if ($scope.historyPast3.length === 0) {
                             var alertPopup = $ionicPopup.alert ({
                                 title : '<div class="popup-heads"><img src="./img/alert-success.png" alt="" width = "100%"></div>',
