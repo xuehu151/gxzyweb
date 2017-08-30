@@ -241,6 +241,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         }
                     });
             }
+            
             //错误码窗口配置
             $rootScope.errorInfo = function () {
                 $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
@@ -252,9 +253,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 });
                 $scope.cancelPopError = function() {
                     $scope.modalError.hide();
-                    /*var opened = window.open('about:blank', '_self');
-                    opened.opener = null;
-                    opened.close();*/
+                    WeixinJSBridge.call('closeWindow');
                 };
             };
             
