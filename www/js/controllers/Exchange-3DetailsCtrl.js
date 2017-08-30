@@ -116,11 +116,12 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
             $state.go('exchange-3');
             $scope.deleteRow3D($index);
         };
+        //计算钱数
+//        $scope.totalMoney = $scope.totalMoney * $scope.multiple*2;
         //排列三确认提交
         $scope.submitCms = function () {
-            $ionicLoading.show();
-            if ($scope.multiple == 0) { //投注倍数限制
-                alert('倍数不能为0');
+            if ($scope.multiple == 0 || $scope.multiple == '') { //投注倍数限制
+                alert('倍数不能为0或为空');
                 return;
             }
             //获取3D期号
@@ -129,6 +130,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
             var data = {
                 lotteryID: 31
             };
+            $ionicLoading.show();
             getWareIssueService.getWareIssue(data, userInfo.data.token)
                 .then(function (response) {
 //                   console.log(response);
@@ -217,7 +219,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                                     $scope.info = response.data.info;
                                     $scope.realName = userInfo.data.user.realName;
                                     $scope.phones = userInfo.data.user.phone;
-                                    $scope.receives = userInfo.data.user.updateDate; //获赠时间
+                                    $scope.receives = reques.createDate; //投注时间
                                     $scope.draw_time = reques.drawTime;    //开奖时间
             
                                     $scope.receiveNumArr = data.data;//获赠号码
