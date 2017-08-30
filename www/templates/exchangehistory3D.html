@@ -12,8 +12,9 @@
 
     <ion-content ng-class="h80 == true?'h88':'h40' ">
         <ion-list>
+            <!--<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>-->
             <ion-item class="history-time" ng-repeat="past in historyPast3 track by $index">
-                <p><span ng-cloak>{{past.wareIssue}}期 </span><ins ng-cloak> {{past.createDate}} 周三</ins></p>
+                <p><span ng-cloak>{{past.wareIssue}}期 </span><ins ng-cloak> {{past.createDate}}</ins></p>
                 <div class="row" >
                     <div class="col col-67 show-red-ball" >
                         <i ng-cloak>{{toArray(past.result,0)}}</i>
@@ -22,7 +23,7 @@
                     </div>
                 </div>
             </ion-item>
-            <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+            <ion-infinite-scroll ng-if="!hasMore" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
         </ion-list>
 
     </ion-content>

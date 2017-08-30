@@ -17,6 +17,7 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
         /*
          * 上拉加载，分批加载服务端剩余的数据
          */
+        loadajax ();
         $scope.items = [];
         $scope.hasMore = true;
         $scope.loadMore = function () {
@@ -32,7 +33,7 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
                         $scope.historyPast3 = response.data;
 //                        $scope.$broadcast ('scroll.refreshComplete');
 //                        $scope.$broadcast ('scroll.infiniteScrollComplete');
-                        if (response.data.length <= data.pageNum * data.pageSize) {
+                      /*  if (response.data.length <= data.pageNum * data.pageSize) {
                             $scope.hasMore = false;      //这里判断是否还能获取到数据，如果没有获取数据，则不再触发加载事件
                             return;
                         }else {
@@ -42,9 +43,9 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
     
                         if (data.pageNum == 1) {
                             $scope.items = [];
-                        }
+                        }*/
     
-                        $scope.items = $scope.items.concat (response.data);
+                       // $scope.items = $scope.items.concat (response.data);
                         
                         for (var i = 0; i < $scope.historyPast3.length; i++) {
                             var createDate = $scope.historyPast3[i].createDate;

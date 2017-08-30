@@ -91,7 +91,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 
                 var token = userInfo.data.token;
                 $scope.needExchangeAmount = { amount : 0 };
-    
+                
                 getWareIssueService.getWinamt(data, userInfo.data.token)
                     .then(function (response) {
                         // console.info(response.data);
@@ -183,15 +183,20 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
         $scope.cancelPop2 = function () {
             $scope.modal2.hide ();
         };
-  
-        //错误码窗口配置2
-        $ionicModal.fromTemplateUrl ('templates/errorPop.html', {
-            scope : $scope,
-            backdropClickToClose : true
-        }).then (function (modal) {
-            $scope.modalError = modal;
-        });
-        $scope.cancelPopError = function () {
-            $scope.modalError.hide ();
+    
+        //错误码窗口配置
+        $rootScope.errorInfo = function () {
+            $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
+                scope: $scope,
+                backdropClickToClose: true
+            }).then(function(modal) {
+                $scope.modalError = modal;
+                modal.show ();
+            });
+            $scope.cancelPopError = function() {
+                $scope.modalError.hide();
+            };
         };
+        
+        
     });
