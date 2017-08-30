@@ -21,7 +21,7 @@ angular.module('starter.orderDetailCtrl', ['starter.services']).controller('orde
     returnCode = $scope.orderDetail.investCode[0];
   }
 
-  $scope.failThenExchange = function() {
+  /*$scope.failThenExchange = function() {
     if ($scope.orderDetail.investCode.length == 1)
     {
       //字符串转成数字
@@ -127,6 +127,6 @@ angular.module('starter.orderDetailCtrl', ['starter.services']).controller('orde
           $state.go('BigLotto-2');
         }
       }
-  };
+  };*/
 
 });
