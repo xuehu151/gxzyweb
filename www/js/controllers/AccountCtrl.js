@@ -147,7 +147,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         }
                                         console.log(bettingEachFailed);
                                         $scope.wareIssueFailed = winFailItems[0].wareIssue;
-                                        $scope.failedDate = winFailItems[0].updateDate;
+                                        $scope.failedDate = winFailItems[0].createDate;
                                         $scope.investCodeFailed = bettingEachFailed.first.concat();
                                         console.log($scope.investCodeFailed);
                                         winFailAlertStatus.first = true;
@@ -411,7 +411,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     }
                     $scope.investCodeFailed = bettingEachFailed.second.concat();
                     $scope.wareIssueFailed = winFailItems[1].wareIssue;
-                    $scope.failedDate = winFailItems[1].updateDate;
+                    $scope.failedDate = winFailItems[1].createDate;
                     winFailAlertStatus.second = true;
                     $scope.modalPrintFailed.show();
 
@@ -422,7 +422,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     }
                     $scope.investCodeFailed = bettingEachFailed.third.concat();
                     $scope.wareIssueFailed = winFailItems[2].wareIssue;
-                    $scope.failedDate = winFailItems[2].updateDate;
+                    $scope.failedDate = winFailItems[2].createDate;
                     winFailAlertStatus.third = true;
                     $scope.modalPrintFailed.show();
 
@@ -432,7 +432,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     }
                     $scope.investCodeFailed = bettingEachFailed.forth.concat();
                     $scope.wareIssueFailed = winFailItems[3].wareIssue;
-                    $scope.failedDate = winFailItems[3].updateDate;
+                    $scope.failedDate = winFailItems[3].createDate;
                     winFailAlertStatus.forth = true;
                     $scope.modalPrintFailed.show();
                 }
