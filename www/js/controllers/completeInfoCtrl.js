@@ -101,4 +101,7 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
         bankNoInput.onfocus = function() {
           scrollInput(bankNoInput);
         }
+        bankNoInput.onblur = function() {
+          $interval.cancel(scrollTimer)
+        }
     });
