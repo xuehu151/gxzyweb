@@ -256,7 +256,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     WeixinJSBridge.call('closeWindow');
                 };
             };
-            
         }
         else {
             alert ("初始化数据失败");

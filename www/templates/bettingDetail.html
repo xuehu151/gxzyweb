@@ -36,11 +36,15 @@
             <p>
                 投注
                 <label class="padding-left">
-                    <input class="bigLotto-input1 " type="text" ng-model="multiple"/>
+                    <input class="bigLotto-input1"
+                           placeholder=""
+                           type="tel"
+                           onKeyUp="value=value.replace(/\D/g,'')"
+                           ng-model="multiple"/>
                 </label> 倍
             </p>
             <p style="height: 35px;">
-                金额:<span class="font-red" ng-cloak>{{totalMoney * multiple * countMoney}}</span> 元 &nbsp;&nbsp;&nbsp;
+                金额:<span class="font-red" ng-cloak> {{totalMoney * multiple * countMoney}}</span>  元 &nbsp;&nbsp;&nbsp;
                 <span class="checkSected">
                     <label class="checkbox" ng-show="newStatus==true?false:true">
                        <!-- <input class="bigLotto-input2" type="checkbox"  checked disabled />追加(每注3元)-->

@@ -12,7 +12,7 @@
 
     <ion-content ng-class="h80 == true?'h88':'h40' ">
         <ion-list>
-            <!--<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>-->
+            <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
             <ion-item class="history-time" ng-repeat="past in historyPast3 track by $index">
                 <p><span ng-cloak>{{past.wareIssue}}期 </span><ins ng-cloak> {{past.createDate}}&nbsp;{{past.getDayDate}}</ins></p>
                 <div class="row" >

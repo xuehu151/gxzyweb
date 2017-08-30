@@ -48,7 +48,11 @@
             <p>
                 投注
                 <label class="padding-left">
-                    <input class="bigLotto-input1 " type="text" placeholder="1" ng-model="multiple"/>
+                    <input class="bigLotto-input1"
+                           type="tel"
+                           placeholder=""
+                           onKeyUp="value=value.replace(/\D/g,'')"
+                           ng-model="multiple"/>
                 </label> 倍
             </p>
             <p>

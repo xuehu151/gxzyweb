@@ -116,12 +116,10 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
             $state.go('exchange-3');
             $scope.deleteRow3D($index);
         };
-        //计算钱数
-//        $scope.totalMoney = $scope.totalMoney * $scope.multiple;
-        console.info(typeof ($scope.multiple * 1));
+        
         //排列三确认提交
         $scope.submitCms = function () {
-            if (($scope.multiple * 1) <= 0 || $scope.multiple * 1 == '') { //投注倍数限制
+            if ($scope.multiple * 1 <= 0 || $scope.multiple * 1 == '') { //投注倍数限制
                 alert('倍数不能为0或为空');
                 return;
             }

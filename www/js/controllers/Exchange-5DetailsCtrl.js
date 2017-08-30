@@ -139,8 +139,8 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
         //排列五确认提交
         $scope.submitCms5D = function () {
             $ionicLoading.show ();
-            if ($scope.multiple <= 0) { //投注倍数限制
-                alert ('投注倍数错误');
+            if ($scope.multiple * 1 <= 0 || $scope.multiple * 1 == '') { //投注倍数限制
+                alert('倍数不能为0或为空');
                 return
             }
             //获取5D期号

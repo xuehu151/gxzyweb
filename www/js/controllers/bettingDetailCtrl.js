@@ -163,8 +163,8 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
         };
         // 确认提交按钮
         $scope.showOrderAlertCms = function () {
-            if ($scope.multiple <= 0) { //投注倍数限制
-                alert ('请重新设置投注倍数');
+            if ($scope.multiple * 1 <= 0 || $scope.multiple * 1 == '') { //投注倍数限制
+                alert('倍数不能为0或为空');
                 return
             }
             //获取大乐透期号

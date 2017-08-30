@@ -8,6 +8,7 @@
 
     <ion-content ng-class="h80 == true?'h88':'h40' ">
         <ion-list>
+            <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
             <ion-item class="history-time"  ng-repeat="past in bitLotto track by $index">
                 <p><span ng-cloak>{{past.wareIssue}}期</span><ins ng-cloak> {{past.createDate}}&nbsp;{{past.getDayDate}}</ins></p>
                 <div class="row">
@@ -25,7 +26,7 @@
                 </div>
             </ion-item>
         </ion-list>
-        <ion-infinite-scroll ng-if="!hasMore" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
     </ion-content>
 
 </ion-view>

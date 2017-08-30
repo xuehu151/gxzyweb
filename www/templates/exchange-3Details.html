@@ -44,14 +44,14 @@
                 <label class="padding-left">
                     <input class="bigLotto-input1"
                            type="tel"
-                           placeholder="1"
+                           placeholder=""
                            onKeyUp="value=value.replace(/\D/g,'')"
                            ng-model="multiple"/>
                 </label> 倍
             </p>
             <p>
                 金额：
-                <span class="font-red" ng-cloak>{{totalMoney*multiple*2}}</span> 元 &nbsp;
+                <span class="font-red" ng-cloak >{{totalMoney*multiple*2}}</span> 元 &nbsp;
             </p>
             <button class="button button-block button-liner-gradiend" ng-click="submitCms()"
                     style="font-size: 16px;" ng-disabled="isDisabled">
