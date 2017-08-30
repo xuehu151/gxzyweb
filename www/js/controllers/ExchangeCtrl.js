@@ -104,8 +104,9 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         }
                         else if (userInfo.error == '2301') {
                             $scope.errorInfo = userInfo.info;
-                            $scope.errorInfo ();
-                        } else {
+                            $rootScope.errorInfo ();
+                        }
+                        else {
                             $state.go ('tab.account');
                         }
                     }, function (error) {
@@ -131,60 +132,18 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             var datas = $util.setUserInfo (response);
                             userInfo = $util.getUserInfo ();
                             console.log (userInfo);
-                           /* getWareIssueService.getWinamt (data, userInfo.data.token)
-                                .then (function (response) {
-                                    // console.info(response.data);
-                                    $scope.winningShow = response.data;
-                                    console.info ($scope.winningShow);
-                                    //上下滚动效果
-                                    slide (document.getElementsByTagName ('ul')[0]);
-                                    function slide (parent) {
-                                        setTimeout (function () {
-                                            var className = $ ("." + parent.className);
-                    
-                                            var i = 0, sh;
-                                            var liLength = className.children ("li").length;
-                                            var liHeight = className.children ("li").height () + parseInt (className.children ("li").css ('border-bottom-width'));
-                                            className.html (className.html () + className.html ());
-                    
-                                            // 开启定时器
-                                            sh = setInterval (slide, 3000);
-                                            function slide () {
-                                                if (parseInt (className.css ("margin-top")) > (-liLength * liHeight)) {
-                                                    i++;
-                                                    className.animate ({
-                                                        marginTop : -liHeight * i + "px"
-                                                    }, "slow");
-                                                }
-                                                else {
-                                                    i = 0;
-                                                    className.css ("margin-top", "0px");
-                                                }
-                                            }
-                    
-                                            // 清除定时器
-                                            className.hover (function () {
-                                                clearInterval (sh);
-                                            }, function () {
-                                                clearInterval (sh);
-                                                sh = setInterval (slide, 3000);
-                                            });
-                                        }, 0);
-                                    }
-                                }, function (error) {
-                                    alert ('数据获取失败!');
-                                });*/
                             $state.go ('scanCodeIndex');
                         }
                         else if (response.error == '2301') {
                             /* 获取初始化数据 */
                             var datas = $util.setUserInfo (response);
-                            var userInfo = $util.getUserInfo ();
+                            userInfo = $util.getUserInfo ();
                             console.log (userInfo);
                             $state.go ('tab.account');
                         }
                         else {
-                            alert(response.info)
+                            $scope.errorInfo = userInfo.info;
+                            $rootScope.errorInfo ();
                         }
                     }, function (response) {
                         alert ("初始化数据失败");
@@ -287,15 +246,19 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     });
             }
             //错误码窗口配置
-            $ionicModal.fromTemplateUrl ('templates/errorPop.html', {
-                scope : $scope,
-                backdropClickToClose : true
-            }).then (function (modal) {
-                $scope.modalError = modal;
-            });
-            $scope.cancelPopError = function () {
-                $scope.modalError.hide ();
+            $rootScope.errorInfo = function () {
+                $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
+                    scope: $scope,
+                    backdropClickToClose: true
+                }).then(function(modal) {
+                    $scope.modalError = modal;
+                    modal.show ();
+                });
+                $scope.cancelPopError = function() {
+                    $scope.modalError.hide();
+                };
             };
+            
         }
         else {
             alert ("初始化数据失败");

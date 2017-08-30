@@ -14,14 +14,13 @@ angular.module ('starter.Exchangehistory5DCtrl', ['starter.services'])
             pageSize: pageSize,
             pageNum: pageNum
         };
-        
+        loadajax();
         /*
          * 上拉加载，分批加载服务端剩余的数据
          */
         $scope.items = [];
-        $scope.hasMore = true;
+        $scope.hasMore = false;
         $scope.loadMore = function () {
-            pageNum++;
             loadajax ();
         };
     
@@ -32,32 +31,23 @@ angular.module ('starter.Exchangehistory5DCtrl', ['starter.services'])
                     .then (function (response) {
                         $ionicLoading.hide ();
                         $scope.historyPast5 = response.data;
-          
-                       /* if (response.data.length == 0) {
-                            $scope.hasMore = false;      //这里判断是否还能获取到数据，如果没有获取数据，则不再触发加载事件
-                            return;
-                        }else {
-                            $scope.hasMore = true;
-                            $scope.items = $scope.items.concat (response.data);
-                            return;
-                        }
-                        $scope.items = $scope.items.concat (response.data);*/
-                /*        $scope.$broadcast ('scroll.refreshComplete');
-                        $scope.$broadcast ('scroll.infiniteScrollComplete');
-                       console.info(response.data.length);
-                        var pagesize = Math.ceil (response.data.length / pageSize);
-                        //console.log(data.count/20);
-                        if (pageNum < pagesize) {
-                            $scope.hasMore = true;
-                        }
-                        else {
-                            $scope.hasMore = false;
-                        }
     
-                        if (pageNum == 1) {
-                            $scope.items = [];
+                        $scope.$broadcast('scroll.refreshComplete');
+                   /*
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        if (response.data.length == 0) {
+                            $scope.hasMore = true;
+                            return;
                         }
-                        */
+                        else if(response.data.length < 8){
+                            $scope.hasMore = false;
+                            return;
+                        }
+                        data.pageNum++;
+                        $scope.items = $scope.items.concat(response.data);
+                       
+                       */
+                       
                         for (var i = 0; i < $scope.historyPast5.length; i++) {
                             var createDate = $scope.historyPast5[i].createDate;
                     
@@ -90,6 +80,12 @@ angular.module ('starter.Exchangehistory5DCtrl', ['starter.services'])
             }
     
         }
+    
+        $scope.doRefresh = function () {
+            data.pageNum = 1;
+            $scope.items = [];
+            $scope.loadMore();
+        };
         
         $scope.toArray = function (string2, num) {
             var array = string2.split (",");
