@@ -7,7 +7,7 @@ var sign = '';
 var type = '';
 var PayType = '';//判断是否为老用户扫码进来 0 新用户 1 老用户扫码
 
-angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl', 'starter.widthdrawRecordsCtrl', 'starter.widthdrawCtrl', 'starter.DrawCtrl', 'starter.TrendCtrl', 'starter.3DTrendChart', 'starter.5DTrendChart', 'starter.bigTrendChart', 'starter.selfInfoCtrl'])
+angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl',  'starter.widthdrawCtrl', 'starter.DrawCtrl', 'starter.TrendCtrl', 'starter.3DTrendChart', 'starter.5DTrendChart', 'starter.bigTrendChart', 'starter.selfInfoCtrl'])
 
     .run (function ($ionicPlatform,$ionicPopup,$rootScope, $ionicHistory) {
         $ionicPlatform.ready (function () {
@@ -407,14 +407,14 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
                 controller:'orderDetailCtrl'
             })
 
-            //提现明细
+            /*//提现明细
             .state('widthdrawRecords',{
                 url:'/account/widthdrawRecords',
                 cache:'true',
                 prefetchTemplate:false,
                 templateUrl:'templates/widthdrawRecords.html',
                 controller:'widthdrawRecordsCtrl'
-            });
+            });*/
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise ('/tab/exchange');

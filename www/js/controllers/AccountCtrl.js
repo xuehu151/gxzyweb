@@ -87,13 +87,13 @@ angular.module('starter.AccountCtrl', ['starter.services'])
 
                                     for (var i = 0; i < winItems[0].lotteryList.length; i++) {
                                         totalWinamt.first += winItems[0].lotteryList[i].winamt;
-                                        bettingEach.first.push(splitCode.split(winItems[0].lotteryList[i].investCode))
+                                        winItems[0].lotteryList[i].code = splitCode.split(winItems[0].lotteryList[i].investCode)
                                     }
-                                    $scope.bettingTotal = bettingEach.first.concat();
+                                    $scope.thisWinItems = winItems[0].lotteryList;
                                     $scope.winamt = totalWinamt.first;
                                     $scope.wareIssue = winItems[0].wareIssue;
                                     $scope.drawTime = winItems[0].drawTime;
-                                    $scope.investCode = splitCode.split(winItems[0].lotteryList[0].investCode);
+                                    console.log($scope.thisWinItems);
                                     winAlertStatus.first = true;
 
                                     getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID=' + winItems[0].lotteryID + '&wareIssue=' + (winItems[0].wareIssue * 1 - 1))
@@ -290,9 +290,9 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                 if (winAlertStatus.first == true && winAlertStatus.second == false && winAlertStatus.third == false && winAlertStatus.forth == false && winItems[1]) {
                     for (var i = 0; i < winItems[1].lotteryList.length; i++) {
                         totalWinamt.second += winItems[1].lotteryList[i].winamt;
-                        bettingEach.second.push(splitCode.split(winItems[1].lotteryList[i].investCode))
+                        winItems[1].lotteryList[i].code = splitCode.split(winItems[1].lotteryList[i].investCode)
                     }
-                    $scope.bettingTotal = bettingEach.second.concat();
+                    $scope.thisWinItems = winItems[1].lotteryList;
                     $scope.winamt = totalWinamt.second;
                     $scope.wareIssue = winItems[1].wareIssue;
                     $scope.drawTime = winItems[1].drawTime;
@@ -319,10 +319,10 @@ angular.module('starter.AccountCtrl', ['starter.services'])
 
                 } else if (winAlertStatus.first == true && winAlertStatus.second == true && winAlertStatus.third == false && winAlertStatus.forth == false && winItems[2]) {
                     for (var i = 0; i < winItems[2].lotteryList.length; i++) {
-                        totalWinamt.third += winItems[2].lotteryList[i].winamt;
-                        bettingEach.third.push(splitCode.split(winItems[2].lotteryList[i].investCode))
+                        totalWinamt.second += winItems[2].lotteryList[i].winamt;
+                        winItems[2].lotteryList[i].code = splitCode.split(winItems[2].lotteryList[i].investCode)
                     }
-                    $scope.bettingTotal = bettingEach.third.concat();
+                    $scope.thisWinItems = winItems[2].lotteryList;
                     $scope.winamt = totalWinamt.third;
                     $scope.wareIssue = winItems[2].wareIssue;
                     $scope.drawTime = winItems[2].drawTime;
@@ -348,10 +348,10 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     $scope.modal3.show();
                 } else if (winAlertStatus.first == true && winAlertStatus.second == true && winAlertStatus.third == true && winAlertStatus.forth == false && winItems[3]) {
                     for (var i = 0; i < winItems[3].lotteryList.length; i++) {
-                        totalWinamt.forth += winItems[3].lotteryList[i].winamt;
-                        bettingEach.forth.push(splitCode.split(winItems[3].lotteryList[i].investCode))
+                        totalWinamt.second += winItems[3].lotteryList[i].winamt;
+                        winItems[3].lotteryList[i].code = splitCode.split(winItems[3].lotteryList[i].investCode)
                     }
-                    $scope.bettingTotal = bettingEach.forth.concat();
+                    $scope.thisWinItems = winItems[3].lotteryList;
                     $scope.winamt = totalWinamt.forth;
                     $scope.wareIssue = winItems[3].wareIssue;
                     $scope.drawTime = winItems[3].drawTime;

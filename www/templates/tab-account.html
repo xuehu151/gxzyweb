@@ -84,7 +84,7 @@
             </ion-modal-view>
         </script>
         <!-- modal弹窗 老用户获得彩票 -->
-        <script id="accountModalOldUser.html" type="text/ng-template">
+        <!-- <script id="accountModalOldUser.html" type="text/ng-template">
             <ion-modal-view id="modalAccount2">
                 <div class="account-modal2">
                     <div class="cancel-pop" ng-click="cancelPop2()">X</div>
@@ -93,7 +93,7 @@
                     <a ng-click="goToExchange()" class="account-style1 account-style2">点击立即兑换</a>
                 </div>
             </ion-modal-view>
-        </script>
+        </script> -->
         <!-- modal弹窗 中奖 -->
         <script id="accountModalGetPrize.html" type="text/ng-template">
             <ion-modal-view id="modalAccount3">
@@ -111,15 +111,21 @@
                         <span class="fl">时 间:</span><span ng-cloak>{{drawTime}}</span>
                     </div>
                     <div class="account-modal3-style2 clearfix">
-                        <span class="fl">获赠号码:</span>
+                        <span class="fl">
+                            <span class="fr">获赠号码:</span>
+                            <br>
+                            <span class="remark-style" >(多于三注可拖动号码查看未显示号码,灰色背景号码为中奖号码)</span>
+                        </span>
                         <ion-scroll class="fl rowball-wrap" zooming="true" direction="y" overflow-scroll="true" scrollbar-y="true">
-                            <span class="rowball" ng-repeat="eachBet in bettingTotal track by $index">
-                              <i ng-cloak ng-repeat="codeRed in eachBet[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in eachBet[1] track by $index" ng-if="eachBet[1]" class="blue">{{codeBlue}}</i>
+                            <span ng-class="eachBet.status==4?'win-suc':''" class="rowball" ng-repeat="eachBet in thisWinItems track by $index">
+                              <i ng-cloak ng-repeat="codeRed in eachBet.code[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in eachBet.code[1] track by $index" ng-if="eachBet.code[1]" class="blue">{{codeBlue}}</i>
                             </span>
                         </ion-scroll>
                     </div>
-                    <div class="account-modal3-style2" style="margin-top: 0;">
-                        <span class="fl">开奖号码:</span>
+                    <div class="account-modal3-style2" style="margin-top: 3px;">
+                        <span class="fl">开奖号码:
+                            <span></span>
+                        </span>
                         <span>
                           <i ng-cloak ng-repeat="codeRed in result[0] track by $index">{{codeRed}}</i><i ng-cloak ng-repeat="codeBlue in result[1] track by $index" ng-if="result[1]" class="blue">{{codeBlue}}</i>
                         </span>
@@ -161,7 +167,7 @@
                                 <span class="fr">
                                     <span class="fr">投注号码:</span>
                                     <br>
-                                    <span style="font-size: 8px;color: #999;line-height: 12px;display: inline-block;">(多于三注可拖动号码查看未显示号码,灰色背景号码为出票失败)</span>
+                                    <span class="remark-style" >(多于三注可拖动号码查看未显示号码,灰色背景号码为出票失败)</span>
                                 </span>
                             </div>
                             <div class="fl style2">
