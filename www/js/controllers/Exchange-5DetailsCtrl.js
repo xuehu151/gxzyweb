@@ -168,7 +168,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                 for (var i in $scope.sessionJsonWarp5D) {
                     var dataObj = {
                         investCode: "",
-                        multiple: 1
+                        multiple: $scope.multiple
                     };
                     var investCode = null;
                     investCode = $scope.sessionJsonWarp5D[i].W_Bit[0].num + "*";

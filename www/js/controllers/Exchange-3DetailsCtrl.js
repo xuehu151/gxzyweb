@@ -146,8 +146,9 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                 for (var i in $scope.sessionJsonWarp3D) {
                     var dataObj = {
                         investCode: "",
-                        multiple: 1
+                        multiple: $scope.multiple
                     };
+                    console.info(dataObj);
                     var investCode = null;
                     investCode = $scope.sessionJsonWarp3D[i].B_Bit[0].num + "*";
                     investCode += $scope.sessionJsonWarp3D[i].S_Bit[0].num + "*";

@@ -192,7 +192,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                 for (var i in $scope.sessionJsonWarp) {
                     var dataObj = {
                         investCode : "", //"investCode":"01,03,05,07,09*06,08"
-                        multiple : 1
+                        multiple : $scope.multiple
                     };
                     var investCode = '';
                     for (var j in $scope.sessionJsonWarp[i]) {

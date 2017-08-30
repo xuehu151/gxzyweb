@@ -252,6 +252,9 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 });
                 $scope.cancelPopError = function() {
                     $scope.modalError.hide();
+                    /*var opened = window.open('about:blank', '_self');
+                    opened.opener = null;
+                    opened.close();*/
                 };
             };
             
