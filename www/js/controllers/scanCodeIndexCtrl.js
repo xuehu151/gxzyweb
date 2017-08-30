@@ -143,13 +143,15 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                                 }
             
                             }, function (error) {
-                                alert ('数据获取失败');
                                 $ionicLoading.hide ();
+                                alert ('数据获取失败');
                             });
                     }, function (error) {
+                        $ionicLoading.hide ();
                         alert('数据获取失败!');
                     });
             }, function (response) {
+                $ionicLoading.hide ();
                 alert ("初始化数据失败");
             });
         

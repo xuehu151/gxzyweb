@@ -5,17 +5,16 @@
 angular.module ('starter.Exchangehistory5DCtrl', ['starter.services'])
     
     .controller ('Exchangehistory5DCtrl', function ($scope, $http, $filter, $ionicLoading, $ionicPopup, $rootScope, $util, historyPastService) {
-        
         var userInfo = $util.getUserInfo ();
         var pageSize = 12;
         var pageNum = 1;
-        var data = {};
         //loadajax();
         /*
          * 上拉加载，分批加载服务端剩余的数据
          */
-        $scope.items = [];
+        $ionicLoading.show ();
         $scope.hasMore = true;
+        $scope.historyPast5 = [];
         $scope.loadMore = function () {
             data = {
                 lotteryID: '40',
@@ -24,16 +23,13 @@ angular.module ('starter.Exchangehistory5DCtrl', ['starter.services'])
             };
             loadajax ();
         };
-        $scope.historyPast5 = [];
     
         function loadajax() {
             if(userInfo.data){
-                $ionicLoading.show ();
                 historyPastService.PastLottery (data, userInfo.data.token)
                     .then (function (response) {
-                        console.log (response);
+                        //console.log (response);
                         $ionicLoading.hide ();
-                        //$scope.historyPast5 = response.data;
                         if (response.data.length != 0) {
                             $scope.historyPast5 = $scope.historyPast5.concat (response.data);
                             for (var i = 0; i < $scope.historyPast5.length; i++) {
@@ -69,11 +65,12 @@ angular.module ('starter.Exchangehistory5DCtrl', ['starter.services'])
                             console.log (response.data);
                         }else {
                             $scope.hasMore = false;
-                            alert ('已经展示了全部开奖历史')
+                            //alert ('已经展示了全部开奖历史')
                         }
                         $scope.$broadcast ('scroll.refreshComplete');
                         $scope.$broadcast ('scroll.infiniteScrollComplete');
                     }, function (response) {
+                        $ionicLoading.hide ();
                         alert ("获取列表失败");
                     });
             }else {

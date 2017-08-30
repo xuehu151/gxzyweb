@@ -12,7 +12,6 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
         var userInfo = $util.getUserInfo ();
         var pageSize = 12;
         var pageNum = 1;
-        var data = {};
     
         //loadajax();
         /*
