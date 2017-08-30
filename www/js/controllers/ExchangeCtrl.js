@@ -102,10 +102,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             $scope.errorInfo = userInfo.info;
                             $rootScope.errorInfo ();
                         }
-                        else if (userInfo.error == '2301') {
-                            $scope.errorInfo = userInfo.info;
-                            $rootScope.errorInfo ();
-                        }
                         else {
                             $state.go ('tab.account');
                         }
