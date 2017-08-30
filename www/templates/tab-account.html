@@ -161,14 +161,14 @@
                                 <span class="fr">
                                     <span class="fr">投注号码:</span>
                                     <br>
-                                    <span style="font-size: 8px;color: #999;line-height: 12px;display: inline-block;">(多于三注可拖动号码查看未显示号码)</span>
+                                    <span style="font-size: 8px;color: #999;line-height: 12px;display: inline-block;">(多于三注可拖动号码查看未显示号码,灰色背景号码为出票失败)</span>
                                 </span>
                             </div>
                             <div class="fl style2">
                                 <ion-scroll class="fl rowball-wrap" zooming="true" direction="y" overflow-scroll="true" scrollbar-y="true">
-                                    <span class="rowball" ng-repeat="eachBet in investCodeFailed track by $index">
-                                        <i ng-cloak ng-repeat="codeRed in eachBet[0] track by $index" >{{codeRed}}</i>
-                                        <i ng-cloak ng-repeat="codeBlue in eachBet[1] track by $index" ng-if="eachBet[1]" class="blue" >{{codeBlue}}</i>
+                                    <span ng-class="eachBet.status==-1?'bg-fail':''" class="rowball" ng-repeat="eachBet in thisWinFailItems track by $index">
+                                        <i ng-cloak ng-repeat="codeRed in eachBet.code[0] track by $index" >{{codeRed}}</i>
+                                        <i ng-cloak ng-repeat="codeBlue in eachBet.code[1] track by $index" ng-if="eachBet.code[1]" class="blue" >{{codeBlue}}</i>
                                     </span>
                                 </ion-scroll>
                             </div>

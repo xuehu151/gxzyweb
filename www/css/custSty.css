@@ -586,7 +586,7 @@ ion-item.f15 {
     border-radius: 10px;
     color: #132d8e;
     font-size:11px;
-    padding:0 0 0 20px;
+    padding: 0 0 0 15px;
 }
 
 .modal-failed>.top {
@@ -622,14 +622,19 @@ ion-item.f15 {
 
 
 .print-failed .style2>.rowball-wrap {
-    width: 150px;
+    width: 148px;
     height: 70px;
     text-align:left;
 }
 
+.print-failed .style2>.rowball-wrap .bg-fail
+{
+    background-color:#999;
+}
+
 .print-failed .style2>.rowball-wrap span.rowball {
-    width: 100%;
-    text-align: left;
+    width: 90%;
+    text-align: center;
     display: inline-block;
 }
 

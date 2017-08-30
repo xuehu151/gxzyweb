@@ -134,26 +134,25 @@ angular.module('starter.AccountCtrl', ['starter.services'])
 
 
                     //检测出票失败
+
                     getUser.getInfo(url + "/service/lottery/getPrintFailList?token=" + token + '&pageNum=1&pageSize=100')
                         .then(function(response) {
                             console.log(response);
                             if (response.error == '0') {
 
-                                    winFailItems = response.data;
+                                winFailItems = response.data;
 
-                                    if (winFailItems[0]) {
-                                        for (var j = 0; j < winFailItems[0].lotteryList.length; j++) {
-                                            bettingEachFailed.first.push(splitCode.split(winFailItems[0].lotteryList[j].investCode))
-                                        }
-                                        console.log(bettingEachFailed);
-                                        $scope.wareIssueFailed = winFailItems[0].wareIssue;
-                                        $scope.failedDate = winFailItems[0].createDate;
-                                        $scope.investCodeFailed = bettingEachFailed.first.concat();
-                                        console.log($scope.investCodeFailed);
-                                        winFailAlertStatus.first = true;
-                                        $scope.modalPrintFailed.show();
+                                if (winFailItems[0]) {
+                                    for (var j = 0; j < winFailItems[0].lotteryList.length; j++) {
+                                        winFailItems[0].lotteryList[j].code = splitCode.split(winFailItems[0].lotteryList[j].investCode)
                                     }
-                                    else if (!winFailItems[0]) {
+                                    console.log(winFailItems[0].lotteryList);
+                                    $scope.thisWinFailItems = winFailItems[0].lotteryList;
+                                    $scope.wareIssueFailed = winFailItems[0].wareIssue;
+                                    $scope.failedDate = winFailItems[0].createDate;
+                                    winFailAlertStatus.first = true;
+                                    $scope.modalPrintFailed.show();
+                                } else if (!winFailItems[0]) {
                                     $timeout.cancel(nextFailShow);
                                 }
 
@@ -406,31 +405,33 @@ angular.module('starter.AccountCtrl', ['starter.services'])
             $scope.modalPrintFailed.hide();
             nextFailShow = $timeout(function() {
                 if (winFailAlertStatus.first == true && winFailAlertStatus.second == false && winFailAlertStatus.third == false && winFailAlertStatus.forth == false && winFailItems[1]) {
-                    for (var i = 0; i < winFailItems[1].lotteryList.length; i++) {
-                        bettingEachFailed.second.push(splitCode.split(winFailItems[1].lotteryList[i].investCode))
+                    for (var j = 0; j < winFailItems[1].lotteryList.length; j++) {
+                        winFailItems[1].lotteryList[j].code = splitCode.split(winFailItems[1].lotteryList[j].investCode)
                     }
-                    $scope.investCodeFailed = bettingEachFailed.second.concat();
+                    console.log(winFailItems[1].lotteryList);
+                    $scope.thisWinFailItems = winFailItems[1].lotteryList;
                     $scope.wareIssueFailed = winFailItems[1].wareIssue;
                     $scope.failedDate = winFailItems[1].createDate;
                     winFailAlertStatus.second = true;
                     $scope.modalPrintFailed.show();
 
                 } else if (winFailAlertStatus.first == true && winFailAlertStatus.second == true && winFailAlertStatus.third == false && winFailAlertStatus.forth == false && winFailItems[2]) {
-
-                    for (var i = 0; i < winFailItems[2].lotteryList.length; i++) {
-                        bettingEachFailed.third.push(splitCode.split(winFailItems[2].lotteryList[i].investCode))
+                    for (var j = 0; j < winFailItems[2].lotteryList.length; j++) {
+                        winFailItems[2].lotteryList[j].code = splitCode.split(winFailItems[2].lotteryList[j].investCode)
                     }
-                    $scope.investCodeFailed = bettingEachFailed.third.concat();
+                    console.log(winFailItems[2].lotteryList);
+                    $scope.thisWinFailItems = winFailItems[2].lotteryList;
                     $scope.wareIssueFailed = winFailItems[2].wareIssue;
                     $scope.failedDate = winFailItems[2].createDate;
                     winFailAlertStatus.third = true;
                     $scope.modalPrintFailed.show();
 
                 } else if (winFailAlertStatus.first == true && winFailAlertStatus.second == true && winFailAlertStatus.third == true && winFailAlertStatus.forth == false && winFailItems[3]) {
-                    for (var i = 0; i < winFailItems[3].lotteryList.length; i++) {
-                        bettingEachFailed.forth.push(splitCode.split(winFailItems[3].lotteryList[i].investCode))
+                    for (var j = 0; j < winFailItems[3].lotteryList.length; j++) {
+                        winFailItems[3].lotteryList[j].code = splitCode.split(winFailItems[3].lotteryList[j].investCode)
                     }
-                    $scope.investCodeFailed = bettingEachFailed.forth.concat();
+                    console.log(winFailItems[3].lotteryList);
+                    $scope.thisWinFailItems = winFailItems[3].lotteryList;
                     $scope.wareIssueFailed = winFailItems[3].wareIssue;
                     $scope.failedDate = winFailItems[3].createDate;
                     winFailAlertStatus.forth = true;
