@@ -209,8 +209,8 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         $scope.withdrawConfirm = function() {
             var userData = userInfo.data.user;
             if (userData.wechat || userData.alipay || userData.bankNo) {
-                // $scope.modal.show();
-                $scope.modalPrintFailed.show();
+                $scope.modal.show();
+                // $scope.modalPrintFailed.show();
             } else {
                 $scope.modal4.show();
             }
