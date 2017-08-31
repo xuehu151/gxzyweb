@@ -40,7 +40,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                 $scope.isDisabled = true;
                 var alertPopup = $ionicPopup.alert ({
                     title: '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
-                    template: '<div class="alert-left">' + '<p style="text-align: center">余额不足,无法操作,请充值</p>' + '</div>',
+                    template: '<div class="alert-left">' + '<p style="text-align: center">余额不足，请查看个人账户余额或删除多余的投注！</p>' + '</div>',
                     okText: '确 定',
                     okType: 'button-light'
                 })

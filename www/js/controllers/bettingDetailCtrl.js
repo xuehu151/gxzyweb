@@ -59,7 +59,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                 $scope.isDisabled = true;
                 var alertPopup = $ionicPopup.alert ({
                     title : '<div class="popup-heads"><img src="./img/alert-success.png" alt=""  width = "100%"></div>',
-                    template : '<div class="alert-left">' + '<p style="text-align: center;">余额不足,请充值或删除多余的投注</p>' + '</div>',
+                    template : '<div class="alert-left">' + '<p style="text-align: center;">余额不足，请查看个人账户余额或删除多余的投注！</p>' + '</div>',
                     okText : '确 定',
                     okType : 'button-light'
                 }).then (function () {
@@ -182,7 +182,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
 //             console.log (reques);
                     getdltadd ();
                 }, function (response) {
-                   alert ("获取期号失败");
+                    alert ("获取期号失败，请重新登录");
                 });
             // 大乐透投注接口信息
             function getdltadd () {

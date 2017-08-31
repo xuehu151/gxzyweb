@@ -17,7 +17,6 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
         if (userInfo != undefined && type == '0'){
             PayType = 0;
             console.info("PayType*************"+PayType);
-            $ionicLoading.hide ();
             $scope.goToExchange3D = function () {
                 $state.go ('exchange-3');
             };
@@ -76,10 +75,12 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
             return;
         }
         
-        
-        var data = {
+        data = {
             token : sign
         };
+        $ionicLoading.show ({
+            template: 'Loading...'
+        });
         initDataService.initData (data) // index
             .then (function (response) {
                 $ionicLoading.hide ();
@@ -143,11 +144,9 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                                 }
             
                             }, function (error) {
-                                $ionicLoading.hide ();
                                 alert ('数据获取失败');
                             });
                     }, function (error) {
-                        $ionicLoading.hide ();
                         alert('数据获取失败!');
                     });
             }, function (response) {

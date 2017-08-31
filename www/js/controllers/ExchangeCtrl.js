@@ -7,9 +7,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
     
     .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService, getWareIssueService) {
         $rootScope.newStatus = true;
-        $ionicLoading.show ({
-            template : 'Loading...'
-        });
         sign = $location.search ().sign;
         type = $location.search ().type;
         var data = {};
@@ -20,7 +17,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
         if (userInfo != undefined && type == undefined){
             PayType = 1;
             console.info("PayType*************"+PayType);
-            $ionicLoading.hide ();
             $scope.goToExchange3D = function () {
                 $state.go ('exchange-3');
             };
@@ -89,6 +85,9 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 var userToken = {
                     token : sign
                 };
+                $ionicLoading.show ({
+                    template : 'Loading...'
+                });
                 initDataService.initDataNew (userToken)  //index1==余额
                     .then (function (response) {
                         $ionicLoading.hide ();
@@ -106,6 +105,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             $state.go ('tab.account');
                         }
                     }, function (error) {
+                        $ionicLoading.hide ();
                         alert ('加载失败，请检查网络')
                     });
             }
@@ -114,10 +114,9 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 data = {
                     token : sign
                 };
-              /*  if (userInfo != undefined) {
-                    $ionicLoading.hide ();
-                    return
-                }*/
+                $ionicLoading.show ({
+                    template : 'Loading...'
+                });
                 initDataService.initData (data)   //index==扫码
                     .then (function (response) {
                         $ionicLoading.hide ();
@@ -142,6 +141,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             $rootScope.errorInfo ();
                         }
                     }, function (response) {
+                        $ionicLoading.hide ();
                         alert ("初始化数据失败");
                     });
             }

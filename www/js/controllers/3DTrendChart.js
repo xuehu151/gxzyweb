@@ -40,22 +40,14 @@ angular.module ('starter.3DTrendChart', [])
         };
         
         if(userInfo.data){
-            /*$http ({
-             method: "POST",
-             url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
-             params: data,
-             headers: {
-             "Content-Type": "application/json"
-             }
-             })*/
+    
             historyPastService.PastLottery (data, userInfo.data.token)
                 .then (function (response) {
                     $ionicLoading.hide ();
                     $scope.historyPast3 = response.data;
-            
-            
                 }, function (error) {
-                    console.log ("获取列表失败");
+                    $ionicLoading.hide ();
+                    alert ("数据获取失败");
                 });
         }else {
             $ionicLoading.hide ();

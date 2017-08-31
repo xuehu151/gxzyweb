@@ -279,11 +279,8 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
 
         //PayType =0 用抵用券扫码
         function joinMenuBig () {
-            $ionicLoading.show ({
-                template: 'Loading...'
-            });
-            if ($scope.multiple == 0) { //投注倍数限制
-                alert ('请重新设置投注倍数');
+            if ($scope.multiple * 1 <= 0 || $scope.multiple * 1 == '') { //投注倍数限制
+                alert('倍数不能为0或为空');
                 return
             }
             //获取大乐透期号
@@ -293,6 +290,9 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
             var data = {
                 lotteryID : 2
             };
+            $ionicLoading.show ({
+                template: 'Loading...'
+            });
             getWareIssueService.getWareIssue (data, userInfo.data.token)
                 .then (function (response) {
                     $ionicLoading.hide ();
@@ -305,7 +305,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         getdltadd ();
                     }
                 }, function (response) {
-                    console.log ("获取列表失败");
+                    alert("获取期号失败，请重新登录");
                 });
             // 大乐透投注接口信息
             function getdltadd () {
@@ -448,7 +448,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         }
                         //console.log (response.data.info);
                     }, function (response) {
-                        alert('网络加载失败!')
+                        alert('获取投注信息失败，请检查您的网络');
                         /*var confirmPopup = $ionicPopup.confirm ({
                             title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
                             template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
@@ -521,7 +521,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                     }
                 }
             }, function (response) {
-               alert("获取信息失败，请检查网络");
+                alert("获取期号或时间失败，请退出重新登录");
             });
 
         //网期开奖

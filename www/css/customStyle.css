@@ -223,7 +223,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     font-family: inherit;
     font-weight: bold;
     letter-spacing: 1px;
-    font-size: .9em;
+    font-size: .8em;
 }
 
 .home-icon h3 {
@@ -238,6 +238,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 .title-intro h6 {
     padding-left: 10px;
     color: #999999;
+    font-size: .8em;
 }
 
 .title-intro span {
@@ -1023,6 +1024,7 @@ input.bigLotto-input2:checked:before {
 
 /*走势图*/
 .tab_trend {
+    height: 40px;
     padding: 10px 0;
     font-weight: 600;
     color: #959595;
@@ -1043,6 +1045,10 @@ input.bigLotto-input2:checked:before {
     margin-top: -5px;
 }
 
+.trendView .has-header{
+    top: 40px;
+}
+
 .tab_draw a.button {
     width: 31%;
     color: #989898;
@@ -1056,10 +1062,11 @@ input.bigLotto-input2:checked:before {
 }
 
 .tab_trend a.button {
-    width: 25%;
+    width: 15%;
     color: #989898;
-    margin: -5px 2% 0 2%;
+    margin: -5px 6% 0;
     border-radius: 0;
+    padding: 0 0;
 }
 
 .tab_trend > .button,

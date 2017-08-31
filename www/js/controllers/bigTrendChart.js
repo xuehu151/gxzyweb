@@ -55,22 +55,14 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
         };
     
         if (userInfo.data) {
-            /*$http ({
-             method: "POST",
-             url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
-             params: data,
-             headers: {
-             "Content-Type": "application/json"
-             }
-             })*/
             $scope.blueBallData = [];
             historyPastService.PastLottery (data, userInfo.data.token)
                 .then (function (response) {
                     $ionicLoading.hide ();
                     $scope.bitLotto = response.data;
-                
                 }, function (response) {
-                    console.log ("获取列表失败");
+                    $ionicLoading.hide ();
+                    alert ("数据获取失败");
                 });
         }
         else {

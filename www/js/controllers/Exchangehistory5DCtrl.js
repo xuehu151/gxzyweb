@@ -65,7 +65,7 @@ angular.module ('starter.Exchangehistory5DCtrl', ['starter.services'])
                             console.log (response.data);
                         }else {
                             $scope.hasMore = false;
-                            //alert ('已经展示了全部开奖历史')
+                            alert ('已经展示了全部开奖历史');
                         }
                         $scope.$broadcast ('scroll.refreshComplete');
                         $scope.$broadcast ('scroll.infiniteScrollComplete');

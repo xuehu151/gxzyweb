@@ -437,7 +437,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                         getPl5add ();
                     }
                 }, function (response) {
-                    alert("获取期号失败");
+                    alert("获取期号失败，请重新登录");
                 });
             // 排列五投注信息
             function getPl5add () {
@@ -464,11 +464,11 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                         investCode += redBall_10[0].num + '*';
                         investCode += redBall_0[0].num;
                     }else {
-                        alert('请先选择号码!');
+                        alert('请先正确选择号码!');
                         return;
                     }
                 }else {
-                    alert('请先选择号码!');
+                    alert('请先正确选择号码!');
                     return;
                 }
 
@@ -558,7 +558,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                         }
                         //console.log (response.data.info);
                     }, function (response) {
-                        alert('获取投注信息失败，请检查网络');
+                        alert('获取投注信息失败，请检查您的网络');
                         /*var confirmPopup = $ionicPopup.confirm ({
                             title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
                             template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
@@ -630,7 +630,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     }
                 }
             }, function (response) {
-                console.log("获取列表失败");
+                alert("获取期号或时间失败，请退出重新登录");
             });
 
         //网期开奖

@@ -21,6 +21,7 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault ();
             }
+            ionic.Platform.fullScreen(true, true);
         });
 
         $ionicPlatform.registerBackButtonAction (function (e) {
@@ -118,14 +119,14 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
             })
 
             //兑换
-            .state ('tab.exchange', {
+            .state ('exchange', {
                 url: '/exchange',
-                views: {
-                    'tab-exchange': {
+//                views: {
+//                    'tab-exchange': {
                         templateUrl: 'templates/exchange.html',
                         controller: 'ExchangeCtrl'
-                    }
-                }
+//                    }
+//                }
             })
 
             //兑换 排列3
@@ -417,6 +418,6 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
             });*/
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise ('/tab/exchange');
+        $urlRouterProvider.otherwise ('exchange');
 
     });

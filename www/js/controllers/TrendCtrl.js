@@ -25,7 +25,7 @@ angular.module ('starter.TrendCtrl', ['starter.services'])
                 scope : $scope,
                 backdropClickToClose : true
             }).then (function (modal) {
-                $scope.errorInfo = 'token获取失败';
+                $scope.errorInfo = 'token过期';
                 $scope.modalError = modal;
                 modal.show ();
             });

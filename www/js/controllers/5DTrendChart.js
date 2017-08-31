@@ -38,16 +38,7 @@ angular.module ('starter.5DTrendChart', ['starter.services'])
             pageNum: pageNum
         };
         console.log(data);
-      
         if(userInfo.data){
-            /*  $http ({
-             method: "POST",
-             url: ipUrl + '/lottery/getHistoryList?token=' + userInfo.data.token,
-             params: data,
-             headers: {
-             "Content-Type": "application/json"
-             }
-             })*/
             historyPastService.PastLottery (data, userInfo.data.token)
                 .then (function (response) {
                     $ionicLoading.hide ();
@@ -55,7 +46,8 @@ angular.module ('starter.5DTrendChart', ['starter.services'])
             
                     console.log (response.data);
                 }, function (response) {
-                    console.log ("获取列表失败");
+                    $ionicLoading.hide ();
+                    alert ("数据获取失败");
                 });
         }else {
             $ionicLoading.hide ();

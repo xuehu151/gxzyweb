@@ -77,7 +77,7 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
                         $scope.$broadcast ('scroll.infiniteScrollComplete');
                         
                     }, function (response) {
-                        alert ("获取列表失败");
+                        alert ("开奖记录获取失败，请重试!");
                     });
             }
             else {

@@ -18,7 +18,7 @@ angular.module ('starter.DrawCtrl', ['starter.services'])
                 scope : $scope,
                 backdropClickToClose : true
             }).then (function (modal) {
-                $scope.errorInfo = 'token获取失败';
+                $scope.errorInfo = 'token过期';
                 $scope.modalError = modal;
                 modal.show ();
             });
@@ -26,12 +26,11 @@ angular.module ('starter.DrawCtrl', ['starter.services'])
                 $scope.modalError.hide ();
             };
         };
+        
 
     })
 
     .controller('tabsCtrl', function ($scope,$rootScope) {
-
-    
 
     });
 
