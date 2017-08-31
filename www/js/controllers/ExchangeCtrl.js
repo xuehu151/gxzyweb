@@ -29,10 +29,10 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     'flag2' : 1
                 });
             };
-            $scope.goToExchangeBigLotto3 = function (status) {
+          /*  $scope.goToExchangeBigLotto3 = function (status) {
                 $rootScope.newStatus = status;
                 $state.go ('BigLotto-2');
-            };
+            };*/
             getWareIssueService.getWinamt (data, userInfo.data.token)
                 .then (function (response) {
                      console.info(response);

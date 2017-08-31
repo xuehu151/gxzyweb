@@ -46,7 +46,7 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
         });
         //获取历史投注记录............
         var userInfo = $util.getUserInfo ();
-        var pageSize = 8;
+        var pageSize = 30;
         var pageNum = 1;
         var data = {
             lotteryID: '2',

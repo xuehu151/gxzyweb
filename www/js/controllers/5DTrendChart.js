@@ -30,7 +30,7 @@ angular.module ('starter.5DTrendChart', ['starter.services'])
         }
     
         var userInfo = $util.getUserInfo ();
-        var pageSize = 8;
+        var pageSize = 30;
         var pageNum = 1;
         var data = {
             lotteryID: '40',

@@ -418,6 +418,6 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
             });*/
 
         // if none of the above states are matched, use this as the fallback
+//        $urlRouterProvider.otherwise ('/tab/exchange');
         $urlRouterProvider.otherwise ('exchange');
-
     });
