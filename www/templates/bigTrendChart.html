@@ -59,6 +59,7 @@
             </ion-scroll>
             <div style="overflow: hidden;white-space: nowrap;width:100%;">
                 <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false" has-bouncing="false" on-scroll="scrollRightHorizon()" delegate-handle="rightContainerHandle" style="height:{{h}}px;">
+                    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
                     <div style="width:750px;">
                         <div ng-repeat="drawItem in bitLotto" style="display:flex;"  class="padding-td">
                             <div class="head5DBig" style="width: 162px;">
@@ -132,6 +133,7 @@
                             </div>
                         </div>
                     </div>
+                    <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
                 </ion-scroll>
             </div>
         </div>

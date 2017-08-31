@@ -46,29 +46,51 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
         });
         //获取历史投注记录............
         var userInfo = $util.getUserInfo ();
-        var pageSize = 30;
+        var pageSize = 25;
         var pageNum = 1;
-        var data = {
-            lotteryID: '2',
-            pageSize: pageSize,
-            pageNum: pageNum
+        $scope.hasMore = true;
+        $scope.bitLotto = [];
+        $scope.loadMore = function () {
+            data = {
+                lotteryID: '2',
+                pageSize: pageSize,
+                pageNum: pageNum,
+                sort : 0
+            };
+            loadajax ();
         };
+        
+        function loadajax () {
+            if (userInfo.data) {
+                //$scope.blueBallData = [];
+                historyPastService.PastLottery (data, userInfo.data.token)
+                    .then (function (response) {
+                        $ionicLoading.hide ();
+                        if (response.data.length != 0) {
+                            $scope.bitLotto = $scope.bitLotto.concat (response.data);
+                            pageNum++;
+                        }else {
+                            $scope.hasMore = false;
+                            alert ('已经展示了全部开奖历史')
+                        }
+                        $scope.$broadcast ('scroll.refreshComplete');
+                        $scope.$broadcast ('scroll.infiniteScrollComplete');
+                    }, function (response) {
+                        $ionicLoading.hide ();
+                        alert ("数据获取失败");
+                    });
+            }
+            else {
+                $ionicLoading.hide ();
+                $rootScope.errorInfo ();
+            }
+        }
     
-        if (userInfo.data) {
-            $scope.blueBallData = [];
-            historyPastService.PastLottery (data, userInfo.data.token)
-                .then (function (response) {
-                    $ionicLoading.hide ();
-                    $scope.bitLotto = response.data;
-                }, function (response) {
-                    $ionicLoading.hide ();
-                    alert ("数据获取失败");
-                });
-        }
-        else {
-            $ionicLoading.hide ();
-            $rootScope.errorInfo ();
-        }
+        $scope.doRefresh = function () {
+            pageNum = 1;
+            $scope.bitLotto = [];
+            $scope.loadMore();
+        };
         
         $scope.toArray = function (string2, num) {
             var array1 = string2.split ("*");

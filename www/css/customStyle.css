@@ -78,7 +78,6 @@
 */
 * {
     font-family: 'PingFangSC', 'Microsoft YaHei';
-    // font-family: '新宋体';
 }
 
 a {
@@ -88,6 +87,7 @@ a {
 ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     color: #293e97;
 }
+
 
 /*
     首页 兑换

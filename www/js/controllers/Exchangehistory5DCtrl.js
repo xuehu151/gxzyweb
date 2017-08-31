@@ -19,7 +19,8 @@ angular.module ('starter.Exchangehistory5DCtrl', ['starter.services'])
             data = {
                 lotteryID: '40',
                 pageSize: pageSize,
-                pageNum: pageNum
+                pageNum: pageNum,
+                sort : 1
             };
             loadajax ();
         };

@@ -23,7 +23,8 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
             data = {
                 lotteryID : '2',
                 pageSize : pageSize,
-                pageNum : pageNum
+                pageNum : pageNum,
+                sort : 1
             };
             loadajax ();
         };

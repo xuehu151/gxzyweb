@@ -67,6 +67,7 @@
             </ion-scroll>
             <div style="overflow: hidden;white-space: nowrap;width:100%;">
                 <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false" overflow-scroll="false" has-bouncing="false" on-scroll="scrollRightHorizon()" delegate-handle="rightContainerHandle" style="height:{{h}}px;">
+                    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
                     <div style="width:700px;">
                         <div ng-repeat="drawItem in historyPast5" style="display:flex;">
                             <div class="head5D padding-td" style="width: 79px" >
@@ -132,6 +133,7 @@
                             </div>
                         </div>
                     </div>
+                    <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
                 </ion-scroll>
             </div>
         </div>

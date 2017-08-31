@@ -30,29 +30,50 @@ angular.module ('starter.5DTrendChart', ['starter.services'])
         }
     
         var userInfo = $util.getUserInfo ();
-        var pageSize = 30;
+        var pageSize = 25;
         var pageNum = 1;
-        var data = {
-            lotteryID: '40',
-            pageSize: pageSize,
-            pageNum: pageNum
+        $scope.hasMore = true;
+        $scope.historyPast5 = [];
+        $scope.loadMore = function () {
+            data = {
+                lotteryID: '40',
+                pageSize: pageSize,
+                pageNum: pageNum,
+                sort : 0
+            };
+            loadajax ();
         };
-        console.log(data);
-        if(userInfo.data){
-            historyPastService.PastLottery (data, userInfo.data.token)
-                .then (function (response) {
-                    $ionicLoading.hide ();
-                    $scope.historyPast5 = response.data;
-            
-                    console.log (response.data);
-                }, function (response) {
-                    $ionicLoading.hide ();
-                    alert ("数据获取失败");
-                });
-        }else {
-            $ionicLoading.hide ();
-            $rootScope.errorInfo ();
+        //console.log(data);
+        function loadajax () {
+            if(userInfo.data){
+                historyPastService.PastLottery (data, userInfo.data.token)
+                    .then (function (response) {
+                        $ionicLoading.hide ();
+                        console.log (response.data);
+                        if (response.data.length != 0) {
+                            $scope.historyPast5 = $scope.historyPast5.concat (response.data);
+                            pageNum++;
+                        }else {
+                            $scope.hasMore = false;
+                            alert ('已经展示了全部开奖历史')
+                        }
+                        $scope.$broadcast ('scroll.refreshComplete');
+                        $scope.$broadcast ('scroll.infiniteScrollComplete');
+                    }, function (response) {
+                        $ionicLoading.hide ();
+                        alert ("数据获取失败");
+                    });
+            }else {
+                $ionicLoading.hide ();
+                $rootScope.errorInfo ();
+            }
         }
+    
+        $scope.doRefresh = function () {
+            pageNum = 1;
+            $scope.historyPast5 = [];
+            $scope.loadMore();
+        };
         
         $scope.toArray = function (string2, num) {
             var array = string2.split (",");
