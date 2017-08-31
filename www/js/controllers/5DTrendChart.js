@@ -19,7 +19,7 @@ angular.module ('starter.5DTrendChart', ['starter.services'])
             var leftHandle = $ionicScrollDelegate.$getByHandle ("leftContainerHandle");
             leftHandle.freezeScroll (true);
         };
-        $ionicLoading.show();
+        $ionicLoading.show ();
         $scope.dataArrange = [];
         $scope.drawCount = [];
         for (var i = 0; i < 10; i++) {
@@ -28,7 +28,7 @@ angular.module ('starter.5DTrendChart', ['starter.services'])
         for (var j = 1; j <= 5; j++) {
             $scope.drawCount.push (j);
         }
-    
+        
         var userInfo = $util.getUserInfo ();
         var pageSize = 25;
         var pageNum = 1;
@@ -36,43 +36,47 @@ angular.module ('starter.5DTrendChart', ['starter.services'])
         $scope.historyPast5 = [];
         $scope.loadMore = function () {
             data = {
-                lotteryID: '40',
-                pageSize: pageSize,
-                pageNum: pageNum,
+                lotteryID : '40',
+                pageSize : pageSize,
+                pageNum : pageNum,
                 sort : 0
             };
             loadajax ();
         };
         //console.log(data);
         function loadajax () {
-            if(userInfo.data){
-                historyPastService.PastLottery (data, userInfo.data.token)
-                    .then (function (response) {
-                        $ionicLoading.hide ();
-                        console.log (response.data);
+            
+            historyPastService.PastLottery (data, userInfo.data.token)
+                .then (function (response) {
+                    $ionicLoading.hide ();
+                    console.log (response.data);
+                    if (response.data) {
                         if (response.data.length != 0) {
                             $scope.historyPast5 = $scope.historyPast5.concat (response.data);
                             pageNum++;
-                        }else {
+                        }
+                        else {
                             $scope.hasMore = false;
                             alert ('已经展示了全部开奖历史')
                         }
                         $scope.$broadcast ('scroll.refreshComplete');
                         $scope.$broadcast ('scroll.infiniteScrollComplete');
-                    }, function (response) {
+                    }
+                    else {
                         $ionicLoading.hide ();
-                        alert ("数据获取失败");
-                    });
-            }else {
-                $ionicLoading.hide ();
-                $rootScope.errorInfo ();
-            }
+                        $rootScope.errorInfo ();
+                    }
+                }, function (response) {
+                    $ionicLoading.hide ();
+                    alert ("数据获取失败");
+                });
+            
         }
-    
+        
         $scope.doRefresh = function () {
             pageNum = 1;
             $scope.historyPast5 = [];
-            $scope.loadMore();
+            $scope.loadMore ();
         };
         
         $scope.toArray = function (string2, num) {

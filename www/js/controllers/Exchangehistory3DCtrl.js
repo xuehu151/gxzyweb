@@ -6,7 +6,7 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
 //兑换 排列 3 网期开奖详情
     .controller ('Exchangehistory3DCtrl', function ($scope, $http, $interval, $ionicPopup, $ionicLoading, $rootScope, $util, historyPastService, $filter) {
         var userInfo = $util.getUserInfo ();
-        var pageSize = 12;
+        var pageSize = 8;
         var pageNum = 1;
         /*
          * 上拉加载，分批加载服务端剩余的数据
@@ -27,12 +27,11 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
         
         function loadajax () {
             console.log (data);
-            if (userInfo.data) {
-                historyPastService.PastLottery (data, userInfo.data.token)
-                    .then (function (response) {
-                        $ionicLoading.hide ();
-                        console.log (response);
-
+            historyPastService.PastLottery (data, userInfo.data.token)
+                .then (function (response) {
+                    $ionicLoading.hide ();
+                    console.log (response);
+                    if (response.data) {
                         if (response.data.length != 0) {
                             $scope.historyPast3 = $scope.historyPast3.concat (response.data);
                             for (var i = 0; i < $scope.historyPast3.length; i++) {
@@ -73,23 +72,23 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
                         }
                         $scope.$broadcast ('scroll.refreshComplete');
                         $scope.$broadcast ('scroll.infiniteScrollComplete');
-                    }, function (response) {
+                    }
+                    else {
                         $ionicLoading.hide ();
-                        alert ("获取列表失败");
-                    });
-            }
-            else {
-                $ionicLoading.hide ();
-                $rootScope.errorInfo ();
-            }
+                        $rootScope.errorInfo ();
+                    }
+                }, function (response) {
+                    $ionicLoading.hide ();
+                    alert ("获取列表失败");
+                });
         }
-    
+        
         $scope.doRefresh = function () {
             pageNum = 1;
             $scope.historyPast3 = [];
-            $scope.loadMore();
+            $scope.loadMore ();
         };
-    
+        
         $scope.toArray = function (string2, num) {
             var array = string2.split (",");
             return array[num];

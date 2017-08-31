@@ -3,7 +3,7 @@
  */
 //大乐透走势图
 angular.module ('starter.bigTrendChart', ['starter.services'])
-
+    
     .controller ('bigTrendChart', function ($scope, $ionicScrollDelegate, $util, $ionicLoading, $rootScope, historyPastService) {
         $scope.h = Math.min (document.documentElement.clientHeight, window.innerHeight) - 44 - 88;
         $scope.scrollRightHorizon = function () {
@@ -19,7 +19,7 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
             var leftHandle = $ionicScrollDelegate.$getByHandle ("leftContainerHandle");
             leftHandle.freezeScroll (true);
         };
-
+        
         $scope.formerAreaOne = [];
         $scope.formerAreaTwo = [];
         $scope.formerAreaThree = [];
@@ -40,7 +40,7 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
         for (var j = 1; j < 8; j++) {
             $scope.drawCount.push (j);
         }
-    
+        
         $ionicLoading.show ({
             template : 'Loading...'
         });
@@ -52,44 +52,47 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
         $scope.bitLotto = [];
         $scope.loadMore = function () {
             data = {
-                lotteryID: '2',
-                pageSize: pageSize,
-                pageNum: pageNum,
+                lotteryID : '2',
+                pageSize : pageSize,
+                pageNum : pageNum,
                 sort : 0
             };
             loadajax ();
         };
         
         function loadajax () {
-            if (userInfo.data) {
-                //$scope.blueBallData = [];
-                historyPastService.PastLottery (data, userInfo.data.token)
-                    .then (function (response) {
-                        $ionicLoading.hide ();
+            
+            //$scope.blueBallData = [];
+            historyPastService.PastLottery (data, userInfo.data.token)
+                .then (function (response) {
+                    $ionicLoading.hide ();
+                    if (response.data) {
                         if (response.data.length != 0) {
                             $scope.bitLotto = $scope.bitLotto.concat (response.data);
                             pageNum++;
-                        }else {
+                        }
+                        else {
                             $scope.hasMore = false;
                             alert ('已经展示了全部开奖历史')
                         }
                         $scope.$broadcast ('scroll.refreshComplete');
                         $scope.$broadcast ('scroll.infiniteScrollComplete');
-                    }, function (response) {
+                    }
+                    else {
                         $ionicLoading.hide ();
-                        alert ("数据获取失败");
-                    });
-            }
-            else {
-                $ionicLoading.hide ();
-                $rootScope.errorInfo ();
-            }
+                        $rootScope.errorInfo ();
+                    }
+                }, function (response) {
+                    $ionicLoading.hide ();
+                    alert ("数据获取失败");
+                });
+            
         }
-    
+        
         $scope.doRefresh = function () {
             pageNum = 1;
             $scope.bitLotto = [];
-            $scope.loadMore();
+            $scope.loadMore ();
         };
         
         $scope.toArray = function (string2, num) {
@@ -100,5 +103,5 @@ angular.module ('starter.bigTrendChart', ['starter.services'])
             //console.log(array);
             return array[num];
         };
-
+        
     });
