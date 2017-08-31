@@ -119,14 +119,14 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
             })
 
             //兑换
-            .state ('exchange', {
+            .state ('tab.exchange', {
                 url: '/exchange',
-//                views: {
-//                    'tab-exchange': {
+                views: {
+                    'tab-exchange': {
                         templateUrl: 'templates/exchange.html',
                         controller: 'ExchangeCtrl'
-//                    }
-//                }
+                    }
+                }
             })
 
             //兑换 排列3
@@ -418,6 +418,5 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
             });*/
 
         // if none of the above states are matched, use this as the fallback
-//        $urlRouterProvider.otherwise ('/tab/exchange');
-        $urlRouterProvider.otherwise ('exchange');
+        $urlRouterProvider.otherwise ('/tab/exchange');
     });
