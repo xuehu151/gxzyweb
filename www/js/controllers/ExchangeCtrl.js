@@ -253,7 +253,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 });
                 $scope.cancelPopError = function() {
                     $scope.modalError.hide();
-                    WeixinJSBridge.call('closeWindow');
+                    //WeixinJSBridge.call('closeWindow');
                 };
             };
         }
