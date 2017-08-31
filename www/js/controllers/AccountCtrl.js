@@ -5,6 +5,9 @@ angular.module('starter.AccountCtrl', ['starter.services'])
     //账户页面
     .controller('AccountCtrl', function($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading, $util, splitCode, $timeout, $location) {
         //验证是否资料完善
+        var firstTab = document.querySelector(".tab-item");
+        console.log(firstTab);
+        firstTab.style.display='none';
 
         PayType = 1;
         var userInfo = $util.getUserInfo();

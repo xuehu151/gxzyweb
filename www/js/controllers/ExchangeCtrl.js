@@ -4,8 +4,14 @@
 var ipUrl = 'http://lottery.zhenlong.wang/service';
 //兑换
 angular.module ('starter.ExchangeCtrl', ['starter.services'])
-    
+
     .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService, getWareIssueService) {
+
+        var firstTab = document.querySelector(".tab-item");
+        console.log(firstTab);
+        firstTab.style.display='none';
+        console.log(firstTab.style.display);
+
         $rootScope.newStatus = true;
         sign = $location.search ().sign;
         type = $location.search ().type;
@@ -43,12 +49,12 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     function slide (parent) {
                         setTimeout (function () {
                             var className = $ ("." + parent.className);
-                    
+
                             var i = 0, sh;
                             var liLength = className.children ("li").length;
                             var liHeight = className.children ("li").height () + parseInt (className.children ("li").css ('border-bottom-width'));
                             className.html (className.html () + className.html ());
-                    
+
                             // 开启定时器
                             sh = setInterval (slide, 3000);
                             function slide () {
@@ -63,7 +69,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     className.css ("margin-top", "0px");
                                 }
                             }
-                    
+
                             // 清除定时器
                             className.hover (function () {
                                 clearInterval (sh);
@@ -78,10 +84,10 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 });
             return;
         }
-        
+
         if (sign != undefined) {
             if (type == 0) {//初始化不带二维码    index1
-                
+
                 var userToken = {
                     token : sign
                 };
@@ -96,7 +102,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         var datas = $util.setUserInfo (response);
                         var userInfo = $util.getUserInfo ();
                         console.log (userInfo);
-                        
+
                         if (userInfo.error != '0') {
                             $scope.errorInfo = userInfo.info;
                             $rootScope.errorInfo ();
@@ -158,7 +164,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     .then (function (modal) {
                         modal.show ();
                         //$scope.modal = modal;
-                        
+
                         $scope.userInfo = {
                             newUserName : "",
                             newUserIphone : "",
@@ -207,7 +213,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     modal.hide ();
                                 }, 1000, 100);
                             }
-                            
+
                             $ionicLoading.show ();
                             $http ({
                                 method : "POST",
@@ -233,7 +239,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                                     userInfo.data.user.phone = $scope.userInfo.newUserIphone;
                                     var datas = $util.setUserInfo (userInfo);
                                     console.log (userInfo);
-                                    
+
                                     $state.go ("scanCodeIndex", {}, { reload : true });
                                 }, function (response) {
                                     alert ('加载失败，请检查网络')
@@ -241,7 +247,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         }
                     });
             }
-            
+
             //错误码窗口配置
             $rootScope.errorInfo = function () {
                 $ionicModal.fromTemplateUrl('templates/errorInfo.html', {
