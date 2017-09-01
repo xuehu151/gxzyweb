@@ -1,7 +1,7 @@
 /**
  * Created by admin on 2017/6/15.
  */
-var url = "http://lottery.zhenlong.wang";
+//var url = "http://lottery.zhenlong.wang";
 //var url = 'http://103.235.237.134';      //本地ip地址或者域名
 
 //提现页面

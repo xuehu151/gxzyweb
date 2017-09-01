@@ -1,7 +1,7 @@
 /**
  * Created by admin on 2017/6/14.
  */
-var ipUrl = 'http://lottery.zhenlong.wang';
+//var ipUrl = 'http://lottery.zhenlong.wang';
 //var ipUrl = 'http://103.235.237.134';      //本地ip地址或者域名
 
 
@@ -371,7 +371,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     },
                     timeout: 1000 * 10
                 })
-                //BettingService.pl3Add(data, userInfo.data.token)
+//                BettingService.pl3Add(data, userInfo.data.token)
                     .then (function (response) {
                         $ionicLoading.hide ();
                         console.log (reques);
