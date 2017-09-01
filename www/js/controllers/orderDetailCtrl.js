@@ -2,6 +2,8 @@
  * Created by admin on 2017/6/15.
  */
 var url = "http://lottery.zhenlong.wang";
+//var ipUrl = 'http://103.235.237.134';      //本地ip地址或者域名
+
 //订单详情
 angular.module('starter.orderDetailCtrl', ['starter.services']).controller('orderDetailCtrl', function($scope, $rootScope, $state) {
   $scope.orderDetail = $rootScope.orderDetail;

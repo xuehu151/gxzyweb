@@ -990,6 +990,7 @@ input.bigLotto-input2:checked:before {
     margin-top: 15px;
     border-top: 0;
     font-weight: bolder;
+    margin-left: -43%;
 }
 
 .paddingTop h5 {

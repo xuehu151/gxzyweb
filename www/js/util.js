@@ -6,7 +6,7 @@ angular.module ('starter.util', [])
     .factory ('$util', function ($http, $q, $ionicLoading) {
         //Might use a resource here that returns a JSON array
         var ipUrl = 'http://lottery.zhenlong.wang';       //服务器ip地址或者域名
-        //var ipUrl = 'http://192.168.1.118:8080';      //本地ip地址或者域名
+//        var ipUrl = 'http://103.235.237.134';      //本地ip地址或者域名
 
         /* 接口地址  */
         var httpURL = {
