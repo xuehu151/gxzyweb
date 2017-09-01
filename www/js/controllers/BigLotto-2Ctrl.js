@@ -1,6 +1,9 @@
 /**
  * Created by admin on 2017/6/14.
  */
+var ipUrl = 'http://lottery.zhenlong.wang';
+//var ipUrl = 'http://103.235.237.134';      //本地ip地址或者域名
+
 angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
 
 //兑换  大乐透不追加
@@ -320,24 +323,40 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 var investCodeBlue = [];
                 var investCodeStr;
                 for (var i = 0; i < 5; i++) {
-
-                    if($scope.filterDataRed[i] != undefined){
+                    if($scope.filterDataRed[i]){
+                        if($scope.filterDataRed[i].num){
+                            investCodeRed.push($scope.filterDataRed[i].num);
+                        }
+                    } else {
+                        alert('请正确选择红色号码!!!');
+                        return;
+                    }
+                    /*if($scope.filterDataRed[i] != undefined){
                         if($scope.numDataRed[randomRed[i] - 1]){
                             investCodeRed.push($scope.numDataRed[randomRed[i] - 1].num);
                         }else if($scope.filterDataRed[i].num){
                             investCodeRed.push($scope.filterDataRed[i].num);
                         }
-                        else {
+//                        else {
                             alert('请正确选择红色号码!!!');
                             return;
                         }
                     }else {
                         alert('请正确选择红色号码!!!');
                         return;
-                    }
+                    }*/
                 }
                 for (var i = 0; i < 2; i++) {
-                    if($scope.filterDataBlue[i] != undefined){
+                    if($scope.filterDataBlue[i]){
+                        if($scope.filterDataBlue[i].num){
+                            investCodeBlue.push($scope.filterDataBlue[i].num);
+                        }
+                    }else {
+                        alert('请正确选择蓝色号码!!!');
+                        return
+                    }
+                    
+                    /*if($scope.filterDataBlue[i] != undefined){
                         if($scope.numDataBlue[randomBlue[i] - 1]){
                             investCodeBlue.push($scope.numDataBlue[randomBlue[i] - 1].num);
                         }else if($scope.filterDataBlue[i].num){
@@ -350,7 +369,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                     }else {
                         alert('请正确选择蓝色号码!!!');
                         return
-                    }
+                    }*/
                 }
                 investCodeStr = investCodeRed + '*' + investCodeBlue;
                 dataObj.investCode = investCodeStr;
@@ -391,7 +410,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 };
                 $http ({
                     method : "POST",
-                    url : ipUrl + '/lottery/dltadd?token=' + userInfo.data.token,
+                    url : ipUrl + '/service/lottery/dltadd?token=' + userInfo.data.token,
                     data : data,
                     headers : {
                         "Content-Type" : "application/json"

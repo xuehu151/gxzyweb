@@ -1,8 +1,9 @@
 /**
  * Created by admin on 2017/6/14.
  */
-var ipUrl = 'http://lottery.zhenlong.wang/service';
+var ipUrl = 'http://lottery.zhenlong.wang';
 //var ipUrl = 'http://103.235.237.134';      //本地ip地址或者域名
+
 
 //兑换
 angular.module ('starter.ExchangeCtrl', ['starter.services'])
@@ -219,7 +220,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             $ionicLoading.show ();
                             $http ({
                                 method : "POST",
-                                url : ipUrl + '/customer/add?token=' + userInfo.data.token,
+                                url : ipUrl + '/service/customer/add?token=' + userInfo.data.token,
                                 data : {
                                     realName : $scope.userInfo.newUserName,
                                     phone : $scope.userInfo.newUserIphone

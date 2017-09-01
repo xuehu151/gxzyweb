@@ -1,6 +1,10 @@
 /**
  * Created by admin on 2017/6/15.
  */
+var url = "http://lottery.zhenlong.wang";
+//var url = 'http://103.235.237.134';      //本地ip地址或者域名
+
+
 angular.module('starter.AccountCtrl', ['starter.services'])
     //账户页面
     .controller('AccountCtrl', function($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading, $util, splitCode, $timeout, $location) {

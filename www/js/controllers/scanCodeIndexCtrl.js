@@ -1,7 +1,7 @@
 /**
  * Created by admin on 2017/6/14.
  */
-var url = "http://lottery.zhenlong.wang";
+var ipUrl = "http://lottery.zhenlong.wang";
 //var ipUrl = 'http://103.235.237.134';      //本地ip地址或者域名
 
 //扫码兑换首页
@@ -133,7 +133,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                             }, 0);
                         }
     
-                        getUser.getInfo (url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
+                        getUser.getInfo (ipUrl + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
                             .then (function (response) {
                                 console.log (response);
                                 $scope.needExchangeAmount.amount = response.data.length;

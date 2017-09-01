@@ -2,9 +2,8 @@
  * Created by admin on 2017/6/14.
  */
 
-var ipUrl = 'http://lottery.zhenlong.wang/service';
+var ipUrl = 'http://lottery.zhenlong.wang';
 //var ipUrl = 'http://103.235.237.134';      //本地ip地址或者域名
-
 
 angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
 //兑换 排列 3 详情
@@ -194,7 +193,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
 //                console.log(data.token);
                 $http ({
                     method: "POST",
-                    url: ipUrl + '/lottery/pl3add?token=' + userInfo.data.token,
+                    url: ipUrl + '/service/lottery/pl3add?token=' + userInfo.data.token,
                     data: data,
                     headers: {
                         "Content-Type": "application/json"
