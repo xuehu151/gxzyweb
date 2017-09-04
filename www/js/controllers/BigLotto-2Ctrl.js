@@ -116,8 +116,6 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
             }
         };
         //随机选择   红蓝  色球
-        var randomRed = []; //原数组
-        var randomBlue = []; //原数组
         $scope.randomBall = function () {
             $scope.filterDataRed = [];
             $scope.filterDataBlue = [];
@@ -126,42 +124,50 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 $scope.numDataRed[i].check = false;
                 $scope.filterDataRed = [];
             }
-
-            //给原数组randomBlue赋值
-            for (var i = 1; i <= 35; i++) {
-                randomRed[i] = i;
-            }
-            randomRed.sort (function () {
-                return 0.5 - Math.random ();
-            });
             //随机打撒
+            var arr =getArrayItems($scope.numDataRed,5);
             for (var i = 0; i < 5; i++) {
-                // console.log (randomRed[i]);
-                $scope.numDataRed[randomRed[i] - 1].check = true;
-                $scope.filterDataRed.push ($scope.numDataRed[randomRed[i] - 1]);
+                $scope.numDataRed[parseInt(arr[i].num)-1].check = true;
+                $scope.filterDataRed.push ($scope.numDataRed[parseInt(arr[i].num)-1]);
             }
+
             //处理随机选取蓝色球*************
             for (var i = 0; i < 12; i++) { //首先清空选中的号码效果
                 $scope.numDataBlue[i].check = false;
                 $scope.filterDataBlue = [];
             }
-
-            //给原数组randomBlue赋值
-            for (var i = 1; i <= 12; i++) {
-                randomBlue[i] = i;
-            }
-            randomBlue.sort (function () {
-                return 0.5 - Math.random ();
-            });
-            //随机打撒
+            //随机打撒\
+            var arr =getArrayItems($scope.numDataBlue,2);
             for (var i = 0; i < 2; i++) {
-//                 console.log (randomBlue[i]);
-                $scope.numDataBlue[randomBlue[i] - 1].check = true;
-                $scope.filterDataBlue.push ($scope.numDataBlue[randomBlue[i] - 1]);
+                $scope.numDataBlue[parseInt(arr[i].num)-1].check = true;
+                $scope.filterDataBlue.push ($scope.numDataBlue[parseInt(arr[i].num)-1]);
             }
-            // console.log ($scope.filterDataRed);
-            // console.log ($scope.filterDataBlue);
         };
+        function getArrayItems(arr, num) {
+            //新建一个数组,将传入的数组复制过来,用于运算,而不要直接操作传入的数组;
+            var temp_array = new Array();
+            for (var index in arr) {
+                temp_array.push(arr[index]);
+            }
+            //取出的数值项,保存在此数组
+            var return_array = new Array();
+            for (var i = 0; i<num; i++) {
+                //判断如果数组还有可以取出的元素,以防下标越界
+                if (temp_array.length>0) {
+                    //在数组中产生一个随机索引
+                    var arrIndex = Math.floor(Math.random()*temp_array.length);
+                    //将此随机索引的对应的数组元素值复制出来
+                    return_array[i] = temp_array[arrIndex];
+                    //然后删掉此索引的数组元素,这时候temp_array变为新的数组
+                    temp_array.splice(arrIndex, 1);
+                } else {
+                    //数组中数据项取完后,退出循环,比如数组本来只有10项,但要求取出20项.
+                    break;
+                }
+            }
+            return return_array;
+        }
+
         /**
          * 1.此if是用来判断是不是在投注详情页面点击修改后跳转过来的
          * 2.如果是点击修改后跳转过来的需要渲染红篮球
@@ -355,7 +361,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         alert('请正确选择蓝色号码!!!');
                         return
                     }
-                    
+
                     /*if($scope.filterDataBlue[i] != undefined){
                         if($scope.numDataBlue[randomBlue[i] - 1]){
                             investCodeBlue.push($scope.numDataBlue[randomBlue[i] - 1].num);
