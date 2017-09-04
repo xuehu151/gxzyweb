@@ -18,7 +18,7 @@
 
         <div class="num-sum-red">
             <i
-                ng-repeat="redNumRed in numDataRed"
+                ng-repeat="redNumRed in numDataRed track by $index"
                 ng-class="{false: 'red-ball-bg-white', true: 'red-ball-bg-red'}[redNumRed.check]"
                 ng-click="addRedClick(redNumRed)" ng-cloak>
                 {{redNumRed.num}}
@@ -26,7 +26,7 @@
         </div>
         <div class="num-sum-blue">
             <i
-                ng-repeat="blueNumBlue in numDataBlue"
+                ng-repeat="blueNumBlue in numDataBlue track by $index"
                 class="blue-ball-bg-white"
                 ng-class="{false: 'blue-ball-bg-white', true: 'blue-ball-bg-blue'}[blueNumBlue.check]"
                 ng-click="addBlueClick(blueNumBlue)" ng-cloak>
@@ -48,10 +48,10 @@
 
         <div class="row" style="height: 50px">
             <div class="col col-67 show-red-ball">
-                <i ng-repeat="filterRedNumBlue in filterDataRed" ng-cloak>{{filterRedNumBlue.num}}</i>
+                <i ng-repeat="filterRedNumBlue in filterDataRed  track by $index" ng-cloak>{{filterRedNumBlue.num}}</i>
             </div>
             <div class="col col-33 show-blue-ball">
-                <i ng-repeat="filterBlueNumBlue in filterDataBlue" ng-cloak>{{filterBlueNumBlue.num}}</i>
+                <i ng-repeat="filterBlueNumBlue in filterDataBlue track by $index" ng-cloak>{{filterBlueNumBlue.num}}</i>
             </div>
         </div>
         <div class="row">

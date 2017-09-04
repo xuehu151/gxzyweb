@@ -155,7 +155,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
             });
             //随机打撒
             for (var i = 0; i < 2; i++) {
-                // console.log (randomBlue[i]);
+//                 console.log (randomBlue[i]);
                 $scope.numDataBlue[randomBlue[i] - 1].check = true;
                 $scope.filterDataBlue.push ($scope.numDataBlue[randomBlue[i] - 1]);
             }
