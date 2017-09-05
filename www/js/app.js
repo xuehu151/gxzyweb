@@ -6,9 +6,9 @@ var jsonWrapBit5D = []; //点击向右的修改后返回来时数据的存放
 var sign = '';
 var type = '';
 var PayType = '';//判断是否为老用户扫码进来 0 新用户 1 老用户扫码
-//var ipUrl = 'http://lottery.zhenlong.wang';
-var ipUrl = 'http://103.235.237.134';      //本地ip地址或者域名
-var url = 'http://103.235.237.134';      //本地ip地址或者域名
+var ipUrl = 'http://lottery.zhenlong.wang';
+//var ipUrl = 'http://103.235.237.134';      //本地ip地址或者域名
+//var url = 'http://103.235.237.134';      //本地ip地址或者域名
 
 
 angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.services', 'starter.util', 'starter.ExchangeCtrl', 'starter.scanCodeIndexCtrl', 'starter.Exchange-3Ctrl', 'starter.Exchange-3DetailsCtrl', 'starter.Exchangehistory3DCtrl', 'starter.Exchange-5Ctrl', 'starter.Exchange-5DetailsCtrl', 'starter.Exchangehistory5DCtrl', 'starter.BigLotto-2Ctrl', 'starter.bettingDetailCtrl', 'starter.bigLottoHistoryDetailsCtrl', 'starter.AccountCtrl', 'starter.completeInfoCtrl', 'starter.completeInfoSucceedCtrl', 'starter.widthdrawResultCtrl', 'starter.prizeRecordsCtrl', 'starter.allOrdersCtrl', 'starter.orderDetailCtrl',  'starter.widthdrawCtrl', 'starter.DrawCtrl', 'starter.TrendCtrl', 'starter.3DTrendChart', 'starter.5DTrendChart', 'starter.bigTrendChart', 'starter.selfInfoCtrl'])
