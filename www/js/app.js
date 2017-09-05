@@ -7,6 +7,7 @@ var sign = '';
 var type = '';
 var PayType = '';//判断是否为老用户扫码进来 0 新用户 1 老用户扫码
 var ipUrl = 'http://lottery.zhenlong.wang';
+var url = 'http://lottery.zhenlong.wang';
 //var ipUrl = 'http://103.235.237.134';      //本地ip地址或者域名
 //var url = 'http://103.235.237.134';      //本地ip地址或者域名
 
