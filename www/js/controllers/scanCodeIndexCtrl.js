@@ -76,16 +76,78 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 });
             return;
         }
-        
+    
+        var token = userInfo.data.token;
+        $scope.needExchangeAmount = { amount : 0 };
+        console.log (userInfo);
+    
+        getWareIssueService.getWinamt(data, userInfo.data.token)
+            .then(function (response) {
+                // console.info(response.data);
+                $scope.winningShow = response.data;
+            
+                //上下滚动效果
+                slide (document.getElementsByTagName ('ul')[0]);
+                function slide (parent) {
+                    setTimeout (function () {
+                        var className = $ ("." + parent.className);
+                    
+                        var i = 0, sh;
+                        var liLength = className.children ("li").length;
+                        var liHeight = className.children ("li").height () + parseInt (className.children ("li").css ('border-bottom-width'));
+                        className.html (className.html () + className.html ());
+                    
+                        // 开启定时器
+                        sh = setInterval (slide, 3000);
+                        function slide () {
+                            if (parseInt (className.css ("margin-top")) > (-liLength * liHeight)) {
+                                i++;
+                                className.animate ({
+                                    marginTop : -liHeight * i + "px"
+                                }, "slow");
+                            }
+                            else {
+                                i = 0;
+                                className.css ("margin-top", "0px");
+                            }
+                        }
+                        // 清除定时器
+                        className.hover (function () {
+                            clearInterval (sh);
+                        }, function () {
+                            clearInterval (sh);
+                            sh = setInterval (slide, 3000);
+                        });
+                    }, 0);
+                }
+            
+                getUser.getInfo (ipUrl + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=8')
+                    .then (function (response) {
+                        console.log (response);
+                        $scope.needExchangeAmount.amount = response.data.length;
+                        console.log ($scope.needExchangeAmount.amount);
+                        $rootScope.needExchangeItems = response.data;
+                        if (userInfo.data.voucher) {
+                            $scope.modal2.show ();
+                        }
+                    
+                    }, function (error) {
+                        $ionicLoading.hide ();
+                        alert ('数据获取失败');
+                    });
+            }, function (error) {
+                $ionicLoading.hide ();
+                alert('数据获取失败!');
+            });
         
         var data = {
             token : sign
         };
-        initDataService.initData (data) // index
+        /*initDataService.initData (data) // index
             .then (function (response) {
                 $ionicLoading.hide ();
                 
-                /* 获取初始化数据 */
+                /!* 获取初始化数据 *!/
                 var datas = $util.setUserInfo (response);
                 var userInfo = $util.getUserInfo ();
                 console.log (userInfo);
@@ -154,7 +216,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
             }, function (response) {
                 $ionicLoading.hide ();
                 alert ("初始化数据失败");
-            });
+            });*/
         
         $scope.goToExchange3D = function () {
             $state.go ('exchange-3');

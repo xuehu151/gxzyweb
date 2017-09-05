@@ -198,93 +198,29 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
         if(type == 0 || type == undefined){
             if (PayType == 0) {
                 $scope.saveBallSelect3D = function () {
-                    joinMenu3D ();
+                    joinMenu3DPayType0 ();
                 }
             }else {
                 //加入选单
                 $scope.saveBallSelect3D = function ($index) {
-                    var json3D = {
-                        B_Bit : filterBit100,
-                        S_Bit : filterBit10,
-                        G_Bit : filterBit1
-                    };
-                    if (sessionStorage.jsonWrap3D) { //判断是否第一次点击确定 并且对进行完删除后赋值
-                        var changeToArray3D = JSON.parse (sessionStorage.jsonWrap3D);
-                        //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
-                        jsonWrapBit3D = changeToArray3D;
-                    }
-                    if (filterBit100.length != 0 && filterBit10 != 0 && filterBit1 != 0) {
-                        jsonWrapBit3D.push (json3D);
-                        //                console.log($rootScope.jsonWrapBit3D);
-                        var sessionJsonWarp3D = JSON.stringify (jsonWrapBit3D); //解析数组
-                        //console.log (sessionJsonWarp3D);
-                        sessionStorage.jsonWrap3D = sessionJsonWarp3D; //session保存数据
-                        //console.log(sessionStorage.jsonWrap3D);
-                        $scope.generate100 = 0;
-                        $scope.generate10 = 0;
-                        $scope.generate1 = 0;
-                        for (var i = 0; i < 10; i++) { //再次点击之前 首先清空上次选中的号码效果
-                            $scope.numDataBit100[i].check = false;
-                            $scope.numDataBit10[i].check = false;
-                            $scope.numDataBit1[i].check = false;
-                            filterBit100 = [];
-                            filterBit10 = [];
-                            filterBit1 = [];
-                        }
-                        $state.go ('exchange-3Details');
-                    }
-                    else {
-                        alert ('请正确选择号码');
-                    }
+                    joinMenu3DPayType1 ($index);
                 };
             }
         }else if(type == 1){
             if (PayType == 0) {
                 $scope.saveBallSelect3D = function () {
-                    joinMenu3D ();
+                    joinMenu3DPayType0 ();
                 }
             }
             else {
                 //加入选单
                 $scope.saveBallSelect3D = function ($index) {
-                    var json3D = {
-                        B_Bit : filterBit100,
-                        S_Bit : filterBit10,
-                        G_Bit : filterBit1
-                    };
-                    if (sessionStorage.jsonWrap3D) { //判断是否第一次点击确定 并且对进行完删除后赋值
-                        var changeToArray3D = JSON.parse (sessionStorage.jsonWrap3D);
-                        //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
-                        jsonWrapBit3D = changeToArray3D;
-                    }
-                    if (filterBit100.length != 0 && filterBit10 != 0 && filterBit1 != 0) {
-                        jsonWrapBit3D.push (json3D);
-                        //                console.log($rootScope.jsonWrapBit3D);
-                        var sessionJsonWarp3D = JSON.stringify (jsonWrapBit3D); //解析数组
-                        //console.log (sessionJsonWarp3D);
-                        sessionStorage.jsonWrap3D = sessionJsonWarp3D; //session保存数据
-                        //console.log(sessionStorage.jsonWrap3D);
-                        $scope.generate100 = 0;
-                        $scope.generate10 = 0;
-                        $scope.generate1 = 0;
-                        for (var i = 0; i < 10; i++) { //再次点击之前 首先清空上次选中的号码效果
-                            $scope.numDataBit100[i].check = false;
-                            $scope.numDataBit10[i].check = false;
-                            $scope.numDataBit1[i].check = false;
-                            filterBit100 = [];
-                            filterBit10 = [];
-                            filterBit1 = [];
-                        }
-                        $state.go ('exchange-3Details');
-                    }
-                    else {
-                        alert ('请正确选择号码');
-                    }
+                    joinMenu3DPayType1 ($index);
                 };
             }
         }
         //PayType =0 用抵用券扫码
-        function joinMenu3D () {
+        function joinMenu3DPayType0 () {
             //获取3D期号
             var reques = {};
             var userInfo = $util.getUserInfo ();
@@ -442,7 +378,44 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 };
             };
         }
-
+        //PayType = 1
+        function joinMenu3DPayType1 ($index){
+            var json3D = {
+                B_Bit : filterBit100,
+                S_Bit : filterBit10,
+                G_Bit : filterBit1
+            };
+            if (sessionStorage.jsonWrap3D) { //判断是否第一次点击确定 并且对进行完删除后赋值
+                var changeToArray3D = JSON.parse (sessionStorage.jsonWrap3D);
+                //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
+                jsonWrapBit3D = changeToArray3D;
+            }
+            if (filterBit100.length != 0 && filterBit10 != 0 && filterBit1 != 0) {
+                jsonWrapBit3D.push (json3D);
+                //                console.log($rootScope.jsonWrapBit3D);
+                var sessionJsonWarp3D = JSON.stringify (jsonWrapBit3D); //解析数组
+                //console.log (sessionJsonWarp3D);
+                sessionStorage.jsonWrap3D = sessionJsonWarp3D; //session保存数据
+                //console.log(sessionStorage.jsonWrap3D);
+                $scope.generate100 = 0;
+                $scope.generate10 = 0;
+                $scope.generate1 = 0;
+                for (var i = 0; i < 10; i++) { //再次点击之前 首先清空上次选中的号码效果
+                    $scope.numDataBit100[i].check = false;
+                    $scope.numDataBit10[i].check = false;
+                    $scope.numDataBit1[i].check = false;
+                    filterBit100 = [];
+                    filterBit10 = [];
+                    filterBit1 = [];
+                }
+                $state.go ('exchange-3Details');
+            }
+            else {
+                alert ('请正确选择号码');
+            }
+        }
+        
+        
         //玩法说明时间
         var userInfo = $util.getUserInfo ();
         var data = {
@@ -457,16 +430,15 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 console.log ($scope.reques);
                 var timer = $interval (countTime, 1000);
                 var end_sale_time = $scope.reques.end_sale_time.replace(/-/g,'/');
-
+                
                 function countTime () {
                     var date = new Date ();//获取当前时间
                     var now = date.getTime ();
-
+                   
                     var endDate = new Date (end_sale_time); //设置截止时间
                     var end = endDate.getTime ();
 
                     var leftTime = end - now;//计算时间差
-
                     var d, h, m, s;
                     if (leftTime >= 0) {//定义变量 d,h,m,s保存倒计时的时间
                         d = Math.floor (leftTime / 1000 / 60 / 60 / 24);
@@ -477,7 +449,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     $scope.hours = checkTime ((d * 24) + h);
                     $scope.minute = checkTime (m);
                     $scope.second = checkTime (s);
-
+                    
                     function checkTime (i) { //将0-9的数字前面加上0，例1变为01
                         if (i < 10) {
                             i = "0" + i;

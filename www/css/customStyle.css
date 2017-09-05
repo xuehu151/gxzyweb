@@ -236,7 +236,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 }
 
 .title-intro h6 {
-    padding-left: 10px;
+    padding-left: 15px;
     color: #999999;
     font-size: .8em;
 }
@@ -852,6 +852,42 @@ input.bigLotto-input2:checked:before {
     top: 89px !important;
 }
 
+.margin_10{
+    margin-top: 10%!important;
+}
+
+.margin_0{
+    margin-top: 0!important;
+}
+
+.history-notice{
+    padding: 0;
+    margin-top: 11%;
+    background: transparent;
+    background: -o-linear-gradient(top, #ececec, #fdfdfd);
+    background: -ms-linear-gradient(top, #ececec, #fdfdfd);
+    background: -moz-linear-gradient(top, #ececec, #fdfdfd);
+    background: -webkit-linear-gradient(top, #ececec, #fdfdfd);
+}
+
+.history-notice .icon-notice{
+    width: 12%;
+    text-align: center;
+    line-height: 48px;
+}
+
+.history-notice i {
+    width: 10%;
+    display: inline-block;
+    font-size: 20px;
+}
+
+.noticeText{
+    color: #11288e!important;
+    text-align: left;
+}
+
+
 .notice {
     padding: 8px;
     background: #e5e5e5;
@@ -987,7 +1023,7 @@ input.bigLotto-input2:checked:before {
 }
 
 .paddingTop .list .title-intro {
-    margin-top: 15px;
+    margin-top: 10%;
     border-top: 0;
     font-weight: bolder;
     margin-left: -43%;

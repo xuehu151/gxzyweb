@@ -4,7 +4,7 @@
 //开奖
 angular.module ('starter.DrawCtrl', ['starter.services'])
 
-    .controller ('DrawCtrl', function ($scope, $state, $rootScope, $ionicModal) {
+    .controller ('DrawCtrl', function ($scope, $state, $rootScope, $ionicModal, getWareIssueService, $util) {
         var firstTab = document.querySelector(".tab-item");
         console.log(firstTab);
         firstTab.style.display='none';
@@ -13,7 +13,8 @@ angular.module ('starter.DrawCtrl', ['starter.services'])
         $scope.activeSlide = function (index) {//点击时候触发
             $scope.slectIndex = index;
         };
-        $rootScope.h80 = true;
+        $scope.h80 = true;
+        $scope.marginNotice_10 = true;
 
         //错误码窗口配置
         $rootScope.errorInfo = function () {

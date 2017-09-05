@@ -188,106 +188,30 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
         if(type == 0 || type == undefined){
             if (PayType == 0) {
                 $scope.saveBallSelect = function () {
-                    joinMenuBig ();
+                    joinMenuBigPayType0 ();
                 }
             }else {
                 //加入选单按钮
                 $scope.saveBallSelect = function () {
-                    var filterDataRed1 = []; //用来保存本次点击确定后的红球
-                    var filterDataBlue1 = []; //用来保存本次点击确定后的蓝球
-                    if ($scope.filterDataRed.length == 5 && $scope.filterDataBlue.length == 2) { //判断用户未选择号码时点击确定无效
-                        if (sessionStorage.jsonWrap) //判断是否第一次点击确定
-                        {
-                            var changeToArray = JSON.parse (sessionStorage.jsonWrap);
-                            //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
-                            jsonWrap = changeToArray;
-                        }
-                        //如果红篮球就添加进数组
-                        for (var i = 0; i < 35; i++) {
-                            if ($scope.numDataRed[i].check == true) {
-                                filterDataRed1.push ($scope.numDataRed[i]);
-                            }
-                        }
-                        for (var i = 0; i < 12; i++) {
-                            if ($scope.numDataBlue[i].check == true) {
-                                filterDataBlue1.push ($scope.numDataBlue[i]);
-                            }
-                        }
-                        // console.log(filterDataBlue1)
-                        //以对象的方式存放每一注的  红篮球 的数据
-                        var jsonInner = {
-                            red: filterDataRed1,
-                            blue: filterDataBlue1
-                        };
-                        jsonWrap.push (jsonInner);
-                        // console.log (jsonWrap);
-                        var sessionJsonWarp = JSON.stringify (jsonWrap); //解析数组
-                        sessionStorage.jsonWrap = sessionJsonWarp; //保存解析后的数组
-                        // console.log (sessionStorage.jsonWrap);
-                        $state.go ('bettingDetail', {
-                            'flag3': flag2
-                        });
-                    }
-                    else {
-                        alert('请正确选择号码!!!');
-                        return;
-                    }
+                    joinMenuBigPayType1 ();
                 };
             }
         }else if(type == 1){
             if (PayType == 0) {
                 $scope.saveBallSelect = function () {
-                    joinMenuBig ();
+                    joinMenuBigPayType0 ();
                 }
             }
             else {
                 //加入选单按钮
                 $scope.saveBallSelect = function () {
-                    var filterDataRed1 = []; //用来保存本次点击确定后的红球
-                    var filterDataBlue1 = []; //用来保存本次点击确定后的蓝球
-                    if ($scope.filterDataRed.length == 5 && $scope.filterDataBlue.length == 2) { //判断用户未选择号码时点击确定无效
-                        if (sessionStorage.jsonWrap) //判断是否第一次点击确定
-                        {
-                            var changeToArray = JSON.parse (sessionStorage.jsonWrap);
-                            //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
-                            jsonWrap = changeToArray;
-                        }
-                        //如果红篮球就添加进数组
-                        for (var i = 0; i < 35; i++) {
-                            if ($scope.numDataRed[i].check == true) {
-                                filterDataRed1.push ($scope.numDataRed[i]);
-                            }
-                        }
-                        for (var i = 0; i < 12; i++) {
-                            if ($scope.numDataBlue[i].check == true) {
-                                filterDataBlue1.push ($scope.numDataBlue[i]);
-                            }
-                        }
-                        // console.log(filterDataBlue1)
-                        //以对象的方式存放每一注的  红篮球 的数据
-                        var jsonInner = {
-                            red: filterDataRed1,
-                            blue: filterDataBlue1
-                        };
-                        jsonWrap.push (jsonInner);
-                        // console.log (jsonWrap);
-                        var sessionJsonWarp = JSON.stringify (jsonWrap); //解析数组
-                        sessionStorage.jsonWrap = sessionJsonWarp; //保存解析后的数组
-                        // console.log (sessionStorage.jsonWrap);
-                        $state.go ('bettingDetail', {
-                            'flag3': flag2
-                        });
-                    }
-                    else {
-                        alert('请正确选择号码!!!');
-                        return;
-                    }
+                    joinMenuBigPayType1 ();
                 };
             }
         }
 
         //PayType =0 用抵用券扫码
-        function joinMenuBig () {
+        function joinMenuBigPayType0 () {
             if ($scope.multiple * 1 <= 0 || $scope.multiple * 1 == '') { //投注倍数限制
                 alert('倍数不能为0或为空');
                 return
@@ -500,7 +424,48 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 };
             };
         }
-
+        //PayType = 1 用抵用券扫码
+        function joinMenuBigPayType1 (){
+            var filterDataRed1 = []; //用来保存本次点击确定后的红球
+            var filterDataBlue1 = []; //用来保存本次点击确定后的蓝球
+            if ($scope.filterDataRed.length == 5 && $scope.filterDataBlue.length == 2) { //判断用户未选择号码时点击确定无效
+                if (sessionStorage.jsonWrap) //判断是否第一次点击确定
+                {
+                    var changeToArray = JSON.parse (sessionStorage.jsonWrap);
+                    //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
+                    jsonWrap = changeToArray;
+                }
+                //如果红篮球就添加进数组
+                for (var i = 0; i < 35; i++) {
+                    if ($scope.numDataRed[i].check == true) {
+                        filterDataRed1.push ($scope.numDataRed[i]);
+                    }
+                }
+                for (var i = 0; i < 12; i++) {
+                    if ($scope.numDataBlue[i].check == true) {
+                        filterDataBlue1.push ($scope.numDataBlue[i]);
+                    }
+                }
+                // console.log(filterDataBlue1)
+                //以对象的方式存放每一注的  红篮球 的数据
+                var jsonInner = {
+                    red: filterDataRed1,
+                    blue: filterDataBlue1
+                };
+                jsonWrap.push (jsonInner);
+                // console.log (jsonWrap);
+                var sessionJsonWarp = JSON.stringify (jsonWrap); //解析数组
+                sessionStorage.jsonWrap = sessionJsonWarp; //保存解析后的数组
+                // console.log (sessionStorage.jsonWrap);
+                $state.go ('bettingDetail', {
+                    'flag3': flag2
+                });
+            }
+            else {
+                alert('请正确选择号码!!!');
+                return;
+            }
+        }
         //玩法说明时间
         var userInfo = $util.getUserInfo ();
         var data = {

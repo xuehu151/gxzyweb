@@ -4,7 +4,7 @@
 //大乐透往期详情
 angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
     
-    .controller ('bigLottoHistoryDetailsCtrl', function ($scope, $http, $ionicLoading, $ionicPopup, $rootScope, $ionicModal, $timeout, $util, historyPastService) {
+    .controller ('bigLottoHistoryDetailsCtrl', function ($scope, $http, $ionicLoading, $ionicPopup, $rootScope, $ionicModal, $timeout, $util, historyPastService, getWareIssueService) {
         $ionicLoading.show ({
             template : 'Loading...'
         });
@@ -41,15 +41,15 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
                         if (response.data.length != 0) {
                             $scope.bitLotto = $scope.bitLotto.concat (response.data);
                             for (var i = 0; i < $scope.bitLotto.length; i++) {
-                                var createDate = $scope.bitLotto[i].createDate;
+                                var drawTime = $scope.bitLotto[i].drawTime;
+                                console.info(drawTime);
+                                var colon_drawTime = drawTime.split (':')[0];
+                                var blank_drawTime = colon_drawTime.split (' ')[0];
+                                var _drawTime = blank_drawTime.split ('-');
+                                $scope.drawTime = _drawTime.splice (-2, 4).join ('-');
                                 
-                                var colon_createDate = createDate.split (':')[0];
-                                var blank_createDate = colon_createDate.split (' ')[0];
-                                var _createDate = blank_createDate.split ('-');
-                                $scope.createDate = _createDate.splice (-2, 4).join ('-');
-                                
-                                $scope.bitLotto[i].createDate = $scope.createDate;
-                                $scope.bitLotto[i].getDayDate = getWeekByDay (blank_createDate);
+                                $scope.bitLotto[i].drawTime = $scope.drawTime;
+                                $scope.bitLotto[i].getDayDate = getWeekByDay (blank_drawTime);
                             }
                             
                             //根据日期 得到是星期几
@@ -94,7 +94,54 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
             $scope.bitLotto = [];
             $scope.loadMore ();
         };
-        
+    
+        var data = {};
+        $scope.margin_10 = false;
+        getWareIssueService.getWinamt (data, userInfo.data.token)
+            .then (function (response) {
+                // console.info(response.data);
+                $scope.winningShow = response.data;
+                console.info ($scope.winningShow);
+                //上下滚动效果
+                slide (document.getElementsByTagName ('ul')[0]);
+                function slide (parent) {
+                    setTimeout (function () {
+                        var className = $ ("." + parent.className);
+                    
+                        var i = 0, sh;
+                        var liLength = className.children ("li").length;
+                        var liHeight = className.children ("li").height () + parseInt (className.children ("li").css ('border-bottom-width'));
+                        className.html (className.html () + className.html ());
+                    
+                        // 开启定时器
+                        sh = setInterval (slide, 3000);
+                        function slide () {
+                            if (parseInt (className.css ("margin-top")) > (-liLength * liHeight)) {
+                                i++;
+                                className.animate ({
+                                    marginTop : -liHeight * i + "px"
+                                }, "slow");
+                            }
+                            else {
+                                i = 0;
+                                className.css ("margin-top", "0px");
+                            }
+                        }
+                    
+                        // 清除定时器
+                        className.hover (function () {
+                            clearInterval (sh);
+                        }, function () {
+                            clearInterval (sh);
+                            sh = setInterval (slide, 3000);
+                        });
+                    }, 0);
+                }
+            }, function (error) {
+                alert ('数据获取失败!');
+            });
+    
+    
         $scope.toArray = function (string2, num) {
             var array1 = string2.split ("*");
             var arrFront = array1[0].split (",");

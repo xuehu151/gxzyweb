@@ -2,11 +2,26 @@
     <!--<ion-nav-bar class="bar bar-header bar-linerBlue ">
         <ion-nav-back-button class="icon ion-ios-arrow-left button-clear" style="color: white;"></ion-nav-back-button>
     </ion-nav-bar>-->
+    <div class="bar history-notice"  ng-class="marginNotice_10 == true?'margin_10':'margin_0' ">
+        <div class="icon-notice">
+            <i class="ion-volume-high"></i>
+        </div>
 
-    <div class="bar " style="padding: 0">
-        <div class="row notice">
-            <i class="icon ion-volume-medium"></i>
-            <div class="noticeText">恭喜185****6868排列3中奖1040元</div>
+        <div style="float: left;padding:0;width: 100%; height: 45px;overflow: hidden;">
+            <div class="slide noticeText" style="width: 100%;text-align: center;display: inline-block;padding: 0;">
+                <ul class="slideUl ">
+                    <!-- 指令 -->
+                    <li style=" width: 100%;height: 45px; font-size: 20px;float: left;line-height: 45px"
+                        ng-repeat="winning in winningShow track by $index"
+                        ng-show="winning.lotteryID == 2?LottoId='大乐透':winning.lotteryID == 31?LottoId='排列3':LottoId='排列5'">
+                        <div class="row">
+                            <div class="col noticeText" style="padding: 0 6px">
+                                <span >恭喜 {{winning.phone}}</span>中<span>{{LottoId}}</span>,<span>{{winning.winamt }}</span>元
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -14,7 +29,7 @@
         <ion-list>
             <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
             <ion-item class="history-time" ng-repeat="past in historyPast3 track by $index">
-                <p><span ng-cloak>{{past.wareIssue}}期 </span><ins ng-cloak> {{past.createDate}}&nbsp;{{past.getDayDate}}</ins></p>
+                <p><span ng-cloak>{{past.wareIssue}}期 </span><ins ng-cloak> {{past.drawTime}}&nbsp;{{past.getDayDate}}</ins></p>
                 <div class="row" >
                     <div class="col col-67 show-red-ball" >
                         <i ng-cloak>{{toArray(past.result,0)}}</i>

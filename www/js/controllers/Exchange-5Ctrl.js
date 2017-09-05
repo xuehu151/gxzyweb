@@ -301,110 +301,30 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
         if(type == 0 || type == undefined){
             if (PayType == 0) {
                 $scope.saveBallSelect5D = function () {
-                    joinMenu5 ();
+                    joinMenu5PayType0 ();
                 }
             }else {
                 //加入选单
                 $scope.saveBallSelect5D = function ($index) {
-                    var json5D = {
-                        W_Bit: filterBit10000,
-                        Q_Bit: filterBit1000,
-                        B_Bit: filterBit100,
-                        S_Bit: filterBit10,
-                        G_Bit: filterBit1
-                    };
-                    if (sessionStorage.jsonWrap5D) { //判断是否第一次点击确定 并且对进行完删除后赋值
-                        var changeToArray5D = JSON.parse (sessionStorage.jsonWrap5D);
-                        //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
-                        jsonWrapBit5D = changeToArray5D;
-                    }
-                    if (filterBit10000.length != 0 && filterBit1000.length != 0 && filterBit100.length != 0 && filterBit10 != 0 && filterBit1 != 0) {
-                        jsonWrapBit5D.push (json5D);
-                        //console.log($rootScope.jsonWrapBit3D);
-                        var sessionJsonWarp5D = JSON.stringify (jsonWrapBit5D); //解析数组
-                        //console.log (sessionJsonWarp3D);
-                        sessionStorage.jsonWrap5D = sessionJsonWarp5D; //session保存数据
-                        //console.log(sessionStorage.jsonWrap3D);
-                        $scope.generate10000 = 0;
-                        $scope.generate1000 = 0;
-                        $scope.generate100 = 0;
-                        $scope.generate10 = 0;
-                        $scope.generate1 = 0;
-                        for (var i = 0; i < 10; i++) { //再次点击之前 首先清空上次选中的号码效果
-                            $scope.numDataBit10000[i].check = false;
-                            $scope.numDataBit1000[i].check = false;
-                            $scope.numDataBit100[i].check = false;
-                            $scope.numDataBit10[i].check = false;
-                            $scope.numDataBit1[i].check = false;
-                            filterBit10000 = [];
-                            filterBit1000 = [];
-                            filterBit100 = [];
-                            filterBit10 = [];
-                            filterBit1 = [];
-                        }
-                        $state.go ('exchange-5Details');
-                    }
-                    else {
-                        alert ('请正确选择号码');
-                    }
+                    joinMenu5PayType1 ($index);
                 };
             }
         }else if(type == 1){
             if (PayType == 0) {
                 $scope.saveBallSelect5D = function () {
-                    joinMenu5 ();
+                    joinMenu5PayType0 ();
                 }
             }
             else {
                 //加入选单
                 $scope.saveBallSelect5D = function ($index) {
-                    var json5D = {
-                        W_Bit: filterBit10000,
-                        Q_Bit: filterBit1000,
-                        B_Bit: filterBit100,
-                        S_Bit: filterBit10,
-                        G_Bit: filterBit1
-                    };
-                    if (sessionStorage.jsonWrap5D) { //判断是否第一次点击确定 并且对进行完删除后赋值
-                        var changeToArray5D = JSON.parse (sessionStorage.jsonWrap5D);
-                        //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
-                        jsonWrapBit5D = changeToArray5D;
-                    }
-                    if (filterBit10000.length != 0 && filterBit1000.length != 0 && filterBit100.length != 0 && filterBit10 != 0 && filterBit1 != 0) {
-                        jsonWrapBit5D.push (json5D);
-                        //console.log($rootScope.jsonWrapBit3D);
-                        var sessionJsonWarp5D = JSON.stringify (jsonWrapBit5D); //解析数组
-                        //console.log (sessionJsonWarp3D);
-                        sessionStorage.jsonWrap5D = sessionJsonWarp5D; //session保存数据
-                        //console.log(sessionStorage.jsonWrap3D);
-                        $scope.generate10000 = 0;
-                        $scope.generate1000 = 0;
-                        $scope.generate100 = 0;
-                        $scope.generate10 = 0;
-                        $scope.generate1 = 0;
-                        for (var i = 0; i < 10; i++) { //再次点击之前 首先清空上次选中的号码效果
-                            $scope.numDataBit10000[i].check = false;
-                            $scope.numDataBit1000[i].check = false;
-                            $scope.numDataBit100[i].check = false;
-                            $scope.numDataBit10[i].check = false;
-                            $scope.numDataBit1[i].check = false;
-                            filterBit10000 = [];
-                            filterBit1000 = [];
-                            filterBit100 = [];
-                            filterBit10 = [];
-                            filterBit1 = [];
-                        }
-                        $state.go ('exchange-5Details');
-                    }
-                    else {
-                        alert ('请正确选择号码');
-                    }
+                    joinMenu5PayType1 ($index);
                 };
             }
         }
 
         //PayType =0 用抵用券扫码
-        function joinMenu5 () {
+        function joinMenu5PayType0 () {
             $ionicLoading.show ();
             //获取5D期号
             var reques = {};
@@ -560,7 +480,52 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                 };
             };
         }
+        //PayType = 1
+        function joinMenu5PayType1 ($index){
+            var json5D = {
+                W_Bit: filterBit10000,
+                Q_Bit: filterBit1000,
+                B_Bit: filterBit100,
+                S_Bit: filterBit10,
+                G_Bit: filterBit1
+            };
+            if (sessionStorage.jsonWrap5D) { //判断是否第一次点击确定 并且对进行完删除后赋值
+                var changeToArray5D = JSON.parse (sessionStorage.jsonWrap5D);
+                //把controller(bettingHaveSaved)中获取的sessionStorage.jsonWrap放到此controller中来，在这个pushWrap上push新号码
+                jsonWrapBit5D = changeToArray5D;
+            }
+            if (filterBit10000.length != 0 && filterBit1000.length != 0 && filterBit100.length != 0 && filterBit10 != 0 && filterBit1 != 0) {
+                jsonWrapBit5D.push (json5D);
+                //console.log($rootScope.jsonWrapBit3D);
+                var sessionJsonWarp5D = JSON.stringify (jsonWrapBit5D); //解析数组
+                //console.log (sessionJsonWarp3D);
+                sessionStorage.jsonWrap5D = sessionJsonWarp5D; //session保存数据
+                //console.log(sessionStorage.jsonWrap3D);
+                $scope.generate10000 = 0;
+                $scope.generate1000 = 0;
+                $scope.generate100 = 0;
+                $scope.generate10 = 0;
+                $scope.generate1 = 0;
+                for (var i = 0; i < 10; i++) { //再次点击之前 首先清空上次选中的号码效果
+                    $scope.numDataBit10000[i].check = false;
+                    $scope.numDataBit1000[i].check = false;
+                    $scope.numDataBit100[i].check = false;
+                    $scope.numDataBit10[i].check = false;
+                    $scope.numDataBit1[i].check = false;
+                    filterBit10000 = [];
+                    filterBit1000 = [];
+                    filterBit100 = [];
+                    filterBit10 = [];
+                    filterBit1 = [];
+                }
+                $state.go ('exchange-5Details');
+            }
+            else {
+                alert ('请正确选择号码');
+            }
+        }
 
+        
         //玩法说明时间
         var userInfo = $util.getUserInfo ();
         var data = {
