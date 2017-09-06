@@ -11,21 +11,15 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
     .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService, getWareIssueService) {
 
         var firstTab = document.querySelector(".tab-item");
-        console.log(firstTab);
         firstTab.style.display='none';
-        console.log(firstTab.style.display);
 
         $rootScope.newStatus = true;
         sign = $location.search ().sign;
         type = $location.search ().type;
         var data = {};
         var userInfo = $util.getUserInfo ();
-        console.info(userInfo);
-        console.info("aaa"+typeof type);
-        console.info("aaa" + type);
         if (userInfo != undefined && type == undefined){
             PayType = 1;
-            console.info("PayType*************"+PayType);
             $scope.goToExchange3D = function () {
                 $state.go ('exchange-3');
             };
@@ -104,7 +98,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         /* 获取初始化数据 */
                         var datas = $util.setUserInfo (response);
                         var userInfo = $util.getUserInfo ();
-                        console.log (userInfo);
+                        console.info(userInfo);
 
                         if (userInfo.error != '0') {
                             $scope.errorInfo = userInfo.info;
@@ -120,7 +114,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
             }
             else if (type == 1) {
                 var userInfo;
-                var popup = '';
+                $rootScope.popup = '';
                 data = {
                     token : sign
                 };
@@ -134,7 +128,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         console.info(response);
                         if (response.error == '0') {
                             /* 获取初始化数据 */
-                            popup = 1;
+                            $rootScope.popup = 1;
                             var datas = $util.setUserInfo (response);
                             userInfo = $util.getUserInfo ();
                             console.log (userInfo);
@@ -157,7 +151,8 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     });
             }
             else {
-                return
+                $scope.errorInfo = '请求错误';
+                $rootScope.errorInfo ();
             }
             //模态注册窗口
             function modal () {

@@ -11,10 +11,8 @@ angular.module('starter.needExchangeCtrl', [])
         for (var i = 0; i < $scope.needExchanges.length; i++) {
             if ($scope.needExchanges[i].endDate) {
                 var leftTime = timeRemain.stillHave($scope.needExchanges[i].endDate);
-                console.log(leftTime);
                 $scope.needExchanges[i].d = leftTime.d;
                 $scope.needExchanges[i].h = leftTime.h;
-                console.log($scope.needExchanges[i].d === 0)
                 if ($scope.needExchanges[i].d === 0 && $scope.needExchanges[i].h === 0) {
 
                     $scope.needExchanges[i].class = 'grey'
@@ -36,6 +34,7 @@ angular.module('starter.needExchangeCtrl', [])
         console.log($scope.needExchangeAmount);
         $scope.toScanExchange = function($index, convert) {
             // $scope.needExchanges.splice($index, 1);
+            $rootScope.popup = '';
             $rootScope.needExchangeItems = $scope.needExchanges;
             $rootScope.nowVid = $scope.needExchanges[$index].vid;
             console.info($rootScope.nowVid);

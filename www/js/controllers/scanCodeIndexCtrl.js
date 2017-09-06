@@ -12,12 +12,8 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
         
         var data = {};
         var userInfo = $util.getUserInfo ();
-//        console.info(userInfo);
-//        console.info("aaa"+typeof type);
-//        console.info("aaa" + type);
         if (userInfo != undefined && type == '0') {
             PayType = 0;
-            console.info ("PayType*************" + PayType);
             $ionicLoading.hide ();
             $scope.goToExchange3D = function () {
                 $state.go ('exchange-3');
@@ -76,7 +72,6 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 });
             return;
         }
-        
         getWareIssueService.getWinamt (data, userInfo.data.token)
             .then (function (response) {
                 // console.info(response.data);
@@ -122,8 +117,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 $ionicLoading.hide ();
                 alert ('数据获取失败!');
             });
-    
-        if (popup == 1) {
+        if ($rootScope.popup == 1) {
             $timeout(function () {
                 $scope.modal2.show();
             }, 500);
@@ -236,7 +230,6 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
         $scope.cancelPop2 = function () {
             $scope.modal2.hide ();
         };
-        
         
         //错误码窗口配置
         $rootScope.errorInfo = function () {

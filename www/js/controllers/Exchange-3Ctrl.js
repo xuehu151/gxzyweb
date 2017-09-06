@@ -244,7 +244,6 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 });
             // 排列三投注信息接口
             function getPl3add () {
-//                var userInfo = $util.getUserInfo ();
                 $rootScope.makeSureText = '';
 
                 var dataArray = [];
@@ -265,24 +264,17 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 dataArray.push (dataObj);
                 console.info(dataObj);
 
-                //console.log(userInfo.data.voucher);
                 var vid = '';
                 if (type == 0) {
-                    if(userInfo.data.vouchers){
-                        for (var k = 0; k < userInfo.data.vouchers.length; k++) {
-                            if (userInfo.data.vouchers == undefined) {
-                                vid = '';
-                            }
-                            else {
-                                vid = userInfo.data.vouchers[k].vid;
-                            }
-                        }
-                    }else {
-                        vid = ''
+                    if ($rootScope.nowVid) {
+                        vid = $rootScope.nowVid;
+                    }
+                    else {
+                        vid = '';
                     }
                 }
                 else if (type == 1){
-                    if (userInfo.data.voucher == undefined) {
+                    if ($rootScope.nowVid) {
                         vid = $rootScope.nowVid;
                     }
                     else {
@@ -310,11 +302,9 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
 //                BettingService.pl3Add(data, userInfo.data.token)
                     .then (function (response) {
                         $ionicLoading.hide ();
-                        console.log (reques);
                         console.log (response);
                         if(response.data.error != '0'){
                             $scope.errorInfo = response.data.info;
-                            console.info($scope.errorInfo);
                             $rootScope.errorInfo();
                         }
                         else {

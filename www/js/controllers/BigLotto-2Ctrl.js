@@ -309,20 +309,14 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 $ionicLoading.show ();
                 var vid = '';
                 if(type == 0){
-                    if (userInfo.data.vouchers){
-                        for(var k = 0; k < userInfo.data.vouchers.length; k++ ){
-                            if (userInfo.data.vouchers == undefined) {
-                                vid = '';
-                            }
-                            else {
-                                vid = userInfo.data.vouchers[k].vid;
-                            }
-                        }
-                    }else {
-                        vid = ''
+                    if ($rootScope.nowVid) {
+                        vid = $rootScope.nowVid;
+                    }
+                    else {
+                        vid = '';
                     }
                 }else if(type == 1) {
-                    if (userInfo.data.voucher == undefined) {
+                    if ($rootScope.nowVid) {
                         vid = $rootScope.nowVid;
                     }
                     else {
