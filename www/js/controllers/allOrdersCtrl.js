@@ -21,6 +21,11 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
         });
         var userInfo = $util.getUserInfo();
         var token = userInfo.data.token;
+
+        /**
+         * [分页]
+         * @type {[type]}
+         */
         var vm = $scope.vm = {
             moredata: true,
             orderEach: [],

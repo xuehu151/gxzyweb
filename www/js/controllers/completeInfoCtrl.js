@@ -7,14 +7,14 @@
 //完善个人资料
 angular.module('starter.completeInfoCtrl', ['starter.services'])
 
-    .controller('completeInfoCtrl', function($scope, $rootScope, $state, locals, postData, $ionicLoading,$ionicModal, $util,$timeout,$interval) {
+    .controller('completeInfoCtrl', function($scope, $rootScope, $state, locals, postData, $ionicLoading, $ionicModal, $util, $timeout, $interval) {
         $scope.users = {
             // realName: '',
             // phone: '',
             idcard: '',
             wechat: '',
             bank: '',
-            bankNo: ''
+            bankNo: void 0
         };
         /**
          * 功能:把提交的值保存到localstorage
@@ -42,7 +42,7 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
              * 功能:把提交的值上传到后台
              */
 
-            postData.getInfo(url + "/service/customer/add", userInfo)
+            postData.getInfo(url + "/service/customer/add", $rootScope.addData)
                 .then(function(response) {
                     console.log(response);
                     if (response.error == '0') {
@@ -57,7 +57,7 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
                     $ionicLoading.hide();
                 }, function(error) {
                     alert('您的网络异常,未能成功完善您的信息');
-                    $ionicLoading.hide ();
+                    $ionicLoading.hide();
                 })
         }
 
@@ -79,17 +79,15 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
          * @return {[type]}     [description]
          */
         function scrollInput(obj) {
-          scrollTimer = $interval(function() {
-            obj.scrollIntoViewIfNeeded(true);
-          }, 300)
+            scrollTimer = $interval(function() {
+                obj.scrollIntoViewIfNeeded(true);
+            }, 300)
         }
-
 
         /*var idcardInput = document.getElementsById('idCard');
         var weChatInput = document.getElementsById('wechat');
         var bankInput = document.getElementById('bank');*/
         var bankNoInput = document.getElementById('bankNo');
-
 
         /*idcardInput.onfocus = function() {
           scrollInput(idcardInput);
@@ -101,9 +99,9 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
           scrollInput(bankInput);
         }*/
         bankNoInput.onfocus = function() {
-          scrollInput(bankNoInput);
+            scrollInput(bankNoInput);
         }
         bankNoInput.onblur = function() {
-          $interval.cancel(scrollTimer)
+            $interval.cancel(scrollTimer)
         }
     });

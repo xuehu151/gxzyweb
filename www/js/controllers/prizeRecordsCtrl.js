@@ -6,8 +6,7 @@
 
 //奖金纪录页面
 angular.module('starter.prizeRecordsCtrl', ['starter.services'])
-
-    .controller('prizeRecordsCtrl', function($scope, $rootScope, getUser, locals, $ionicLoading, $util,$ionicModal, $timeout,$ionicScrollDelegate) {
+    .controller('prizeRecordsCtrl', function($scope, $rootScope, getUser, locals, $ionicLoading, $util, $ionicModal, $timeout, $ionicScrollDelegate) {
         var userInfo = $util.getUserInfo();
         var token = userInfo.data.token;
         $scope.selectIndex = 0; //切换奖金记录和提现记录
@@ -22,7 +21,7 @@ angular.module('starter.prizeRecordsCtrl', ['starter.services'])
 
         var prizeRecords = $scope.prizeRecords = {
             moredata: true,
-            prizeEach:[],
+            prizeEach: [],
             pagination: {
                 pageSize: 12,
                 pageNum: 1
@@ -32,7 +31,7 @@ angular.module('starter.prizeRecordsCtrl', ['starter.services'])
                     .then(function(response) {
                         console.log(response);
                         if (response.error == '0' && response.data.length != 0) {
-                            $scope.prizeItems=prizeRecords.prizeEach =prizeRecords.prizeEach.concat(response.data) ;
+                            $scope.prizeItems = prizeRecords.prizeEach = prizeRecords.prizeEach.concat(response.data);
 
                             console.log($scope.prizeItems);
                             for (var i = 0; i < $scope.prizeItems.length; i++) {
@@ -53,11 +52,9 @@ angular.module('starter.prizeRecordsCtrl', ['starter.services'])
 
 
                             prizeRecords.pagination.pageNum += 1;
-                        }
-                        else if (response.error == '0' && response.data.length == 0) {
+                        } else if (response.error == '0' && response.data.length == 0) {
                             prizeRecords.moredata = false;
-                        }
-                        else {
+                        } else {
                             $scope.error = response.info;
                             $timeout(function() {
                                 $scope.modalError.show();
@@ -73,10 +70,10 @@ angular.module('starter.prizeRecordsCtrl', ['starter.services'])
             }
         };
 
-
+        //分页
         var widthdrawRecords = $scope.widthdrawRecords = {
             moredata: true,
-            widthdrawEach:[],
+            widthdrawEach: [],
             pagination: {
                 pageSize: 12,
                 pageNum: 1
@@ -86,13 +83,11 @@ angular.module('starter.prizeRecordsCtrl', ['starter.services'])
                     .then(function(response) {
                         console.log(response);
                         if (response.error == '0' && response.data.length != 0) {
-                            $scope.widthdrawItems=widthdrawRecords.widthdrawEach =widthdrawRecords.widthdrawEach.concat(response.data) ;
+                            $scope.widthdrawItems = widthdrawRecords.widthdrawEach = widthdrawRecords.widthdrawEach.concat(response.data);
                             widthdrawRecords.pagination.pageNum += 1;
-                        }
-                        else if (response.error == '0' && response.data.length == 0) {
+                        } else if (response.error == '0' && response.data.length == 0) {
                             widthdrawRecords.moredata = false;
-                        }
-                        else {
+                        } else {
                             $scope.error = response.info;
                             $timeout(function() {
                                 $scope.modalError.show();
@@ -104,10 +99,8 @@ angular.module('starter.prizeRecordsCtrl', ['starter.services'])
                         alert('您的网络异常,未能成功获取您的提现记录');
                         $ionicLoading.hide();
                     });
-
             }
         };
-
 
         //错误码窗口配置
         $ionicModal.fromTemplateUrl('templates/errorPop.html', {

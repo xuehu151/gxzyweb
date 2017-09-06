@@ -6,8 +6,7 @@
 
 //提现页面
 angular.module('starter.widthdrawCtrl', ['starter.services'])
-
-    .controller('widthdrawCtrl', function($scope, $state, $rootScope, getUser, locals, postData, $ionicLoading, $util,$ionicModal, $timeout) {
+    .controller('widthdrawCtrl', function($scope, $state, $rootScope, getUser, locals, postData, $ionicLoading, $util, $ionicModal, $timeout) {
         $ionicLoading.show({
             hideOnStateChange: true
         });
@@ -70,8 +69,8 @@ angular.module('starter.widthdrawCtrl', ['starter.services'])
             $ionicLoading.show({
                 hideOnStateChange: true
             });
-            var token = userInfo.data.token;
 
+            var token = userInfo.data.token;
             getUser.getInfo(url + '/service/cash/add' + '?channel=' + $rootScope.channel + '&money=' + $scope.widthdrawMoney.money + '&token=' + token)
                 .then(function(response) {
                     console.log(response);

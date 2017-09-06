@@ -8,17 +8,18 @@
 angular.module('starter.AccountCtrl', ['starter.services'])
     //账户页面
     .controller('AccountCtrl', function($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading, $util, splitCode, $timeout, $location) {
-        //验证是否资料完善
+
         var firstTab = document.querySelector(".tab-item");
-        console.log(firstTab);
-        firstTab.style.display='none';
+        // console.log(firstTab);
+        firstTab.style.display = 'none';
+
+        $scope.needExchangeAmount = { amount: 0 };  //待兑换数量
 
         PayType = 1;
         var userInfo = $util.getUserInfo();
-        console.log(userInfo);
-
-        if (!userInfo.data)
-        {
+        // console.log(userInfo);
+        //验证是否资料完善
+        if (!userInfo.data) {
             $scope.useableMoney = 0;
             $scope.frozedMoney = 0;
             $scope.totalMoney = 0;
@@ -27,9 +28,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
             $timeout(function() {
                 $scope.modalError.show();
             }, 400);
-        }
-        else
-        {
+        } else {
             $ionicLoading.show();
             var token = userInfo.data.token;
             /**
@@ -55,10 +54,6 @@ angular.module('starter.AccountCtrl', ['starter.services'])
             //检测有无兑换失败
             var bettingEachFailed = { first: [], second: [], third: [], forth: [] }; //每次弹框获得的奖金
 
-
-            $scope.needExchangeAmount = { amount: 0 };
-
-
             //更新余额
             getUser.getInfo(url + "/service/customer/getUser?token=" + token)
                 .then(function(response) {
@@ -76,8 +71,6 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                             var newBankNo = response.data.bankNo.split('');
                             // newWechat.splice(4,4,'****');
                             newBankNo.splice(4, 4, '****');
-
-
                             $rootScope.accountNum = [
                                 /*{
                                     chanel: 2,
@@ -114,16 +107,16 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         $scope.winamt = totalWinamt.first;
                                         $scope.wareIssue = winItems[0].wareIssue;
                                         $scope.drawTime = winItems[0].drawTime;
-                                        console.log($scope.thisWinItems);
+                                        // console.log($scope.thisWinItems);
                                         winAlertStatus.first = true;
 
                                         getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID=' + winItems[0].lotteryID + '&wareIssue=' + (winItems[0].wareIssue * 1 - 1))
                                             // getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue=2017094')
                                             .then(function(response) {
-                                                console.log(response);
+                                                // console.log(response);
                                                 if (response.error == '0') {
                                                     $scope.result = splitCode.split(response.data.result);
-                                                    console.log($scope.result);
+                                                    // console.log($scope.result);
                                                     $scope.modal3.show();
                                                 } else {
                                                     $scope.error = response.info;
@@ -135,9 +128,6 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                                 alert('您的网络异常,未能成功获取开奖号码');
                                                 $ionicLoading.hide();
                                             });
-
-
-
                                     } else if (!winItems[0]) {
                                         $timeout.cancel(nextShow);
                                     }
@@ -153,16 +143,12 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                 $ionicLoading.hide();
                             });
 
-
                         //检测出票失败
-
                         getUser.getInfo(url + "/service/lottery/getPrintFailList?token=" + token + '&pageNum=1&pageSize=100')
                             .then(function(response) {
                                 console.log(response);
                                 if (response.error == '0') {
-
                                     winFailItems = response.data;
-
                                     if (winFailItems[0]) {
                                         for (var j = 0; j < winFailItems[0].lotteryList.length; j++) {
                                             winFailItems[0].lotteryList[j].code = splitCode.split(winFailItems[0].lotteryList[j].investCode)
@@ -176,8 +162,6 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                     } else if (!winFailItems[0]) {
                                         $timeout.cancel(nextFailShow);
                                     }
-
-
                                 } else {
                                     $scope.error = response.info;
                                     $timeout(function() {
@@ -190,7 +174,6 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                 $ionicLoading.hide();
                             });
 
-
                         //更新待兑换
                         getUser.getInfo(url + "/service/customer/getVoucherList?token=" + token + '&pageNum=1&pageSize=100')
                             .then(function(response) {
@@ -200,7 +183,6 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                     console.log($scope.needExchangeAmount.amount);
                                     $rootScope.needExchangeItems = response.data;
                                     // $scope.modal2.show();
-
                                 } else {
                                     $scope.error = response.info;
                                     $timeout(function() {
@@ -212,8 +194,6 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                 alert('您的网络异常,未能成功获取待兑换数量');
                                 $ionicLoading.hide();
                             });
-
-
                     } else {
                         $ionicLoading.hide();
                         $scope.error = response.info;
@@ -337,7 +317,6 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                 $ionicLoading.hide();
                             });
                         $scope.modal3.show();
-
                     } else if (winAlertStatus.first == true && winAlertStatus.second == true && winAlertStatus.third == false && winAlertStatus.forth == false && winItems[2]) {
                         for (var i = 0; i < winItems[2].lotteryList.length; i++) {
                             totalWinamt.second += winItems[2].lotteryList[i].winamt;
@@ -414,7 +393,6 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                 $scope.modal4.hide();
             };
 
-
             //出票失败窗口配置
             $ionicModal.fromTemplateUrl('accountModalFailed.html', {
                 scope: $scope,
@@ -460,10 +438,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     }
                 }, 1000)
             };
-
-
         }
-
 
         //错误码窗口配置
         $ionicModal.fromTemplateUrl('templates/errorPop.html', {
