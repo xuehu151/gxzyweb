@@ -357,14 +357,14 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     multiple: 1
                 };
                 var investCode = null;
-                if($scope.generate10000 && $scope.generate1000 && $scope.generate100 && $scope.generate10 && $scope.generate1){
+                if($scope.generate10000.toString().length != 0 && $scope.generate1000.toString().length != 0 && $scope.generate100.toString().length != 0 && $scope.generate10.toString().length != 0 && $scope.generate1.toString().length != 0){
                     investCode = $scope.generate10000 + '*';
                     investCode += $scope.generate1000 + '*';
                     investCode += $scope.generate100 + '*';
                     investCode += $scope.generate10 + '*';
                     investCode += $scope.generate1;
                 }else {
-                    alert('请先正确选择号码!');
+                    alert('投注失败!');
                     return;
                 }
                 dataObj.investCode = investCode;

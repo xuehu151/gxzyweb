@@ -120,6 +120,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
             }
             else if (type == 1) {
                 var userInfo;
+                var popup = '';
                 data = {
                     token : sign
                 };
@@ -133,6 +134,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         console.info(response);
                         if (response.error == '0') {
                             /* 获取初始化数据 */
+                            popup = 1;
                             var datas = $util.setUserInfo (response);
                             userInfo = $util.getUserInfo ();
                             console.log (userInfo);

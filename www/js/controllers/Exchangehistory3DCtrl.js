@@ -6,7 +6,7 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
 //兑换 排列 3 网期开奖详情
     .controller ('Exchangehistory3DCtrl', function ($scope, $http, $interval, $ionicPopup, $ionicLoading, $rootScope, $util, historyPastService, $filter, getWareIssueService) {
         var userInfo = $util.getUserInfo ();
-        var pageSize = 8;
+        var pageSize = 10;
         var pageNum = 1;
         /*
          * 上拉加载，分批加载服务端剩余的数据
@@ -35,15 +35,14 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
                             $scope.historyPast3 = $scope.historyPast3.concat (response.data);
                             for (var i = 0; i < $scope.historyPast3.length; i++) {
                                 var drawTime = $scope.historyPast3[i].drawTime;
-                                var colon_drawTime = drawTime.split (':')[0];
-                                var blank_drawTime = colon_drawTime.split (' ')[0];
-                                //var sprit_drawTime = blank_drawTime.replace(/-/g,'/');
-                                var _drawTime = blank_drawTime.split ('-');
-                                $scope.drawTime = _drawTime.splice (-2, 4).join ('-');
-                                //console.info(sprit_createDate);
+                                var blank_drawTime = drawTime.split (' ')[0];
+//                                var colon_drawTime = blank_drawTime.split (':');
+                                var sprit_drawTime = blank_drawTime.replace(/-/g,'/');
+//                                var _drawTime = blank_drawTime.split ('-');
+                                //var drawTimes = sprit_drawTime.slice(5);
 
-                                $scope.historyPast3[i].drawTime = $scope.drawTime;
-                                $scope.historyPast3[i].getDayDate = getWeekByDay (drawTime);
+                                $scope.historyPast3[i].drawTime = sprit_drawTime;
+                                $scope.historyPast3[i].getDayDate = getWeekByDay (sprit_drawTime);
                             }
                             //根据日期 得到是星期几
                             function getWeekByDay (blank_drawTime) { //dayValue=“2014-01-01”

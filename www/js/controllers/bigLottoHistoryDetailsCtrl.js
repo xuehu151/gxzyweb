@@ -42,19 +42,19 @@ angular.module ('starter.bigLottoHistoryDetailsCtrl', ['starter.services'])
                             $scope.bitLotto = $scope.bitLotto.concat (response.data);
                             for (var i = 0; i < $scope.bitLotto.length; i++) {
                                 var drawTime = $scope.bitLotto[i].drawTime;
-                                //console.info(drawTime);
-                                var colon_drawTime = drawTime.split (':')[0];
-                                var blank_drawTime = colon_drawTime.split (' ')[0];
-                                var _drawTime = blank_drawTime.split ('-');
-                                $scope.drawTime = _drawTime.splice (-2, 4).join ('-');
-
-                                $scope.bitLotto[i].drawTime = $scope.drawTime;
-                                $scope.bitLotto[i].getDayDate = getWeekByDay (drawTime);
+                                var blank_drawTime = drawTime.split (' ')[0];
+//                                var colon_drawTime = blank_drawTime.split (':');
+                                var sprit_drawTime = blank_drawTime.replace(/-/g,'/');
+//                                var _drawTime = blank_drawTime.split ('-');
+                                //var drawTimes = sprit_drawTime.slice(5);
+                                
+                                $scope.bitLotto[i].drawTime = sprit_drawTime;
+                                $scope.bitLotto[i].getDayDate = getWeekByDay (sprit_drawTime);
                             }
 
                             //根据日期 得到是星期几
-                            function getWeekByDay (blank_createDate) { //dayValue=“2014-01-01”
-                                var day = new Date (Date.parse (blank_createDate)); //将日期值格式化
+                            function getWeekByDay (sprit_drawTime) { //dayValue=“2014-01-01”
+                                var day = new Date (Date.parse (sprit_drawTime)); //将日期值格式化
                                 var today = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]; //创建星期数组
                                 return today[day.getDay ()];  //返一个星期中的某一天，其中0为星期日
                             }

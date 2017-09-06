@@ -258,7 +258,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                             investCodeRed.push($scope.filterDataRed[i].num);
                         }
                     } else {
-                        alert('请正确选择红色号码!!!');
+                        alert('投注失败!!!');
                         return;
                     }
                     /*if($scope.filterDataRed[i] != undefined){
@@ -282,7 +282,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                             investCodeBlue.push($scope.filterDataBlue[i].num);
                         }
                     }else {
-                        alert('请正确选择蓝色号码!!!');
+                        alert('投注失败!!!');
                         return
                     }
 

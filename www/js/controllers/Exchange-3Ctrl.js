@@ -253,12 +253,12 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     multiple : 1
                 };
                 var investCode = null;
-                if($scope.generate100 && $scope.generate10 && $scope.generate1){
+                if($scope.generate100.toString().length != 0 && $scope.generate10.toString().length != 0 && $scope.generate1.toString().length != 0){
                     investCode = $scope.generate100 + '*';
                     investCode += $scope.generate10 + '*';
                     investCode += $scope.generate1;
                 }else {
-                    alert('请先正确选择号码!');
+                    alert('投注失败!');
                     return;
                 }
                 dataObj.investCode = investCode;
