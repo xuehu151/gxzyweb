@@ -3,9 +3,9 @@
 var jsonWrap = []; //存放所有的注数
 var jsonWrapBit3D = []; //点击向右的修改后返回来时数据的存放
 var jsonWrapBit5D = []; //点击向右的修改后返回来时数据的存放
-var sign = '';
-var type = '';
-var PayType = '';//判断是否为老用户扫码进来 0 新用户 1 老用户扫码
+var sign = ''; // 加密串
+var type = '';//区分调取那个初始化接口type = 0 index1 初始化不带二维码 type = 0  index 初始化
+var PayType = '';//判断投注方式   0 扫码投注 1 余额投注
 
 // var ipUrl = 'http://103.235.237.134';      //本地ip地址或者域名
 // var url = 'http://103.235.237.134';      //本地ip地址或者域名
