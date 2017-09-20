@@ -7,7 +7,7 @@
 //扫码兑换首页
 angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
     
-    .controller ('scanCodeIndexCtrl', function ($scope, $state, getUser, $util, $ionicModal, $rootScope, initDataService, $ionicLoading, $timeout, getWareIssueService) {
+    .controller ('scanCodeIndexCtrl', function ($scope, $state, getUser, $util, $ionicModal, $rootScope, initDataService, $ionicLoading, $timeout, getWareIssueService, BettingService) {
         PayType = 0;
         
         var data = {};
@@ -16,7 +16,8 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
             PayType = 0;
             $ionicLoading.hide ();
             $scope.goToExchange3D = function () {
-                $state.go ('exchange-3');
+                pl3AddAuto();
+                //$state.go ('exchange-3');
             };
             $scope.goToExchange5D = function () {
                 $state.go ('exchange-5');
@@ -74,8 +75,14 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
         }
         getWareIssueService.getWinamt (data, userInfo.data.token)
             .then (function (response) {
-                // console.info(response.data);
+                //console.info (response.data);
                 $scope.winningShow = response.data;
+                for (var i = 0; i < response.data.length; i++) {//手机号隐藏中间四位
+                    var userPhone = response.data[i].phone;
+                    var userPhoneStr = userPhone.substr(0,3)+"****"+userPhone.substr(7);
+                    response.data[i].phone = userPhoneStr;
+                }
+                
                 
                 //上下滚动效果
                 slide (document.getElementsByTagName ('ul')[0]);
@@ -201,9 +208,9 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 $ionicLoading.hide ();
                 alert ("初始化数据失败");
             });*/
-        
         $scope.goToExchange3D = function () {
-            $state.go ('exchange-3');
+            pl3AddAuto();
+            //$state.go ('exchange-3');
         };
         $scope.goToExchange5D = function () {
             $state.go ('exchange-5');
@@ -218,6 +225,63 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
 //            $state.go('scanCodeIndex');
             $scope.modal2.hide ();
         };
+        
+        //排列3自动投注
+        function pl3AddAuto () {
+            var vid = '';
+            if (type == 0) {
+                if ($rootScope.nowVid) {
+                    vid = $rootScope.nowVid;
+                }
+            }
+            else if (type == 1){
+                if ($rootScope.nowVid) {
+                    vid = $rootScope.nowVid;
+                }
+                else {
+                    vid = userInfo.data.voucher.vid;
+                }
+            }
+            var data = {
+                vid : vid
+            };
+ 
+            BettingService.pl3addAuto(data, userInfo.data.token)
+                .then(function (response) {
+                    //console.info(response);
+                    if(response.error == '0'){
+                        //提交成功窗口配置
+                        $ionicModal.fromTemplateUrl ('templates/pl3addAuto.html', {
+                            scope : $scope,
+                            backdropClickToClose : true
+                        })
+                            .then (function (modal) {
+                                modal.show ();
+                                $rootScope.makeSureText = '立即查看';
+                                $scope.info ='恭喜您获得排列3号码一注';
+                                $scope.realName = userInfo.data.user.realName;
+                                $scope.phones = userInfo.data.user.phone;
+                                $scope.receives = response.data.createDate; //投注时间
+                                $scope.draw_time = response.data.drawTime;    //开奖时间
+                        
+                                var investCode = response.data.lotteryList[0].investCode;//获赠号码
+                                $scope.receiveNum = investCode.split('*');
+                                //console.info($scope.receiveNum);
+                                $scope.makeSure = function () {
+                                    modal.hide ();
+                                    $state.go ('allOrders');
+                                }
+                            });
+                    }
+                    else {
+                        $scope.errorInfo = response.info;
+                        $rootScope.errorInfo();
+                    }
+                },function () {
+            
+                });
+    
+        }
         
         //老用户获得彩票的mordal窗口配置
         $ionicModal.fromTemplateUrl ('templates/getOneBetModal.html', {

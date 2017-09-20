@@ -430,6 +430,16 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     margin-left: 5px;
 }
 
+.sure-modal3-pl3{
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    color: #fffefb;
+    transform: translate(-50%, 0);
+    letter-spacing: 2px;
+    width: 100%;
+}
+
 /*兑换   排列5*/
 
 /*兑换   大乐透不追加*/

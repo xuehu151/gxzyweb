@@ -54,7 +54,13 @@ angular.module('starter.services', [])
             },
             dltAdd: function(data, token) {
                 return $util.httpPostRequest($util.getHttpURL().dltAddUrl + '?token=' + token, data);
+            },
+            pl3addAuto: function(data, token) {
+                return $util.httpPostRequest($util.getHttpURL().pl3addAutoUrl + '?token=' + token, data);
             }
+            
+            
+            
 
         };
     })
