@@ -17,7 +17,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
 
         PayType = 1;
         var userInfo = $util.getUserInfo();
-        // console.log(userInfo);
+        console.log(userInfo);
         //验证是否资料完善
         if (!userInfo.data) {
             $scope.useableMoney = 0;
@@ -215,6 +215,15 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                     $scope.modal4.show();
                 }
             };
+
+            $scope.toSelfInfo = function () {
+                if (userInfo.data.user.bankNo) {
+                    $state.go('selfInfo')
+                }
+                else {
+                    $state.go('completeInfo')
+                }
+            }
 
             //冻结金额的解释
             $scope.toggleShowAnswer = function() {

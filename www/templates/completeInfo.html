@@ -1,32 +1,32 @@
 <ion-view view-title="完善个人资料">
-    <ion-content style="background: #eee;">
-      <ion-list class="complete-info-list">
-        <form role="form" name="inputInfoForm" ng-submit="submitInfo()">
-          <label class="item item-input">
-           <img class="img-style" src="img/name.png" alt="姓名" />
-            <div ng-cloak style="margin-left: 18px;">{{userInfo.data.user.realName}}</div>
-
-          </label>
-          <label class="item item-input">
-           <img class="img-style" src="img/phone.png" alt="电话" />
-            <div ng-cloak style="margin-left: 18px;">{{userInfo.data.user.phone}}</div>
-
-          </label>
-
-          <label class="item item-input">
-           <!-- <div class="img_003"></div> -->
-           <i class="icon-id f22"></i>
-            <input id="idCard" type="text"
-                name="idcard"
-                placeholder="请输入身份证号" ng-model="users.idcard"
-                required
-                ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/"
-                class="completeInfo-style" />
-            <span class="icon ion-close-round error"
-                ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid">15位或18位身份证号</span>
-            <span class="fr" style="color: #d21e1e;margin-top: 4px;">*</span>
-          </label>
-          <!-- <label class="item item-input">
+    <ion-content style="background: #eee;" id="scrollBug">
+        <ion-list class="complete-info-list">
+            <form role="form" name="inputInfoForm" ng-submit="submitInfo()">
+                <label class="item item-input">
+                    <!-- <img class="img-style" src="img/name.png" alt="用户名" /> -->
+                    <span>用户名:</span>
+                    <div ng-cloak style="margin-left: 18px;">{{userInfo.data.user.realName}}</div>
+                </label>
+                <label class="item item-input">
+                    <!-- <img class="img-style" src="img/phone.png" alt="电话" /> -->
+                    <span>手机号码:</span>
+                    <div ng-cloak style="margin-left: 18px;">{{userInfo.data.user.phone}}</div>
+                </label>
+                <label class="item item-input">
+                    <!-- <img class="img-style" src="img/name.png" alt="姓名" /> -->
+                    <span>真实姓名</span>
+                    <input id="name" type="text" name="name" placeholder="请输入姓名" ng-model="users.name" required ng-pattern="/[\u4E00-\u9FA5\uF900-\uFA2D]/" class="completeInfo-style" />
+                    <span class="icon ion-close-round error" ng-show="inputInfoForm.name.$dirty && inputInfoForm.name.$invalid">请输入中文</span>
+                    <span class="fr" style="color: #d21e1e;margin-top: 4px;">*</span>
+                </label>
+                <label class="item item-input">
+                    <!-- <i class="icon-id f22"></i> -->
+                    <span>身份证号:</span>
+                    <input id="idCard" type="text" name="idcard" placeholder="请输入身份证号" ng-model="users.idcard" required ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/" class="completeInfo-style" />
+                    <span class="icon ion-close-round error" ng-show="inputInfoForm.idcard.$dirty && inputInfoForm.idcard.$invalid">15位或18位身份证号</span>
+                    <span class="fr" style="color: #d21e1e;margin-top: 4px;">*</span>
+                </label>
+                <!-- <label class="item item-input">
             <i class="icon-wechat f22"></i>
             <input id="wechat" type="text"
                 name="wechat"
@@ -38,33 +38,24 @@
                 ng-show="inputInfoForm.wechat.$dirty && inputInfoForm.wechat.$invalid">6-16个字符</span>
             <span class="fr" style="color: #d21e1e;margin-top: 4px;">*</span>
           </label> -->
-          <label class="item item-input">
-            <i class="icon-bank f22"></i>
-            <input id="bank" type="text"
-                name="bank"
-                placeholder="请输入开户行名称" ng-model="users.bank"
-                ng-pattern="/[\u4E00-\u9FA5\uF900-\uFA2D]/"
-                class="completeInfo-style" />
-            <span class="icon ion-close-round error"
-                ng-show="inputInfoForm.bank.$dirty && inputInfoForm.bank.$invalid">请输入中文</span>
-            <span class="fr" style="color: #d21e1e;margin-top: 4px;">*</span>
-          </label>
-          <label class="item item-input">
-            <img class="icon-style1" src="./img/bankNo.png" alt="bankNo" />
-            <input id="bankNo" type="text"
-                name="bankNo"
-                placeholder="请输入银行卡号"
-                ng-model="users.bankNo"
-                ng-pattern="/^[0-9]*$/"
-                class="completeInfo-style" />
-            <span class="icon ion-close-round error"
-                ng-show="inputInfoForm.bankNo.$dirty && inputInfoForm.bankNo.$invalid">请输入数字</span>
-            <span class="fr" style="color: #d21e1e;margin-top: 4px;">*</span>
-          </label>
-          <ion-item class="completeInfo-note">注意：为了不影响您中奖资金的提现，请确保您的资料真实有效;
-          </ion-item >
-         <input type="submit" class="comform-edit-info" ng-class="inputInfoForm.$invalid?'comform-edit-info1':'comform-edit-info2'" ng-disabled="inputInfoForm.$invalid" value="点击提交" />
-       </form>
-      </ion-list>
+                <label class="item item-input">
+                    <!-- <i class="icon-bank f22"></i> -->
+                    <span>开户行:</span>
+                    <input id="bank" type="text" name="bank" placeholder="请输入开户行名称" ng-model="users.bank" required ng-pattern="/[\u4E00-\u9FA5\uF900-\uFA2D]/" class="completeInfo-style" />
+                    <span class="icon ion-close-round error" ng-show="inputInfoForm.bank.$dirty && inputInfoForm.bank.$invalid">请输入中文</span>
+                    <span class="fr" style="color: #d21e1e;margin-top: 4px;">*</span>
+                </label>
+                <label class="item item-input">
+                    <!-- <img class="icon-style1" src="./img/bankNo.png" alt="bankNo" /> -->
+                    <span>银行卡号:</span>
+                    <input id="bankNo" type="text" name="bankNo" placeholder="请输入银行卡号" ng-model="users.bankNo" required ng-pattern="/^\d{16,}$/" class="completeInfo-style" />
+                    <span class="icon ion-close-round error" ng-show="inputInfoForm.bankNo.$dirty && inputInfoForm.bankNo.$invalid">请输入至少16位数字</span>
+                    <span class="fr" style="color: #d21e1e;margin-top: 4px;">*</span>
+                </label>
+                <ion-item class="completeInfo-note">注意：为了不影响您中奖资金的提现，请确保您的资料真实有效;
+                </ion-item>
+                <input type="submit" class="comform-edit-info" ng-class="inputInfoForm.$invalid?'comform-edit-info1':'comform-edit-info2'" ng-disabled="inputInfoForm.$invalid" value="点击提交" />
+            </form>
+        </ion-list>
     </ion-content>
 </ion-view>

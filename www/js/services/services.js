@@ -58,9 +58,9 @@ angular.module('starter.services', [])
             pl3addAuto: function(data, token) {
                 return $util.httpPostRequest($util.getHttpURL().pl3addAutoUrl + '?token=' + token, data);
             }
-            
-            
-            
+
+
+
 
         };
     })
@@ -122,6 +122,7 @@ angular.module('starter.services', [])
                 data: {
                     // "realName": addData.data.user.realName,
                     // "phone": addData.data.user.phone,
+                    "name": addData.data.user.name,
                     "idcard": addData.data.user.idcard,
                     "wechat": addData.data.user.wechat,
                     "bank": addData.data.user.bank,

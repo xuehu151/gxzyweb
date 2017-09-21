@@ -8,9 +8,14 @@
 angular.module('starter.completeInfoCtrl', ['starter.services'])
 
     .controller('completeInfoCtrl', function($scope, $rootScope, $state, locals, postData, $ionicLoading, $ionicModal, $util, $timeout, $interval) {
+        var userInfo = $scope.userInfo = $util.getUserInfo();
+        $rootScope.addData = userInfo;
+        console.log(userInfo);
+
         $scope.users = {
             // realName: '',
             // phone: '',
+            name:userInfo.data.user.realName,
             idcard: '',
             wechat: '',
             bank: '',
@@ -22,22 +27,21 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
          *     2.再把ng-model值赋进来
          *     3.再把这个对象赋给localstorage
          */
-        var userInfo = $scope.userInfo = $util.getUserInfo();
-        console.log(userInfo);
-        $rootScope.addData = userInfo;
+
+
         //        console.log ($rootScope.addData);
 
         $scope.submitInfo = function() {
             $ionicLoading.show({
                 hideOnStateChange: true
             });
+            $rootScope.addData.data.user.name = $scope.users.name;
             $rootScope.addData.data.user.idcard = $scope.users.idcard;
             $rootScope.addData.data.user.wechat = $scope.users.wechat;
             $rootScope.addData.data.user.bank = $scope.users.bank;
             $rootScope.addData.data.user.bankNo = $scope.users.bankNo;
             //            locals.setObject ($rootScope.user, $rootScope.addData);
 
-            console.log(userInfo);
             /**
              * 功能:把提交的值上传到后台
              */
@@ -72,6 +76,20 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
             $scope.modalError.hide();
         };
 
+
+        var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        $(window).on('resize', function () {
+            var nowClientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            if (clientHeight > nowClientHeight) {
+                //键盘弹出的事件处理
+            }
+            else {
+                $interval.cancel(scrollTimer);
+                $('#scrollBug').css('height',clientHeight);
+
+            }
+        });
+
         var scrollTimer = null; //控制延时0.6s后scrollIntoViewIfNeeded
         /**
          * [输入时调整视图位置,使键盘不遮挡input框]
@@ -85,8 +103,8 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
         }
 
         /*var idcardInput = document.getElementsById('idCard');
-        var weChatInput = document.getElementsById('wechat');
-        var bankInput = document.getElementById('bank');*/
+        var weChatInput = document.getElementsById('wechat');*/
+        var bankInput = document.getElementById('bank');
         var bankNoInput = document.getElementById('bankNo');
 
         /*idcardInput.onfocus = function() {
@@ -95,9 +113,12 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
         weChatInput.onfocus = function() {
           scrollInput(idcardInput);
         }*/
-        /*bankInput.onfocus = function() {
+        bankInput.onfocus = function() {
           scrollInput(bankInput);
-        }*/
+        }
+        bankInput.onblur = function() {
+            $interval.cancel(scrollTimer)
+        }
         bankNoInput.onfocus = function() {
             scrollInput(bankNoInput);
         }

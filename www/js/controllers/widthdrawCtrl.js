@@ -89,6 +89,20 @@ angular.module('starter.widthdrawCtrl', ['starter.services'])
                     $ionicLoading.hide();
                 })
         };
+
+        var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        $(window).on('resize', function () {
+            var nowClientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            if (clientHeight > nowClientHeight) {
+                //键盘弹出的事件处理
+            }
+            else {
+                console.log($('#scrollBugTwo').css('height'))
+                $('#scrollBugTwo').css('height',clientHeight);
+
+            }
+        });
+
         //错误码窗口配置
         $ionicModal.fromTemplateUrl('templates/errorPop.html', {
             scope: $scope,

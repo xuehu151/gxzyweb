@@ -717,33 +717,32 @@ ion-item.f15 {
 
 
 
-/* div.save
+/*  .self-info div.save
 {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  text-align: center;
-  width: 100%;
-  font-size: 16px;
-  color: #fff;
-  height: 54px;
-  line-height: 54px;
+ margin: 50px auto;
+ text-align: center;
+ border-radius: 8px;
+ width: 70%;
+ font-size: 16px;
+ color: #fff;
+ height: 40px;
+ line-height: 40px;
 
-  background: -webkit-linear-gradient(#0462aa, #2e2f8b);
-  Safari 5.1 - 6.0
-  background: -o-linear-gradient(#0462aa, #2e2f8b);
-  Opera 11.1 - 12.0
-  background: -moz-linear-gradient(#0462aa, #2e2f8b);
-  Firefox 3.6 - 15
-  background: linear-gradient(#0462aa, #2e2f8b);
-  标准的语法
+ background: -webkit-linear-gradient(#0462aa, #2e2f8b);
+ // Safari 5.1 - 6.0
+ background: -o-linear-gradient(#0462aa, #2e2f8b);
+ // Opera 11.1 - 12.0
+ background: -moz-linear-gradient(#0462aa, #2e2f8b);
+ // Firefox 3.6 - 15
+ background: linear-gradient(#0462aa, #2e2f8b);
+ // 标准的语法
 } */
 
 
 /**********completeInfo.html************/
 
 .complete-info-list .item {
-    margin: 7px 30px -1px 44px;
+    margin: 7px 15px -1px 30px;
     padding: 17px 0;
     border-width: 0 0 1px 0;
     background: #eee;
@@ -772,12 +771,22 @@ ion-item.f15 {
 .complete-info-list .completeInfo-style {
     margin-left: 18px;
     font-size: 13px;
+    padding-right: 10px;
 }
 
 .complete-info-list .img-style {
     width: 22px;
 }
 
+.complete-info-list .item-input
+{
+    font-size: 13px;
+}
+
+.complete-info-list .item-input>span:first-child
+{
+    width: 56px;
+}
 
 /* .img_001, .img_002, .img_003, .img_004, .img_005, .img_006, .img_008, .img_009, .img_010, .img_011, .img_012 {
   background: url(../img/iconsBg.png) no-repeat;
