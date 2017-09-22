@@ -110,7 +110,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         // console.log($scope.thisWinItems);
                                         winAlertStatus.first = true;
 
-                                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID=' + winItems[0].lotteryID + '&wareIssue=' + (winItems[0].wareIssue * 1 - 1))
+                                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID=' + winItems[0].lotteryID + '&wareIssue=' + (winItems[0].wareIssue * 1))
                                             // getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue=2017094')
                                             .then(function(response) {
                                                 // console.log(response);
@@ -308,7 +308,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         $scope.drawTime = winItems[1].drawTime;
                         winAlertStatus.second = true;
 
-                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID=' + winItems[1].lotteryID + '&wareIssue=' + (winItems[1].wareIssue * 1 - 1))
+                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID=' + winItems[1].lotteryID + '&wareIssue=' + (winItems[1].wareIssue * 1))
                             // getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue=2017219')
                             .then(function(response) {
                                 console.log(response);
@@ -337,7 +337,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         $scope.drawTime = winItems[2].drawTime;
                         winAlertStatus.third = true;
 
-                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID=' + winItems[2].lotteryID + '&wareIssue=' + (winItems[2].wareIssue * 1 - 1))
+                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID=' + winItems[2].lotteryID + '&wareIssue=' + (winItems[2].wareIssue * 1))
                             // getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue=2017219')
                             .then(function(response) {
                                 console.log(response);
@@ -366,7 +366,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                         $scope.drawTime = winItems[3].drawTime;
                         winAlertStatus.forth = true;
 
-                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID=' + winItems[3].lotteryID + '&wareIssue=' + (winItems[3].wareIssue * 1 - 1))
+                        getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID=' + winItems[3].lotteryID + '&wareIssue=' + (winItems[3].wareIssue * 1))
                             // getUser.getInfo(url + "/service/lottery/getHistory?token=" + token + '&lotteryID='+winItems[0].lotteryID + '&wareIssue=2017219')
                             .then(function(response) {
                                 console.log(response);
