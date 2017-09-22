@@ -198,9 +198,12 @@
 
 .account-list .head-pic {
     position: absolute;
-
-    right: 35px;
-    top: 30px;
+    right: 30px;
+    top: 25px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
 }
 
 .account-list .item div,
@@ -769,7 +772,7 @@ ion-item.f15 {
 }
 
 .complete-info-list .completeInfo-style {
-    margin-left: 18px;
+    padding-left: 12px;
     font-size: 13px;
     padding-right: 10px;
 }
