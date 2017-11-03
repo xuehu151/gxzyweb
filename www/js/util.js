@@ -85,7 +85,7 @@ angular.module ('starter.util', [])
                         }
                         return str.join ("&");
                     },
-                    timeout: 1000 * 10
+                    timeout: 1000 * 10 * 3
                 }).success (function (response) {
                     //return success
                     $ionicLoading.hide ();
