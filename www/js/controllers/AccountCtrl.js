@@ -119,7 +119,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                                     // console.log($scope.result);
                                                     $scope.modal3.show();
                                                 } else {
-                                                    $scope.error = response.info;
+                                                    $scope.error = response.info + '错误码:' + response.error;
                                                     $timeout(function() {
                                                         $scope.modalError.show();
                                                     }, 400);
@@ -132,7 +132,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         $timeout.cancel(nextShow);
                                     }
                                 } else {
-                                    $scope.error = response.info;
+                                    $scope.error = response.info + '错误码:' + response.error;
                                     $timeout(function() {
                                         $scope.modalError.show();
                                     }, 400);
@@ -163,7 +163,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                         $timeout.cancel(nextFailShow);
                                     }
                                 } else {
-                                    $scope.error = response.info;
+                                    $scope.error = response.info + '错误码:' + response.error;
                                     $timeout(function() {
                                         $scope.modalError.show();
                                     }, 300);
@@ -184,7 +184,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                     $rootScope.needExchangeItems = response.data;
                                     // $scope.modal2.show();
                                 } else {
-                                    $scope.error = response.info;
+                                    $scope.error = response.info + '错误码:' + response.error;
                                     $timeout(function() {
                                         $scope.modalError.show();
                                     }, 300);
@@ -196,7 +196,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                             });
                     } else {
                         $ionicLoading.hide();
-                        $scope.error = response.info;
+                        $scope.error = response.info + '错误码:' + response.error;
                         $timeout(function() {
                             $scope.modalError.show();
                         }, 400);
@@ -316,7 +316,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                     $scope.result = splitCode.split(response.data.result);
                                     console.log($scope.result);
                                 } else {
-                                    $scope.error = response.info;
+                                    $scope.error = response.info + '错误码:' + response.error;
                                     $timeout(function() {
                                         $scope.modalError.show();
                                     }, 400);
@@ -345,7 +345,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                     $scope.result = splitCode.split(response.data.result);
                                     console.log($scope.result);
                                 } else {
-                                    $scope.error = response.info;
+                                    $scope.error = response.info + '错误码:' + response.error;
                                     $timeout(function() {
                                         $scope.modalError.show();
                                     }, 400);
@@ -374,7 +374,7 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                                     $scope.result = splitCode.split(response.data.result);
                                     console.log($scope.result);
                                 } else {
-                                    $scope.error = response.info;
+                                    $scope.error = response.info + '错误码:' + response.error;
                                     $timeout(function() {
                                         $scope.modalError.show();
                                     }, 400);

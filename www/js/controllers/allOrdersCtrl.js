@@ -46,7 +46,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                         } else if (response.error == '0' && response.data.length == 0) {
                             vm.moredata = false;
                         } else {
-                            $scope.error = response.info;
+                            $scope.error = response.info + '错误码:' + response.error;
                             $timeout(function() {
                                 $scope.modalError.show();
                             }, 100);
@@ -80,7 +80,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                         } else if (response.error == '0' && response.data.length == 0) {
                             havenot.moredata = false;
                         } else {
-                            $scope.error = response.info;
+                            $scope.error = response.info + '错误码:' + response.error;
                             $timeout(function() {
                                 $scope.modalError.show();
                             }, 100);
@@ -114,7 +114,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                         } else if (response.error == '0' && response.data.length == 0) {
                             havewin.moredata = false;
                         } else {
-                            $scope.error = response.info;
+                            $scope.error = response.info + '错误码:' + response.error;
                             $timeout(function() {
                                 $scope.modalError.show();
                             }, 100);
@@ -148,7 +148,7 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                         } else if (response.error == '0' && response.data.length == 0) {
                             havefail.moredata = false;
                         } else {
-                            $scope.error = response.info;
+                            $scope.error = response.info + '错误码:' + response.error;
                             $timeout(function() {
                                 $scope.modalError.show();
                             }, 100);

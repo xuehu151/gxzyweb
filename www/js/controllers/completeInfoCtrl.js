@@ -53,7 +53,7 @@ angular.module('starter.completeInfoCtrl', ['starter.services'])
                         $util.setUserInfo($rootScope.addData);
                         $state.go('completeInfoSucceed');
                     } else {
-                        $scope.error = response.info;
+                        $scope.error = response.info + '错误码:' + response.error;
                         $timeout(function() {
                             $scope.modalError.show();
                         }, 100);
