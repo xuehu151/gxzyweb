@@ -297,7 +297,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                     headers : {
                         "Content-Type" : "application/json"
                     },
-                    timeout: 1000 * 10
+                    timeout: 1000 * 10 * 3
                 })
 //                BettingService.pl3Add(data, userInfo.data.token)
                     .then (function (response) {
