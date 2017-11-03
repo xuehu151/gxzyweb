@@ -249,7 +249,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                                 $scope.modalError = modal;
                                 $scope.modalError.show ();
     
-                                $scope.errorInfo = response.data.info;
+                                $scope.errorInfo = response.data.info + '错误码' + response.data.error;
                             });
                             $scope.cancelPopError = function () {
                                 $scope.modalError.hide();

@@ -308,7 +308,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                                 $scope.modalError = modal;
                                 $scope.modalError.show ();
                                 
-                                $scope.errorInfo = response.data.info;
+                                $scope.errorInfo = response.data.info + '错误码' + response.error;
                             });
                             $scope.cancelPopError = function () {
                                 $scope.modalError.hide ();

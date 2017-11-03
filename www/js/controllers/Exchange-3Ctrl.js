@@ -304,7 +304,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                         $ionicLoading.hide ();
                         console.log (response);
                         if(response.data.error != '0'){
-                            $scope.errorInfo = response.data.info;
+                            $scope.errorInfo = response.data.info + '错误码' + response.data.error;
                             $rootScope.errorInfo();
                         }
                         else {

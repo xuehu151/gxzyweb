@@ -409,7 +409,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                         console.info (response);
                         console.dir (data);
                         if(response.data.error != '0'){
-                            $scope.errorInfo = response.data.info;
+                            $scope.errorInfo = response.data.info + '错误码' + response.data.error;
                             $rootScope.errorInfo();
                         }else {
                             //提交成功窗口配置
