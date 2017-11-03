@@ -55,7 +55,7 @@ angular.module('starter.prizeRecordsCtrl', ['starter.services'])
                         } else if (response.error == '0' && response.data.length == 0) {
                             prizeRecords.moredata = false;
                         } else {
-                            $scope.error = response.info;
+                            $scope.error = response.info + '错误码:' + response.error;
                             $timeout(function() {
                                 $scope.modalError.show();
                             }, 100);
@@ -88,7 +88,7 @@ angular.module('starter.prizeRecordsCtrl', ['starter.services'])
                         } else if (response.error == '0' && response.data.length == 0) {
                             widthdrawRecords.moredata = false;
                         } else {
-                            $scope.error = response.info;
+                            $scope.error = response.info + '错误码:' + response.error;
                             $timeout(function() {
                                 $scope.modalError.show();
                             }, 100);

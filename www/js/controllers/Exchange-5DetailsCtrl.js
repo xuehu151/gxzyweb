@@ -220,7 +220,7 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    timeout: 1000 * 10
+                    timeout: 1000 * 10 * 3
                 })
                     .then (function (response) {
                         $ionicLoading.hide ();
@@ -269,8 +269,8 @@ angular.module ('starter.Exchange-5DetailsCtrl', ['starter.services'])
                             }).then(function (modal) {
                                 $scope.modalError = modal;
                                 $scope.modalError.show ();
-        
-                                $scope.errorInfo = response.data.info;
+    
+                                $scope.errorInfo = response.data.info + '错误码' + response.data.error;
                             });
                             $scope.cancelPopError = function () {
                                 $scope.modalError.hide();

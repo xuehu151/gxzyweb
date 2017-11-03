@@ -274,7 +274,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                             });
                     }
                     else {
-                        $scope.errorInfo = response.info;
+                        $scope.errorInfo = response.info + '错误码' + response.error;
                         $rootScope.errorInfo();
                     }
                 },function () {

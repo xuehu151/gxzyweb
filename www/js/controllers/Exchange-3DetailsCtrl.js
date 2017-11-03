@@ -198,7 +198,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    timeout: 1000 * 10
+                    timeout: 1000 * 10 * 3
                 })
 //                BettingService.pl3Add(data, userInfo.data.token)
                     .then(function (response) {
@@ -249,7 +249,7 @@ angular.module('starter.Exchange-3DetailsCtrl', ['starter.services'])
                                 $scope.modalError = modal;
                                 $scope.modalError.show ();
     
-                                $scope.errorInfo = response.data.info;
+                                $scope.errorInfo = response.data.info + '错误码' + response.data.error;
                             });
                             $scope.cancelPopError = function () {
                                 $scope.modalError.hide();

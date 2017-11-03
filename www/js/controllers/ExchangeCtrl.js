@@ -101,7 +101,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         console.info(userInfo);
 
                         if (userInfo.error != '0') {
-                            $scope.errorInfo = userInfo.info;
+                            $scope.errorInfo = userInfo.info + '错误码' + userInfo.error;
                             $rootScope.errorInfo ();
                         }
                         else {
@@ -140,7 +140,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                             $state.go ('tab.account');
                         }
                         else {
-                            $scope.errorInfo = response.info;
+                            $scope.errorInfo = userInfo.info + '错误码' + userInfo.error;
                             $rootScope.errorInfo ();
                         }
                     }, function (response) {
