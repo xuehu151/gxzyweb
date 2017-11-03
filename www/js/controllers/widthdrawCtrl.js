@@ -18,7 +18,7 @@ angular.module('starter.widthdrawCtrl', ['starter.services'])
                 if (response.error == '0') {
                     $scope.widthdrawAble = response.data.money; //可用余额
                 } else {
-                    $scope.error = response.info;
+                    $scope.error = response.info + '错误码:' + response.error;
                     $timeout(function() {
                         $scope.modalError.show();
                     }, 100);
@@ -78,7 +78,7 @@ angular.module('starter.widthdrawCtrl', ['starter.services'])
                         $rootScope.WidthdrawStatus = response.error; //保存返回的状态,用于决定widthdrawResult的页面
                         $state.go('widthdrawResult');
                     } else {
-                        $scope.error = response.info;
+                        $scope.error = response.info + '错误码:' + response.error;
                         $timeout(function() {
                             $scope.modalError.show();
                         }, 100);
