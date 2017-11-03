@@ -403,7 +403,6 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         });*/
                     });
             }
-
             
             //错误码窗口配置
             $rootScope.errorInfo = function () {
