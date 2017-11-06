@@ -94,6 +94,11 @@ angular.module ('starter.Exchangehistory3DCtrl', ['starter.services'])
                 // console.info(response.data);
                 $scope.winningShow = response.data;
                 console.info ($scope.winningShow);
+                for (var i = 0; i < response.data.length; i++) {//手机号隐藏中间四位
+                    var userPhone = response.data[i].phone;
+                    var userPhoneStr = userPhone.substr(0,3)+"****"+userPhone.substr(7);
+                    response.data[i].phone = userPhoneStr;
+                }
                 //上下滚动效果
                 slide (document.getElementsByTagName ('ul')[0]);
                 function slide (parent) {
