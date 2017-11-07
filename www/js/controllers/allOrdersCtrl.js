@@ -190,7 +190,8 @@ angular.module('starter.allOrdersCtrl', ['starter.services'])
                 pay: order.money,
                 ticketID: order.orderNo,
                 orderTime: order.createDate,
-                winMoney: winMoney
+                winMoney: winMoney,
+                wareIssue:order.wareIssue
             };
             $state.go('orderDetail');
         };

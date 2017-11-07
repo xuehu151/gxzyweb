@@ -1350,6 +1350,7 @@ ion-item.f15 {
 .order-detail-list .lottery-type {
     font-size: 13px;
     color: #333;
+    line-height: 42px;
 }
 
 .order-detail-list .detail {
@@ -1422,7 +1423,7 @@ ion-item.f15 {
 .order-detail-list .open-time {
     font-size: 11px;
     color: #d11d1d;
-    margin-left: 10px;
+    margin-left: 6px;
 }
 
 

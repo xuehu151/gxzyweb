@@ -1,10 +1,14 @@
 <ion-view view-title="订单详情">
     <ion-content>
         <ion-list class="order-detail-list">
-            <ion-item style="padding: 8px 16px;">
+            <ion-item style="padding: 8px 8px;">
                 <span class="lottery-type">{{orderDetail.lotteryID}}</span>
+                <span class="font-style" ng-if="orderDetail.lotteryID === '排列三'">(组选投注)</span>
                 <span ng-if="orderDetail.status=='待开奖'" class="open-time">开奖时间:{{orderDetail.openTime}}</span>
-                <span class="fr font-style1" style="margin-top: 2px;">{{orderDetail.status}}</span>
+                <span class="fr font-style1" style="text-align: center;">
+                    <span>{{orderDetail.status}}</span><br>
+                <span style="color: #333;font-size: 8px;">第{{orderDetail.wareIssue}}期</span>
+                </span>
             </ion-item>
             <div class="detail">
                 <div style="display: flex">
