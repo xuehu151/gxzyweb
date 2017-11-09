@@ -10,9 +10,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
 
     .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService, getWareIssueService) {
 
-        var firstTab = document.querySelector(".tab-item");
-        firstTab.style.display='none';
-
         $rootScope.newStatus = true;
         sign = $location.search ().sign;
         type = $location.search ().type;

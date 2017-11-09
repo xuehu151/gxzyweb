@@ -5,9 +5,6 @@
 angular.module ('starter.TrendCtrl', ['starter.services'])
 
     .controller ('TrendCtrl', function ($scope, $state, $ionicModal, $rootScope) {
-        var firstTab = document.querySelector(".tab-item");
-        console.log(firstTab);
-        firstTab.style.display='none';
 
         $state.go('tab.trend.bigTrendChart');
         $scope.isActive = true;

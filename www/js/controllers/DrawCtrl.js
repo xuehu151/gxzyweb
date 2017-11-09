@@ -5,9 +5,6 @@
 angular.module ('starter.DrawCtrl', ['starter.services'])
 
     .controller ('DrawCtrl', function ($scope, $state, $rootScope, $ionicModal, getWareIssueService, $util) {
-        var firstTab = document.querySelector(".tab-item");
-        console.log(firstTab);
-        firstTab.style.display='none';
         $state.go('tab.draw.bigLottoHistoryDetails');
         $scope.slectIndex = 0;
         $scope.activeSlide = function (index) {//点击时候触发
