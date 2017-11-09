@@ -6,6 +6,9 @@
         </ion-nav-buttons>
     </ion-nav-bar> -->
     <ion-content style="background: #eee;" id="scrollBugTwo">
+        <p class="good-news" style="text-indent: 30px;margin-top: 22px;">
+            好消息，奖金余额也可以兑换彩票了！
+        </p>
         <ion-list class="widthdraw-list list-borderless">
             <ion-item style="padding: 22px 30px 16px">
                 <p style="margin-bottom: 15px;">
@@ -13,16 +16,9 @@
                 </p>
                     <i class="ion-social-yen loc1">
                     </i>
-                    <input type="tel" name="" class="widthdraw-amount" autofocus="autofocus" placeholder=""  ng-model="widthdrawMoney.money" ng-change="whetherOK()" />
-            </ion-item>
-            <ion-item class="padding0">
-                <p ng-cloak ng-show="whetherShow1">
-                    可提现金额{{widthdrawAble}}元
-                    <a href="" style="color: #0098ff" ng-click="widthdrawAll()">
-                         &nbsp;&nbsp;&nbsp;全部提现
-                    </a>
-                </p>
-                <p class="cant-widthdraw">{{cantWidthdraw}}</p>
+                    <!-- <input type="tel" name="" class="widthdraw-amount" autofocus="autofocus" placeholder=""  ng-model="widthdrawMoney.money" ng-change="whetherOK()" /> -->
+                    <span class="widthdraw-amount" ng-cloak>{{widthdrawMoney.money}}</span>
+
             </ion-item>
             <p ng-class="{true:'widthdraw-btn-grey',false:'widthdraw-btn-blue'}[whetherShow2]" ng-click="whetherShow2 || confirmWidthdraw(widthdrawMoney)" ng-disable="whetherShow2">
                 确认
@@ -30,15 +26,15 @@
             <div class="widthdraw-descri">
                 提现说明
                 <p>
-                    1、10元及10元以下提现扣除1元手续费（小于等于1元无法提现）；
+                    1.奖金帐户余额小于20元时，余额可以继续用于彩票兑换;
                     <br/>
-                    2、11元及以上提现无手续费；
+                    2.奖金帐户超过20元（含）时，除继续兑换彩票外，也可进行提现;
                     <br/>
-                    3、每天最多可提现3次；
+                    3.申请提现：即指一次性将奖金帐户余额全部提取，每次提现扣除1元手续费;
                     <br/>
-                    4、提现申请的款项将在24小时到账；
+                    4.提现到账时间为2个工作日，遇法定节假日顺延;
                     <br/>
-                    5、为了不影响您的提款，请务必正确填写开户行、银行账号、姓名；
+                    5.为了不影响您的提现，请务必正确填写开户行、银行账号、姓名。
                     <br/>
                 </p>
             </div>

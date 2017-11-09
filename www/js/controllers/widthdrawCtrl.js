@@ -7,16 +7,26 @@
 //提现页面
 angular.module('starter.widthdrawCtrl', ['starter.services'])
     .controller('widthdrawCtrl', function($scope, $state, $rootScope, getUser, locals, postData, $ionicLoading, $util, $ionicModal, $timeout) {
+        $scope.whetherShow2 = false; //控制提现提交按钮disable
         $ionicLoading.show({
             hideOnStateChange: true
         });
         var userInfo = $util.getUserInfo();
         var token = userInfo.data.token;
-
         getUser.getInfo(url + "/service/customer/getUser?token=" + token)
             .then(function(response) {
                 if (response.error == '0') {
                     $scope.widthdrawAble = response.data.money; //可用余额
+                    $scope.widthdrawMoney = { money: $scope.widthdrawAble }; //提现金额
+
+                    //小于20 disable
+                    if ($scope.widthdrawMoney.money < 20) {
+                        $scope.cantWidthdraw = '';
+                        $scope.whetherShow2 = true;
+                    } else {
+                        $scope.cantWidthdraw = '';
+                        $scope.whetherShow2 = false;
+                    };
                 } else {
                     $scope.error = response.info + '错误码:' + response.error;
                     $timeout(function() {
@@ -28,43 +38,7 @@ angular.module('starter.widthdrawCtrl', ['starter.services'])
                 alert('您的网络异常,未能成功获取您的可用余额');
                 $ionicLoading.hide();
             });
-        $scope.widthdrawMoney = { money: '' }; //提现金额
-        $scope.whetherShow1 = true; //控制展示可提现余额
-        $scope.whetherShow2 = false; //控制提现提交按钮disable
 
-        $scope.whetherOK = function() {
-            // console.log($scope.widthdrawMoney.money)
-            if ($scope.widthdrawMoney.money > $scope.widthdrawAble) {
-                $scope.cantWidthdraw = '输入金额超出可提现余额';
-                $scope.whetherShow1 = false;
-                $scope.whetherShow2 = true;
-            }
-            //小于10元扣除1元手续费
-            else if (($scope.widthdrawMoney.money <= 10 && $scope.widthdrawMoney.money > 1) && ($scope.widthdrawMoney.money <= $scope.widthdrawAble)) {
-                $scope.cantWidthdraw = '需扣除1元手续费';
-                $scope.whetherShow1 = false;
-                $scope.whetherShow2 = false;
-            }
-            //小于1 disable
-            else if ($scope.widthdrawMoney.money <= 1) {
-                $scope.cantWidthdraw = '';
-                $scope.whetherShow1 = true;
-                $scope.whetherShow2 = true;
-            } else if (($scope.widthdrawAble <= 200 && $scope.widthdrawAble > 10) && $scope.widthdrawMoney.money != $scope.widthdrawAble) {
-                $scope.cantWidthdraw = '';
-                $scope.whetherShow1 = true;
-                $scope.whetherShow2 = true;
-            } else {
-                $scope.cantWidthdraw = '';
-                $scope.whetherShow1 = true;
-                $scope.whetherShow2 = false;
-            };
-        };
-        //提现所有可用余额
-        $scope.widthdrawAll = function() {
-            $scope.widthdrawMoney.money = $scope.widthdrawAble;
-            $scope.whetherOK();
-        };
         $scope.confirmWidthdraw = function(widthdrawMoney) {
             $ionicLoading.show({
                 hideOnStateChange: true
@@ -91,14 +65,13 @@ angular.module('starter.widthdrawCtrl', ['starter.services'])
         };
 
         var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
-        $(window).on('resize', function () {
+        $(window).on('resize', function() {
             var nowClientHeight = document.documentElement.clientHeight || document.body.clientHeight;
             if (clientHeight > nowClientHeight) {
                 //键盘弹出的事件处理
-            }
-            else {
+            } else {
                 console.log($('#scrollBugTwo').css('height'))
-                $('#scrollBugTwo').css('height',clientHeight);
+                $('#scrollBugTwo').css('height', clientHeight);
 
             }
         });

@@ -5,7 +5,7 @@
                 <div class="f16">
                     奖金余额 (元)
                 </div>
-                <a class="head-pic" ng-click="toSelfInfo()" >
+                <a class="head-pic" ng-click="toSelfInfo()">
           <img style="width: 20px;vertical-align: middle;" src="./img/head.png" alt="" />
         </a>
                 <h2 class="light" style="margin:10px 0" ng-cloak>
@@ -58,6 +58,9 @@
                 <i class="icon ion-ios-arrow-right">
         </i>
             </ion-item>
+            <p class="good-news" >
+                好消息，奖金余额也可以兑换彩票了！
+            </p>
             <p class="account-common account-bg-blue" ng-click="withdrawConfirm()">
                 提现
             </p>
@@ -113,8 +116,8 @@
                     <div class="account-modal3-style2 clearfix">
                         <span class="fl">
                             <span class="fr">获赠号码:</span>
-                            <br>
-                            <span class="remark-style" >(多于三注可拖动号码查看未显示号码,灰色背景号码为中奖号码)</span>
+                        <br>
+                        <span class="remark-style">(多于三注可拖动号码查看未显示号码,灰色背景号码为中奖号码)</span>
                         </span>
                         <ion-scroll class="fl rowball-wrap" zooming="true" direction="y" overflow-scroll="true" scrollbar-y="true">
                             <span ng-class="eachBet.status==4?'win-suc':''" class="rowball" ng-repeat="eachBet in thisWinItems track by $index">
@@ -166,8 +169,8 @@
                             <div class="fl style1">
                                 <span class="fr">
                                     <span class="fr">投注号码:</span>
-                                    <br>
-                                    <span class="remark-style" >(多于三注可拖动号码查看未显示号码,灰色背景号码为出票失败)</span>
+                                <br>
+                                <span class="remark-style">(多于三注可拖动号码查看未显示号码,灰色背景号码为出票失败)</span>
                                 </span>
                             </div>
                             <div class="fl style2">
@@ -182,7 +185,6 @@
                         <div class="row-style2">
                             *兑换资格或支付款已返还至待兑换或账户余额,请重新投注
                         </div>
-
                     </div>
                     <div class="close" ng-click="cancelPrintFailed()">
                         关闭
