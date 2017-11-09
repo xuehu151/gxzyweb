@@ -9,11 +9,10 @@ angular.module('starter.AccountCtrl', ['starter.services'])
     //账户页面
     .controller('AccountCtrl', function($scope, $rootScope, $ionicPopup, $state, $ionicModal, $http, locals, getUser, $ionicLoading, $util, splitCode, $timeout, $location) {
 
-        var firstTab = document.querySelector(".tab-item");
-        // console.log(firstTab);
-        firstTab.style.display = 'none';
+        /*   var firstTab = document.querySelector(".tab-item");
+           firstTab.style.display = 'none';*/
 
-        $scope.needExchangeAmount = { amount: 0 };  //待兑换数量
+        $scope.needExchangeAmount = { amount: 0 }; //待兑换数量
 
         PayType = 1;
         var userInfo = $util.getUserInfo();
@@ -216,11 +215,10 @@ angular.module('starter.AccountCtrl', ['starter.services'])
                 }
             };
 
-            $scope.toSelfInfo = function () {
+            $scope.toSelfInfo = function() {
                 if (userInfo.data.user.bankNo) {
                     $state.go('selfInfo')
-                }
-                else {
+                } else {
                     $state.go('completeInfo')
                 }
             }
