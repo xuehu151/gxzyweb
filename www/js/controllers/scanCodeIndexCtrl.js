@@ -225,11 +225,13 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
 //            $state.go('scanCodeIndex');
             $scope.modal2.hide ();
         };
-        
+
+        console.info('type44444',type);
+        console.info('PayType4444',PayType);
         //排列3自动投注
         function pl3AddAuto () {
             var vid = '';
-            if (type == 0) {
+            if (type == 0 || type === undefined) {
                 if ($rootScope.nowVid) {
                     vid = $rootScope.nowVid;
                 }

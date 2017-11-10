@@ -372,7 +372,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                 console.log (dataArray);
 
                 var vid = '';
-                if(type == 0){
+                if(type == 0 || type === undefined){
                     if ($rootScope.nowVid) {
                         vid = $rootScope.nowVid;
                     }

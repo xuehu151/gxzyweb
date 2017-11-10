@@ -38,6 +38,12 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                      console.info(response);
                     $scope.winningShow = response.data;
                     console.info ($scope.winningShow);
+                    for (var i = 0; i < response.data.length; i++) {//手机号隐藏中间四位
+                        var userPhone = response.data[i].phone;
+                        var userPhoneStr = userPhone.substr(0,3)+"****"+userPhone.substr(7);
+                        response.data[i].phone = userPhoneStr;
+                    }
+                    
                     //上下滚动效果
                     slide (document.getElementsByTagName ('ul')[0]);
                     function slide (parent) {
@@ -98,7 +104,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         console.info(userInfo);
 
                         if (userInfo.error != '0') {
-                            $scope.errorInfo = userInfo.info + '错误码' + userInfo.error;
+                            $scope.errorInfo = response.info + '错误码' + response.error;
                             $rootScope.errorInfo ();
                         }
                         else {
@@ -126,18 +132,18 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         if (response.error == '0') {
                             /* 获取初始化数据 */
                             $rootScope.popup = 1;
-                            var datas = $util.setUserInfo (response);
+                            $util.setUserInfo (response);
                             userInfo = $util.getUserInfo ();
                             $state.go ('scanCodeIndex');
                         }
                         else if (response.error == '2301') {
                             /* 获取初始化数据 */
-                            var datas = $util.setUserInfo (response);
+                            $util.setUserInfo (response);
                             userInfo = $util.getUserInfo ();
                             $state.go ('tab.account');
                         }
                         else {
-                            $scope.errorInfo = userInfo.info + '错误码' + userInfo.error;
+                            $scope.errorInfo = response.info + '错误码' + response.error;
                             $rootScope.errorInfo ();
                         }
                     }, function (response) {
@@ -254,7 +260,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                 });
                 $scope.cancelPopError = function() {
                     $scope.modalError.hide();
-                    WeixinJSBridge.call('closeWindow');
+//                    WeixinJSBridge.call('closeWindow');
                 };
             };
         }

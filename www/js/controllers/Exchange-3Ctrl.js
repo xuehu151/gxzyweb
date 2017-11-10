@@ -265,7 +265,7 @@ angular.module ('starter.Exchange-3Ctrl', ['starter.services'])
                 console.info(dataObj);
 
                 var vid = '';
-                if (type == 0) {
+                if (type == 0 || type === undefined) {
                     if ($rootScope.nowVid) {
                         vid = $rootScope.nowVid;
                     }

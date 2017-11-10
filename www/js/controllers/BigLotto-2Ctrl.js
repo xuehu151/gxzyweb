@@ -184,7 +184,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                 $scope.numDataBlue[changeToArray1.blue[i].num - 1].check = true;
             }
         }
-
+        
         if(type == 0 || type == undefined){
             if (PayType == 0) {
                 $scope.saveBallSelect = function () {
@@ -308,7 +308,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
 
                 $ionicLoading.show ();
                 var vid = '';
-                if(type == 0){
+                if(type == 0 || type === undefined){
                     if ($rootScope.nowVid) {
                         vid = $rootScope.nowVid;
                     }
@@ -332,6 +332,8 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                     addFlag : "0",
                     data : dataArrayBig
                 };
+    
+                console.info (data);
                 $http ({
                     method : "POST",
                     url : ipUrl + '/service/lottery/dltadd?token=' + userInfo.data.token,
@@ -344,7 +346,6 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                     .then (function (response) {
                         $ionicLoading.hide ();
                         console.info (response);
-                        console.dir (data);
                         if(response.data.error != '0'){
                             $scope.errorInfo = response.data.info + '错误码' + response.data.error;
                             $rootScope.errorInfo();
@@ -392,15 +393,6 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                         //console.log (response.data.info);
                     }, function (response) {
                         alert('获取投注信息失败，请检查您的网络');
-                        /*var confirmPopup = $ionicPopup.confirm ({
-                            title: '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
-                            template: '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
-                            okText: '确认',
-                            cancelText: '返回',
-                            okType: 'button-darkBlue'
-                        }).then (function () {
-                            $state.go ('tab.account');
-                        });*/
                     });
             }
 

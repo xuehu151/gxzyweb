@@ -171,7 +171,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
             $ionicLoading.show ();
             var reques = {};
             var userInfo = $util.getUserInfo ();
-//            console.log(userInfo);
+            console.log(userInfo);
             var data = {
                 lotteryID : 2
             };
@@ -214,7 +214,6 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                     dataArrayBig.push (dataObj);
                     // console.log (dataArrayBig);
                 }
-                
                 var vid = '';
                 if (type == 0 || type == undefined) {
                     if (userInfo.data.vouchers) {
@@ -231,7 +230,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                         vid = '';
                     }
                 }
-                else if (type == 1) {
+                else if (type == 1 || type === undefined) {
                     if (userInfo.data.voucher == undefined) {
                         vid = '';
                     }
@@ -251,7 +250,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                 console.log (data);
                 $http ({
                     method : "POST",
-                    url : ipUrl + '/lottery/dltadd?token=' + userInfo.data.token,
+                    url : ipUrl + '/service/lottery/dltadd?token=' + userInfo.data.token,
                     data : data,
                     headers : {
                         "Content-Type" : "application/json"
@@ -290,7 +289,6 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                                         $scope.receiveNum.push (receiveNumWarp);
                                         // console.info($scope.receiveNum);
                                     }
-//                            $scope.modal3 = modal;
                                     $scope.makeSure = function () {
                                         modal.hide ();
                                         $state.go ('tab.exchange');
@@ -316,17 +314,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                             };
                         }
                     }, function (response) {
-                        //扫码后，所获赠注数的限制提示。
                         alert('获取投注信息失败，请检查网络');
-                        /*var confirmPopup = $ionicPopup.confirm ({
-                            title : '<div class="confirmPopup-heads"><img src="./img/alert-img.png" alt=""  width = "30%"></div>',
-                            template : '<div style="color: #132d8e;">您只获赠了真龙赠与您的 3 注彩票,想多来几注，再来一包真龙香烟吧！</div>',
-                            okText : '确认',
-                            okType : 'button-darkBlue'
-                        })
-                            .then (function () {
-                                $state.go ('tab.account');
-                            });*/
                     });
             }
         }
