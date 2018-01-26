@@ -269,7 +269,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 /*app下载*/
 .logoImg {
     text-align: center;
-    margin: 3rem 0;
+    margin: .5rem 0;
 }
 
 .logoImg img {
@@ -315,16 +315,17 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 
 .introduce h4 {
     color: #e01a00;
-
+    margin-top: 0;
 }
 
 .introduce h5 {
     color: #293e97;
-    margin: 6px 0;
+    margin: 0;
 }
 
 .introduce p {
     color: #333;
+    margin: 0 0 3px 0;
 }
 
 .tipsWarp {
@@ -348,7 +349,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     width: 95%;
     border-radius: 8px;
     background: #fff;
-    margin: 2rem auto 1rem;
+    margin: .5rem auto;
 }
 
 .tips h4 {

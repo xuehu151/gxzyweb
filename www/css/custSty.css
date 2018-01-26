@@ -181,6 +181,7 @@
 }
 
 .bg3 {
+    padding: 0;
     text-align: center;
     background: -webkit-linear-gradient(#392883, #15469e);
     /* Safari 5.1 - 6.0 */
@@ -281,7 +282,7 @@ ion-item.f15 {
 
 .account-list .account-common,
 .complete-info-succeed .account-common {
-    margin: 15px 13% 0;
+    margin: 8px 13% 0;
     padding: 3% 0;
     text-align: center;
     border-radius: 4px;
@@ -294,12 +295,12 @@ p.good-news{
     font-size: 16px;
     color: #186ca9;
     text-indent: 16px;
-    margin:10px 0 0;
+    margin: 5px 0 0;
 }
 
 p.lead{
     color: #c01919;
-    padding: .8rem 1rem;
+    padding: .2rem 1rem;
 }
 
 p.lead span{
@@ -309,7 +310,7 @@ p.lead span{
 
 div.wantWin{
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 5px;
 }
 
 div.wantWin a{
