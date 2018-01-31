@@ -84,7 +84,7 @@ angular.module ('starter', ['ionic', 'starter.needExchangeCtrl', 'starter.servic
                 url: '/tab',
                 abstract: true,
                 templateUrl: 'templates/tabs.html',
-                // controller:'tabCtrl'
+                controller:'tabCtrl'
             })
 
             //app下载
