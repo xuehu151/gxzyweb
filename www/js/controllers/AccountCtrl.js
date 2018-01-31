@@ -447,6 +447,13 @@ angular.module('starter.AccountCtrl', ['starter.services'])
             };
         }
 
+        $scope.wantToWin = function () {
+            // var winUrl = 'wcapi.baibaocp.com/singlered/index';
+            // window.location.href = winUrl;
+
+
+        };
+
         //错误码窗口配置
         $ionicModal.fromTemplateUrl('templates/errorPop.html', {
             scope: $scope,
