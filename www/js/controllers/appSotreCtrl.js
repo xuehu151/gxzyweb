@@ -42,12 +42,12 @@ angular.module ('starter.appSotreCtrl', [])
     .controller('tabCtrl',function ($scope, $ionicTabsDelegate) {
         var ua = navigator.userAgent.toLowerCase ();
         var isWeixin = ua.indexOf ('micromessenger') != -1;
-        if (!isWeixin) {
-            $scope.$on('$ionicView.beforeEnter', function() {
-                //关闭tab选项卡
-                $ionicTabsDelegate.showBar(false);
-            });
-        }
+        // if (!isWeixin) {
+        //     $scope.$on('$ionicView.beforeEnter', function() {
+        //         //关闭tab选项卡
+        //         // $ionicTabsDelegate.showBar(false);
+        //     });
+        // }
     });
     
     
