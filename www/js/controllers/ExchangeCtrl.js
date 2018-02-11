@@ -87,7 +87,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
 
         if (sign != undefined) {
             if (type == 0) {//初始化不带二维码    index1
-
                 var userToken = {
                     token : sign
                 };
@@ -122,7 +121,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                     });
             }
             else if (type == 1) {
-                var num = '';
                 var userInfo;
                 $rootScope.popup = '';
                 data = {
@@ -265,7 +263,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
 
             //错误码窗口配置
             $rootScope.errorInfo = function () {
-                num = '1';
                 $ionicModal.fromTemplateUrl ('templates/errorInfo.html', {
                     scope : $scope,
                     backdropClickToClose : true
