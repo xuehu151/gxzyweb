@@ -313,6 +313,11 @@ div.wantWin{
     margin-top: 5px;
 }
 
+div.wantWin img{
+    width: 100px;
+    margin: 0 auto;
+}
+
 div.wantWin a{
     color: #fc811e;
     font-size: 2rem;

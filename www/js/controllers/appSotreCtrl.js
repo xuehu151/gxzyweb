@@ -45,7 +45,7 @@ angular.module ('starter.appSotreCtrl', [])
         if (!isWeixin) {
             $scope.$on('$ionicView.beforeEnter', function() {
                 //关闭tab选项卡
-                $ionicTabsDelegate.showBar(false);
+                // $ionicTabsDelegate.showBar(false);
             });
         }
     });
