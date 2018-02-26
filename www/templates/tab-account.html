@@ -8,7 +8,7 @@
                 <a class="head-pic" ng-click="toSelfInfo()">
           <img style="width: 20px;vertical-align: middle;" src="./img/head.png" alt="" />
         </a>
-                <h2 class="light" style="margin:10px 0" ng-cloak>
+                <h2 class="light" style="margin:0" ng-cloak>
             {{totalMoney | number:2}}
           </h2>
             </ion-item>
@@ -64,10 +64,19 @@
             <p class="account-common account-bg-blue" ng-click="withdrawConfirm()">
                 提现
             </p>
-            <!-- <a class="account-common account-bg-none" ui-sref="tab.exchange">
+            <p class="lead" >
+                <span>中奖余额经常为0.00?</span>
+                <span>为什么我买的号就是不中奖?</span>
+                <!--<span>点击"我要中奖",跟单专家推荐,一起中大奖!</span>-->
+                <span>请长按二维码关注。</span>
+            </p>
+            <div class="wantWin tips-img">
+                <!--<a href="http://wcapi.baibaocp.com/singlered/index" ng-click="wantToWin()">-->
+                    <!--我要中奖!-->
+                <!--</a>-->
+                <img src="./img/cli_500px.png" alt="" class="">
+            </div>
 
-                兑换
-            </a> -->
         </ion-list>
         <!-- modal弹窗选择提现方式 -->
         <script id="accountModal.html" type="text/ng-template">

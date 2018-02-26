@@ -21,9 +21,9 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- path to ionic / angularjs files-->
-    <!--<script src="lib/ionic-toast/dist/ionic-toast.bundle.min.js"></script>-->
+    <!--<script src="lib/ionic-tosrcdist/ionic-toast.bundle.min.js"></script>-->
 
-    <!--<script src="lib/ngCordova/dist/ng-cordova.js"></script>-->
+    <!--<script src="lib/ngCordsrcdist/ng-cordova.js"></script>-->
     <!--<script src="cordova.js"></script>-->
 
     <!-- your app's js -->
@@ -48,6 +48,7 @@
     <script src="js/controllers/3DTrendChart.js"></script>
     <script src="js/controllers/5DTrendChart.js"></script>
     <script src="js/controllers/bigTrendChart.js"></script>
+    <script src="js/controllers/appSotreCtrl.js"></script>
 
     <script src="js/controllers/AccountCtrl.js"></script>
 
@@ -73,8 +74,11 @@
 
 <!--<script type="text/javascript">
     // 对浏览器的UserAgent进行正则匹配，不含有微信独有标识的则为其他浏览器
-    var useragent = navigator.userAgent;
-    if (useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
+//    var useragent = navigator.userAgent;
+    alert();
+    var ua = navigator.userAgent.toLowerCase ();
+    var isWeixin = ua.indexOf ('micromessenger') != -1;
+    if (!isWeixin) {
         // 这里警告框会阻塞当前页面继续加载
         alert('已禁止本次访问：您必须使用微信内置浏览器访问本页面！');
         // 以下代码是用javascript强行关闭当前页面

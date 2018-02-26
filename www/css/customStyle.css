@@ -88,7 +88,6 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     color: #293e97;
 }
 
-
 /*
     首页 兑换
 */
@@ -100,7 +99,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     background-color: #f2f2f2;
 }
 
-.notice-text{
+.notice-text {
     height: 50px;
     background: linear-gradient(top, #0a4fa5, #2d338c);
     background: -o-linear-gradient(top, #0a4fa5, #2d338c);
@@ -110,7 +109,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     background: #1b4299;
 }
 
-.notice-text .icon-notice{
+.notice-text .icon-notice {
     width: 7%;
     height: 50px;
     line-height: 50px;
@@ -120,47 +119,47 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     /*background: #ff5642;*/
 }
 
-.notice-warp .row{
-    padding: 2px 0 2px 0 ;
+.notice-warp .row {
+    padding: 2px 0 2px 0;
 }
 
-.slide li{
+.slide li {
     height: 23px;
     width: 50%;
     float: left;
 }
 
-.slide .row{
+.slide .row {
     padding: 1px 0;
-    width: 100%!important;
+    width: 100% !important;
 }
 
-.slide .col{
+.slide .col {
     padding: 0;
     font-size: 10px;
-    color: white;overflow: hidden;
-    text-overflow:ellipsis;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.notice-text i{
+.notice-text i {
     color: white;
     margin-left: 5px;
     font-size: large;
 }
 
-.tips-img{
+.tips-img {
     text-align: center;
     color: #1a4a9e;
     font-size: 9px;
     font-weight: 600;
 }
 
-.tips-img img{
+.tips-img img {
     width: 60px;
     margin: 0 auto;
 }
-
 
 .home-icon {
     padding: 0 0;
@@ -199,7 +198,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
 
 .home-icon .col {
     width: 100%;
-    height: 100%;
+    height: 15rem;
     background-color: white;
     margin-left: 4%;
 }
@@ -250,8 +249,171 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     margin-bottom: 4px;
 }
 
-/*兑换   排列3*/
+.qrCode {
+    border-top: 0;
+}
 
+.qrCode h6 {
+    font-size: 1rem;
+    color: #13075d;
+    text-align: center;
+    padding: 0;
+    margin: .65rem 0;
+}
+
+.qrimg{
+    margin: .8rem auto!important;
+    width: auto;
+}
+
+/*app下载*/
+.logoImg {
+    text-align: center;
+    margin: .5rem 0;
+}
+
+.logoImg img {
+    width: 30%;
+    vertical-align: middle;
+}
+
+.downLoadBtn {
+    text-align: center;
+}
+
+.downLoadBtn .button {
+    border-color: transparent;
+    background: #362b85;
+    background: -o-linear-gradient(top, #095ea9, #362b85);
+    background: -ms-linear-gradient(top, #095ea9, #362b85);
+    background: -moz-linear-gradient(top, #095ea9, #362b85);
+    background: -webkit-linear-gradient(top, #095ea9, #362b85);
+    color: white;
+    margin: 0;
+    padding: 2px 15px;
+    min-width: 52px;
+    min-height: 30px;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.downLoadBtn .iosOrandroid {
+    font-size: 2.5rem;
+    vertical-align: sub;
+}
+
+.downLoadBtn span {
+    display: inline-block;
+    vertical-align: super;
+    margin-left: .8rem;
+}
+
+.introduce {
+    padding-left: 1.2rem;
+}
+
+.introduce h4 {
+    color: #e01a00;
+    margin-top: 0;
+}
+
+.introduce h5 {
+    color: #293e97;
+    margin: 0;
+}
+
+.introduce p {
+    color: #333;
+    margin: 0 0 3px 0;
+}
+
+.tipsWarp {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.arrow {
+    position: absolute;
+    top: 0;
+    right: -40px;
+}
+
+.arrow img{
+    width: 40%;
+}
+
+.tipsWarp .tips {
+    width: 95%;
+    border-radius: 8px;
+    background: #fff;
+    margin: .5rem auto;
+}
+
+.tips h4 {
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    width: 100%;
+    background: #333333;
+    display: block;
+    margin: 0;
+    padding: .6rem;
+    border-radius: 8px 8px 0 0;
+    letter-spacing: .8px;
+}
+
+.tipsContent {
+    width: 100%;
+    text-align: center;
+    padding: 1.2rem 0;
+}
+
+.tipsContent .col-30{
+    position: relative;
+}
+
+.tipsContent span{
+    display: block;
+    margin-top: 5px;
+}
+
+.tipsContent img{
+    width: 70%;
+}
+
+.tipsFoot {
+    background: #333333;
+    border-radius: 0 0 8px 8px;
+    display: block;
+    height: 12px;
+}
+
+.spot{
+    position: absolute;
+    top: 30%;
+    right: -20%;
+    bottom: 50%;
+    width: 45px;
+    height: 20px;
+}
+
+.spot i{
+    width: 8px;
+    height: 8px;
+    background: #a9a9a9;
+    display: inline-block;
+    margin-left: 3px;
+    border-radius: 50%;
+}
+.spot b{
+    color: #565656;
+}
+
+
+/*兑换   排列3*/
 .bar .back-button.hide, .bar .buttons .hide {
     display: inline-block;
 }
@@ -360,16 +522,16 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     padding-left: 10px;
 }
 
-.sure-modal3 .sure-modal3-style2 .betting{
+.sure-modal3 .sure-modal3-style2 .betting {
     height: 68px;
     width: 74%;
 }
 
-.sure-modal3 .sure-modal3-style2 .betting i{
+.sure-modal3 .sure-modal3-style2 .betting i {
     margin-left: 5px;
 }
 
-.sure-modal3 .sure-modal3-style2 .betting i.blue{
+.sure-modal3 .sure-modal3-style2 .betting i.blue {
     background-color: #1d90d1;
 }
 
@@ -406,7 +568,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     color: #fffefb;
 }
 
-.sure-modal3-win{
+.sure-modal3-win {
     position: absolute;
     top: 32%;
     left: 50%;
@@ -415,7 +577,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     letter-spacing: 5px;
 }
 
-.sure-modal3 .ballNum{
+.sure-modal3 .ballNum {
     display: grid;
     width: 74%;
     height: 75px;
@@ -430,7 +592,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     margin-left: 5px;
 }
 
-.sure-modal3-pl3{
+.sure-modal3-pl3 {
     position: absolute;
     top: 32%;
     left: 50%;
@@ -640,7 +802,7 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
     font-weight: bold;
 }
 
-.show-red-ball{
+.show-red-ball {
     height: 40px;
 }
 
@@ -798,7 +960,7 @@ input.bigLotto-input2:checked:before {
     color: red;
 }
 
-.checkSected{
+.checkSected {
     margin-left: 2%;
 }
 
@@ -862,15 +1024,15 @@ input.bigLotto-input2:checked:before {
     top: 89px !important;
 }
 
-.margin_10{
-    margin-top: 10%!important;
+.margin_10 {
+    margin-top: 10% !important;
 }
 
-.margin_0{
-    margin-top: 0!important;
+.margin_0 {
+    margin-top: 0 !important;
 }
 
-.history-notice{
+.history-notice {
     padding: 0;
     margin-top: 11%;
     background: transparent;
@@ -880,7 +1042,7 @@ input.bigLotto-input2:checked:before {
     background: -webkit-linear-gradient(top, #ececec, #fdfdfd);
 }
 
-.history-notice .icon-notice{
+.history-notice .icon-notice {
     width: 12%;
     text-align: center;
     line-height: 48px;
@@ -892,11 +1054,10 @@ input.bigLotto-input2:checked:before {
     font-size: 20px;
 }
 
-.noticeText{
-    color: #11288e!important;
+.noticeText {
+    color: #11288e !important;
     text-align: left;
 }
-
 
 .notice {
     padding: 8px;
@@ -942,7 +1103,7 @@ input.bigLotto-input2:checked:before {
     text-decoration: none;
 }
 
-.history-time .col-50{
+.history-time .col-50 {
     max-width: 60%;
 }
 
@@ -1092,7 +1253,7 @@ input.bigLotto-input2:checked:before {
     margin-top: -5px;
 }
 
-.trendView .has-header{
+.trendView .has-header {
     top: 40px;
 }
 
@@ -1104,7 +1265,7 @@ input.bigLotto-input2:checked:before {
     border-radius: 0;
 }
 
-.tab_draw a.button:first-child{
+.tab_draw a.button:first-child {
     border-left: none;
 }
 
@@ -1374,12 +1535,12 @@ input.bigLotto-input2:checked:before {
     margin: 16px auto 10px;
 }
 
-div.good-news{
+div.good-news {
     font-size: 16px;
     font-weight: bold;
     color: #c01919;
     text-indent: 16px;
-    margin:10px 0 0;
+    margin: 10px 0 0;
     position: relative;
     z-index: 9;
     top: 45px;
