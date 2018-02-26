@@ -280,4 +280,5 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
             alert ("初始化数据失败");
             $ionicLoading.hide ();
         }
+
     });
