@@ -15,7 +15,7 @@ angular.module ('starter.util', [])
             getWareIssueUrl: ipUrl + '/service/lottery/getWareIssue',   //获取期号
             getHistoryUrl: ipUrl + '/service/lottery/getHistoryList' ,     //往期开奖
             getWinamtUrl: ipUrl + '/service/lottery/getWinamt',   //用户中奖金额及手机号显示
-            pl3addAutoUrl: ipUrl + '/service/lottery/pl3addAuto'   //排列三自动投注
+            pl3addAutoUrl: ipUrl + '/service/lottery/pl3addAuto'   //排列三自动投注**
         };
         return {
             /* 返回httpURL  */
