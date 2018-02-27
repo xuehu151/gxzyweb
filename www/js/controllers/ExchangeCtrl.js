@@ -9,7 +9,7 @@
 angular.module ('starter.ExchangeCtrl', ['starter.services'])
 
     .controller ('ExchangeCtrl', function ($location, $scope, $http, $state, $ionicLoading, $ionicPopup, $rootScope, locals, $ionicModal, $interval, $util, initDataService, getUserNameService, getWareIssueService, $timeout) {
-
+        $scope.errorInfo = '系统升级维护中，2月28号08:00恢复给您造成的不便敬请谅解。';
         $rootScope.newStatus = true;
         sign = $location.search ().sign;
         type = $location.search ().type;
@@ -280,5 +280,6 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
             alert ("初始化数据失败");
             $ionicLoading.hide ();
         }
+
 
     });
