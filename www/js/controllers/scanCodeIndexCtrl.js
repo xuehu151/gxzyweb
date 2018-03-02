@@ -9,6 +9,7 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
     
     .controller ('scanCodeIndexCtrl', function ($scope, $state, getUser, $util, $ionicModal, $rootScope, initDataService, $ionicLoading, $timeout, getWareIssueService, BettingService) {
         PayType = 0;
+
         var data = {};
         var userInfo = $util.getUserInfo ();
         if (userInfo != undefined && type == '0') {
@@ -124,10 +125,9 @@ angular.module ('starter.scanCodeIndexCtrl', ['starter.services'])
                 alert ('数据获取失败!');
             });
         if ($rootScope.popup == 1) {
-            // $timeout(function () {
-            //     $scope.modal2.show();
-            // }, 500);
-            $rootScope.errorInfo();
+            $timeout(function () {
+                $scope.modal2.show();
+            }, 500);
         }
 
        /* var data = {
