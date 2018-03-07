@@ -105,7 +105,7 @@ angular.module ('starter.ExchangeCtrl', ['starter.services'])
                         // $timeout (function () {
                         //     $rootScope.errorInfo ();
                             // $timeout(function () {
-                                $scope.modalError.hide ();
+                            //     $scope.modalError.hide ();
                                 if (userInfo.error != '0') {
                                     $scope.errorInfo = response.info + '错误码' + response.error;
                                     $rootScope.errorInfo ();
