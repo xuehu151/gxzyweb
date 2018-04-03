@@ -448,8 +448,8 @@ angular.module('starter.AccountCtrl', ['starter.services'])
         }
 
         $scope.wantToWin = function () {
-            // var winUrl = 'wcapi.baibaocp.com/singlered/index';
-            // window.location.href = winUrl;
+            var winUrl = 'wcapi.baibaocp.com/singlered/index';
+            window.location.href = winUrl;
 
 
         };
