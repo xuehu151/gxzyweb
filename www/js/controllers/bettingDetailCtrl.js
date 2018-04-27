@@ -255,7 +255,7 @@ angular.module ('starter.bettingDetailCtrl', ['starter.services'])
                     headers : {
                         "Content-Type" : "application/json"
                     },
-                    timeout: 1000 * 10 * 3
+                    timeout: 1000 * 10 * 6
                 })
                     .then (function (response) {
                         $ionicLoading.hide ();
