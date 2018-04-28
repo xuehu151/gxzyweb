@@ -157,12 +157,11 @@ angular.module('starter.services', [])
             } else if (investCode.length == 3 || investCode.length == 5 ) {
 
                 for (var i = 0; i < investCode.length; i++) {
-                    investCode[i] = '0' + investCode[i]
+                    investCode[i] = investCode[i]
                 }
                 investCodeFormat[0] = investCode;
             }
-            else if (investCode.length == 1)
-            {
+            else if (investCode.length == 1) {
                 var noUse = [];
                 noUse = investCode[0].split(',');
                 for (var i = 0; i < noUse.length; i++) {

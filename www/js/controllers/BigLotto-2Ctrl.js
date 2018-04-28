@@ -330,6 +330,7 @@ angular.module ('starter.BigLotto-2Ctrl', ['starter.services'])
                     payType : PayType,
                     vid : vid,
                     addFlag : "0",
+                    businessmanId : 0,
                     data : dataArrayBig
                 };
     

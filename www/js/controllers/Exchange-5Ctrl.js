@@ -393,6 +393,7 @@ angular.module ('starter.Exchange-5Ctrl', ['starter.services'])
                     wareIssue: reques.wareIssue,
                     payType: PayType,
                     vid: vid,
+                    businessmanId : 0,
                     data: dataArray
                 };
                 $http ({
