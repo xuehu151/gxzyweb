@@ -1,0 +1,100 @@
+<ion-view view-title="世界杯-单关">
+
+    <ion-content class="content_warp">
+        <div class="competition-time ">
+            <span class="time" ng-cloak="">{{titleDate}} {{weekText}} {{titleTime}} 截止</span>
+        </div>
+        <div class="content-bg">
+            <div class="description" ng-if="descrip" ng-clock="">您本次可兑换价值 {{giveMoney}} 元的彩票</div>
+            <div class="competition-session">
+                <div class="weak">{{weekText}}&nbsp;{{playId}}</div>
+                <div class="team-name">
+                    <span ng-cloak="">{{singlePassGame[0].hostTeam}}</span>
+                    <span><img src="./img/VS.png" alt=""></span>
+                    <span ng-cloak="">{{singlePassGame[0].visitTeam}}</span>
+                </div>
+                <div class="match-fitness">
+                    <div class="rating">
+                        <div class="plan win-plan" ng-style="{'width':'{{winpercent+'%'}}'}"></div>
+                        <div class="plan draw-plan" ng-style="{'width':'{{drawpercent+'%'}}'}"></div>
+                        <div class="plan lose-plan" ng-style="{'width':'{{losepercent+'%'}}'}"></div>
+                    </div>
+                    <div class="rating-num">
+                        <div class="win">
+                            <span class="num win-cl" ng-cloak="">{{winpercent}}%</span>
+                            <div
+                                class="num-btn"
+                                 ng-click="bunkoBtn(0, singlePassGame[0].v3)"
+                                 ng-class="betnum[0]?'num-btn-click':''">
+                                胜&nbsp;&nbsp;{{singlePassGame[0].v3}}
+                            </div>
+                            <span class="support">{{headwin}}次支持</span>
+                        </div>
+                        <div class="draw">
+                            <span class="num draw-cl" ng-cloak="">{{drawpercent}}%</span>
+                            <div
+                                class="num-btn"
+                                ng-click="bunkoBtn(1, singlePassGame[0].v1)"
+                                ng-class="betnum[1]?'num-btn-click':''">
+                                平&nbsp;&nbsp;{{singlePassGame[0].v1}}
+                            </div>
+                            <span class="support">{{headdraw}}次支持</span>
+                        </div>
+                        <div class="lose">
+                            <span class="num lose-cl" ng-cloak="">{{losepercent}}%</span>
+                            <div
+                                class="num-btn"
+                                ng-click="bunkoBtn(2, singlePassGame[0].v0)"
+                                ng-class="betnum[2]?'num-btn-click':''">
+                                负&nbsp;&nbsp;{{singlePassGame[0].v0}}
+                            </div>
+                            <span class="support">{{headlose}}次支持</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="more_game">
+                <div class="more_game_btn">
+                   <a href="http://wcapi.baibaocp.com/singlered/index" target="_blank" class="button convert_more_game">兑换更多比赛</a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar class="footer-bar">
+        <div class="row top">
+            <div class="footer-multiple">
+                <span>投</span>
+                <div class="add-subtract">
+                    <a ng-click="multSmall()">-</a>
+                    <input class="multiple-ipt" type="text" ng-model="multiple" ng-change="noteChange(multiple)">
+                    <a ng-click="multBig()">+</a>
+                </div>
+                <span>倍</span>
+            </div>
+        </div>
+        <div class="row bottom">
+            <div class="col col-20 arrange">
+                <button type="button" class="button button-stable" ng-click="clearBtnChecked()">
+                    清 空
+                </button>
+            </div>
+            <div class="col col-50">
+                <div class="bet-num">
+                    共 <i ng-cloak="">{{noteNumber}}</i> 注 <i ng-cloak=""> {{money}} </i> 元
+                </div>
+                <div class="bet-num">
+                    预计奖金 <i ng-cloak=""> {{topPrize | currency:' '}} </i> 元
+                </div>
+            </div>
+            <div class="col col-30 arrange">
+                <button type="button" class="button-liner-gradiend footer-confirm" ng-click="makeSureSinglePass()">
+                    确 定
+                </button>
+            </div>
+        </div>
+    </ion-footer-bar>
+</ion-view>
+
+
+

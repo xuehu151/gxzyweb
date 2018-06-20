@@ -1,0 +1,452 @@
+/*足彩*/
+.btn-mig-l {
+    margin-left: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.footer-bar {
+    height: 6rem;
+    border-top: 1px solid gainsboro;
+    align-items: center;
+}
+
+.footer-bar .row {
+    position: absolute;
+}
+
+.footer-bar .top {
+    top: 0;
+    left: 0;
+    height: 2.5rem;
+    display: table;
+}
+
+.footer-bar .bottom {
+    height: 3.5rem;
+    padding-bottom: 0;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid gainsboro;
+}
+
+.footer-bar .bottom .arrange {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-bar .bottom .col-50 {
+    text-align: center;
+}
+
+.footer-bar .bottom .col-50 i {
+    color: #d11d1d;
+}
+
+.footer-clean {
+    float: left;
+    font-size: 1rem;
+    color: #1F3795;
+    display: flex;
+}
+
+.footer-clean span {
+    font-size: 1rem;
+    margin-left: 13px;
+}
+
+.footer-confirm {
+    padding: 0 12px !important;
+    border-radius: 5px;
+    min-height: 35px!important;
+}
+
+.footer-multiple {
+    text-align: center;
+    font-size: 14px;
+    display: table-cell;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+.footer-multiple .add-subtract .multiple-ipt {
+    height: 100%;
+    width: 5rem;
+    padding: 4px 4px;
+    text-align: center;
+    display: inline-block;
+}
+
+.add-subtract {
+    border: 1px solid #d4d4d4;
+    display: inline-block;
+    font-size: 1rem;
+    margin-bottom: 3px;
+}
+
+.add-subtract a {
+    width: 1.5rem;
+    padding: 1px 0;
+    height: 100%;
+    line-height: 1.6667;
+    display: inline-block;
+    text-align: center;
+    color: black;
+    background: gainsboro;
+}
+
+.add-subtract a:first-child {
+    float: left;
+    border-right: 1px solid #c3c3c3;
+}
+
+.add-subtract a:last-child {
+    float: right;
+    border-left: 1px solid #c3c3c3;
+}
+
+.bet-num {
+    font-size: .8rem;
+}
+
+.bet-num i {
+    font-size: 1rem;
+    color: purple;
+}
+
+.content_warp .scroll {
+    height: 100%;
+}
+
+.one_game {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.one_game .weak {
+    top: -1.5rem;
+    left: 0;
+}
+
+.content-bg {
+    background: url("../img/football_bg.png") no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    padding: 2.5rem 1rem;
+}
+
+.description{
+    width: 70%;
+    margin: 0 auto;
+    background: #ffee00;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #ff0000;
+    text-align: center;
+    position: relative;
+    top: -5%;
+}
+
+.competition-time {
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: start;
+    background: white;
+}
+
+.competition-time .time {
+    font-size: .7rem;
+    margin-left: 5%;
+}
+
+.more_game {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.more_game .more_game_btn2 {
+    padding: 1.5rem 1rem;
+    border-radius: 14px;
+    background: white;
+    font-size: 1.2rem;
+}
+
+.more_game .more_game_btn {
+    border-radius: 14px;
+    background: white;
+    padding: 4rem 1rem;
+    font-size: 1.2rem;
+}
+
+.convert_more_game {
+    background: #692cfe;
+    border-radius: 10px;
+    padding: .8rem 3rem;
+    color: white;
+    border: none;
+    margin: 0 auto;
+    font-size: 1.2rem;
+}
+
+.competition-session {
+    width: 100%;
+    position: relative;
+}
+
+.team-name {
+    height: 2.3rem;
+    display: flex;
+    justify-content: space-around;
+    background: #692CFE;
+    align-items: center;
+    font-size: 1.2rem;
+    color: white;
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
+    position: relative;
+    padding: 0 1rem;
+}
+
+.team-name img {
+    width: 90%;
+}
+
+.team-name span {
+    display: inline-block;
+    width: 33.33%;
+    text-align: center;
+}
+
+.weak {
+    position: absolute;
+    left: 0;
+    top: -1.5rem;
+    background: white;
+    font-size: .5rem;
+    color: #692CFE;
+    padding: 0 8px;
+    border-top-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.match-fitness {
+    padding: 1rem 1rem;
+    background: white;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+
+.match-fitness .rating {
+    width: 100%;
+    height: .4rem;
+    background: gainsboro;
+    border-radius: 28px;
+    overflow: hidden;
+}
+
+.match-fitness .rating .plan {
+    height: 100%;
+    float: left;
+}
+
+.match-fitness .rating .win-plan {
+    background: #00B7EE;
+    border-radius: 28px;
+}
+
+.rating-num .win-cl {
+    color: #00B7EE;
+}
+
+.match-fitness .rating .draw-plan {
+    background: #EB00EE;
+    border-radius: 28px;
+}
+
+.rating-num .draw-cl {
+    color: #EB00EE;
+}
+
+.match-fitness .rating .lose-plan {
+    background: #BFE707;
+}
+
+.rating-num .lose-cl {
+    color: #BFE707;
+}
+
+.match-fitness .rating-num {
+    display: flex;
+    justify-content: space-around;
+}
+
+.match-fitness .rating-num div {
+    text-align: center;
+}
+
+.match-fitness .rating-num .num {
+    line-height: 2.5rem;
+    font-size: .6rem;
+}
+
+.match-fitness .rating-num .num-btn {
+    border: 2px solid #692cfe;
+    border-radius: 6px;
+    padding: .6rem 1.5rem;
+    color: #692cfe;
+}
+
+.match-fitness .rating-num .num-btn-click {
+    border: 2px solid #FB9504;
+    background: #FB9504;
+    color: white;
+}
+
+.match-fitness .rating-num .support {
+    font-size: .6rem;
+    color: #6A2EFE;
+    margin-top: .5rem;
+    display: inline-block;
+}
+
+/*足彩-2串1*/
+.two-lh {
+    line-height: 1.5rem;
+}
+
+.two-rating {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 1rem;
+}
+
+.two-rating .rating {
+    margin: 0 1.5rem;
+}
+
+.p-bottom {
+    padding-bottom: 0;
+    padding-top: 1rem;
+}
+
+.two-support {
+    line-height: 3rem;
+    font-size: 1rem;
+    color: #6A2EFE
+}
+
+.match-fitness .rating-num .two-w {
+    padding: .8rem 1rem;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.match-fitness .two-rating {
+}
+
+/*.PK_bg{*/
+/*display: flex;*/
+/*justify-content: center;*/
+/*align-items: flex-start;*/
+/*}*/
+
+.PK_bg img {
+    display: inline-block;
+    width: 50%;
+    margin-top: .6rem;
+}
+
+.match-fitness .two-rating .num {
+    line-height: 1rem;
+}
+
+.match-fitness .two-rating .rating {
+    background: #EB00EE;
+}
+
+/*彩票详情页*/
+.order-title-result {
+    text-align: left;
+}
+
+.order-title-result .text-head {
+    font-size: 32px;
+}
+
+/*.order-title-result .match-message {*/
+    /*width: 100%;*/
+    /*margin: 2rem 0;*/
+    /*padding: 0 13.5rem;*/
+/*}*/
+
+.match-message .message-tb {
+    width: 100%;
+    font-size: 17px;
+    font-weight: 100;
+}
+
+.match-message .message-tb tbody tr:first-child {
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.match-message .message-tb tbody tr:first-child th {
+    padding: 1rem;
+}
+
+.hancaiHome li img {
+    height: 34rem;
+}
+
+.footerText {
+    line-height: 25px;
+}
+
+/*足彩订单详情*/
+.order-title-result .text-head {
+    font-size: 1rem;
+}
+
+.order-title-result .match-message {
+    margin: 1rem 2rem 1rem 0;
+}
+
+.match-message tr,
+.match-message td{
+    border: 1px solid #545454;
+    text-align: center;
+    font-size: .8rem;
+    vertical-align: middle;
+}
+
+.match-message .message-tb {
+    width: 100%;
+    font-size: 17px;
+}
+
+.match-message .message-tb tbody tr:first-child {
+    font-size: 1rem;
+}
+
+.match-message .message-tb tbody tr:first-child th {
+    padding: .6rem;
+    text-align: center;
+}
+
+th{
+    border: 1px solid black;
+    vertical-align: middle;
+    padding: 0.5rem;
+}
+
+/*.hancaiHome li img {*/
+    /*height: 33rem;*/
+/*}*/
+
+
+
+

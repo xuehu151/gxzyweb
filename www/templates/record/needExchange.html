@@ -1,0 +1,47 @@
+<ion-view view-title="待兑换">
+    <ion-content style="background: #eee;">
+        <ion-list class="need-exchange-list" ng-if="needExchangeAmount!=0">
+            <ion-item style="padding: 12px 16px 6px;" ng-repeat="item in needExchanges">
+                <div class="fl">
+                    <p class="font-style9">
+                        兑换彩票<span>1</span>注
+                        <span style="font-size: 10px;" ng-cloak>{{'('+ item.channelName +')'}}</span>
+                    </p>
+                    <p class="font-style10" ng-cloak>
+                        {{item.updateDate}}
+                    </p>
+                </div>
+                <div class="fr">
+                    <p  ng-cloak>
+                       <button class="font-style8 "
+                               ng-class="{'grey': item.class==='grey','margin10': item.class==='margin10','':item.class===''}"
+                               ng-disabled="item.d===0 && item.h===0"
+                               ng-click="toScanExchange($index, item.money)" >
+                           立即兑换
+                       </button>
+                    </p>
+                    <p class="font-style11" ng-cloak ng-if="item.endDate">
+                        <span style="font-size: 10px;">距离有效期结束还剩</span>
+                        <span ng-class="item.d<3 && item.h>0?'less3':''" style="font-size: 10px;" ng-cloak>{{item.d}}</span>
+                        <span style="font-size: 10px;">天</span>
+                        <span style="font-size: 0;" ng-if="item.d<3">
+                            <span ng-class="item.d<3 && item.h>0?'less3':''" style="font-size: 10px;" ng-cloak>{{item.h}}</span><span style="font-size: 10px;">小时</span>
+                        </span>
+                    </p>
+                </div>
+                <img class="expired-img" src="./img/haveExpired.png" alt="已过期" ng-if="item.endDate&&item.d==0&&item.h==0" />
+            </ion-item>
+            <div class="prize-records-all">
+                <img src="./img/prizeRecords.png" />
+                <p>就这么多咯~兑换彩票中奖金吧~~</p>
+            </div>
+        </ion-list>
+        <ion-list class="need-exchange-list" ng-if="needExchangeAmount==0">
+            <div class="prize-records-all">
+                <img src="./img/completeInf.png" />
+                <p>啊~哦~，您还没有待兑换的彩票哦！</p>
+            </div>
+        </ion-list>
+    </ion-content>
+    <div class="back-to-home" ui-sref="tab.account">点击返回我的账户</div>
+</ion-view>

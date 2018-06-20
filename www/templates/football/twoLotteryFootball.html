@@ -1,0 +1,99 @@
+<ion-view view-title="世界杯-2串1">
+
+    <ion-content class="content_warp">
+        <div class="competition-time two-lh">
+            <span class="time" ng-cloak="">{{titleDate}} {{weekText}} {{titleTime}} 截止</span>
+        </div>
+        <div class="content-bg">
+            <div class="description" ng-if="descrip" ng-clock="">您本次可兑换价值 {{giveMoney}} 元的彩票</div>
+            <div class="one_game" ng-repeat = 'item in twoLotteryGameList track by $index'>
+                <div class="weak" ng-cloak="">{{item.weekText}}&nbsp;{{item.playId}}</div>
+                <div class="competition-session">
+                    <div class="team-name">
+                        <span ng-cloak="">{{item.hostTeam}}</span>
+                        <span><img src="./img/VS.png"></span>
+                        <span ng-cloak="">{{item.visitTeam}}</span>
+                    </div>
+                    <div class="match-fitness p-bottom">
+                        <div class="two-rating">
+                            <span class="num win-cl">{{winpercent}}%</span>
+                            <div class="rating">
+                                <div class="plan win-plan" ng-style="{'width':'{{winpercent+'%'}}'}"></div>
+                                <div class="plan draw-plan" ng-style="{'width':'{{losepercent+'%'}}'}"></div>
+                            </div>
+                            <span class="num lose-cl">{{losepercent}}%</span>
+                        </div>
+
+                        <div class="rating-num" >
+                            <div class="win">
+                                <div
+                                    class="num-btn two-w"
+                                    ng-click="mainWinBtn($index, item, 1)"
+                                    ng-class="{true: 'num-btn-click', false: ''}[item.btnWinChecked]"
+                                    ng-cloak="">
+                                    {{item.mainWin}}&nbsp;&nbsp;{{item.mainWinOdds}}
+                                </div>
+                                <span class="two-support" ng-cloak="">{{item.winTeamApproval}}次支持</span>
+                            </div>
+
+                            <div class="PK_bg">
+                                <img src="./img/pk.png" alt="">
+                            </div>
+
+                            <div class="lose">
+                                <div
+                                    class="num-btn two-w"
+                                    ng-click="mainWinBtn($index, item, 2)"
+                                    ng-class="{true: 'num-btn-click', false: ''}[item.btnLoseChecked]"
+                                    ng-cloak="">
+                                    {{item.guestUnbeaten}}&nbsp;&nbsp;{{item.guestLossOdds}}
+                                </div>
+                                <span class="two-support" ng-cloak="">{{item.loseTeamApproval}}次支持</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="more_game">
+                <div class="more_game_btn2">
+                    <a href="http://wcapi.baibaocp.com/singlered/index" target="_blank" class="button convert_more_game">兑换更多比赛</a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar class="footer-bar" style="height: 50px">
+        <!--<div class="row top">-->
+            <!--<div class="footer-multiple">-->
+                <!--<span>投</span>-->
+                <!--<div class="add-subtract">-->
+                    <!--<a ng-click="multSmall()">-</a>-->
+                    <!--<input class="multiple-ipt" type="text" ng-model="multiple">-->
+                    <!--<a ng-click="multBig()">+</a>-->
+                <!--</div>-->
+                <!--<span>倍</span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="row bottom" style="border: none">
+            <div class="col col-20 arrange">
+                <button type="button" class="button button-stable " ng-click="clearBtnChecked()">
+                    清 空
+                </button>
+            </div>
+            <div class="col col-50" ng-if="condition">
+                <div class="bet-num">
+                    共1注 <i ng-clock=""> {{money}} </i> 元
+                </div>
+                <div class="bet-num">
+                    预计奖金 <i ng-clock=""> {{topPrize}} </i> 元
+                </div>
+            </div>
+            <div class="col col-50 footerText" ng-if="!condition">至少选择 <i STYLE="color: #e01c0f">2</i> 场比赛</div>
+            <div class="col col-30 arrange">
+                <button type="button" class="button-liner-gradiend footer-confirm" ng-click="makeSureSeries()">
+                    确 定
+                </button>
+            </div>
+        </div>
+    </ion-footer-bar>
+</ion-view>

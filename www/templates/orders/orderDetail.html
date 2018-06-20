@@ -1,0 +1,78 @@
+<ion-view view-title="订单详情">
+    <ion-content>
+        <ion-list class="order-detail-list">
+            <ion-item style="padding: 8px 8px;">
+                <span class="lottery-type">{{orderDetail.lotteryID}}</span>
+                <span class="font-style" ng-if="orderDetail.lotteryID === '排列三'">(组选投注)</span>
+                <span ng-if="orderDetail.status=='待开奖'" class="open-time">{{orderDetail.openTime}}</span>
+                <span class="fr font-style1" style="text-align: center;">
+                    <span>{{orderDetail.status}}</span><br>
+                <span style="color: #333;font-size: 8px;" >{{orderDetail.wareIssue}}</span>
+                </span>
+            </ion-item>
+            <div class="detail">
+                <div style="display: flex">
+                    <div ng-if="orderDetail.planId==undefined">
+                        <span class="purchase-code">购买方案：</span>
+                        <div class="dis-inlineblock" ng-repeat="ele in orderDetail.investCode">
+                            <div style="font-size: 0;">
+                                <span class="ball" ng-repeat="ball1 in ele[0] track by $index">{{ball1}}</span>
+                                <span class="ball" style="background-color: #00a0e9" ng-repeat="ball2 in ele[1] track by $index">{{ball2}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--足彩-->
+                <div class="order-title-result" ng-if="orderDetail.planId!=undefined">
+                    <span class="text-head">购买方案&nbsp;:&nbsp;&nbsp;{{orderInfos.fewGames}}场,&nbsp;&nbsp;{{orderInfos.palyWay}},&nbsp;方案{{orderInfos.multiple}}倍</span>
+                    <div class="match-message">
+                        <table border="1" class="message-tb">
+                            <tr>
+                                <th>场次</th>
+                                <th>主&nbsp;VS&nbsp;客</th>
+                                <th>投注</th>
+                                <th>赛果</th>
+                            </tr>
+                            <tr ng-repeat="list in orderInfos.lotteryList">
+                                <td>
+                                    <div>{{list.weekText}}</div>
+                                    <div>{{list.playId}}</div>
+                                </td>
+                                <td>
+                                    <div>{{list.hostTeam}}</div>
+                                    <div style="line-height: .8rem;">{{list.resultNum}}</div>
+                                    <div>{{list.visitTeam}}</div>
+                                </td>
+                                <td style="color: red">
+                                    <div ng-if="list.betWay!=500">{{list.code}} {{list.lossPercent}}</div>
+                                    <div ng-if="list.betWay==500" ng-repeat="pec in lastCode">
+                                        {{pec.code}} {{pec.lossPercent}}
+                                    </div>
+                                </td>
+                                <td style="color: red">{{list.amidithion}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <span class="purchase-code">订单支付：</span>
+                    <span ng-class="orderDetail.status=='已中奖'||orderDetail.status=='待开奖'?'font-style6':'font-style3'" ng-cloak>{{orderDetail.payType }}</span>
+                    <span class="explain-info" ng-show="{{orderDetail.status=='兑换超时'}}" ng-cloak>{{explainInfo}}</span>
+                </div>
+                <div>
+                    <span class="purchase-code">订单编号：</span>
+                    <span class="font-style2" ng-cloak>{{orderDetail.ticketID}}</span></div>
+                <div>
+                    <span class="purchase-code">订单时间：</span>
+                    <span class="font-style2" ng-cloak>{{orderDetail.orderTime}}</span></div>
+                <div ng-show="orderDetail.winMoney">
+                    <span class="purchase-code">中奖奖金：</span>
+                    <span class="font-style6" ng-cloak>¥ {{orderDetail.winMoney | number:0 }}</span>
+                </div>
+            </div>
+        </ion-list>
+        <!-- <p ng-show="{{orderDetail.status=='兑换超时'}}" class="exchange-fail" ng-click="failThenExchange()">
+            兑换
+        </p> -->
+    </ion-content>
+</ion-view>
